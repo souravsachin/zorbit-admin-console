@@ -21,6 +21,9 @@ const columns: Column<Organization>[] = [
   { key: 'name', header: 'Name' },
   { key: 'orgType', header: 'Type', render: (o) => o.orgType || <span className="text-gray-400">—</span> },
   { key: 'status', header: 'Status', render: (o) => <StatusBadge label={o.status || 'active'} /> },
+  { key: 'isCustomer', header: 'Customer', render: (o) => o.isCustomer ? <span className="text-green-600 font-medium">Yes</span> : <span className="text-gray-400">No</span> },
+  { key: 'isPaying', header: 'Paying', render: (o) => o.isPaying ? <span className="text-green-600 font-medium">Yes</span> : <span className="text-gray-400">No</span> },
+  { key: 'customerStatus', header: 'Customer Status', render: (o) => o.customerStatus ? <StatusBadge label={o.customerStatus} /> : <span className="text-gray-400">—</span> },
   { key: 'createdAt', header: 'Created', render: (o) => new Date(o.createdAt).toLocaleDateString() },
 ];
 

@@ -1,0 +1,1329 @@
+{
+  "sections": [
+    {
+      "id": "SEC-DA01",
+      "code": "dashboard",
+      "label": "Dashboard",
+      "icon": "dashboard",
+      "seq": 1,
+      "items": [
+        {
+          "id": "NAV-835D",
+          "code": "NAV-835D",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/dashboard/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-BF0C",
+          "code": "NAV-BF0C",
+          "label": "View Dashboard",
+          "icon": "eye",
+          "route": "/dashboard",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-7913",
+          "code": "NAV-7913",
+          "label": "Dashboard Designer",
+          "icon": "palette",
+          "route": "/dashboard/designer",
+          "apiRoute": null,
+          "seq": 3
+        },
+        {
+          "id": "NAV-30B2",
+          "code": "NAV-30B2",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/dashboard/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-88C7",
+          "code": "NAV-88C7",
+          "label": "Deployments",
+          "icon": "upload-cloud",
+          "route": "/dashboard/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-ID01",
+      "code": "identity",
+      "label": "Identity",
+      "icon": "person",
+      "seq": 2,
+      "items": [
+        {
+          "id": "NAV-7D31",
+          "code": "NAV-7D31",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/identity/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "PRV-ID01",
+          "code": "identity.users.read",
+          "label": "Users",
+          "icon": "people",
+          "route": "/users",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "PRV-ID02",
+          "code": "identity.organizations.read",
+          "label": "Organizations",
+          "icon": "business",
+          "route": "/organizations",
+          "apiRoute": null,
+          "seq": 2
+        }
+      ]
+    },
+    {
+      "id": "SEC-AZ01",
+      "code": "authorization",
+      "label": "Authorization",
+      "icon": "security",
+      "seq": 3,
+      "items": [
+        {
+          "id": "NAV-63BF",
+          "code": "NAV-63BF",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/authorization/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "PRV-AZ01",
+          "code": "authorization.roles.read",
+          "label": "Roles",
+          "icon": "admin_panel_settings",
+          "route": "/roles",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "PRV-AZ02",
+          "code": "authorization.privileges.read",
+          "label": "Privileges",
+          "icon": "verified_user",
+          "route": "/privileges",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-1552",
+          "code": "NAV-1552",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/authorization/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-7D35",
+          "code": "NAV-7D35",
+          "label": "Deployments",
+          "icon": "upload-cloud",
+          "route": "/authorization/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-NV01",
+      "code": "navigation",
+      "label": "Navigation",
+      "icon": "menu",
+      "seq": 4,
+      "items": [
+        {
+          "id": "PRV-NV01",
+          "code": "navigation.menus.read",
+          "label": "Menu Items",
+          "icon": "list",
+          "route": "/navigation/menus",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-A8B4",
+          "code": "NAV-A8B4",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/navigation/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "PRV-NV02",
+          "code": "navigation.routes.read",
+          "label": "Routes",
+          "icon": "route",
+          "route": "/navigation/routes",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-460A",
+          "code": "NAV-460A",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/navigation/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-D1B8",
+          "code": "NAV-D1B8",
+          "label": "Deployments",
+          "icon": "upload-cloud",
+          "route": "/navigation/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-MS01",
+      "code": "messaging",
+      "label": "Messaging",
+      "icon": "email",
+      "seq": 5,
+      "items": [
+        {
+          "id": "PRV-MS01",
+          "code": "messaging.topics.read",
+          "label": "Topics",
+          "icon": "topic",
+          "route": "/messaging/topics",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-18FF",
+          "code": "NAV-18FF",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/messaging/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "PRV-MS02",
+          "code": "messaging.events.read",
+          "label": "Event Log",
+          "icon": "receipt_long",
+          "route": "/messaging/events",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-0A99",
+          "code": "NAV-0A99",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/messaging/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-874F",
+          "code": "NAV-874F",
+          "label": "Deployments",
+          "icon": "upload-cloud",
+          "route": "/messaging/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-AU01",
+      "code": "audit",
+      "label": "Audit",
+      "icon": "fact_check",
+      "seq": 6,
+      "items": [
+        {
+          "id": "NAV-9C98",
+          "code": "NAV-9C98",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/audit/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-CFA4",
+          "code": "NAV-CFA4",
+          "label": "Audit Logs",
+          "icon": "scroll-text",
+          "route": "/audit/logs",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-F7AF",
+          "code": "NAV-F7AF",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/audit/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-58E5",
+          "code": "NAV-58E5",
+          "label": "Deployments",
+          "icon": "upload-cloud",
+          "route": "/audit/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-PV01",
+      "code": "pii-vault",
+      "label": "PII Vault",
+      "icon": "enhanced_encryption",
+      "seq": 7,
+      "items": [
+        {
+          "id": "PRV-PV01",
+          "code": "pii-vault.tokens.read",
+          "label": "Token Registry",
+          "icon": "vpn_key",
+          "route": "/pii-vault/tokens",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-2056",
+          "code": "NAV-2056",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/pii-vault/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-0E84",
+          "code": "NAV-0E84",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/pii-vault/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-0277",
+          "code": "NAV-0277",
+          "label": "Deployments",
+          "icon": "upload-cloud",
+          "route": "/pii-vault/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-ST01",
+      "code": "settings",
+      "label": "Settings",
+      "icon": "settings",
+      "seq": 8,
+      "items": [
+        {
+          "id": "NAV-0C92",
+          "code": "NAV-0C92",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/settings/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-71A4",
+          "code": "NAV-71A4",
+          "label": "General Settings",
+          "icon": "settings",
+          "route": "/settings/general",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-8E87",
+          "code": "NAV-8E87",
+          "label": "Secrets",
+          "icon": "lock",
+          "route": "/settings/secrets",
+          "apiRoute": null,
+          "seq": 3
+        },
+        {
+          "id": "NAV-MFA1",
+          "code": "NAV-MFA1",
+          "label": "Security (MFA)",
+          "icon": "shield-check",
+          "route": "/settings/security",
+          "apiRoute": null,
+          "seq": 4
+        },
+        {
+          "id": "NAV-4099",
+          "code": "NAV-4099",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/settings/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-FCFD",
+          "code": "NAV-FCFD",
+          "label": "Deployments",
+          "icon": "upload-cloud",
+          "route": "/settings/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-AD01",
+      "code": "admin",
+      "label": "Admin",
+      "icon": "admin_panel_settings",
+      "seq": 9,
+      "items": [
+        {
+          "id": "NAV-1BCC",
+          "code": "NAV-1BCC",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/admin/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-882E",
+          "code": "NAV-882E",
+          "label": "Module Registry",
+          "icon": "grid",
+          "route": "/admin/modules",
+          "apiRoute": null,
+          "seq": 3
+        },
+        {
+          "id": "NAV-11E5",
+          "code": "NAV-11E5",
+          "label": "Platform Sitemap",
+          "icon": "map",
+          "route": "/admin/sitemap",
+          "apiRoute": null,
+          "seq": 4
+        },
+        {
+          "id": "NAV-8BEB",
+          "code": "NAV-8BEB",
+          "label": "Licensing",
+          "icon": "key",
+          "route": "/admin/licensing",
+          "apiRoute": null,
+          "seq": 5
+        },
+        {
+          "id": "NAV-DEV1",
+          "code": "NAV-DEV1",
+          "label": "Developer Tools",
+          "icon": "code",
+          "route": "/admin/developer",
+          "apiRoute": null,
+          "seq": 6
+        },
+        {
+          "id": "NAV-5E18",
+          "code": "NAV-5E18",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/admin/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-4F87",
+          "code": "NAV-4F87",
+          "label": "Deployments",
+          "icon": "upload-cloud",
+          "route": "/admin/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-PR01",
+      "code": "products",
+      "label": "Products",
+      "icon": "inventory_2",
+      "seq": 10,
+      "items": [
+        {
+          "id": "NAV-6DD6",
+          "code": "NAV-6DD6",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/app/pcg4/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-2B85",
+          "code": "NAV-2B85",
+          "label": "Configurations",
+          "icon": "grid",
+          "route": "/app/pcg4/configurations",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-DA99",
+          "code": "NAV-DA99",
+          "label": "Reference Library",
+          "icon": "book-open",
+          "route": "/app/pcg4/reference-library",
+          "apiRoute": null,
+          "seq": 3
+        },
+        {
+          "id": "NAV-0B93",
+          "code": "NAV-0B93",
+          "label": "Configurations (FB)",
+          "icon": "file-input",
+          "route": "/app/pcg4/configurations-fb",
+          "apiRoute": null,
+          "seq": 3
+        },
+        {
+          "id": "NAV-7E73",
+          "code": "NAV-7E73",
+          "label": "Coverage Mapper",
+          "icon": "map",
+          "route": "/app/pcg4/coverage-mapper",
+          "apiRoute": null,
+          "seq": 4
+        },
+        {
+          "id": "NAV-C757",
+          "code": "NAV-C757",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/app/pcg4/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-5278",
+          "code": "NAV-5278",
+          "label": "Deployments",
+          "icon": "upload-cloud",
+          "route": "/app/pcg4/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-PP01",
+      "code": "product-pricing",
+      "label": "Product Pricing",
+      "icon": "calculator",
+      "seq": 11,
+      "items": [
+        {
+          "id": "NAV-75A8",
+          "code": "NAV-75A8",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/product-pricing/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-9BF5",
+          "code": "NAV-9BF5",
+          "label": "Rate Tables",
+          "icon": "table",
+          "route": "/product-pricing/rate-tables",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-A28E",
+          "code": "NAV-A28E",
+          "label": "Premium Calculator",
+          "icon": "calculator",
+          "route": "/product-pricing/calculator",
+          "apiRoute": null,
+          "seq": 3
+        },
+        {
+          "id": "NAV-EBB6",
+          "code": "NAV-EBB6",
+          "label": "Import Rate Card",
+          "icon": "upload",
+          "route": "/product-pricing/import",
+          "apiRoute": null,
+          "seq": 4
+        },
+        {
+          "id": "NAV-03FE",
+          "code": "NAV-03FE",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/product-pricing/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-E6D4",
+          "code": "NAV-E6D4",
+          "label": "Deployments",
+          "icon": "upload-cloud",
+          "route": "/product-pricing/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-196F",
+      "code": "form-builder",
+      "label": "Form Builder",
+      "icon": "dynamic_form",
+      "seq": 12,
+      "items": [
+        {
+          "id": "NAV-38D8",
+          "code": "NAV-38D8",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/form-builder/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-7C93",
+          "code": "NAV-7C93",
+          "label": "Form Templates",
+          "icon": "layout",
+          "route": "/form-builder/templates",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-9BED",
+          "code": "NAV-9BED",
+          "label": "Create Form",
+          "icon": "plus_circle",
+          "route": "/form-builder/create",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-EDEB",
+          "code": "NAV-EDEB",
+          "label": "Submissions",
+          "icon": "inbox",
+          "route": "/form-builder/submissions",
+          "apiRoute": null,
+          "seq": 3
+        },
+        {
+          "id": "NAV-1D6B",
+          "code": "NAV-1D6B",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/form-builder/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-6E37",
+          "code": "NAV-6E37",
+          "label": "Deployments",
+          "icon": "upload-cloud",
+          "route": "/form-builder/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-SC01",
+      "code": "support-center",
+      "label": "Support Center",
+      "icon": "headset",
+      "seq": 16,
+      "items": [
+        {
+          "id": "NAV-SC01",
+          "code": "NAV-SC01",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/support-center/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-SC02",
+          "code": "NAV-SC02",
+          "label": "Support",
+          "icon": "headset",
+          "route": "/support-center",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-SC90",
+          "code": "NAV-SC90",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/support-center/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-SC91",
+          "code": "NAV-SC91",
+          "label": "Deployments",
+          "icon": "rocket_launch",
+          "route": "/support-center/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-VE01",
+      "code": "voice-engine",
+      "label": "Voice Engine",
+      "icon": "radio",
+      "seq": 17,
+      "items": [
+        {
+          "id": "NAV-VE01",
+          "code": "NAV-VE01",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/voice-engine/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-VE02",
+          "code": "NAV-VE02",
+          "label": "TTS Demo",
+          "icon": "play",
+          "route": "/voice-engine/demo",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-VE90",
+          "code": "NAV-VE90",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/voice-engine/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-VE91",
+          "code": "NAV-VE91",
+          "label": "Deployments",
+          "icon": "rocket_launch",
+          "route": "/voice-engine/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-JA01",
+      "code": "jayna",
+      "label": "Jayna AI",
+      "icon": "sparkles",
+      "seq": 18,
+      "items": [
+        {
+          "id": "NAV-JA01",
+          "code": "NAV-JA01",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/jayna/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-JA02",
+          "code": "NAV-JA02",
+          "label": "Agents",
+          "icon": "users",
+          "route": "/jayna/agents",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-JA03",
+          "code": "NAV-JA03",
+          "label": "Workflows",
+          "icon": "list",
+          "route": "/jayna/workflows",
+          "apiRoute": null,
+          "seq": 3
+        },
+        {
+          "id": "NAV-JA04",
+          "code": "NAV-JA04",
+          "label": "Call History",
+          "icon": "history",
+          "route": "/jayna/calls",
+          "apiRoute": null,
+          "seq": 4
+        },
+        {
+          "id": "NAV-JA05",
+          "code": "NAV-JA05",
+          "label": "Test Call",
+          "icon": "headset",
+          "route": "/jayna/test-call",
+          "apiRoute": null,
+          "seq": 5
+        },
+        {
+          "id": "NAV-JA90",
+          "code": "NAV-JA90",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/jayna/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-JA91",
+          "code": "NAV-JA91",
+          "label": "Deployments",
+          "icon": "rocket_launch",
+          "route": "/jayna/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-B302",
+      "code": "app_hi_quotation:hi_quotation",
+      "label": "HI Quotation",
+      "icon": "file-text",
+      "seq": 30,
+      "items": [
+        {
+          "id": "NAV-8D8B",
+          "code": "hi_quotation.view",
+          "label": "Guide",
+          "icon": "menu_book",
+          "route": "/hi-quotation/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-B59F",
+          "code": "hi_quotation.quotations.create",
+          "label": "New Application",
+          "icon": "add_circle",
+          "route": "/hi-quotation/new",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-1B86",
+          "code": "hi_quotation.quotations.read",
+          "label": "All Quotations",
+          "icon": "list_alt",
+          "route": "/hi-quotation/quotations",
+          "apiRoute": null,
+          "seq": 3
+        },
+        {
+          "id": "NAV-C168",
+          "code": "hi_quotation.maf.read",
+          "label": "MAF Questions",
+          "icon": "quiz",
+          "route": "/hi-quotation/maf",
+          "apiRoute": null,
+          "seq": 4
+        },
+        {
+          "id": "NAV-HQS1",
+          "code": "NAV-HQS1",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/hi-quotation/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-4DC5",
+          "code": "hi_quotation.admin",
+          "label": "Deployments",
+          "icon": "rocket_launch",
+          "route": "/hi-quotation/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-B262",
+      "code": "app_uw_workflow:uw_workflow",
+      "label": "UW Workflow",
+      "icon": "clipboard-check",
+      "seq": 31,
+      "items": [
+        {
+          "id": "NAV-9538",
+          "code": "retail_insurance.view",
+          "label": "Guide",
+          "icon": "menu_book",
+          "route": "/uw-workflow/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-C3C7",
+          "code": "retail_insurance.new_quotations_l1.view",
+          "label": "New Quotations (L1)",
+          "icon": "fiber_new",
+          "route": "/uw-workflow/wf/new-quotations-l1",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-EE83",
+          "code": "retail_insurance.new_quotations_l2.view",
+          "label": "New Quotations (L2)",
+          "icon": "fiber_new",
+          "route": "/uw-workflow/wf/new-quotations-l2",
+          "apiRoute": null,
+          "seq": 3
+        },
+        {
+          "id": "NAV-ABEC",
+          "code": "retail_insurance.stp_approved.view",
+          "label": "STP Approved",
+          "icon": "check_circle",
+          "route": "/uw-workflow/wf/stp-approved",
+          "apiRoute": null,
+          "seq": 4
+        },
+        {
+          "id": "NAV-C9C2",
+          "code": "retail_insurance.nstp_review.view",
+          "label": "NSTP Review",
+          "icon": "pending",
+          "route": "/uw-workflow/wf/nstp-review",
+          "apiRoute": null,
+          "seq": 5
+        },
+        {
+          "id": "NAV-9910",
+          "code": "retail_insurance.query_raised.view",
+          "label": "Query Raised",
+          "icon": "help_outline",
+          "route": "/uw-workflow/wf/query-raised",
+          "apiRoute": null,
+          "seq": 6
+        },
+        {
+          "id": "NAV-8B75",
+          "code": "retail_insurance.query_responded.view",
+          "label": "Query Responded",
+          "icon": "question_answer",
+          "route": "/uw-workflow/wf/query-responded",
+          "apiRoute": null,
+          "seq": 7
+        },
+        {
+          "id": "NAV-154F",
+          "code": "retail_insurance.approved.view",
+          "label": "Approved",
+          "icon": "thumb_up",
+          "route": "/uw-workflow/wf/approved",
+          "apiRoute": null,
+          "seq": 8
+        },
+        {
+          "id": "NAV-4795",
+          "code": "retail_insurance.declined.view",
+          "label": "Declined",
+          "icon": "thumb_down",
+          "route": "/uw-workflow/wf/declined",
+          "apiRoute": null,
+          "seq": 9
+        },
+        {
+          "id": "NAV-E14C",
+          "code": "retail_insurance.payment_pending.view",
+          "label": "Payment Pending",
+          "icon": "payment",
+          "route": "/uw-workflow/wf/payment-pending",
+          "apiRoute": null,
+          "seq": 10
+        },
+        {
+          "id": "NAV-9F65",
+          "code": "retail_insurance.policy_issued.view",
+          "label": "Policy Issued",
+          "icon": "verified",
+          "route": "/uw-workflow/wf/policy-issued",
+          "apiRoute": null,
+          "seq": 11
+        },
+        {
+          "id": "NAV-832A",
+          "code": "retail_insurance.all_quotations.view",
+          "label": "All Quotations",
+          "icon": "list",
+          "route": "/uw-workflow/wf/all-quotations",
+          "apiRoute": null,
+          "seq": 12
+        },
+        {
+          "id": "NAV-D9F2",
+          "code": "retail_insurance.my_assignments.view",
+          "label": "My Assignments",
+          "icon": "assignment_ind",
+          "route": "/uw-workflow/wf/my-assignments",
+          "apiRoute": null,
+          "seq": 13
+        },
+        {
+          "id": "NAV-809C",
+          "code": "retail_insurance.workflow_actions.read",
+          "label": "Workflow Actions",
+          "icon": "settings",
+          "route": "/uw-workflow/workflow-actions",
+          "apiRoute": null,
+          "seq": 14
+        },
+        {
+          "id": "NAV-UWS1",
+          "code": "NAV-UWS1",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/uw-workflow/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-7F04",
+          "code": "retail_insurance.admin",
+          "label": "Deployments",
+          "icon": "rocket_launch",
+          "route": "/uw-workflow/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-3940",
+      "code": "app_hi_decisioning:hi_decisioning",
+      "label": "HI Decisioning",
+      "icon": "gavel",
+      "seq": 32,
+      "items": [
+        {
+          "id": "NAV-4C7E",
+          "code": "hi_decisioning.view",
+          "label": "Guide",
+          "icon": "menu_book",
+          "route": "/hi-decisioning/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-BDF1",
+          "code": "hi_decisioning.rules.read",
+          "label": "Rules",
+          "icon": "rule",
+          "route": "/hi-decisioning/rules",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-AECD",
+          "code": "hi_decisioning.evaluations.read",
+          "label": "Evaluation History",
+          "icon": "history",
+          "route": "/hi-decisioning/evaluations",
+          "apiRoute": null,
+          "seq": 3
+        },
+        {
+          "id": "NAV-E991",
+          "code": "hi_decisioning.loading_tables.read",
+          "label": "Loading Tables",
+          "icon": "table_chart",
+          "route": "/hi-decisioning/loading-tables",
+          "apiRoute": null,
+          "seq": 4
+        },
+        {
+          "id": "NAV-F582",
+          "code": "hi_decisioning.stp_criteria.read",
+          "label": "STP Criteria",
+          "icon": "speed",
+          "route": "/hi-decisioning/stp-criteria",
+          "apiRoute": null,
+          "seq": 5
+        },
+        {
+          "id": "NAV-2D15",
+          "code": "hi_decisioning.fields.read",
+          "label": "Field Introspection",
+          "icon": "data_object",
+          "route": "/hi-decisioning/fields",
+          "apiRoute": null,
+          "seq": 6
+        },
+        {
+          "id": "NAV-HDS1",
+          "code": "NAV-HDS1",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/hi-decisioning/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-CAE7",
+          "code": "hi_decisioning.admin",
+          "label": "Deployments",
+          "icon": "rocket_launch",
+          "route": "/hi-decisioning/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-MQ01",
+      "code": "mi-quotation",
+      "label": "MI Quotation",
+      "icon": "car",
+      "seq": 33,
+      "items": [
+        {
+          "id": "NAV-MQ01",
+          "code": "NAV-MQ01",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/mi-quotation/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-MQ02",
+          "code": "NAV-MQ02",
+          "label": "New Quotation",
+          "icon": "add_circle",
+          "route": "/mi-quotation/new",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-MQ90",
+          "code": "NAV-MQ90",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/mi-quotation/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-MQ91",
+          "code": "NAV-MQ91",
+          "label": "Deployments",
+          "icon": "rocket_launch",
+          "route": "/mi-quotation/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-CL01",
+      "code": "claims",
+      "label": "Claims",
+      "icon": "file_warning",
+      "seq": 34,
+      "items": [
+        {
+          "id": "NAV-CL01",
+          "code": "NAV-CL01",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/claims/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-CL90",
+          "code": "NAV-CL90",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/claims/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-CL91",
+          "code": "NAV-CL91",
+          "label": "Deployments",
+          "icon": "rocket_launch",
+          "route": "/claims/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-FM01",
+      "code": "fee-management",
+      "label": "Fee Management",
+      "icon": "wallet",
+      "seq": 35,
+      "items": [
+        {
+          "id": "NAV-FM01",
+          "code": "NAV-FM01",
+          "label": "Guide",
+          "icon": "info",
+          "route": "/fee-management/guide",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-FM90",
+          "code": "NAV-FM90",
+          "label": "Setup",
+          "icon": "settings",
+          "route": "/fee-management/setup",
+          "apiRoute": null,
+          "seq": 90
+        },
+        {
+          "id": "NAV-FM91",
+          "code": "NAV-FM91",
+          "label": "Deployments",
+          "icon": "rocket_launch",
+          "route": "/fee-management/deployments",
+          "apiRoute": null,
+          "seq": 91
+        }
+      ]
+    },
+    {
+      "id": "SEC-PS01",
+      "code": "pii-showcase",
+      "label": "PII Showcase",
+      "icon": "enhanced_encryption",
+      "seq": 85,
+      "items": [
+        {
+          "id": "NAV-2A57",
+          "code": "NAV-2A57",
+          "label": "PII Showcase",
+          "icon": "visibility",
+          "route": "/O/O-OZPY/pii-showcase",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-6973",
+          "code": "NAV-6973",
+          "label": "Dashboard",
+          "icon": "dashboard",
+          "route": "/O/O-OZPY/pii-showcase/dashboard",
+          "apiRoute": null,
+          "seq": 2
+        },
+        {
+          "id": "NAV-2BD8",
+          "code": "NAV-2BD8",
+          "label": "Upload & Ingest",
+          "icon": "upload",
+          "route": "/O/O-OZPY/pii-showcase/upload",
+          "apiRoute": null,
+          "seq": 3
+        },
+        {
+          "id": "NAV-1CF4",
+          "code": "NAV-1CF4",
+          "label": "PII Configuration",
+          "icon": "settings",
+          "route": "/O/O-OZPY/pii-showcase/config",
+          "apiRoute": null,
+          "seq": 4
+        }
+      ]
+    },
+    {
+      "id": "SEC-DR01",
+      "code": "directory",
+      "label": "Directory",
+      "icon": "people",
+      "seq": 90,
+      "items": [
+        {
+          "id": "NAV-899D",
+          "code": "NAV-899D",
+          "label": "Team Directory",
+          "icon": "users",
+          "route": "/directory",
+          "apiRoute": null,
+          "seq": 1
+        },
+        {
+          "id": "NAV-AC12",
+          "code": "NAV-AC12",
+          "label": "Group Spaces",
+          "icon": "message_square",
+          "route": "/directory/groups",
+          "apiRoute": null,
+          "seq": 2
+        }
+      ]
+    }
+  ],
+  "source": "database",
+  "generatedAt": "2026-04-02T17:03:14.522Z"
+}

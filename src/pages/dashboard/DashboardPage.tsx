@@ -3,8 +3,7 @@ import { Users, Building2, UserCircle, Activity } from 'lucide-react';
 import Card from '../../components/shared/Card';
 import StatusBadge from '../../components/shared/StatusBadge';
 import { useAuth } from '../../hooks/useAuth';
-import { identityService } from '../../services/identity';
-import { customerService } from '../../services/customer';
+import { identityService, Organization } from '../../services/identity';
 import { auditService, AuditEvent } from '../../services/audit';
 import { messagingService } from '../../services/messaging';
 
@@ -26,13 +25,11 @@ const DashboardPage: React.FC = () => {
     const load = async () => {
       setLoading(true);
       try {
-        // Use limit=1 to avoid fetching full lists just for counts.
-        // Extract total from paginated response metadata when available,
-        // otherwise fall back to array length.
-        const [usersRes, orgsRes, custRes, auditRes, healthRes] = await Promise.allSettled([
+        // Fetch users (limit=1 for count), full org list (to derive customer count),
+        // recent audit events, and messaging health.
+        const [usersRes, orgsRes, auditRes, healthRes] = await Promise.allSettled([
           identityService.getUsers(orgId, { limit: 1 }),
-          identityService.getOrganizations({ limit: 1 }),
-          customerService.getCustomers(orgId, { limit: 1 }),
+          identityService.getOrganizations(),
           auditService.getEvents(orgId, { limit: 5 }),
           messagingService.getHealth(),
         ]);
@@ -40,7 +37,6 @@ const DashboardPage: React.FC = () => {
         const extractCount = (res: PromiseSettledResult<any>): number => {
           if (res.status !== 'fulfilled') return 0;
           const d = res.value.data;
-          // Prefer total/count from paginated envelope
           if (d && typeof d === 'object' && !Array.isArray(d)) {
             if (typeof d.total === 'number') return d.total;
             if (typeof d.count === 'number') return d.count;
@@ -50,10 +46,19 @@ const DashboardPage: React.FC = () => {
           return 0;
         };
 
+        // Derive customer count from orgs with isCustomer flag
+        let customerCount = 0;
+        if (orgsRes.status === 'fulfilled') {
+          const orgList: Organization[] = Array.isArray(orgsRes.value.data)
+            ? orgsRes.value.data
+            : [];
+          customerCount = orgList.filter((o) => o.isCustomer).length;
+        }
+
         setStats({
           users: extractCount(usersRes),
           orgs: extractCount(orgsRes),
-          customers: extractCount(custRes),
+          customers: customerCount,
         });
 
         if (auditRes.status === 'fulfilled') {

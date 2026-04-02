@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { identityService } from '../../services/identity';
+import { identityService, hashPassword } from '../../services/identity';
 import { useToast } from '../../components/shared/Toast';
 
 const RegisterPage: React.FC = () => {
@@ -18,14 +18,12 @@ const RegisterPage: React.FC = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Security note: password is sent over HTTPS (wire encryption) and hashed
-  // server-side with bcrypt (12 rounds). Client-side hashing is a Phase 2
-  // backlog item for defense-in-depth.
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await identityService.register(form);
+      const hashed = await hashPassword(form.password);
+      await identityService.register({ ...form, password: hashed, clientHashed: true });
       toast('Account created. Please sign in.', 'success');
       navigate('/login');
     } catch {

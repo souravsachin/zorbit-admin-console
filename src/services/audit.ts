@@ -3,12 +3,24 @@ import api from './api';
 
 export interface AuditEvent {
   id: string;
+  hashId: string;
   eventType: string;
-  actor: string;
-  resource: string;
+  source: string;
+  actor: Record<string, unknown>;
+  namespace: Record<string, unknown>;
+  resourceType: string | null;
+  resourceId: string | null;
   action: string;
-  timestamp: string;
-  metadata: Record<string, unknown>;
+  previousState: Record<string, unknown> | null;
+  newState: Record<string, unknown> | null;
+  metadata: Record<string, unknown> | null;
+  ipAddress: string | null;
+  eventTimestamp: string;
+  organizationHashId: string | null;
+  createdAt: string;
+  /** Virtual fields for display convenience */
+  timestamp?: string;
+  resource?: string;
 }
 
 export interface AuditQuery {

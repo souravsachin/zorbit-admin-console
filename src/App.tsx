@@ -58,6 +58,7 @@ const FormBuilderOverviewPage = React.lazy(() => import('./pages/form-builder/Fo
 const ModuleRegistryPage = React.lazy(() => import('./pages/admin/ModuleRegistryPage'));
 const LicensingPage = React.lazy(() => import('./pages/admin/LicensingPage'));
 const SitemapPage = React.lazy(() => import('./pages/admin/SitemapPage'));
+const DeveloperPage = React.lazy(() => import('./pages/admin/DeveloperPage'));
 const UWWorkflowPage = React.lazy(() => import('./pages/uw-workflow/UWWorkflowPage'));
 const HIDecisioningPage = React.lazy(() => import('./pages/hi-decisioning/HIDecisioningPage'));
 const HIQuotationPage = React.lazy(() => import('./pages/hi-quotation/HIQuotationPage'));
@@ -225,36 +226,36 @@ function PageRoutes() {
       <Route path="settings/secrets" element={<SecretsPage />} />
       <Route path="settings/security" element={<SafeLazy><SecurityPage /></SafeLazy>} />
       <Route path="admin/platform" element={<DashboardPage />} />
-      <Route path="admin/guide" element={<DashboardPage />} />
+      <Route path="admin/guide/*" element={<DashboardPage />} />
       <Route path="admin/licensing" element={<SafeLazy><LicensingPage /></SafeLazy>} />
-      <Route path="settings/guide" element={<SettingsPage />} />
+      <Route path="settings/guide/*" element={<SettingsPage />} />
 
       {/* Platform Core — Guide (renamed from Overview) & Hub Pages */}
-      <Route path="identity/guide" element={<SafeLazy><IdentityHubPage /></SafeLazy>} />
+      <Route path="identity/guide/*" element={<SafeLazy><IdentityHubPage /></SafeLazy>} />
       <Route path="identity/hub" element={<SafeLazy><IdentityHubPage /></SafeLazy>} />
       <Route path="identity/overview" element={<Navigate to="identity/guide" replace />} />
-      <Route path="authorization/guide" element={<SafeLazy><AuthorizationHubPage /></SafeLazy>} />
+      <Route path="authorization/guide/*" element={<SafeLazy><AuthorizationHubPage /></SafeLazy>} />
       <Route path="authorization/hub" element={<SafeLazy><AuthorizationHubPage /></SafeLazy>} />
       <Route path="authorization/overview" element={<Navigate to="authorization/guide" replace />} />
-      <Route path="navigation/guide" element={<SafeLazy><NavigationHubPage /></SafeLazy>} />
+      <Route path="navigation/guide/*" element={<SafeLazy><NavigationHubPage /></SafeLazy>} />
       <Route path="navigation/hub" element={<SafeLazy><NavigationHubPage /></SafeLazy>} />
       <Route path="navigation/overview" element={<Navigate to="navigation/guide" replace />} />
-      <Route path="messaging/guide" element={<SafeLazy><MessagingHubPage /></SafeLazy>} />
+      <Route path="messaging/guide/*" element={<SafeLazy><MessagingHubPage /></SafeLazy>} />
       <Route path="messaging/hub" element={<SafeLazy><MessagingHubPage /></SafeLazy>} />
       <Route path="messaging/overview" element={<Navigate to="messaging/guide" replace />} />
-      <Route path="audit/guide" element={<SafeLazy><AuditHubPage /></SafeLazy>} />
+      <Route path="audit/guide/*" element={<SafeLazy><AuditHubPage /></SafeLazy>} />
       <Route path="audit/hub" element={<SafeLazy><AuditHubPage /></SafeLazy>} />
       <Route path="audit/overview" element={<Navigate to="audit/guide" replace />} />
-      <Route path="pii-vault/guide" element={<SafeLazy><PIIVaultHubPage /></SafeLazy>} />
+      <Route path="pii-vault/guide/*" element={<SafeLazy><PIIVaultHubPage /></SafeLazy>} />
       <Route path="pii-vault/hub" element={<SafeLazy><PIIVaultHubPage /></SafeLazy>} />
       <Route path="pii-vault/overview" element={<Navigate to="pii-vault/guide" replace />} />
-      <Route path="dashboard/guide" element={<SafeLazy><DashboardHubPage /></SafeLazy>} />
+      <Route path="dashboard/guide/*" element={<SafeLazy><DashboardHubPage /></SafeLazy>} />
       <Route path="dashboard/hub" element={<SafeLazy><DashboardHubPage /></SafeLazy>} />
       <Route path="dashboard/overview" element={<Navigate to="dashboard/guide" replace />} />
 
       {/* PII Showcase (own section + microservice via pii-vault) */}
       <Route path="pii-showcase" element={<SafeLazy><PIIShowcasePage /></SafeLazy>} />
-      <Route path="pii-showcase/guide" element={<SafeLazy><PIIShowcaseHubPage /></SafeLazy>} />
+      <Route path="pii-showcase/guide/*" element={<SafeLazy><PIIShowcaseHubPage /></SafeLazy>} />
       <Route path="pii-showcase/hub" element={<SafeLazy><PIIShowcaseHubPage /></SafeLazy>} />
       <Route path="pii-showcase/dashboard" element={<SafeLazy><PIIDashboardPage /></SafeLazy>} />
       <Route path="pii-showcase/upload" element={<SafeLazy><PIIUploadPage /></SafeLazy>} />
@@ -264,7 +265,7 @@ function PageRoutes() {
 
       {/* PCG4 routes — new /app/pcg4/* convention with lazy loading */}
       <Route path="app/pcg4/hub" element={<SafeLazy><PCG4HubPage /></SafeLazy>} />
-      <Route path="app/pcg4/guide" element={<SafeLazy><PCG4HubPage /></SafeLazy>} />
+      <Route path="app/pcg4/guide/*" element={<SafeLazy><PCG4HubPage /></SafeLazy>} />
       <Route path="app/pcg4/overview" element={<Navigate to="/app/pcg4/guide" replace />} />
       <Route path="app/pcg4/configurations" element={<SafeLazy><PCG4DashboardPage /></SafeLazy>} />
       <Route path="app/pcg4/configurations/new" element={<SafeLazy><PCG4ConfiguratorPage /></SafeLazy>} />
@@ -281,21 +282,21 @@ function PageRoutes() {
 
       {/* Organization Directory (own section) */}
       <Route path="directory" element={<SafeLazy><DirectoryPage /></SafeLazy>} />
-      <Route path="directory/guide" element={<SafeLazy><DirectoryHubPage /></SafeLazy>} />
+      <Route path="directory/guide/*" element={<SafeLazy><DirectoryHubPage /></SafeLazy>} />
       <Route path="directory/hub" element={<SafeLazy><DirectoryHubPage /></SafeLazy>} />
       <Route path="directory/setup" element={<SafeLazy><DirectorySetupPage /></SafeLazy>} />
       <Route path="directory/deployments" element={<SafeLazy><DirectoryDeploymentsPage /></SafeLazy>} />
 
       {/* Platform Support Center (own section + microservice via chat) */}
       <Route path="support-center" element={<SafeLazy><SupportCenterPage /></SafeLazy>} />
-      <Route path="support-center/guide" element={<SafeLazy><SupportCenterHubPage /></SafeLazy>} />
+      <Route path="support-center/guide/*" element={<SafeLazy><SupportCenterHubPage /></SafeLazy>} />
       <Route path="support-center/hub" element={<SafeLazy><SupportCenterHubPage /></SafeLazy>} />
       <Route path="support-center/setup" element={<SafeLazy><SupportCenterSetupPage /></SafeLazy>} />
       <Route path="support-center/deployments" element={<SafeLazy><SupportCenterDeploymentsPage /></SafeLazy>} />
 
       {/* Voice Engine */}
       <Route path="voice-engine" element={<SafeLazy><VoiceEngineHubPage /></SafeLazy>} />
-      <Route path="voice-engine/guide" element={<SafeLazy><VoiceEngineHubPage /></SafeLazy>} />
+      <Route path="voice-engine/guide/*" element={<SafeLazy><VoiceEngineHubPage /></SafeLazy>} />
       <Route path="voice-engine/hub" element={<SafeLazy><VoiceEngineHubPage /></SafeLazy>} />
       <Route path="voice-engine/setup" element={<SafeLazy><VoiceEngineSetupPage /></SafeLazy>} />
       <Route path="voice-engine/deployments" element={<SafeLazy><VoiceEngineDeploymentsPage /></SafeLazy>} />
@@ -303,7 +304,7 @@ function PageRoutes() {
 
       {/* Jayna AI Calling */}
       <Route path="jayna" element={<SafeLazy><JaynaHubPage /></SafeLazy>} />
-      <Route path="jayna/guide" element={<SafeLazy><JaynaHubPage /></SafeLazy>} />
+      <Route path="jayna/guide/*" element={<SafeLazy><JaynaHubPage /></SafeLazy>} />
       <Route path="jayna/hub" element={<SafeLazy><JaynaHubPage /></SafeLazy>} />
       <Route path="jayna/agents" element={<SafeLazy><JaynaAgentsPage /></SafeLazy>} />
       <Route path="jayna/workflows" element={<SafeLazy><JaynaWorkflowsPage /></SafeLazy>} />
@@ -318,13 +319,14 @@ function PageRoutes() {
       <Route path="form-builder/submissions" element={<SafeLazy><FormSubmissionsPage /></SafeLazy>} />
       <Route path="form-builder/edit/:slug" element={<SafeLazy><FormEditorPage /></SafeLazy>} />
       <Route path="form-builder/help" element={<SafeLazy><FormBuilderHelpPage /></SafeLazy>} />
-      <Route path="form-builder/guide" element={<SafeLazy><FormBuilderOverviewPage /></SafeLazy>} />
+      <Route path="form-builder/guide/*" element={<SafeLazy><FormBuilderOverviewPage /></SafeLazy>} />
       <Route path="form-builder/overview" element={<Navigate to="form-builder/guide" replace />} />
       <Route path="form-builder/hub" element={<SafeLazy><FormBuilderHubPage /></SafeLazy>} />
 
       {/* Admin */}
       <Route path="admin/modules" element={<SafeLazy><ModuleRegistryPage /></SafeLazy>} />
       <Route path="admin/sitemap" element={<SafeLazy><SitemapPage /></SafeLazy>} />
+      <Route path="admin/developer" element={<SafeLazy><DeveloperPage /></SafeLazy>} />
 
       {/* ============================================================ */}
       {/* Module Setup & Deployments Pages                             */}
@@ -371,17 +373,17 @@ function PageRoutes() {
 
       {/* Business Modules — Retail Insurance */}
       <Route path="uw-workflow" element={<SafeLazy><UWWorkflowPage /></SafeLazy>} />
-      <Route path="uw-workflow/guide" element={<SafeLazy><UWWorkflowHubPage /></SafeLazy>} />
+      <Route path="uw-workflow/guide/*" element={<SafeLazy><UWWorkflowHubPage /></SafeLazy>} />
       <Route path="uw-workflow/hub" element={<SafeLazy><UWWorkflowHubPage /></SafeLazy>} />
       <Route path="uw-workflow/help" element={<SafeLazy><UWWorkflowHelpPage /></SafeLazy>} />
       <Route path="uw-workflow/*" element={<SafeLazy><UWWorkflowPage /></SafeLazy>} />
       <Route path="hi-decisioning" element={<SafeLazy><HIDecisioningPage /></SafeLazy>} />
-      <Route path="hi-decisioning/guide" element={<SafeLazy><HIDecisioningHubPage /></SafeLazy>} />
+      <Route path="hi-decisioning/guide/*" element={<SafeLazy><HIDecisioningHubPage /></SafeLazy>} />
       <Route path="hi-decisioning/hub" element={<SafeLazy><HIDecisioningHubPage /></SafeLazy>} />
       <Route path="hi-decisioning/help" element={<SafeLazy><HIDecisioningHelpPage /></SafeLazy>} />
       <Route path="hi-decisioning/*" element={<SafeLazy><HIDecisioningPage /></SafeLazy>} />
       <Route path="hi-quotation" element={<SafeLazy><HIQuotationPage /></SafeLazy>} />
-      <Route path="hi-quotation/guide" element={<SafeLazy><HIQuotationHubPage /></SafeLazy>} />
+      <Route path="hi-quotation/guide/*" element={<SafeLazy><HIQuotationHubPage /></SafeLazy>} />
       <Route path="hi-quotation/hub" element={<SafeLazy><HIQuotationHubPage /></SafeLazy>} />
       <Route path="hi-quotation/help" element={<SafeLazy><HIQuotationHelpPage /></SafeLazy>} />
       <Route path="hi-quotation/new" element={<SafeLazy><RegionSelectorPage /></SafeLazy>} />
@@ -393,14 +395,14 @@ function PageRoutes() {
 
       {/* Business Modules — Motor Insurance */}
       <Route path="mi-quotation" element={<SafeLazy><MIQuotationPage /></SafeLazy>} />
-      <Route path="mi-quotation/guide" element={<SafeLazy><MIQuotationHubPage /></SafeLazy>} />
+      <Route path="mi-quotation/guide/*" element={<SafeLazy><MIQuotationHubPage /></SafeLazy>} />
       <Route path="mi-quotation/hub" element={<SafeLazy><MIQuotationHubPage /></SafeLazy>} />
       <Route path="mi-quotation/help" element={<SafeLazy><MIQuotationHelpPage /></SafeLazy>} />
       <Route path="mi-quotation/*" element={<SafeLazy><MIQuotationPage /></SafeLazy>} />
 
       {/* Business Modules — Product Pricing (own section + microservice) */}
       <Route path="product-pricing" element={<SafeLazy><ProductPricingHubPage /></SafeLazy>} />
-      <Route path="product-pricing/guide" element={<SafeLazy><ProductPricingHubPage /></SafeLazy>} />
+      <Route path="product-pricing/guide/*" element={<SafeLazy><ProductPricingHubPage /></SafeLazy>} />
       <Route path="product-pricing/hub" element={<SafeLazy><ProductPricingHubPage /></SafeLazy>} />
       <Route path="product-pricing/rate-tables" element={<SafeLazy><RateTablesPage /></SafeLazy>} />
       <Route path="product-pricing/import" element={<SafeLazy><RateCardImportPage /></SafeLazy>} />
@@ -411,12 +413,12 @@ function PageRoutes() {
       {/* Business Modules — Fee Management (own section + microservice) */}
       <Route path="fee-management" element={<SafeLazy><FeeManagementHubPage /></SafeLazy>} />
       <Route path="fee-management/hub" element={<SafeLazy><FeeManagementHubPage /></SafeLazy>} />
-      <Route path="fee-management/guide" element={<SafeLazy><FeeManagementHubPage /></SafeLazy>} />
+      <Route path="fee-management/guide/*" element={<SafeLazy><FeeManagementHubPage /></SafeLazy>} />
 
       {/* Business Modules — Claims (own section + microservice) */}
       <Route path="claims" element={<SafeLazy><ClaimsHubPage /></SafeLazy>} />
       <Route path="claims/hub" element={<SafeLazy><ClaimsHubPage /></SafeLazy>} />
-      <Route path="claims/guide" element={<SafeLazy><ClaimsHubPage /></SafeLazy>} />
+      <Route path="claims/guide/*" element={<SafeLazy><ClaimsHubPage /></SafeLazy>} />
 
       {/* Verification */}
       <Route path="verification/help" element={<SafeLazy><VerificationHelpPage /></SafeLazy>} />

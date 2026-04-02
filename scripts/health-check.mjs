@@ -44,7 +44,15 @@ const LARGE_THRESHOLD_BYTES = 100 * 1024; // 100KB
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const REPORTS_DIR = join(__dirname, 'reports');
+const TIMESTAMP = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+const RUN_DIR = join(__dirname, 'reports', TIMESTAMP);
+const RAW_DIR = join(RUN_DIR, 'raw');
+
+// Headless by default, use --head-full for visible browser
+const HEADLESS = !process.argv.includes('--head-full');
+
+// Create report directories
+mkdirSync(RAW_DIR, { recursive: true });
 
 // ---------------------------------------------------------------------------
 // MFA helpers (proven pattern from existing scripts)
@@ -100,7 +108,7 @@ const report = {
 
   // Step 2: Launch browser and login
   console.log('[2/5] Logging in with MFA...');
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: HEADLESS });
   const context = await browser.newContext({
     viewport: { width: 1920, height: 1080 },
     ignoreHTTPSErrors: true,
@@ -171,6 +179,8 @@ const report = {
       process.exit(1);
     }
     menuData = menuResponse.data;
+    // Save raw menu.json
+    writeFileSync(join(RUN_DIR, 'menu.json'), JSON.stringify(menuData, null, 2));
   } catch (e) {
     console.error('FATAL: Failed to fetch navigation menu:', e.message);
     await browser.close();
@@ -193,6 +203,12 @@ const report = {
     const routeStart = Date.now();
 
     // Set up response listener for this page
+    // Create per-route raw folder
+    const routeSlug = route.path.replace(/\//g, '_').replace(/^_/, '') || 'root';
+    const routeRawDir = join(RAW_DIR, `${String(i + 1).padStart(3, '0')}-${routeSlug}`);
+    mkdirSync(routeRawDir, { recursive: true });
+    let callCounter = 0;
+
     const responseHandler = async (response) => {
       const url = response.url();
       // Only track same-origin and API calls (skip external resources like fonts, analytics)
@@ -220,6 +236,12 @@ const report = {
       try {
         const body = await response.body();
         entry.size = body.length;
+        // Save raw payload for forensics
+        callCounter++;
+        const urlSlug = url.replace(BASE_URL, '').replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 80);
+        const ext = entry.contentType.includes('json') ? '.json' : entry.contentType.includes('html') ? '.html' : '.txt';
+        const rawFile = join(routeRawDir, `${String(callCounter).padStart(2, '0')}-${entry.method}-${urlSlug}${ext}`);
+        try { writeFileSync(rawFile, body); } catch (_) {}
       } catch (_) {
         // Some responses may not have a body
       }
@@ -548,12 +570,32 @@ function printReport() {
 // Save JSON report
 // ---------------------------------------------------------------------------
 function saveReport() {
-  mkdirSync(REPORTS_DIR, { recursive: true });
-  const dateStr = new Date().toISOString().slice(0, 10);
-  const filename = `health-check-${dateStr}.json`;
-  const filepath = join(REPORTS_DIR, filename);
-  writeFileSync(filepath, JSON.stringify(report, null, 2));
-  console.log(`\nReport saved to: ${filepath}`);
+  // Save summary.json
+  writeFileSync(join(RUN_DIR, 'summary.json'), JSON.stringify(report, null, 2));
+
+  // Save summary.md (human-readable)
+  let md = `# Health Check Report\n\n`;
+  md += `**Date:** ${report.date}\n`;
+  md += `**Routes:** ${report.totalRoutes}\n`;
+  md += `**API Calls:** ${report.totalApiCalls}\n`;
+  md += `**Errors:** ${report.errors.length}\n`;
+  md += `**Warnings:** ${report.warnings.length}\n\n`;
+  md += `## Errors\n\n`;
+  for (const e of report.errors) {
+    md += `- [${e.type}] ${e.method} ${shortenUrl(e.url)} → ${e.status}\n`;
+  }
+  md += `\n## Routes\n\n`;
+  for (const r of report.routes) {
+    const icon = r.status === 'OK' ? '✓' : '✗';
+    md += `${icon} \`${r.path}\` — ${r.apiCallCount} calls, ${r.apiErrorCount} issues, ${r.totalTimeMs}ms\n`;
+  }
+  writeFileSync(join(RUN_DIR, 'summary.md'), md);
+
+  console.log(`\nReport saved to: ${RUN_DIR}/`);
+  console.log(`  summary.json — structured report`);
+  console.log(`  summary.md   — human-readable report`);
+  console.log(`  menu.json    — navigation menu snapshot`);
+  console.log(`  raw/         — raw API payloads per route`);
 }
 
 // ---------------------------------------------------------------------------

@@ -39,10 +39,22 @@ const EventLogPage: React.FC = () => {
   useEffect(() => { loadEvents(); }, [orgId, page]);
 
   const columns: Column<AuditEvent>[] = [
-    { key: 'timestamp', header: 'Timestamp', render: (e) => new Date(e.timestamp).toLocaleString() },
+    { key: 'eventTimestamp', header: 'Timestamp', render: (e) => {
+      const d = e.eventTimestamp || e.timestamp;
+      if (!d) return 'N/A';
+      const date = new Date(String(d));
+      return isNaN(date.getTime()) ? 'N/A' : date.toLocaleString();
+    }},
     { key: 'eventType', header: 'Event Type', render: (e) => <StatusBadge label={e.eventType} variant="info" /> },
-    { key: 'actor', header: 'Actor' },
-    { key: 'resource', header: 'Resource' },
+    { key: 'actor', header: 'Actor', render: (e) => {
+      const a = e.actor;
+      if (!a || typeof a !== 'object') return String(a || 'N/A');
+      return (a.displayName as string) || (a.hashId as string) || 'system';
+    }},
+    { key: 'resourceType', header: 'Resource', render: (e) => {
+      const parts = [e.resourceType, e.resourceId].filter(Boolean);
+      return parts.length > 0 ? parts.join(' ') : 'N/A';
+    }},
     { key: 'action', header: 'Action' },
   ];
 

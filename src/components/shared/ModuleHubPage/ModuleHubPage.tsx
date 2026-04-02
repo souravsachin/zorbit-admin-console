@@ -11,6 +11,7 @@ import {
   ChevronDown,
   ChevronUp,
   MessageSquare,
+  CreditCard,
 } from 'lucide-react';
 import SlidePlayer, { type Slide } from '../SlidePlayer';
 import { DemoTourPlayer } from '../DemoTourPlayer';
@@ -77,7 +78,7 @@ export interface ModuleHubPageProps {
 // Tab key type
 // ---------------------------------------------------------------------------
 
-type TabKey = 'introduction' | 'presentation' | 'lifecycle' | 'videos' | 'resources';
+type TabKey = 'introduction' | 'presentation' | 'lifecycle' | 'videos' | 'resources' | 'pricing';
 
 const TABS: { key: TabKey; label: string; icon: React.ElementType }[] = [
   { key: 'introduction', label: 'Introduction', icon: Info },
@@ -85,7 +86,10 @@ const TABS: { key: TabKey; label: string; icon: React.ElementType }[] = [
   { key: 'lifecycle', label: 'Lifecycle', icon: Layers },
   { key: 'videos', label: 'Video Tutorials', icon: Video },
   { key: 'resources', label: 'Resources & Docs', icon: BookOpen },
+  { key: 'pricing', label: 'Pricing', icon: CreditCard },
 ];
+
+const VALID_TABS = new Set<string>(TABS.map((t) => t.key));
 
 // ---------------------------------------------------------------------------
 // Capability color palette (cycles through these)
@@ -168,18 +172,42 @@ function FAQAccordion({ faqs }: { faqs: ModuleFAQ[] }) {
 // ModuleHubPage
 // ---------------------------------------------------------------------------
 
-const ModuleHubPage: React.FC<ModuleHubPageProps> = (props) => {
-  // Deep linking: read tab from URL search params
-  const searchParams = new URLSearchParams(window.location.search);
-  const tabFromUrl = searchParams.get('tab') as TabKey | null;
-  const [activeTab, setActiveTab] = useState<TabKey>(tabFromUrl || 'introduction');
+// ---------------------------------------------------------------------------
+// Helpers: derive tab from URL path and compute the guide base path
+// ---------------------------------------------------------------------------
 
-  // Update URL when tab changes
+function getTabFromPath(): TabKey {
+  const segments = window.location.pathname.split('/').filter(Boolean);
+  const guideIdx = segments.indexOf('guide');
+  if (guideIdx >= 0 && guideIdx < segments.length - 1) {
+    const candidate = segments[guideIdx + 1];
+    if (VALID_TABS.has(candidate)) return candidate as TabKey;
+  }
+  return 'introduction';
+}
+
+/** Returns the path up to and including /guide (without trailing slash). */
+function getGuideBasePath(): string {
+  const path = window.location.pathname;
+  const idx = path.indexOf('/guide');
+  if (idx === -1) return path.replace(/\/$/, '');
+  return path.substring(0, idx + '/guide'.length);
+}
+
+// ---------------------------------------------------------------------------
+// ModuleHubPage
+// ---------------------------------------------------------------------------
+
+const ModuleHubPage: React.FC<ModuleHubPageProps> = (props) => {
+  // Deep linking: read tab from URL path segment after /guide/
+  const [activeTab, setActiveTab] = useState<TabKey>(getTabFromPath);
+
+  // Update URL when tab changes (path-based, e.g. /product-pricing/guide/presentation)
   const handleTabChange = (tab: TabKey) => {
     setActiveTab(tab);
-    const url = new URL(window.location.href);
-    url.searchParams.set('tab', tab);
-    window.history.replaceState({}, '', url.toString());
+    const base = getGuideBasePath();
+    const newPath = tab === 'introduction' ? base : `${base}/${tab}`;
+    window.history.replaceState({}, '', newPath);
   };
   const Icon = props.icon;
 
@@ -228,6 +256,7 @@ const ModuleHubPage: React.FC<ModuleHubPageProps> = (props) => {
       {activeTab === 'lifecycle' && <LifecycleTab stages={props.lifecycleStages} />}
       {activeTab === 'videos' && <VideoTutorialsTab recordings={props.recordings} baseUrl={props.videosBaseUrl} moduleName={props.moduleName} />}
       {activeTab === 'resources' && <ResourcesTab swaggerUrl={props.swaggerUrl} faqs={props.faqs} resources={props.resources} extraContent={props.extraResourceContent} />}
+      {activeTab === 'pricing' && <PricingTab moduleName={props.moduleName} />}
     </div>
   );
 };
@@ -461,6 +490,41 @@ function ResourcesTab({
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Need more resources? Talk to the module administrator to add documentation, guides, and tutorials.
         </p>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Tab: Pricing
+// ---------------------------------------------------------------------------
+
+function PricingTab({ moduleName }: { moduleName: string }) {
+  return (
+    <div className="flex items-center justify-center py-12">
+      <div className="relative w-full max-w-lg rounded-2xl p-[2px] bg-gradient-to-br from-primary-400 via-purple-500 to-pink-500">
+        <div className="rounded-2xl bg-white dark:bg-gray-900 p-10 text-center">
+          {/* Icon */}
+          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900/40 dark:to-purple-900/40">
+            <CreditCard size={32} className="text-primary-600 dark:text-primary-400" />
+          </div>
+
+          {/* Title */}
+          <h2 className="text-xl font-bold mb-2">Module Pricing</h2>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mb-6 leading-relaxed">
+            Pricing information for <strong>{moduleName}</strong> will be available soon.
+          </p>
+
+          {/* Coming Soon badge */}
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-primary-500 to-purple-600 px-4 py-1.5 text-xs font-semibold text-white tracking-wide uppercase shadow-sm">
+            Coming Soon
+          </span>
+
+          {/* CTA */}
+          <p className="mt-6 text-xs text-gray-400 dark:text-gray-500">
+            Contact sales for enterprise pricing and custom packages.
+          </p>
+        </div>
       </div>
     </div>
   );

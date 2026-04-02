@@ -79,11 +79,19 @@ const AuditPage: React.FC = () => {
   };
 
   const columns: Column<AuditEvent>[] = [
-    { key: 'timestamp', header: 'Timestamp', render: (e) => formatDate(e.timestamp) },
+    { key: 'eventTimestamp', header: 'Timestamp', render: (e) => formatDate(e.eventTimestamp) },
     { key: 'eventType', header: 'Event Type', render: (e) => <StatusBadge label={e.eventType} variant="info" /> },
-    { key: 'actor', header: 'Actor' },
-    { key: 'resource', header: 'Resource' },
+    { key: 'actor', header: 'Actor', render: (e) => {
+      const a = e.actor;
+      if (!a || typeof a !== 'object') return 'N/A';
+      return (a.displayName as string) || (a.hashId as string) || 'system';
+    }},
+    { key: 'resourceType', header: 'Resource', render: (e) => {
+      const parts = [e.resourceType, e.resourceId].filter(Boolean);
+      return parts.length > 0 ? parts.join(' ') : 'N/A';
+    }},
     { key: 'action', header: 'Action' },
+    { key: 'source', header: 'Source' },
   ];
 
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
