@@ -19,7 +19,22 @@ import { ModuleHubPage } from '../../components/shared/ModuleHubPage';
 import type { ManifestEntry } from '../../components/shared/DemoTourPlayer';
 
 /* ------------------------------------------------------------------ */
-/*  Desktop Journey Playlist (v1 — 2026-04-02)                       */
+/*  Narrated Journey Playlist (v2 — 2026-04-03, with voice narration)*/
+/* ------------------------------------------------------------------ */
+
+const NARRATED_JOURNEY: ManifestEntry[] = [
+  { file: 'segments-v2/desktop/01-login-mfa.mp4', title: 'Login with MFA (Narrated)', thumbnail: '', timestamp: '2026-04-03T02:30:00Z', duration: 40, chapters: [{ title: 'Login + TOTP', startMs: 0 }] },
+  { file: 'segments-v2/desktop/02-product-config.mp4', title: 'Product Configuration (Narrated)', thumbnail: '', timestamp: '2026-04-03T02:31:00Z', duration: 45, chapters: [{ title: 'PCG4 Wizard', startMs: 0 }] },
+  { file: 'segments-v2/desktop/03-rate-tables.mp4', title: 'Rate Tables & Calculator (Narrated)', thumbnail: '', timestamp: '2026-04-03T02:32:00Z', duration: 35, chapters: [{ title: 'Rate Lookup', startMs: 0 }] },
+  { file: 'segments-v2/desktop/04-uw-workflow.mp4', title: 'UW Workflow Queues (Narrated)', thumbnail: '', timestamp: '2026-04-03T02:33:00Z', duration: 45, chapters: [{ title: 'Queue Engine', startMs: 0 }] },
+  { file: 'segments-v2/desktop/05-decisioning.mp4', title: 'Decisioning Rules Engine (Narrated)', thumbnail: '', timestamp: '2026-04-03T02:34:00Z', duration: 60, chapters: [{ title: 'Rules + STP', startMs: 0 }] },
+  { file: 'segments-v2/desktop/06-payment.mp4', title: 'Payment Collection (Narrated)', thumbnail: '', timestamp: '2026-04-03T02:35:00Z', duration: 40, chapters: [{ title: 'Payment Gateway', startMs: 0 }] },
+  { file: 'segments-v2/desktop/07-jayna-ai.mp4', title: 'Jayna AI Calling (Narrated)', thumbnail: '', timestamp: '2026-04-03T02:36:00Z', duration: 50, chapters: [{ title: 'Agents + Workflows', startMs: 0 }] },
+  { file: 'segments-v2/desktop/08-voice-engine.mp4', title: 'Voice Engine TTS/STT (Narrated)', thumbnail: '', timestamp: '2026-04-03T02:37:00Z', duration: 40, chapters: [{ title: 'TTS Demo', startMs: 0 }] },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Desktop Journey Playlist (v1 — 2026-04-02, silent screencasts)   */
 /* ------------------------------------------------------------------ */
 
 const DESKTOP_JOURNEY: ManifestEntry[] = [
@@ -85,6 +100,7 @@ function withThumbnails(entries: ManifestEntry[]): ManifestEntry[] {
 
 /* Combine all recordings — latest first by default (DemoTourPlayer sorts by timestamp desc) */
 const ALL_RECORDINGS: ManifestEntry[] = withThumbnails([
+  ...NARRATED_JOURNEY,
   ...DESKTOP_JOURNEY,
   ...MOBILE_JOURNEY,
   ...FULL_WORKFLOW_DEMO,

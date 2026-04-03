@@ -107,6 +107,32 @@ const ClaimsDeploymentsPage = React.lazy(() => import('./pages/claims/ClaimsDepl
 const AdminSetupPage = React.lazy(() => import('./pages/admin/AdminSetupPage'));
 const AdminDeploymentsPage = React.lazy(() => import('./pages/admin/AdminDeploymentsPage'));
 
+// MUW-52 Ported Modules — Setup & Deployments
+const EndorsementsSetupPage = React.lazy(() => import('./pages/endorsements/EndorsementsSetupPage'));
+const EndorsementsDeploymentsPage = React.lazy(() => import('./pages/endorsements/EndorsementsDeploymentsPage'));
+const RenewalsSetupPage = React.lazy(() => import('./pages/renewals/RenewalsSetupPage'));
+const RenewalsDeploymentsPage = React.lazy(() => import('./pages/renewals/RenewalsDeploymentsPage'));
+const SMECorporateSetupPage = React.lazy(() => import('./pages/sme-corporate/SMECorporateSetupPage'));
+const SMECorporateDeploymentsPage = React.lazy(() => import('./pages/sme-corporate/SMECorporateDeploymentsPage'));
+const ReinsuranceSetupPage = React.lazy(() => import('./pages/reinsurance/ReinsuranceSetupPage'));
+const ReinsuranceDeploymentsPage = React.lazy(() => import('./pages/reinsurance/ReinsuranceDeploymentsPage'));
+const ClaimsTPASetupPage = React.lazy(() => import('./pages/claims-tpa/ClaimsTPASetupPage'));
+const ClaimsTPADeploymentsPage = React.lazy(() => import('./pages/claims-tpa/ClaimsTPADeploymentsPage'));
+const MedicalCodingSetupPage = React.lazy(() => import('./pages/medical-coding/MedicalCodingSetupPage'));
+const MedicalCodingDeploymentsPage = React.lazy(() => import('./pages/medical-coding/MedicalCodingDeploymentsPage'));
+const MAFEngineSetupPage = React.lazy(() => import('./pages/maf-engine/MAFEngineSetupPage'));
+const MAFEngineDeploymentsPage = React.lazy(() => import('./pages/maf-engine/MAFEngineDeploymentsPage'));
+const RPAIntegrationSetupPage = React.lazy(() => import('./pages/rpa-integration/RPAIntegrationSetupPage'));
+const RPAIntegrationDeploymentsPage = React.lazy(() => import('./pages/rpa-integration/RPAIntegrationDeploymentsPage'));
+const APIIntegrationSetupPage = React.lazy(() => import('./pages/api-integration/APIIntegrationSetupPage'));
+const APIIntegrationDeploymentsPage = React.lazy(() => import('./pages/api-integration/APIIntegrationDeploymentsPage'));
+const ReportingSetupPage = React.lazy(() => import('./pages/reporting/ReportingSetupPage'));
+const ReportingDeploymentsPage = React.lazy(() => import('./pages/reporting/ReportingDeploymentsPage'));
+const PolicyIssuanceSetupPage = React.lazy(() => import('./pages/policy-issuance/PolicyIssuanceSetupPage'));
+const PolicyIssuanceDeploymentsPage = React.lazy(() => import('./pages/policy-issuance/PolicyIssuanceDeploymentsPage'));
+const DocumentManagementSetupPage = React.lazy(() => import('./pages/document-management/DocumentManagementSetupPage'));
+const DocumentManagementDeploymentsPage = React.lazy(() => import('./pages/document-management/DocumentManagementDeploymentsPage'));
+
 // Module Hub Pages — Platform Core
 const IdentityHubPage = React.lazy(() => import('./pages/identity/IdentityHubPage'));
 const AuthorizationHubPage = React.lazy(() => import('./pages/authorization/AuthorizationHubPage'));
@@ -130,6 +156,20 @@ const RateCardImportPage = React.lazy(() => import('./pages/product-pricing/Rate
 const ProductPricingSetupPage = React.lazy(() => import('./pages/product-pricing/ProductPricingSetupPage'));
 const ProductPricingDeploymentsPage = React.lazy(() => import('./pages/product-pricing/ProductPricingDeploymentsPage'));
 const FormBuilderHubPage = React.lazy(() => import('./pages/form-builder/FormBuilderHubPage'));
+
+// MUW-52 Ported Module Hub Pages
+const EndorsementsHubPage = React.lazy(() => import('./pages/endorsements/EndorsementsHubPage'));
+const RenewalsHubPage = React.lazy(() => import('./pages/renewals/RenewalsHubPage'));
+const SMECorporateHubPage = React.lazy(() => import('./pages/sme-corporate/SMECorporateHubPage'));
+const ReinsuranceHubPage = React.lazy(() => import('./pages/reinsurance/ReinsuranceHubPage'));
+const ClaimsTPAHubPage = React.lazy(() => import('./pages/claims-tpa/ClaimsTPAHubPage'));
+const MedicalCodingHubPage = React.lazy(() => import('./pages/medical-coding/MedicalCodingHubPage'));
+const MAFEngineHubPage = React.lazy(() => import('./pages/maf-engine/MAFEngineHubPage'));
+const RPAIntegrationHubPage = React.lazy(() => import('./pages/rpa-integration/RPAIntegrationHubPage'));
+const APIIntegrationHubPage = React.lazy(() => import('./pages/api-integration/APIIntegrationHubPage'));
+const ReportingHubPage = React.lazy(() => import('./pages/reporting/ReportingHubPage'));
+const PolicyIssuanceHubPage = React.lazy(() => import('./pages/policy-issuance/PolicyIssuanceHubPage'));
+const DocumentManagementHubPage = React.lazy(() => import('./pages/document-management/DocumentManagementHubPage'));
 
 // PII Showcase — Hub, Setup, Deployments
 const PIIShowcaseHubPage = React.lazy(() => import('./pages/pii-showcase/PIIShowcaseHubPage'));
@@ -155,7 +195,12 @@ const VoiceEngineDemoPage = React.lazy(() => import('./pages/voice-engine/VoiceE
 // Jayna AI Calling — Hub, Agents, Workflows, Calls, Test Call, Setup, Deployments
 const JaynaHubPage = React.lazy(() => import('./pages/jayna/JaynaHubPage'));
 const JaynaAgentsPage = React.lazy(() => import('./pages/jayna/JaynaAgentsPage'));
+const JaynaAgentCreatePage = React.lazy(() => import('./pages/jayna/JaynaAgentCreatePage'));
+const JaynaAgentDetailPage = React.lazy(() => import('./pages/jayna/JaynaAgentDetailPage'));
+const JaynaAgentEditPage = React.lazy(() => import('./pages/jayna/JaynaAgentEditPage'));
 const JaynaWorkflowsPage = React.lazy(() => import('./pages/jayna/JaynaWorkflowsPage'));
+const JaynaWorkflowCreatePage = React.lazy(() => import('./pages/jayna/JaynaWorkflowCreatePage'));
+const JaynaWorkflowDetailPage = React.lazy(() => import('./pages/jayna/JaynaWorkflowDetailPage'));
 const JaynaCallHistoryPage = React.lazy(() => import('./pages/jayna/JaynaCallHistoryPage'));
 const JaynaTestCallPage = React.lazy(() => import('./pages/jayna/JaynaTestCallPage'));
 const JaynaSetupPage = React.lazy(() => import('./pages/jayna/JaynaSetupPage'));
@@ -306,7 +351,12 @@ function PageRoutes() {
       <Route path="jayna" element={<SafeLazy><JaynaHubPage /></SafeLazy>} />
       <Route path="jayna/guide/*" element={<SafeLazy><JaynaHubPage /></SafeLazy>} />
       <Route path="jayna/hub" element={<SafeLazy><JaynaHubPage /></SafeLazy>} />
+      <Route path="jayna/agents/new" element={<SafeLazy><JaynaAgentCreatePage /></SafeLazy>} />
+      <Route path="jayna/agents/:id/edit" element={<SafeLazy><JaynaAgentEditPage /></SafeLazy>} />
+      <Route path="jayna/agents/:id" element={<SafeLazy><JaynaAgentDetailPage /></SafeLazy>} />
       <Route path="jayna/agents" element={<SafeLazy><JaynaAgentsPage /></SafeLazy>} />
+      <Route path="jayna/workflows/new" element={<SafeLazy><JaynaWorkflowCreatePage /></SafeLazy>} />
+      <Route path="jayna/workflows/:id" element={<SafeLazy><JaynaWorkflowDetailPage /></SafeLazy>} />
       <Route path="jayna/workflows" element={<SafeLazy><JaynaWorkflowsPage /></SafeLazy>} />
       <Route path="jayna/calls" element={<SafeLazy><JaynaCallHistoryPage /></SafeLazy>} />
       <Route path="jayna/test-call" element={<SafeLazy><JaynaTestCallPage /></SafeLazy>} />
@@ -419,6 +469,94 @@ function PageRoutes() {
       <Route path="claims" element={<SafeLazy><ClaimsHubPage /></SafeLazy>} />
       <Route path="claims/hub" element={<SafeLazy><ClaimsHubPage /></SafeLazy>} />
       <Route path="claims/guide/*" element={<SafeLazy><ClaimsHubPage /></SafeLazy>} />
+
+      {/* ============================================================ */}
+      {/* MUW-52 Ported Modules — Hub, Setup & Deployments             */}
+      {/* ============================================================ */}
+
+      {/* Endorsements */}
+      <Route path="endorsements" element={<SafeLazy><EndorsementsHubPage /></SafeLazy>} />
+      <Route path="endorsements/guide/*" element={<SafeLazy><EndorsementsHubPage /></SafeLazy>} />
+      <Route path="endorsements/hub" element={<SafeLazy><EndorsementsHubPage /></SafeLazy>} />
+      <Route path="endorsements/setup" element={<SafeLazy><EndorsementsSetupPage /></SafeLazy>} />
+      <Route path="endorsements/deployments" element={<SafeLazy><EndorsementsDeploymentsPage /></SafeLazy>} />
+
+      {/* Renewals */}
+      <Route path="renewals" element={<SafeLazy><RenewalsHubPage /></SafeLazy>} />
+      <Route path="renewals/guide/*" element={<SafeLazy><RenewalsHubPage /></SafeLazy>} />
+      <Route path="renewals/hub" element={<SafeLazy><RenewalsHubPage /></SafeLazy>} />
+      <Route path="renewals/setup" element={<SafeLazy><RenewalsSetupPage /></SafeLazy>} />
+      <Route path="renewals/deployments" element={<SafeLazy><RenewalsDeploymentsPage /></SafeLazy>} />
+
+      {/* SME & Corporate Insurance */}
+      <Route path="sme-corporate" element={<SafeLazy><SMECorporateHubPage /></SafeLazy>} />
+      <Route path="sme-corporate/guide/*" element={<SafeLazy><SMECorporateHubPage /></SafeLazy>} />
+      <Route path="sme-corporate/hub" element={<SafeLazy><SMECorporateHubPage /></SafeLazy>} />
+      <Route path="sme-corporate/setup" element={<SafeLazy><SMECorporateSetupPage /></SafeLazy>} />
+      <Route path="sme-corporate/deployments" element={<SafeLazy><SMECorporateDeploymentsPage /></SafeLazy>} />
+
+      {/* Reinsurance */}
+      <Route path="reinsurance" element={<SafeLazy><ReinsuranceHubPage /></SafeLazy>} />
+      <Route path="reinsurance/guide/*" element={<SafeLazy><ReinsuranceHubPage /></SafeLazy>} />
+      <Route path="reinsurance/hub" element={<SafeLazy><ReinsuranceHubPage /></SafeLazy>} />
+      <Route path="reinsurance/setup" element={<SafeLazy><ReinsuranceSetupPage /></SafeLazy>} />
+      <Route path="reinsurance/deployments" element={<SafeLazy><ReinsuranceDeploymentsPage /></SafeLazy>} />
+
+      {/* Claims TPA */}
+      <Route path="claims-tpa" element={<SafeLazy><ClaimsTPAHubPage /></SafeLazy>} />
+      <Route path="claims-tpa/guide/*" element={<SafeLazy><ClaimsTPAHubPage /></SafeLazy>} />
+      <Route path="claims-tpa/hub" element={<SafeLazy><ClaimsTPAHubPage /></SafeLazy>} />
+      <Route path="claims-tpa/setup" element={<SafeLazy><ClaimsTPASetupPage /></SafeLazy>} />
+      <Route path="claims-tpa/deployments" element={<SafeLazy><ClaimsTPADeploymentsPage /></SafeLazy>} />
+
+      {/* Medical Coding */}
+      <Route path="medical-coding" element={<SafeLazy><MedicalCodingHubPage /></SafeLazy>} />
+      <Route path="medical-coding/guide/*" element={<SafeLazy><MedicalCodingHubPage /></SafeLazy>} />
+      <Route path="medical-coding/hub" element={<SafeLazy><MedicalCodingHubPage /></SafeLazy>} />
+      <Route path="medical-coding/setup" element={<SafeLazy><MedicalCodingSetupPage /></SafeLazy>} />
+      <Route path="medical-coding/deployments" element={<SafeLazy><MedicalCodingDeploymentsPage /></SafeLazy>} />
+
+      {/* MAF Engine */}
+      <Route path="maf-engine" element={<SafeLazy><MAFEngineHubPage /></SafeLazy>} />
+      <Route path="maf-engine/guide/*" element={<SafeLazy><MAFEngineHubPage /></SafeLazy>} />
+      <Route path="maf-engine/hub" element={<SafeLazy><MAFEngineHubPage /></SafeLazy>} />
+      <Route path="maf-engine/setup" element={<SafeLazy><MAFEngineSetupPage /></SafeLazy>} />
+      <Route path="maf-engine/deployments" element={<SafeLazy><MAFEngineDeploymentsPage /></SafeLazy>} />
+
+      {/* RPA Integration */}
+      <Route path="rpa-integration" element={<SafeLazy><RPAIntegrationHubPage /></SafeLazy>} />
+      <Route path="rpa-integration/guide/*" element={<SafeLazy><RPAIntegrationHubPage /></SafeLazy>} />
+      <Route path="rpa-integration/hub" element={<SafeLazy><RPAIntegrationHubPage /></SafeLazy>} />
+      <Route path="rpa-integration/setup" element={<SafeLazy><RPAIntegrationSetupPage /></SafeLazy>} />
+      <Route path="rpa-integration/deployments" element={<SafeLazy><RPAIntegrationDeploymentsPage /></SafeLazy>} />
+
+      {/* API Integration */}
+      <Route path="api-integration" element={<SafeLazy><APIIntegrationHubPage /></SafeLazy>} />
+      <Route path="api-integration/guide/*" element={<SafeLazy><APIIntegrationHubPage /></SafeLazy>} />
+      <Route path="api-integration/hub" element={<SafeLazy><APIIntegrationHubPage /></SafeLazy>} />
+      <Route path="api-integration/setup" element={<SafeLazy><APIIntegrationSetupPage /></SafeLazy>} />
+      <Route path="api-integration/deployments" element={<SafeLazy><APIIntegrationDeploymentsPage /></SafeLazy>} />
+
+      {/* Reporting & Analytics */}
+      <Route path="reporting" element={<SafeLazy><ReportingHubPage /></SafeLazy>} />
+      <Route path="reporting/guide/*" element={<SafeLazy><ReportingHubPage /></SafeLazy>} />
+      <Route path="reporting/hub" element={<SafeLazy><ReportingHubPage /></SafeLazy>} />
+      <Route path="reporting/setup" element={<SafeLazy><ReportingSetupPage /></SafeLazy>} />
+      <Route path="reporting/deployments" element={<SafeLazy><ReportingDeploymentsPage /></SafeLazy>} />
+
+      {/* Policy Issuance */}
+      <Route path="policy-issuance" element={<SafeLazy><PolicyIssuanceHubPage /></SafeLazy>} />
+      <Route path="policy-issuance/guide/*" element={<SafeLazy><PolicyIssuanceHubPage /></SafeLazy>} />
+      <Route path="policy-issuance/hub" element={<SafeLazy><PolicyIssuanceHubPage /></SafeLazy>} />
+      <Route path="policy-issuance/setup" element={<SafeLazy><PolicyIssuanceSetupPage /></SafeLazy>} />
+      <Route path="policy-issuance/deployments" element={<SafeLazy><PolicyIssuanceDeploymentsPage /></SafeLazy>} />
+
+      {/* Document Management */}
+      <Route path="document-management" element={<SafeLazy><DocumentManagementHubPage /></SafeLazy>} />
+      <Route path="document-management/guide/*" element={<SafeLazy><DocumentManagementHubPage /></SafeLazy>} />
+      <Route path="document-management/hub" element={<SafeLazy><DocumentManagementHubPage /></SafeLazy>} />
+      <Route path="document-management/setup" element={<SafeLazy><DocumentManagementSetupPage /></SafeLazy>} />
+      <Route path="document-management/deployments" element={<SafeLazy><DocumentManagementDeploymentsPage /></SafeLazy>} />
 
       {/* Verification */}
       <Route path="verification/help" element={<SafeLazy><VerificationHelpPage /></SafeLazy>} />

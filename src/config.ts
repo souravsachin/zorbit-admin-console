@@ -24,4 +24,5 @@ export const API_CONFIG = {
   JAYNA_URL: import.meta.env.VITE_JAYNA_URL || '/api/jayna',
   REALTIME_URL: import.meta.env.VITE_REALTIME_URL || '/api/realtime',
   REALTIME_WS_URL: import.meta.env.VITE_REALTIME_WS_URL || '',
+  INTEGRATION_URL: import.meta.env.VITE_INTEGRATION_URL || '/api/integration',
 };

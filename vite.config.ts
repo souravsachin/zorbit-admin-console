@@ -122,6 +122,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/realtime/, ''),
       },
+      '/api/integration': {
+        target: 'http://localhost:3030',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/integration/, ''),
+      },
       '/socket.io/realtime': {
         target: 'http://localhost:3029',
         changeOrigin: true,

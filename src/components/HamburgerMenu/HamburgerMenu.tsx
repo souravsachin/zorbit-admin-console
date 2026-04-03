@@ -83,6 +83,9 @@ import {
   Activity,
   Clock,
   Sparkles,
+  Plug,
+  FolderOpen,
+  RefreshCw,
   type LucideIcon,
 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
@@ -117,6 +120,18 @@ const SECTION_COLORS: Record<string, { light: string; dark: string; border: stri
   'product pricing':  { light: '#0d9488', dark: '#2dd4bf', border: '#0d9488', bg: 'rgba(13,148,136,0.08)', darkBg: 'rgba(13,148,136,0.15)' },
   'voice engine':     { light: '#ec4899', dark: '#f472b6', border: '#ec4899', bg: 'rgba(236,72,153,0.08)', darkBg: 'rgba(236,72,153,0.15)' },
   'jayna ai':         { light: '#7c3aed', dark: '#a78bfa', border: '#7c3aed', bg: 'rgba(124,58,237,0.08)', darkBg: 'rgba(124,58,237,0.15)' },
+  endorsements:       { light: '#d946ef', dark: '#e879f9', border: '#d946ef', bg: 'rgba(217,70,239,0.08)', darkBg: 'rgba(217,70,239,0.15)' },
+  renewals:           { light: '#0891b2', dark: '#22d3ee', border: '#0891b2', bg: 'rgba(8,145,178,0.08)',  darkBg: 'rgba(8,145,178,0.15)' },
+  'sme corporate':    { light: '#7c3aed', dark: '#a78bfa', border: '#7c3aed', bg: 'rgba(124,58,237,0.08)', darkBg: 'rgba(124,58,237,0.15)' },
+  reinsurance:        { light: '#be185d', dark: '#f472b6', border: '#be185d', bg: 'rgba(190,24,93,0.08)',  darkBg: 'rgba(190,24,93,0.15)' },
+  'claims tpa':       { light: '#dc2626', dark: '#f87171', border: '#dc2626', bg: 'rgba(220,38,38,0.08)',  darkBg: 'rgba(220,38,38,0.15)' },
+  'medical coding':   { light: '#059669', dark: '#34d399', border: '#059669', bg: 'rgba(5,150,105,0.08)',  darkBg: 'rgba(5,150,105,0.15)' },
+  'maf engine':       { light: '#4f46e5', dark: '#818cf8', border: '#4f46e5', bg: 'rgba(79,70,229,0.08)',  darkBg: 'rgba(79,70,229,0.15)' },
+  'rpa integration':  { light: '#ca8a04', dark: '#facc15', border: '#ca8a04', bg: 'rgba(202,138,4,0.08)',  darkBg: 'rgba(202,138,4,0.15)' },
+  'api integration':  { light: '#0284c7', dark: '#38bdf8', border: '#0284c7', bg: 'rgba(2,132,199,0.08)',  darkBg: 'rgba(2,132,199,0.15)' },
+  reporting:          { light: '#9333ea', dark: '#c084fc', border: '#9333ea', bg: 'rgba(147,51,234,0.08)', darkBg: 'rgba(147,51,234,0.15)' },
+  'policy issuance':  { light: '#16a34a', dark: '#4ade80', border: '#16a34a', bg: 'rgba(22,163,74,0.08)',  darkBg: 'rgba(22,163,74,0.15)' },
+  'document management': { light: '#b45309', dark: '#fbbf24', border: '#b45309', bg: 'rgba(180,83,9,0.08)', darkBg: 'rgba(180,83,9,0.15)' },
 };
 
 const DEFAULT_COLOR = { light: '#6b7280', dark: '#9ca3af', border: '#6b7280', bg: 'rgba(107,114,128,0.08)', darkBg: 'rgba(107,114,128,0.15)' };
@@ -243,6 +258,15 @@ const ICON_MAP: Record<string, LucideIcon> = {
   // Voice Engine / Jayna icons
   sparkles: Sparkles,
   'play': Play,
+
+  // MUW-52 ported module icons
+  pen_line: PenLine,
+  refresh_cw: RefreshCw,
+  building2: Building2,
+  plug: Plug,
+  folder_open: FolderOpen,
+  cpu: Cpu,
+  bar_chart: BarChart3,
 
   // Legacy/alias names
   users: Users,
