@@ -385,6 +385,7 @@ function PageRoutes() {
       <Route path="form-builder/create" element={<SafeLazy><FormCreatePage /></SafeLazy>} />
       <Route path="form-builder/submissions" element={<SafeLazy><FormSubmissionsPage /></SafeLazy>} />
       <Route path="form-builder/edit/:slug" element={<SafeLazy><FormEditorPage /></SafeLazy>} />
+      <Route path="form-builder/render/:slug" element={<SafeLazy><FormRenderPage /></SafeLazy>} />
       <Route path="form-builder/help" element={<SafeLazy><FormBuilderHelpPage /></SafeLazy>} />
       <Route path="form-builder/guide/*" element={<SafeLazy><FormBuilderOverviewPage /></SafeLazy>} />
       <Route path="form-builder/overview" element={<Navigate to="form-builder/guide" replace />} />

@@ -5,10 +5,11 @@
 // formio.js. On submit, logs the data (future: sends to module API).
 // =============================================================================
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, CheckCircle, AlertCircle, FileText, Send, Loader2 } from 'lucide-react';
-import { Form } from '@formio/js';
+import { ArrowLeft, CheckCircle, AlertCircle, FileText, Loader2 } from 'lucide-react';
+import { Formio } from '@formio/js';
+import '@formio/js/dist/formio.form.min.css';
 
 const API_BASE = '/api/form-builder';
 
@@ -82,7 +83,7 @@ const FormRenderPage: React.FC = () => {
 
     const renderForm = async () => {
       try {
-        const instance = await Form.createForm(
+        const instance = await Formio.createForm(
           formContainerRef.current!,
           form.schema,
           {

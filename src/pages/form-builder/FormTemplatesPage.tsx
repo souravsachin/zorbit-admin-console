@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FileText, Plus, Eye, Copy, Clock, CheckCircle, Archive, Pencil } from 'lucide-react';
+import { FileText, Plus, Eye, Copy, Clock, CheckCircle, Archive, Pencil, Play } from 'lucide-react';
 
 const API_BASE = '/api/form-builder';
 
@@ -151,12 +151,20 @@ const FormTemplatesPage: React.FC = () => {
                     </td>
                     <td className="px-4 py-3 text-gray-400 dark:text-gray-500 text-xs">{new Date(f.updatedAt).toLocaleDateString()}</td>
                     <td className="px-4 py-3">
-                      <button
-                        onClick={(e) => { e.stopPropagation(); navigate(`/form-builder/edit/${f.slug}`); }}
-                        className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/40 transition-colors"
-                      >
-                        <Pencil size={12} /> Edit
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={(e) => { e.stopPropagation(); navigate(`/form-builder/render/${f.slug}`); }}
+                          className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/40 transition-colors"
+                        >
+                          <Play size={12} /> Render
+                        </button>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); navigate(`/form-builder/edit/${f.slug}`); }}
+                          className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/40 transition-colors"
+                        >
+                          <Pencil size={12} /> Edit
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
