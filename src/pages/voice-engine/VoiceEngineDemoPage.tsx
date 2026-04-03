@@ -137,11 +137,13 @@ const VoiceEngineDemoPage: React.FC = () => {
     try {
       // Get org from JWT
       const userStr = localStorage.getItem('zorbit_user');
-      const orgId = userStr ? JSON.parse(userStr).organizationHashId || 'G' : 'G';
+      const orgId = userStr ? (JSON.parse(userStr).organizationId || JSON.parse(userStr).organizationHashId || 'O-OZPY') : 'O-OZPY';
 
+      // Backend expects: text, voice, rate, pitch (not engine/format/speed)
+      const rateStr = speed !== 1 ? `${speed > 1 ? '+' : ''}${Math.round((speed - 1) * 100)}%` : '+0%';
       const res = await api.post(
         `${API_CONFIG.VOICE_ENGINE_URL}/api/v1/O/${orgId}/voice/tts`,
-        { text, engine, voice, format, speed },
+        { text, voice, rate: rateStr },
         { responseType: 'blob' },
       );
 

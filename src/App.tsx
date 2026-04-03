@@ -206,6 +206,14 @@ const JaynaTestCallPage = React.lazy(() => import('./pages/jayna/JaynaTestCallPa
 const JaynaSetupPage = React.lazy(() => import('./pages/jayna/JaynaSetupPage'));
 const JaynaDeploymentsPage = React.lazy(() => import('./pages/jayna/JaynaDeploymentsPage'));
 
+// Workflow Engine (FQP) — Hub, Filters, Queues, Pipelines, Setup, Deployments
+const WorkflowEngineHubPage = React.lazy(() => import('./pages/workflow-engine/WorkflowEngineHubPage'));
+const WorkflowFiltersPage = React.lazy(() => import('./pages/workflow-engine/WorkflowFiltersPage'));
+const WorkflowQueuesPage = React.lazy(() => import('./pages/workflow-engine/WorkflowQueuesPage'));
+const WorkflowPipelinesPage = React.lazy(() => import('./pages/workflow-engine/WorkflowPipelinesPage'));
+const WorkflowSetupPage = React.lazy(() => import('./pages/workflow-engine/WorkflowSetupPage'));
+const WorkflowDeploymentsPage = React.lazy(() => import('./pages/workflow-engine/WorkflowDeploymentsPage'));
+
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const token = localStorage.getItem('zorbit_token');
   if (!token) {
@@ -372,6 +380,16 @@ function PageRoutes() {
       <Route path="form-builder/guide/*" element={<SafeLazy><FormBuilderOverviewPage /></SafeLazy>} />
       <Route path="form-builder/overview" element={<Navigate to="form-builder/guide" replace />} />
       <Route path="form-builder/hub" element={<SafeLazy><FormBuilderHubPage /></SafeLazy>} />
+
+      {/* Workflow Engine (FQP) */}
+      <Route path="workflow-engine" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
+      <Route path="workflow-engine/guide/*" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
+      <Route path="workflow-engine/hub" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
+      <Route path="workflow-engine/filters" element={<SafeLazy><WorkflowFiltersPage /></SafeLazy>} />
+      <Route path="workflow-engine/queues" element={<SafeLazy><WorkflowQueuesPage /></SafeLazy>} />
+      <Route path="workflow-engine/pipelines" element={<SafeLazy><WorkflowPipelinesPage /></SafeLazy>} />
+      <Route path="workflow-engine/setup" element={<SafeLazy><WorkflowSetupPage /></SafeLazy>} />
+      <Route path="workflow-engine/deployments" element={<SafeLazy><WorkflowDeploymentsPage /></SafeLazy>} />
 
       {/* Admin */}
       <Route path="admin/modules" element={<SafeLazy><ModuleRegistryPage /></SafeLazy>} />
