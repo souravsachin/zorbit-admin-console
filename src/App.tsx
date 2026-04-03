@@ -55,6 +55,7 @@ const FormSubmissionsPage = React.lazy(() => import('./pages/form-builder/FormSu
 const FormEditorPage = React.lazy(() => import('./pages/form-builder/FormEditorPage'));
 const FormBuilderHelpPage = React.lazy(() => import('./pages/form-builder/FormBuilderHelpPage'));
 const FormBuilderOverviewPage = React.lazy(() => import('./pages/form-builder/FormBuilderOverviewPage'));
+const FormRenderPage = React.lazy(() => import('./pages/form-builder/FormRenderPage'));
 const ModuleRegistryPage = React.lazy(() => import('./pages/admin/ModuleRegistryPage'));
 const LicensingPage = React.lazy(() => import('./pages/admin/LicensingPage'));
 const SitemapPage = React.lazy(() => import('./pages/admin/SitemapPage'));
@@ -213,6 +214,14 @@ const WorkflowQueuesPage = React.lazy(() => import('./pages/workflow-engine/Work
 const WorkflowPipelinesPage = React.lazy(() => import('./pages/workflow-engine/WorkflowPipelinesPage'));
 const WorkflowSetupPage = React.lazy(() => import('./pages/workflow-engine/WorkflowSetupPage'));
 const WorkflowDeploymentsPage = React.lazy(() => import('./pages/workflow-engine/WorkflowDeploymentsPage'));
+
+// Secrets Vault — Hub, List, Create, Audit, Setup, Deployments
+const SecretsHubPage = React.lazy(() => import('./pages/secrets/SecretsHubPage'));
+const SecretsListPage = React.lazy(() => import('./pages/secrets/SecretsListPage'));
+const SecretsCreatePage = React.lazy(() => import('./pages/secrets/SecretsCreatePage'));
+const SecretsAuditPage = React.lazy(() => import('./pages/secrets/SecretsAuditPage'));
+const SecretsSetupPage = React.lazy(() => import('./pages/secrets/SecretsSetupPage'));
+const SecretsDeploymentsPage = React.lazy(() => import('./pages/secrets/SecretsDeploymentsPage'));
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const token = localStorage.getItem('zorbit_token');
@@ -414,6 +423,16 @@ function PageRoutes() {
       <Route path="audit/deployments" element={<SafeLazy><AuditDeploymentsPage /></SafeLazy>} />
       <Route path="pii-vault/setup" element={<SafeLazy><PiiVaultSetupPage /></SafeLazy>} />
       <Route path="pii-vault/deployments" element={<SafeLazy><PiiVaultDeploymentsPage /></SafeLazy>} />
+
+      {/* Secrets Vault */}
+      <Route path="secrets" element={<SafeLazy><SecretsHubPage /></SafeLazy>} />
+      <Route path="secrets/guide/*" element={<SafeLazy><SecretsHubPage /></SafeLazy>} />
+      <Route path="secrets/hub" element={<SafeLazy><SecretsHubPage /></SafeLazy>} />
+      <Route path="secrets/list" element={<SafeLazy><SecretsListPage /></SafeLazy>} />
+      <Route path="secrets/new" element={<SafeLazy><SecretsCreatePage /></SafeLazy>} />
+      <Route path="secrets/audit" element={<SafeLazy><SecretsAuditPage /></SafeLazy>} />
+      <Route path="secrets/setup" element={<SafeLazy><SecretsSetupPage /></SafeLazy>} />
+      <Route path="secrets/deployments" element={<SafeLazy><SecretsDeploymentsPage /></SafeLazy>} />
 
       {/* Platform Capabilities — Setup & Deployments */}
       <Route path="form-builder/setup" element={<SafeLazy><FormBuilderSetupPage /></SafeLazy>} />

@@ -25,4 +25,5 @@ export const API_CONFIG = {
   REALTIME_URL: import.meta.env.VITE_REALTIME_URL || '/api/realtime',
   REALTIME_WS_URL: import.meta.env.VITE_REALTIME_WS_URL || '',
   INTEGRATION_URL: import.meta.env.VITE_INTEGRATION_URL || '/api/integration',
+  SECRETS_URL: import.meta.env.VITE_SECRETS_URL || '/api/secrets',
 };
