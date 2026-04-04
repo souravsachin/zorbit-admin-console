@@ -298,7 +298,7 @@ const OrgChartPage: React.FC = () => {
             loading={loading}
             selectedId={selectedDeptId}
             onSelect={(node) => setSelectedDeptId(
-              selectedDeptId === node.org.hashId ? null : node.org.hashId
+              selectedDeptId === node?.org?.hashId ? null : node?.org?.hashId ?? null
             )}
           />
         </div>

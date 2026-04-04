@@ -31,6 +31,7 @@ interface TreeNodeProps {
 
 const TreeNode: React.FC<TreeNodeProps> = ({ node, depth, selectedId, onSelect, isLast, parentIsLast }) => {
   const [expanded, setExpanded] = useState(depth < 2);
+  if (!node?.org) return null;
   const hasChildren = node.children && node.children.length > 0;
   const isSelected = selectedId === node.org.hashId;
 

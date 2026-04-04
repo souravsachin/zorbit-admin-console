@@ -59,7 +59,8 @@ const Step5_EncounterConfig: React.FC<StepProps> = ({
   saving,
 }) => {
   const [taxonomy, setTaxonomy] = useState<EncounterCategory[]>(ENCOUNTER_TAXONOMY);
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [selectedIdsMap, setSelectedIdsMap] = useState<Record<number, Set<string>>>({});
+  const [activePlanTab, setActivePlanTab] = useState(0);
   const [loading, setLoading] = useState(true);
 
   // Try fetching from API, fallback to hardcoded
@@ -78,16 +79,21 @@ const Step5_EncounterConfig: React.FC<StepProps> = ({
       .finally(() => setLoading(false));
   }, []);
 
-  // Restore previously-selected encounter types from configuration
+  // Restore previously-selected encounter types from configuration (per-plan)
   useEffect(() => {
     if (configuration?.plans && configuration.plans.length > 0) {
-      const firstPlan = configuration.plans[0];
-      const existing = firstPlan.benefits?.encounter_specific || [];
-      if (existing.length > 0) {
-        setSelectedIds(new Set(existing.map((e) => e.encounter_type)));
-      }
+      const initial: Record<number, Set<string>> = {};
+      configuration.plans.forEach((plan, i) => {
+        const existing = plan.benefits?.encounter_specific || [];
+        initial[i] = existing.length > 0
+          ? new Set(existing.map((e) => e.encounter_type))
+          : new Set<string>();
+      });
+      setSelectedIdsMap(initial);
     }
   }, [configuration]);
+
+  const selectedIds = selectedIdsMap[activePlanTab] || new Set<string>();
 
   const treeNodes = useMemo(() => taxonomyToTreeNodes(taxonomy), [taxonomy]);
 
@@ -98,39 +104,43 @@ const Step5_EncounterConfig: React.FC<StepProps> = ({
   );
 
   const handleSelectionChange = (ids: Set<string>) => {
-    setSelectedIds(ids);
+    setSelectedIdsMap((prev) => ({ ...prev, [activePlanTab]: ids }));
   };
 
   const buildUpdatedPlans = () => {
-    // Build encounter_specific array from selected IDs
-    const encounterBenefits: EncounterBenefit[] = [];
+    return (configuration?.plans || []).map((plan, planIdx) => {
+      const planSelectedIds = selectedIdsMap[planIdx] || new Set<string>();
 
-    // Preserve existing benefits for already-selected encounters
-    const existingMap = new Map<string, EncounterBenefit>();
-    if (configuration?.plans?.[0]?.benefits?.encounter_specific) {
-      for (const eb of configuration.plans[0].benefits.encounter_specific) {
-        existingMap.set(eb.encounter_type, eb);
-      }
-    }
+      // Build encounter_specific array from this plan's selected IDs
+      const encounterBenefits: EncounterBenefit[] = [];
 
-    for (const cat of taxonomy) {
-      for (const t of cat.types) {
-        if (selectedIds.has(t.type_id)) {
-          const existing = existingMap.get(t.type_id);
-          encounterBenefits.push(
-            existing || createDefaultEncounterBenefit(cat.category_name, t.type_id, t.label),
-          );
+      // Preserve existing benefits for already-selected encounters
+      const existingMap = new Map<string, EncounterBenefit>();
+      if (plan.benefits?.encounter_specific) {
+        for (const eb of plan.benefits.encounter_specific) {
+          existingMap.set(eb.encounter_type, eb);
         }
       }
-    }
 
-    return (configuration?.plans || []).map((plan) => ({
-      ...plan,
-      benefits: {
-        ...plan.benefits,
-        encounter_specific: encounterBenefits,
-      },
-    }));
+      for (const cat of taxonomy) {
+        for (const t of cat.types) {
+          if (planSelectedIds.has(t.type_id)) {
+            const existing = existingMap.get(t.type_id);
+            encounterBenefits.push(
+              existing || createDefaultEncounterBenefit(cat.category_name, t.type_id, t.label),
+            );
+          }
+        }
+      }
+
+      return {
+        ...plan,
+        benefits: {
+          ...plan.benefits,
+          encounter_specific: encounterBenefits,
+        },
+      };
+    });
   };
 
   const handleNext = async () => {
@@ -163,6 +173,26 @@ const Step5_EncounterConfig: React.FC<StepProps> = ({
           Select the encounter types that will be covered by your insurance plans.
         </p>
       </div>
+
+      {/* Plan tabs */}
+      {(configuration?.plans || []).length > 1 && (
+        <div className="flex space-x-2 border-b border-gray-200 dark:border-gray-700">
+          {(configuration?.plans || []).map((plan, i) => (
+            <button
+              key={plan.plan_id}
+              type="button"
+              onClick={() => setActivePlanTab(i)}
+              className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px transition ${
+                activePlanTab === i
+                  ? 'border-orange-500 text-orange-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {plan.plan_name || `Plan ${i + 1}`}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Stats */}
       <div className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 rounded-lg px-4 py-3 border border-gray-200 dark:border-gray-700">

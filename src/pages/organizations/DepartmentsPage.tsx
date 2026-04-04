@@ -58,10 +58,10 @@ const DepartmentsPage: React.FC = () => {
 
   // Filter users by selected department
   const filteredUsers = selectedNode
-    ? users.filter((u) => u.department === selectedNode.org.name || u.organizationId === selectedNode.org.id)
+    ? users.filter((u) => u.department === selectedNode?.org?.name || u.organizationId === selectedNode?.org?.id)
     : users;
 
-  const totalDepts = countNodes(hierarchy);
+  const totalDepts = hierarchy ? countNodes(hierarchy) : 0;
 
   return (
     <div className="space-y-4">
@@ -108,9 +108,9 @@ const DepartmentsPage: React.FC = () => {
           <DepartmentTree
             hierarchy={hierarchy}
             loading={loading}
-            selectedId={selectedNode?.org.hashId}
+            selectedId={selectedNode?.org?.hashId}
             onSelect={(node) => setSelectedNode(
-              selectedNode?.org.hashId === node.org.hashId ? null : node
+              selectedNode?.org?.hashId === node?.org?.hashId ? null : node
             )}
           />
         </div>
@@ -120,7 +120,7 @@ const DepartmentsPage: React.FC = () => {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold flex items-center">
               <Users size={18} className="mr-2 text-gray-400" />
-              {selectedNode ? `${selectedNode.org.name} - Users` : 'All Users'}
+              {selectedNode ? `${selectedNode?.org?.name || 'Unknown'} - Users` : 'All Users'}
               <span className="ml-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-500 px-2 py-0.5 rounded-full">
                 {filteredUsers.length}
               </span>

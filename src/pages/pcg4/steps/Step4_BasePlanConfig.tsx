@@ -16,7 +16,7 @@ const Step4_BasePlanConfig: React.FC<StepProps> = ({
   onSave,
   saving,
 }) => {
-  const [rules, setRules] = useState<GeneralRules>(DEFAULT_RULES);
+  const [rulesMap, setRulesMap] = useState<Record<number, GeneralRules>>({});
   const [activePlanTab, setActivePlanTab] = useState(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -24,12 +24,23 @@ const Step4_BasePlanConfig: React.FC<StepProps> = ({
 
   useEffect(() => {
     if (configuration?.plans && configuration.plans.length > 0) {
-      const first = configuration.plans[0];
-      if (first.benefits?.general_rules) {
-        setRules(first.benefits.general_rules);
-      }
+      const initial: Record<number, GeneralRules> = {};
+      configuration.plans.forEach((plan, i) => {
+        initial[i] = plan.benefits?.general_rules
+          ? { ...plan.benefits.general_rules }
+          : { ...DEFAULT_RULES };
+      });
+      setRulesMap(initial);
     }
   }, [configuration]);
+
+  const rules = rulesMap[activePlanTab] || DEFAULT_RULES;
+  const setRules = (updater: GeneralRules | ((prev: GeneralRules) => GeneralRules)) => {
+    setRulesMap((prev) => ({
+      ...prev,
+      [activePlanTab]: typeof updater === 'function' ? updater(prev[activePlanTab] || DEFAULT_RULES) : updater,
+    }));
+  };
 
   const validate = useCallback((r: GeneralRules) => {
     const e: Record<string, string> = {};
@@ -64,9 +75,9 @@ const Step4_BasePlanConfig: React.FC<StepProps> = ({
   };
 
   const buildUpdatedPlans = () =>
-    (configuration?.plans || []).map((plan) => ({
+    (configuration?.plans || []).map((plan, i) => ({
       ...plan,
-      benefits: { ...plan.benefits, general_rules: rules },
+      benefits: { ...plan.benefits, general_rules: rulesMap[i] || DEFAULT_RULES },
     }));
 
   const handleNext = async () => {
@@ -245,10 +256,10 @@ const Step4_BasePlanConfig: React.FC<StepProps> = ({
       {/* Affected Plans */}
       <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
         <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-          Affected Plans
+          Plans
         </h3>
         <p className="text-xs text-gray-500 mb-2">
-          These general rules will apply to all {plans.length} plan(s):
+          Each plan has its own general rules. Currently editing: {plans[activePlanTab]?.plan_name || `Plan ${activePlanTab + 1}`}
         </p>
         <ul className="list-disc list-inside text-sm text-gray-500 space-y-1 pl-2">
           {plans.map((plan) => (

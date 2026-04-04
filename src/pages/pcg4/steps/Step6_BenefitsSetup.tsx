@@ -8,17 +8,30 @@ const Step6_BenefitsSetup: React.FC<StepProps> = ({
   onSave,
   saving,
 }) => {
-  const [encounters, setEncounters] = useState<EncounterBenefit[]>([]);
+  const [encountersMap, setEncountersMap] = useState<Record<number, EncounterBenefit[]>>({});
+  const [activePlanTab, setActivePlanTab] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<'cost' | 'limits' | 'auth' | 'exclusions'>('cost');
 
   useEffect(() => {
-    if (configuration?.plans?.[0]?.benefits?.encounter_specific) {
-      setEncounters(
-        configuration.plans[0].benefits.encounter_specific.map((e) => ({ ...e })),
-      );
+    if (configuration?.plans) {
+      const initial: Record<number, EncounterBenefit[]> = {};
+      configuration.plans.forEach((plan, i) => {
+        initial[i] = (plan.benefits?.encounter_specific || []).map((e) =>
+          JSON.parse(JSON.stringify(e)),
+        );
+      });
+      setEncountersMap(initial);
     }
   }, [configuration]);
+
+  const encounters = encountersMap[activePlanTab] || [];
+  const setEncounters = (updater: EncounterBenefit[] | ((prev: EncounterBenefit[]) => EncounterBenefit[])) => {
+    setEncountersMap((prev) => ({
+      ...prev,
+      [activePlanTab]: typeof updater === 'function' ? updater(prev[activePlanTab] || []) : updater,
+    }));
+  };
 
   const current = encounters[currentIndex];
 
@@ -74,9 +87,9 @@ const Step6_BenefitsSetup: React.FC<StepProps> = ({
   };
 
   const buildUpdatedPlans = () =>
-    (configuration?.plans || []).map((plan) => ({
+    (configuration?.plans || []).map((plan, i) => ({
       ...plan,
-      benefits: { ...plan.benefits, encounter_specific: encounters },
+      benefits: { ...plan.benefits, encounter_specific: encountersMap[i] || [] },
     }));
 
   const handleNext = async () => {
@@ -133,6 +146,26 @@ const Step6_BenefitsSetup: React.FC<StepProps> = ({
           Configure benefit rules, cost sharing, and coverage details for each encounter type.
         </p>
       </div>
+
+      {/* Plan tabs */}
+      {(configuration?.plans || []).length > 1 && (
+        <div className="flex space-x-2 border-b border-gray-200 dark:border-gray-700">
+          {(configuration?.plans || []).map((plan, i) => (
+            <button
+              key={plan.plan_id}
+              type="button"
+              onClick={() => { setActivePlanTab(i); setCurrentIndex(0); }}
+              className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px transition ${
+                activePlanTab === i
+                  ? 'border-orange-500 text-orange-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {plan.plan_name || `Plan ${i + 1}`}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Encounter Navigation */}
       <div className="flex flex-col md:flex-row gap-4">
