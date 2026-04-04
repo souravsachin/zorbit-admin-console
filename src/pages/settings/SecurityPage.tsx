@@ -12,9 +12,12 @@ import {
   Fingerprint,
   Trash2,
   Plus,
+  Lock,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 import { startRegistration } from '@simplewebauthn/browser';
-import { identityService } from '../../services/identity';
+import { identityService, hashPassword } from '../../services/identity';
 import { useToast } from '../../components/shared/Toast';
 
 type MfaState = 'loading' | 'disabled' | 'setup' | 'verify' | 'enabled';
@@ -52,6 +55,15 @@ const SecurityPage: React.FC = () => {
   const [registeringPasskey, setRegisteringPasskey] = useState(false);
   const [newPasskeyName, setNewPasskeyName] = useState('');
   const [showPasskeyNameInput, setShowPasskeyNameInput] = useState(false);
+
+  // Change password state
+  const [currentPw, setCurrentPw] = useState('');
+  const [newPw, setNewPw] = useState('');
+  const [confirmPw, setConfirmPw] = useState('');
+  const [changePwMfaCode, setChangePwMfaCode] = useState('');
+  const [changingPw, setChangingPw] = useState(false);
+  const [showCurrentPw, setShowCurrentPw] = useState(false);
+  const [showNewPw, setShowNewPw] = useState(false);
 
   useEffect(() => {
     loadStatus();
@@ -196,7 +208,43 @@ const SecurityPage: React.FC = () => {
     URL.revokeObjectURL(url);
   };
 
-  // ─── Loading ────────────────────────────────────────────────────
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newPw !== confirmPw) {
+      toast('New passwords do not match', 'error');
+      return;
+    }
+    if (newPw.length < 6) {
+      toast('New password must be at least 6 characters', 'error');
+      return;
+    }
+    // If MFA enabled, require code
+    if (state === 'enabled' && !changePwMfaCode) {
+      toast('MFA code is required to change your password', 'error');
+      return;
+    }
+    setChangingPw(true);
+    try {
+      const hashedCurrent = await hashPassword(currentPw);
+      const hashedNew = await hashPassword(newPw);
+      await identityService.changePassword(
+        hashedCurrent,
+        hashedNew,
+        state === 'enabled' ? changePwMfaCode.trim() : undefined,
+      );
+      toast('Password changed successfully!', 'success');
+      setCurrentPw('');
+      setNewPw('');
+      setConfirmPw('');
+      setChangePwMfaCode('');
+    } catch (err: any) {
+      toast(err.response?.data?.message || 'Failed to change password', 'error');
+    } finally {
+      setChangingPw(false);
+    }
+  };
+
+  // ─── Loading ────────────────��───────────────────────────────────
   if (state === 'loading') {
     return (
       <div className="flex items-center justify-center py-24">
@@ -210,6 +258,114 @@ const SecurityPage: React.FC = () => {
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Security Settings</h1>
         <p className="text-sm text-gray-500 mt-0.5">Manage two-factor authentication for your account</p>
+      </div>
+
+      {/* ─── Change Password ──────────────────────────────────────��─── */}
+      <div className="card p-6 space-y-4">
+        <div className="flex items-start gap-4">
+          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+            <Lock className="w-6 h-6 text-blue-600" />
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold">Change Password</h2>
+            <p className="text-sm text-gray-500 mt-1">
+              Update your password. You'll need to enter your current password first.
+            </p>
+          </div>
+        </div>
+
+        <form onSubmit={handleChangePassword} className="space-y-3">
+          <div>
+            <label className="block text-sm font-medium mb-1">Current Password</label>
+            <div className="relative">
+              <input
+                type={showCurrentPw ? 'text' : 'password'}
+                value={currentPw}
+                onChange={(e) => setCurrentPw(e.target.value)}
+                className="input-field pr-10"
+                required
+                placeholder="Enter current password"
+              />
+              <button
+                type="button"
+                onClick={() => setShowCurrentPw(!showCurrentPw)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                tabIndex={-1}
+              >
+                {showCurrentPw ? <EyeOff size={16} /> : <Eye size={16} />}
+              </button>
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">New Password</label>
+            <div className="relative">
+              <input
+                type={showNewPw ? 'text' : 'password'}
+                value={newPw}
+                onChange={(e) => setNewPw(e.target.value)}
+                className="input-field pr-10"
+                required
+                minLength={6}
+                placeholder="Minimum 6 characters"
+              />
+              <button
+                type="button"
+                onClick={() => setShowNewPw(!showNewPw)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                tabIndex={-1}
+              >
+                {showNewPw ? <EyeOff size={16} /> : <Eye size={16} />}
+              </button>
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Confirm New Password</label>
+            <input
+              type="password"
+              value={confirmPw}
+              onChange={(e) => setConfirmPw(e.target.value)}
+              className="input-field"
+              required
+              minLength={6}
+              placeholder="Confirm new password"
+            />
+            {confirmPw && newPw !== confirmPw && (
+              <p className="text-xs text-red-500 mt-1">Passwords do not match</p>
+            )}
+          </div>
+
+          {/* MFA code required if MFA is enabled */}
+          {state === 'enabled' && (
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                MFA Code <span className="text-xs text-gray-500">(required)</span>
+              </label>
+              <input
+                type="text"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                value={changePwMfaCode}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/\D/g, '').slice(0, 6);
+                  setChangePwMfaCode(val);
+                }}
+                className="input-field text-center text-lg tracking-[0.3em] font-mono w-40"
+                placeholder="000000"
+                maxLength={6}
+                required
+              />
+            </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={changingPw || !currentPw || !newPw || newPw !== confirmPw || (state === 'enabled' && changePwMfaCode.length < 6)}
+            className="btn-primary flex items-center gap-2 disabled:opacity-50"
+          >
+            {changingPw ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
+            {changingPw ? 'Changing...' : 'Change Password'}
+          </button>
+        </form>
       </div>
 
       {/* ─── MFA Disabled ──────────────────────────────────────────── */}

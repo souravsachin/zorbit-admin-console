@@ -145,4 +145,23 @@ export const identityService = {
   // ─── Auth Methods (admin) ──────────────────────────────────────
   updateAuthMethods: (orgId: string, userId: string, methods: Record<string, boolean>) =>
     api.put(`${API_CONFIG.IDENTITY_URL}/api/v1/O/${orgId}/users/${userId}/auth-methods`, methods),
+
+  // ─── Password Management ��─────────────────────────────────────���
+  changePassword: (currentPassword: string, newPassword: string, mfaCode?: string) =>
+    api.put(`${API_CONFIG.IDENTITY_URL}/api/v1/G/auth/change-password`, { currentPassword, newPassword, mfaCode }),
+
+  adminResetPassword: (userHashId: string, newPassword: string, requirePasswordChange?: boolean, sendEmail?: boolean) =>
+    api.post(`${API_CONFIG.IDENTITY_URL}/api/v1/G/auth/admin-reset-password`, { userHashId, newPassword, requirePasswordChange, sendEmail }),
+
+  forgotPassword: (email: string) =>
+    api.post(`${API_CONFIG.IDENTITY_URL}/api/v1/G/auth/forgot-password`, { email }),
+
+  validateResetToken: (token: string) =>
+    api.post(`${API_CONFIG.IDENTITY_URL}/api/v1/G/auth/validate-reset-token`, { token }),
+
+  resetPassword: (token: string, newPassword: string) =>
+    api.post(`${API_CONFIG.IDENTITY_URL}/api/v1/G/auth/reset-password`, { token, newPassword }),
+
+  forceChangePassword: (tempToken: string, newPassword: string) =>
+    api.post(`${API_CONFIG.IDENTITY_URL}/api/v1/G/auth/force-change-password`, { tempToken, newPassword }),
 };

@@ -1008,7 +1008,7 @@ const DemoTourPlayer: React.FC<DemoTourPlayerProps> = ({
     );
   }
 
-  const layoutProps = { recordings: sortedRecordings, selected, setSelected: handleSelect, vp, containerRef };
+  const layoutProps = { recordings: sortedRecordings, selected, setSelected: handleSelect, vp, containerRef, baseUrl };
 
   return (
     <div ref={containerRef} className={`bg-gray-900 text-gray-200 rounded-xl overflow-hidden ${className}`}>

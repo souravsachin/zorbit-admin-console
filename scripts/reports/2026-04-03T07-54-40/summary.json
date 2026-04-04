@@ -1,0 +1,132 @@
+{
+  "timestamp": "2026-04-03T07-54-40",
+  "results": [
+    {
+      "route": "/support-center",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/support-center/guide/videos",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/data-table-demo",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/form-builder/templates",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/form-builder/render/pcg4-configuration-fb",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/workflow-engine/guide",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/workflow-engine/filters",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/workflow-engine/queues",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/workflow-engine/pipelines",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/secrets/guide",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/secrets/list",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/voice-engine/demo",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/jayna/agents",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/jayna/workflows",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/jayna/test-call",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/uw-workflow",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/uw-workflow/wf/new-quotations-l1",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/hi-decisioning/rules",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/hi-decisioning/stp-criteria",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/product-pricing/rate-tables",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/app/pcg4/configurations",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/hi-quotation",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/settings/security",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/admin/developer",
+      "status": "OK",
+      "errors": []
+    },
+    {
+      "route": "/dashboard",
+      "status": "OK",
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "warnings": []
+}

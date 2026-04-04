@@ -19,6 +19,32 @@ import { ModuleHubPage } from '../../components/shared/ModuleHubPage';
 import type { ManifestEntry } from '../../components/shared/DemoTourPlayer';
 
 /* ------------------------------------------------------------------ */
+/*  Full Platform Tour (v3 — 2026-04-03, comprehensive narrated tour) */
+/* ------------------------------------------------------------------ */
+
+const FULL_TOUR: ManifestEntry[] = [
+  {
+    file: 'full-tour/zorbit-full-tour-narrated.mp4',
+    title: 'Complete Platform Tour — All Features (Narrated)',
+    thumbnail: '',
+    timestamp: '2026-04-03T08:30:00Z',
+    duration: 109,
+    chapters: [
+      { title: 'Login with MFA', startMs: 0 },
+      { title: 'DataTable LIVE Demo', startMs: 10000 },
+      { title: 'FormBuilder Rendering', startMs: 20000 },
+      { title: 'FQP Workflow Engine', startMs: 30000 },
+      { title: 'Secrets Vault', startMs: 45000 },
+      { title: 'Voice Engine TTS', startMs: 55000 },
+      { title: 'Jayna AI Calling', startMs: 60000 },
+      { title: 'UW Workflow & Decisioning', startMs: 70000 },
+      { title: 'Security & Developer Tools', startMs: 85000 },
+      { title: 'Support Center', startMs: 100000 },
+    ],
+  },
+];
+
+/* ------------------------------------------------------------------ */
 /*  Narrated Journey Playlist (v2 — 2026-04-03, with voice narration)*/
 /* ------------------------------------------------------------------ */
 
@@ -100,6 +126,7 @@ function withThumbnails(entries: ManifestEntry[]): ManifestEntry[] {
 
 /* Combine all recordings — latest first by default (DemoTourPlayer sorts by timestamp desc) */
 const ALL_RECORDINGS: ManifestEntry[] = withThumbnails([
+  ...FULL_TOUR,
   ...NARRATED_JOURNEY,
   ...DESKTOP_JOURNEY,
   ...MOBILE_JOURNEY,

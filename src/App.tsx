@@ -6,6 +6,9 @@ import Layout from './components/layout/Layout';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import AuthCallback from './pages/auth/AuthCallback';
+const ForgotPasswordPage = React.lazy(() => import('./pages/auth/ForgotPasswordPage'));
+const ResetPasswordPage = React.lazy(() => import('./pages/auth/ResetPasswordPage'));
+const ForceChangePasswordPage = React.lazy(() => import('./pages/auth/ForceChangePasswordPage'));
 import DashboardPage from './pages/dashboard/DashboardPage';
 import UsersPage from './pages/users/UsersPage';
 import OrganizationsPage from './pages/organizations/OrganizationsPage';
@@ -639,6 +642,9 @@ const App: React.FC = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
+        <Route path="/forgot-password" element={<SafeLazy><ForgotPasswordPage /></SafeLazy>} />
+        <Route path="/reset-password" element={<SafeLazy><ResetPasswordPage /></SafeLazy>} />
+        <Route path="/auth/change-password-required" element={<SafeLazy><ForceChangePasswordPage /></SafeLazy>} />
         {/* Payment gateway — public, no auth required (customer-facing) */}
         <Route path="/payments/:paymentId" element={<SafeLazy><PaymentGatewayPage /></SafeLazy>} />
         <Route

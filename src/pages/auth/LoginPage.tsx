@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Lock, Shield, Eye, EyeOff, ShieldCheck, KeyRound, Fingerprint, QrCode, Smartphone, Mail, ChevronDown, ChevronUp } from 'lucide-react';
 import { startAuthentication } from '@simplewebauthn/browser';
 import { useAuth } from '../../hooks/useAuth';
@@ -19,6 +19,7 @@ interface AuthProvider {
 const LoginPage: React.FC = () => {
   const { login } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -115,6 +116,10 @@ const LoginPage: React.FC = () => {
         setTempToken(res.data.tempToken);
         setMfaRequired(true);
         setLoading(false);
+        return;
+      }
+      if (res.data.requirePasswordChange) {
+        navigate(`/auth/change-password-required?token=${encodeURIComponent(res.data.tempToken)}`);
         return;
       }
       const token = res.data.accessToken || res.data.token;
@@ -618,6 +623,12 @@ const LoginPage: React.FC = () => {
           <button type="submit" disabled={loading} className="btn-primary w-full">
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
+
+          <div className="text-right">
+            <Link to="/forgot-password" className="text-sm text-primary-600 hover:text-primary-700 font-medium">
+              Forgot Password?
+            </Link>
+          </div>
 
           {/* Passkey + QR Login buttons */}
           <div className="flex gap-2">
