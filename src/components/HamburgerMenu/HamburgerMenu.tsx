@@ -435,9 +435,11 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ open, onClose, isOverlay,
                 <div className={`min-w-0 flex-1 ${TEXT_LEFT_GAP}`}>
                   <p className="text-sm font-medium truncate text-gray-800 dark:text-gray-200">{user.displayName || user.email}</p>
                   <div className="flex items-center space-x-1.5 mt-0.5">
-                    <span className="inline-block px-1.5 py-0.5 text-[10px] font-medium bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 rounded">
-                      admin
-                    </span>
+                    {user.role && (
+                      <span className="inline-block px-1.5 py-0.5 text-[10px] font-medium bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 rounded">
+                        {user.role}
+                      </span>
+                    )}
                     <span className="text-[10px] text-gray-400 dark:text-gray-500 truncate">{orgId}</span>
                   </div>
                 </div>

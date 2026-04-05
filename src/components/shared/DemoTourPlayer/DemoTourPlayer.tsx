@@ -108,6 +108,69 @@ function useVideoPlayer(baseUrl: string) {
     };
   }, []);
 
+  // Volume control
+  const setVolume = useCallback((vol: number) => {
+    if (videoRef.current) {
+      videoRef.current.volume = Math.max(0, Math.min(1, vol));
+      if (vol > 0 && muted) {
+        videoRef.current.muted = false;
+        setMuted(false);
+      }
+    }
+  }, [muted]);
+
+  const getVolume = useCallback(() => videoRef.current?.volume ?? 1, []);
+
+  // Keyboard shortcuts: Space=play/pause, F=fullscreen, ←→=seek, ↑↓=volume
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      // Don't capture when user is typing in an input
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+
+      switch (e.key) {
+        case ' ':
+        case 'k':
+          e.preventDefault();
+          toggle();
+          break;
+        case 'f':
+        case 'F':
+          e.preventDefault();
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          } else {
+            // Find the closest video container
+            videoRef.current?.closest('[data-player-container]')?.requestFullscreen?.();
+          }
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          seek(Math.max(0, (videoRef.current?.currentTime ?? 0) - 10));
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          seek(Math.min(duration, (videoRef.current?.currentTime ?? 0) + 10));
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          setVolume((videoRef.current?.volume ?? 1) + 0.1);
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          setVolume((videoRef.current?.volume ?? 1) - 0.1);
+          break;
+        case 'm':
+        case 'M':
+          e.preventDefault();
+          toggleMute();
+          break;
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [toggle, seek, duration, setVolume, toggleMute]);
+
   return {
     videoRef,
     playing,
@@ -124,6 +187,8 @@ function useVideoPlayer(baseUrl: string) {
     cycleSpeed,
     loadVideo,
     ended,
+    setVolume,
+    getVolume,
     setOnEnded: (cb: (() => void) | null) => { onEndedCallbackRef.current = cb; },
   };
 }
@@ -261,7 +326,7 @@ function TransportBar({
   containerRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const barContainerRef = useRef<HTMLDivElement>(null);
-  const visible = useControlBarVisibility(barContainerRef);
+  const visible = useControlBarVisibility(containerRef);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
@@ -392,7 +457,7 @@ function YouTubeLayout({
     <div className="flex gap-4" style={{ height: 'calc(100vh - 14rem)' }}>
       {/* Player */}
       <div className="flex-1 flex flex-col min-w-0">
-        <div className="relative bg-black rounded-lg overflow-hidden aspect-video">
+        <div data-player-container className="relative bg-black rounded-lg overflow-hidden aspect-video">
           <video ref={vp.videoRef} className="w-full h-full" />
           <VideoOverlay playing={vp.playing} onToggle={vp.toggle} />
           <TransportBar vp={vp} chapters={rec.chapters} containerRef={containerRef} />
@@ -678,7 +743,7 @@ function ChaptersLayout({
 
       {/* Player */}
       <div className="flex-1 flex flex-col min-w-0">
-        <div className="relative bg-black rounded-lg overflow-hidden aspect-video">
+        <div data-player-container className="relative bg-black rounded-lg overflow-hidden aspect-video">
           <video ref={vp.videoRef} className="w-full h-full" />
           <VideoOverlay playing={vp.playing} onToggle={vp.toggle} />
           <TransportBar vp={vp} chapters={rec.chapters} containerRef={containerRef} />
@@ -726,7 +791,7 @@ function PodcastLayout({
     <div className="flex gap-6">
       {/* Main player area */}
       <div className="flex-1">
-        <div className="relative bg-black rounded-lg overflow-hidden aspect-video">
+        <div data-player-container className="relative bg-black rounded-lg overflow-hidden aspect-video">
           <video ref={vp.videoRef} className="w-full h-full" />
           <VideoOverlay playing={vp.playing} onToggle={vp.toggle} />
           <TransportBar vp={vp} chapters={rec.chapters} containerRef={containerRef} />

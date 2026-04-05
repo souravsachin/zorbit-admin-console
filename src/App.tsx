@@ -40,6 +40,7 @@ import UsersPage from './pages/users/UsersPage';
 import OrganizationsPage from './pages/organizations/OrganizationsPage';
 const DepartmentsPage = lazyWithRetry(() => import('./pages/organizations/DepartmentsPage'));
 const OrgChartPage = lazyWithRetry(() => import('./pages/organizations/OrgChartPage'));
+const UserDirectoryPage = lazyWithRetry(() => import('./pages/users/UserDirectoryPage'));
 import RolesPage from './pages/roles/RolesPage';
 import PrivilegesPage from './pages/privileges/PrivilegesPage';
 import CustomersPage from './pages/customers/CustomersPage';
@@ -299,6 +300,7 @@ function PageRoutes() {
       <Route path="dashboard" element={<DashboardPage />} />
       <Route path="dashboard/designer" element={<DashboardDesignerPage />} />
       <Route path="users" element={<UsersPage />} />
+      <Route path="user-directory" element={<SafeLazy><UserDirectoryPage /></SafeLazy>} />
       <Route path="organizations" element={<OrganizationsPage />} />
       <Route path="organizations/:orgId/departments" element={<SafeLazy><DepartmentsPage /></SafeLazy>} />
       <Route path="organizations/:orgId/org-chart" element={<SafeLazy><OrgChartPage /></SafeLazy>} />

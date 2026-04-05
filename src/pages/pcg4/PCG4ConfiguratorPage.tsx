@@ -122,10 +122,11 @@ const PCG4ConfiguratorPage: React.FC = () => {
           );
         } else {
           const result = await pcg4ConfiguratorApi.createConfig(orgId, updated);
-          if (result?.id) {
-            navigate(`/O/${orgId}/app/pcg4/configurations/${result.id}`, { replace: true });
+          const configId = result?.hashId || result?.id;
+          if (configId) {
+            navigate(`/O/${orgId}/app/pcg4/configurations/${configId}`, { replace: true });
           }
-          setConfiguration({ ...updated, id: result?.id });
+          setConfiguration({ ...updated, id: configId });
         }
 
         return { success: true };

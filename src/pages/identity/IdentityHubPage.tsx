@@ -238,6 +238,23 @@ const IdentityHubPage: React.FC = () => {
       ]}
       recordings={[
         {
+          file: 'zorbit-identity-demo.mp4',
+          title: 'Identity — Departments, Org Chart & Security Demo',
+          thumbnail: 'thumb.jpg',
+          timestamp: '2026-04-05T11:00:00Z',
+          duration: 120,
+          chapters: [
+            { title: 'Login with MFA', startMs: 0 },
+            { title: 'Identity Guide & Capabilities', startMs: 12000 },
+            { title: 'Organizations', startMs: 25000 },
+            { title: 'Department Hierarchy (Vantara)', startMs: 35000 },
+            { title: 'Org Chart — Reporting Structure', startMs: 55000 },
+            { title: 'User Management', startMs: 75000 },
+            { title: 'Security Settings', startMs: 90000 },
+            { title: 'Summary', startMs: 110000 },
+          ],
+        },
+        {
           file: 'zorbit-identity-tutorial.mp4',
           title: 'Identity Service — Complete Tutorial (Narrated)',
           thumbnail: 'thumb.jpg',
@@ -255,7 +272,7 @@ const IdentityHubPage: React.FC = () => {
           ],
         },
       ]}
-      videosBaseUrl="/demos/identity/"
+      videosBaseUrl="/demos/tmp/identity/"
       swaggerUrl="https://zorbit.scalatics.com/api/identity/api-docs"
       faqs={[
         { question: 'What authentication methods are supported?', answer: '13 methods: Email/Password (SHA-256 + bcrypt), TOTP MFA (Google Authenticator), WebAuthn/Passkeys (fingerprint/Face ID), QR code cross-device login, Magic Link, Email OTP, Google OAuth, GitHub OAuth, LinkedIn OAuth, SAML 2.0, RADIUS (RFC 2865), Diameter (RFC 6733), and Generic OIDC/SSO. Each method can be enabled/disabled per user by the Org Admin.' },

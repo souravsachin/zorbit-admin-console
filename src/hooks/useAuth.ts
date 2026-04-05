@@ -10,6 +10,7 @@ interface UserInfo {
   email: string;
   displayName: string;
   organizationId: string;
+  role: string;
 }
 
 function decodeToken(token: string): UserInfo | null {
@@ -21,6 +22,7 @@ function decodeToken(token: string): UserInfo | null {
       email: decoded.email,
       displayName: decoded.displayName || decoded.name || decoded.email,
       organizationId: decoded.org || decoded.organizationId || decoded.orgId || 'O-DEMO',
+      role: decoded.role || '',
     };
   } catch {
     return null;

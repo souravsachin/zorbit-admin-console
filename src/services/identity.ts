@@ -71,6 +71,9 @@ export const identityService = {
   createUser: (orgId: string, payload: Partial<User> & { password: string }) =>
     api.post(`${API_CONFIG.IDENTITY_URL}/api/v1/O/${orgId}/users`, payload),
 
+  updateUser: (orgId: string, userId: string, payload: Partial<User>) =>
+    api.put(`${API_CONFIG.IDENTITY_URL}/api/v1/O/${orgId}/users/${userId}`, payload),
+
   getOrganizations: (params?: Record<string, unknown>) =>
     api.get<Organization[]>(`${API_CONFIG.IDENTITY_URL}/api/v1/G/organizations`, { params }),
 

@@ -308,24 +308,63 @@ function mapBackendConfig(raw: any): FullConfig {
   };
 }
 
+/** Transform frontend nested config to flat backend DTO */
+function toBackendDto(data: Partial<FullConfig>): Record<string, unknown> {
+  const dto: Record<string, unknown> = {};
+  if (data.name) dto.name = data.name;
+  if (data.insurer) {
+    dto.insurerName = data.insurer.name;
+    dto.insurerCode = data.insurer.internal_code;
+  }
+  if (data.product) {
+    dto.productName = data.product.name;
+    dto.productCode = data.product.internal_code;
+  }
+  if (data.effectiveDate) dto.effectiveDate = data.effectiveDate;
+  if (data.expiryDate) dto.expiryDate = data.expiryDate;
+  if (data.general_rules) dto.generalRules = data.general_rules;
+  return dto;
+}
+
+/** Map stage name to stage number for backend */
+const STAGE_NAME_TO_NUM: Record<string, number> = {
+  insurer_details: 1,
+  product_details: 2,
+  create_plans: 3,
+  base_plan_configuration: 4,
+  encounter_configuration: 5,
+  benefits_setup: 6,
+  plan_specific_overrides: 7,
+  review_publish: 8,
+};
+
 export const pcg4ConfiguratorApi = {
   // ---- Configurations ----
 
   createConfig: (orgId: string, data: Partial<FullConfig>) =>
-    api.post(`${orgBase(orgId)}/configurations`, data).then((r) => r.data),
+    api.post(`${orgBase(orgId)}/configurations`, toBackendDto(data)).then((r) => r.data),
 
   getConfig: (orgId: string, configId: string): Promise<FullConfig> =>
     api.get(`${orgBase(orgId)}/configurations/${configId}`).then((r) => mapBackendConfig(r.data)),
 
-  updateStage: (
+  /** Save configuration data (PUT) then advance stage (PATCH) */
+  updateStage: async (
     orgId: string,
     configId: string,
     stage: string,
     data: Record<string, unknown>,
-  ) =>
-    api
-      .put(`${orgBase(orgId)}/configurations/${configId}/stage`, { stage, data })
-      .then((r) => r.data),
+  ) => {
+    // 1. Save configuration data
+    const dto = toBackendDto(data as Partial<FullConfig>);
+    if (Object.keys(dto).length > 0) {
+      await api.put(`${orgBase(orgId)}/configurations/${configId}`, dto);
+    }
+    // 2. Advance stage
+    const stageNum = STAGE_NAME_TO_NUM[stage] || parseInt(stage, 10) || 1;
+    return api
+      .patch(`${orgBase(orgId)}/configurations/${configId}/stage`, { stage: stageNum })
+      .then((r) => r.data);
+  },
 
   // ---- Plans ----
 

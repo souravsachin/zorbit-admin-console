@@ -18,6 +18,7 @@ interface Role {
 
 const UsersPage: React.FC = () => {
   const { orgId, user: currentUser } = useAuth();
+  const isSuperAdmin = (currentUser as any)?.role === 'superadmin' || (currentUser as any)?.role === 'admin';
   const { toast } = useToast();
   const [users, setUsers] = useState<User[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
@@ -42,11 +43,30 @@ const UsersPage: React.FC = () => {
   const [resetting, setResetting] = useState(false);
   const [impersonating, setImpersonating] = useState<string | null>(null);
 
+  const [userRolesMap, setUserRolesMap] = useState<Record<string, string>>({});
+
   const loadUsers = async () => {
     setLoading(true);
     try {
-      const res = await identityService.getUsers(orgId);
-      setUsers(Array.isArray(res.data) ? res.data : []);
+      const res = await identityService.getUsers(orgId, { tree: 'true' });
+      const userList = Array.isArray(res.data) ? res.data : [];
+      setUsers(userList);
+
+      // Fetch authorization roles for each user (in parallel, batched)
+      const roleMap: Record<string, string> = {};
+      const batch = userList.slice(0, 50); // limit to first 50 to avoid overload
+      await Promise.allSettled(
+        batch.map(async (u: User) => {
+          try {
+            const r = await api.get(`${API_CONFIG.AUTHORIZATION_URL}/api/v1/U/${u.hashId}/roles`);
+            const assigned = Array.isArray(r.data) ? r.data : [];
+            if (assigned.length > 0) {
+              roleMap[u.hashId] = assigned.map((a: any) => a.name || a.roleName || a.hashId).join(', ');
+            }
+          } catch { /* skip */ }
+        })
+      );
+      setUserRolesMap(roleMap);
     } catch {
       toast('Failed to load users', 'error');
     } finally {
@@ -75,9 +95,10 @@ const UsersPage: React.FC = () => {
   // Cascading org dropdown: top-level orgs only
   const topLevelOrgs = organizations.filter((o: any) => o.orgType !== 'department');
 
-  // Fetch hierarchy when top-level org changes
+  // Fetch hierarchy when org changes (for super admin: selectedOrg, for org admin: orgId from JWT)
+  const hierarchyOrgId = selectedOrg || (!isSuperAdmin ? orgId : '');
   useEffect(() => {
-    if (!selectedOrg) {
+    if (!hierarchyOrgId) {
       setHierarchy(null);
       return;
     }
@@ -85,7 +106,7 @@ const UsersPage: React.FC = () => {
     const fetchHierarchy = async () => {
       setLoadingHierarchy(true);
       try {
-        const res = await identityService.getOrgHierarchy(selectedOrg);
+        const res = await identityService.getOrgHierarchy(hierarchyOrgId);
         if (!cancelled) setHierarchy(res.data);
       } catch {
         if (!cancelled) setHierarchy(null);
@@ -95,7 +116,7 @@ const UsersPage: React.FC = () => {
     };
     fetchHierarchy();
     return () => { cancelled = true; };
-  }, [selectedOrg]);
+  }, [hierarchyOrgId]);
 
   // Derived: departments under selected org
   const departments = hierarchy?.children?.map((c: any) => c.org) || [];
@@ -152,9 +173,13 @@ const UsersPage: React.FC = () => {
         organizationId: targetOrgId,
       });
 
-      // If a role was selected, assign it
+      // If a role was selected, assign it via Authorization AND update identity role
       if (form.role && res.data) {
         const userId = res.data.hashId || res.data.id;
+        const selectedRole = roles.find(r => r.hashId === form.role);
+        const roleName = selectedRole?.name || '';
+
+        // 1. Assign role in Authorization service
         try {
           await api.post(
             `${API_CONFIG.AUTHORIZATION_URL}/api/v1/U/${userId}/roles`,
@@ -162,6 +187,13 @@ const UsersPage: React.FC = () => {
           );
         } catch {
           toast('User created but role assignment failed. Assign role manually.', 'warning');
+        }
+
+        // 2. Update identity user's role field to match
+        if (roleName) {
+          try {
+            await identityService.updateUser(targetOrgId, userId, { role: roleName });
+          } catch { /* non-critical */ }
         }
       }
 
@@ -271,7 +303,11 @@ const UsersPage: React.FC = () => {
     { key: 'displayName', header: 'Display Name' },
     { key: 'email', header: 'Email', render: (u) => <span className="text-sm text-gray-600 dark:text-gray-400">{u.email || u.emailToken || '-'}</span> },
     { key: 'organizationHashId', header: 'Org', render: (u) => <code className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">{u.organizationHashId || u.organizationId || '-'}</code> },
-    { key: 'role', header: 'Role', render: (u) => u.role ? <StatusBadge label={u.role} /> : <span className="text-xs text-gray-400">No role</span> },
+    { key: 'role', header: 'Role', render: (u) => {
+      const authRole = userRolesMap[u.hashId];
+      const displayRole = authRole || u.role;
+      return displayRole ? <StatusBadge label={displayRole} /> : <span className="text-xs text-gray-400">No role</span>;
+    }},
     { key: 'status', header: 'Status', render: (u) => <StatusBadge label={u.status || 'active'} /> },
     { key: 'createdAt', header: 'Created', render: (u) => new Date(u.createdAt).toLocaleDateString() },
     {
@@ -340,7 +376,7 @@ const UsersPage: React.FC = () => {
           <div className="space-y-3">
             <div>
               <label className="block text-sm font-medium mb-1">Organization <span className="text-red-500">*</span></label>
-              {topLevelOrgs.length > 1 ? (
+              {isSuperAdmin && topLevelOrgs.length > 1 ? (
                 <select
                   value={selectedOrg}
                   onChange={(e) => {
@@ -362,10 +398,13 @@ const UsersPage: React.FC = () => {
               )}
             </div>
 
-            {/* Department dropdown — only if org selected and has children */}
-            {selectedOrg && departments.length > 0 && (
+            {/* Department dropdown — visible for both OrgAdmins and SuperAdmins */}
+            {(selectedOrg || (!isSuperAdmin && orgId)) && (departments.length > 0 || loadingHierarchy) && (
               <div>
                 <label className="block text-sm font-medium mb-1">Department <span className="text-xs text-gray-400 font-normal">(optional)</span></label>
+                {loadingHierarchy ? (
+                  <p className="text-xs text-gray-400 py-2">Loading departments...</p>
+                ) : (
                 <select
                   value={selectedDept}
                   onChange={(e) => {
@@ -381,7 +420,8 @@ const UsersPage: React.FC = () => {
                     </option>
                   ))}
                 </select>
-              </div>
+                )}
+            </div>
             )}
 
             {/* Sub-department dropdown — only if dept selected and has children */}
