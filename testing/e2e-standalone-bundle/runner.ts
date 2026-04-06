@@ -655,16 +655,16 @@ async function executeCustomHandler(step: Step): Promise<string> {
     const mfaSecret = creds?.admin?.mfaSecret || creds?.testUser?.mfaSecret;
     if (mfaSecret) {
       try {
-        // Try to use otplib if available
-        const otplib = require("otplib");
-        const code = (otplib.generateSync || otplib.authenticator?.generateSync)({ secret: mfaSecret });
-        console.log(`${COLORS.dim}  TOTP generated locally from mfaSecret${COLORS.reset}`);
+        // Use otplib to generate TOTP
+        const { authenticator } = require("otplib");
+        const code = authenticator.generate(mfaSecret);
+        console.log(`${COLORS.dim}  TOTP generated locally from mfaSecret → ${code}${COLORS.reset}`);
         return code;
       } catch {
-        // otplib not available, try via node one-liner
+        // otplib require failed, try via node one-liner
         try {
           const result = execSync(
-            `node -e "try{const o=require('otplib');console.log((o.generateSync||o.authenticator.generateSync)({secret:'${mfaSecret}'}))}catch{console.log('OTPLIB_NOT_FOUND')}"`,
+            `node -e "try{const{authenticator:a}=require('otplib');console.log(a.generate('${mfaSecret}'))}catch(e){console.log('OTPLIB_ERROR:'+e.message)}"`,
             { encoding: "utf-8", timeout: 5000 }
           ).trim();
           if (result && result !== "OTPLIB_NOT_FOUND") return result;

@@ -45,7 +45,7 @@ if [ ! -d "node_modules" ]; then
     fi
 
     echo -e "${GREEN}Installing dependencies...${NC}"
-    npm install
+    npm install --loglevel=error
 
     echo -e "${GREEN}Installing Chromium browser...${NC}"
     npx playwright install chromium
