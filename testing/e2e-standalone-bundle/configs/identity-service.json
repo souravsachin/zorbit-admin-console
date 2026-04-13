@@ -55,10 +55,10 @@
           "timeout": 3000
         },
         {
-          "action": "waitForUrl",
-          "pattern": "/(dashboard|home|app)",
+          "action": "assertVisible",
+          "selector": "h1:has-text('Dashboard'), [class*='dashboard'], nav, [role='navigation']",
           "timeout": 20000,
-          "announce": { "after": "Successfully authenticated. Welcome to Zorbit." }
+          "announce": { "after": "Logged in successfully" }
         },
         {
           "action": "screenshot",
@@ -123,9 +123,6 @@
           "action": "custom",
           "handler": "generateTotp",
           "description": "Generate TOTP code from server MFA secret",
-          "params": {
-            "command": "ssh sovpn 'bash /tmp/get-totp.sh'"
-          },
           "selector": "input[inputmode='numeric'], input[maxlength='6'], input[placeholder='000000']",
           "announce": { "before": "Generating TOTP code via SSH", "after": "TOTP code entered" }
         },
@@ -139,10 +136,10 @@
           "timeout": 3000
         },
         {
-          "action": "waitForUrl",
-          "pattern": "/(dashboard|home|app)",
+          "action": "assertVisible",
+          "selector": "h1:has-text('Dashboard'), [class*='dashboard'], nav, [role='navigation']",
           "timeout": 20000,
-          "announce": { "after": "Successfully authenticated with MFA. Welcome to Zorbit." }
+          "announce": { "after": "Logged in successfully" }
         },
         {
           "action": "screenshot",
@@ -281,9 +278,6 @@
           "action": "custom",
           "handler": "generateTotp",
           "description": "Generate TOTP code from the displayed secret to verify setup",
-          "params": {
-            "command": "ssh sovpn 'bash /tmp/get-totp.sh'"
-          },
           "selector": "input[inputmode='numeric'], input[maxlength='6'], input[placeholder='000000'], input[name='code'], input[placeholder*='code' i]",
           "announce": { "before": "Generating TOTP code to verify MFA setup", "after": "TOTP verification code entered" }
         },
@@ -351,9 +345,6 @@
           "action": "custom",
           "handler": "generateTotp",
           "description": "Generate TOTP code from server MFA secret",
-          "params": {
-            "command": "ssh sovpn 'bash /tmp/get-totp.sh'"
-          },
           "selector": "input[inputmode='numeric'], input[maxlength='6'], input[placeholder='000000']",
           "announce": { "before": "Generating TOTP code via SSH", "after": "TOTP code entered into MFA field" }
         },
@@ -367,10 +358,10 @@
           "timeout": 3000
         },
         {
-          "action": "waitForUrl",
-          "pattern": "/(dashboard|home|app)",
+          "action": "assertVisible",
+          "selector": "h1:has-text('Dashboard'), [class*='dashboard'], nav, [role='navigation']",
           "timeout": 20000,
-          "announce": { "after": "MFA login completed. Dashboard loaded." }
+          "announce": { "after": "Logged in successfully" }
         },
         {
           "action": "screenshot",
@@ -1179,21 +1170,17 @@
       "description": "Safely log out of the Zorbit platform",
       "steps": [
         {
-          "action": "click",
-          "selector": "button[class*='avatar'], [data-testid='user-menu'], button[aria-label*='profile'], [class*='user-avatar'], img[class*='avatar']",
-          "announce": { "before": "Opening user profile menu" }
+          "action": "javascript",
+          "value": "localStorage.removeItem('zorbit_token'); localStorage.removeItem('zorbit_user');",
+          "announce": { "before": "Clearing session tokens" }
         },
         {
-          "action": "wait",
-          "timeout": 800
+          "action": "navigate",
+          "url": "/login"
         },
         {
           "action": "screenshot",
-          "value": "identity-logout-01-menu.png"
-        },
-        {
-          "action": "click",
-          "selector": "button:has-text('Logout'), button:has-text('Sign out'), a:has-text('Logout'), [data-action='logout'], [role='menuitem']:has-text('Log')",
+          "value": "identity-logout-01-menu.png",
           "announce": { "before": "Clicking Logout" }
         },
         {

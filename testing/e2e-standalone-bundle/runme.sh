@@ -55,4 +55,15 @@ if [ ! -d "node_modules" ]; then
     sleep 2
 fi
 
-exec npx tsx runner.ts "$@"
+npx tsx runner.ts "$@"
+EXIT_CODE=$?
+
+# Post-process: convert WebM to MP4 + narration + playlist
+LATEST_OUTPUT=$(ls -td outputs/*/ 2>/dev/null | head -1)
+if [ -n "$LATEST_OUTPUT" ] && [ -d "${LATEST_OUTPUT}videos" ] && command -v ffmpeg &>/dev/null; then
+  echo ""
+  echo -e "${GREEN}Converting videos to MP4 with narration...${NC}"
+  bash "$(dirname "$0")/post-process-videos.sh" "${LATEST_OUTPUT%/}"
+fi
+
+exit $EXIT_CODE

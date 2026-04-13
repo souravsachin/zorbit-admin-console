@@ -17,6 +17,7 @@ import { chromium, Browser, Page } from "playwright";
 import { exec, execSync } from "child_process";
 import * as fs from "fs";
 import * as path from "path";
+import * as os from "os";
 import * as readline from "readline";
 
 // ============================================================================
@@ -28,6 +29,7 @@ interface Step {
   url?: string;
   selector?: string;
   value?: string;
+  key?: string;
   pattern?: string;
   endpoint?: string;
   expectedStatus?: number[];
@@ -35,6 +37,7 @@ interface Step {
   waitAfterAction?: number;
   waitForNetworkIdle?: boolean;
   force?: boolean;
+  optional?: boolean;
   description?: string;
   handler?: string;
   params?: Record<string, string>;
@@ -98,6 +101,10 @@ let currentConfig: Config | null = null;
 let currentConfigName: string = "";
 let runOutputDir: string = OUTPUTS_DIR;
 
+// Runtime credentials captured during test execution (e.g., users created in setup)
+// These override config credentials when resolving ${credentials.xxx.yyy}
+let runtimeCredentials: Record<string, Record<string, string>> = {};
+
 // Execution status for display
 let executionStatus = {
   bouquet: "",
@@ -134,7 +141,8 @@ function logStep(result: Omit<StepResult, 'timestamp'>) {
 const args = process.argv.slice(2);
 const cliOptions = {
   headless: args.includes("--headless"),
-  noVoice: args.includes("--no-voice"),
+  noVoice: args.includes("--no-voice") || args.includes("--quiet"),
+  quiet: args.includes("--quiet"),
   interactive: args.includes("--interactive") || args.includes("-i"),
   help: args.includes("--help") || args.includes("-h"),
   list: args.includes("--list"),
@@ -143,6 +151,12 @@ const cliOptions = {
   bouquet: args.find((_, i) => args[i - 1] === "-b" || args[i - 1] === "--bouquet"),
   journey: args.find((_, i) => args[i - 1] === "-j" || args[i - 1] === "--journey"),
   segment: args.find((_, i) => args[i - 1] === "-s" || args[i - 1] === "--segment"),
+  // --url overrides config baseUrl — use this to point the same config at any environment
+  // e.g. --url https://zorbit-demo.onezippy.ai
+  url: args.find((_, i) => args[i - 1] === "--url" || args[i - 1] === "-u"),
+  // --creds <file> loads a specific credentials file from credentials/ dir
+  // e.g. --creds credentials-uat.json  or  --creds credentials-prod
+  credsFile: args.find((_, i) => args[i - 1] === "--creds"),
   targets: args.filter(
     (a, i) =>
       !a.startsWith("-") &&
@@ -154,7 +168,10 @@ const cliOptions = {
       args[i - 1] !== "-j" &&
       args[i - 1] !== "--journey" &&
       args[i - 1] !== "-s" &&
-      args[i - 1] !== "--segment"
+      args[i - 1] !== "--segment" &&
+      args[i - 1] !== "--url" &&
+      args[i - 1] !== "-u" &&
+      args[i - 1] !== "--creds"
   ),
 };
 
@@ -548,22 +565,32 @@ async function promptCredentials(): Promise<Record<string, Record<string, string
   // MFA setup
   console.log(`\n${COLORS.dim}  MFA (Multi-Factor Authentication):${COLORS.reset}`);
   console.log(`${COLORS.dim}  If MFA is enabled on your account, you have two options:${COLORS.reset}`);
-  console.log(`${COLORS.dim}    1. Paste your TOTP base32 secret below (from authenticator setup)${COLORS.reset}`);
-  console.log(`${COLORS.dim}       The runner will auto-generate 6-digit codes — no phone needed.${COLORS.reset}`);
-  console.log(`${COLORS.dim}    2. Leave blank — you'll be prompted for the code each time.${COLORS.reset}`);
+  console.log(`${COLORS.dim}    1. Paste your TOTP base32 secret (the long string like JBSWY3DPEHPK3PXP)${COLORS.reset}`);
+  console.log(`${COLORS.dim}       This is from your authenticator setup, NOT the 6-digit code.${COLORS.reset}`);
+  console.log(`${COLORS.dim}       The runner will auto-generate fresh codes — no phone needed.${COLORS.reset}`);
+  console.log(`${COLORS.dim}    2. Leave blank — you'll be prompted for a fresh code each time.${COLORS.reset}`);
   console.log(`${COLORS.dim}  If MFA is off, just press Enter.${COLORS.reset}`);
-  const mfaSecret = await ask(`\n  TOTP Secret (or press Enter to skip): `);
+  const mfaSecret = await ask(`\n  TOTP Secret (base32 string, NOT 6-digit code): `);
 
   const creds = {
     admin: { email, password, mfaSecret: mfaSecret || '', mfaCommand: '' },
   };
 
-  const saveAnswer = await ask(`\n  Save credentials for next time? (y/n): `);
-  if (saveAnswer.toLowerCase().startsWith('y')) {
+  console.log(`\n  Save credentials?`);
+  console.log(`${COLORS.dim}    g = Global (~/.zorbit-e2e-credentials.json) — persists across all bundles${COLORS.reset}`);
+  console.log(`${COLORS.dim}    l = Local  (credentials/credentials.json) — this bundle only${COLORS.reset}`);
+  console.log(`${COLORS.dim}    n = Don't save${COLORS.reset}`);
+  const saveAnswer = await ask(`  Choice (g/l/n): `);
+  const choice = saveAnswer.toLowerCase();
+  if (choice === 'g' || choice === 'global') {
+    fs.writeFileSync(GLOBAL_CRED_PATH, JSON.stringify(creds, null, 2) + '\n');
+    console.log(`\n${COLORS.green}  Saved to ~/.zorbit-e2e-credentials.json${COLORS.reset}`);
+    console.log(`${COLORS.dim}  (works across all bundles — delete with: rm ~/.zorbit-e2e-credentials.json)${COLORS.reset}`);
+  } else if (choice === 'l' || choice === 'local' || choice === 'y' || choice === 'yes') {
     const credPath = path.join(CREDENTIALS_DIR, "credentials.json");
     fs.writeFileSync(credPath, JSON.stringify(creds, null, 2) + '\n');
     console.log(`\n${COLORS.green}  Saved to credentials/credentials.json${COLORS.reset}`);
-    console.log(`${COLORS.dim}  (git-ignored, never shared)${COLORS.reset}`);
+    console.log(`${COLORS.dim}  (git-ignored, this bundle only)${COLORS.reset}`);
   }
 
   rl.close();
@@ -571,14 +598,34 @@ async function promptCredentials(): Promise<Record<string, Record<string, string
   return creds;
 }
 
+const GLOBAL_CRED_PATH = path.join(os.homedir(), ".zorbit-e2e-credentials.json");
+
 function loadCredentials(): Record<string, Record<string, string>> {
-  const credPath = path.join(CREDENTIALS_DIR, "credentials.json");
-  if (fs.existsSync(credPath)) {
-    const creds = JSON.parse(fs.readFileSync(credPath, "utf-8"));
-    // Validate it has required fields
-    if (creds.admin?.email && creds.admin?.password) {
-      console.log(`${COLORS.green}  Credentials loaded from ${credPath}${COLORS.reset}`);
+  // --creds flag: load a specific credentials file from credentials/ dir
+  if (cliOptions.credsFile) {
+    let credsFile = cliOptions.credsFile;
+    if (!credsFile.endsWith('.json')) credsFile += '.json';
+    const credsPath = path.isAbsolute(credsFile)
+      ? credsFile
+      : path.join(CREDENTIALS_DIR, credsFile);
+    if (fs.existsSync(credsPath)) {
+      const creds = JSON.parse(fs.readFileSync(credsPath, "utf-8"));
+      console.log(`${COLORS.green}  Credentials loaded from ${credsPath} (--creds)${COLORS.reset}`);
       return creds;
+    } else {
+      console.warn(`${COLORS.yellow}  WARNING: --creds file not found: ${credsPath}${COLORS.reset}`);
+    }
+  }
+  // Check local credentials first, then global
+  const localPath = path.join(CREDENTIALS_DIR, "credentials.json");
+  for (const credPath of [localPath, GLOBAL_CRED_PATH]) {
+    if (fs.existsSync(credPath)) {
+      const creds = JSON.parse(fs.readFileSync(credPath, "utf-8"));
+      if (creds.admin?.email && creds.admin?.password) {
+        const label = credPath === GLOBAL_CRED_PATH ? "~/.zorbit-e2e-credentials.json (global)" : credPath;
+        console.log(`${COLORS.green}  Credentials loaded from ${label}${COLORS.reset}`);
+        return creds;
+      }
     }
   }
   // No valid credentials — will prompt interactively before test run
@@ -628,9 +675,24 @@ function createRunOutputDir(): string {
   return dir;
 }
 
+// Unique run ID for this test session (used in ${runId} to make data unique)
+const RUN_ID = Date.now().toString(36).slice(-4).toUpperCase();
+
 function resolveValue(template: string): string {
   if (!template || !currentConfig) return template;
-  return template.replace(/\$\{([^}]+)\}/g, (match, pathStr) => {
+  // Replace built-in variables first
+  let result = template
+    .replace(/\$\{runId\}/g, RUN_ID)
+    .replace(/\$\{timestamp\}/g, new Date().toISOString().slice(0, 19))
+    .replace(/\$\{random4\}/g, Math.random().toString(36).slice(2, 6).toUpperCase());
+  // Then resolve config/credential paths (runtime credentials override config)
+  return result.replace(/\$\{([^}]+)\}/g, (match, pathStr) => {
+    // Check runtime credentials first (captured during test run via captureCredential)
+    if (pathStr.startsWith('credentials.')) {
+      const parts = pathStr.split('.');
+      const val = runtimeCredentials?.[parts[1]]?.[parts[2]];
+      if (val) return val;
+    }
     const parts = pathStr.split(".");
     let value: unknown = currentConfig;
     for (const part of parts) {
@@ -652,26 +714,33 @@ function resolveValue(template: string): string {
 //   3. step.params.command → inline shell command (legacy)
 async function executeCustomHandler(step: Step): Promise<string> {
   if (step.handler === "generateTotp") {
-    // Mode 1: Local TOTP from mfaSecret in credentials (preferred for developers)
     const creds = currentConfig?.credentials || {};
     const mfaSecret = creds?.admin?.mfaSecret || creds?.testUser?.mfaSecret;
-    if (mfaSecret) {
+
+    // Validate mfaSecret is a real base32 secret (16+ chars, not a 6-digit code)
+    const isValidBase32 = mfaSecret && mfaSecret.length >= 16 && /^[A-Z2-7=]+$/i.test(mfaSecret);
+
+    // Mode 1: Local TOTP from valid base32 mfaSecret (preferred — fully automatic)
+    if (isValidBase32) {
       try {
-        // Use otplib to generate TOTP
         const { authenticator } = require("otplib");
+        // Generate fresh code right now
         const code = authenticator.generate(mfaSecret);
-        console.log(`${COLORS.dim}  TOTP generated locally from mfaSecret → ${code}${COLORS.reset}`);
+        const remaining = authenticator.timeRemaining();
+        console.log(`${COLORS.dim}  TOTP generated locally → ${code} (${remaining}s remaining)${COLORS.reset}`);
         return code;
       } catch {
-        // otplib require failed, try via node one-liner
         try {
           const result = execSync(
             `node -e "try{const{authenticator:a}=require('otplib');console.log(a.generate('${mfaSecret}'))}catch(e){console.log('OTPLIB_ERROR:'+e.message)}"`,
             { encoding: "utf-8", timeout: 5000 }
           ).trim();
-          if (result && result !== "OTPLIB_NOT_FOUND") return result;
+          if (result && !result.startsWith("OTPLIB_ERROR")) return result;
         } catch {}
       }
+    } else if (mfaSecret) {
+      console.log(`${COLORS.yellow}  WARNING: mfaSecret "${mfaSecret.substring(0, 4)}..." doesn't look like a base32 secret (too short or wrong format).${COLORS.reset}`);
+      console.log(`${COLORS.yellow}  Tip: The TOTP secret is the long base32 string from authenticator setup, NOT the 6-digit code.${COLORS.reset}`);
     }
 
     // Mode 2: mfaCommand from credentials
@@ -703,8 +772,12 @@ async function executeCustomHandler(step: Step): Promise<string> {
       }
     }
 
-    // Mode 4: Ask the developer to type the 6-digit code from Google Authenticator
-    console.log(`\n${COLORS.cyan}  MFA Required — open Google Authenticator and type the 6-digit code:${COLORS.reset}`);
+    // Mode 4: Ask the developer — announce clearly and wait for fresh code
+    await speak("MFA code needed. Enter it in the terminal now.");
+    console.log(`\n${COLORS.cyan}  ┌─────────────────────────────────────────────┐${COLORS.reset}`);
+    console.log(`${COLORS.cyan}  │  MFA Required — enter a fresh 6-digit code  │${COLORS.reset}`);
+    console.log(`${COLORS.cyan}  │  from Google Authenticator / your auth app   │${COLORS.reset}`);
+    console.log(`${COLORS.cyan}  └─────────────────────────────────────────────┘${COLORS.reset}`);
     const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
     const code = await new Promise<string>((resolve) => {
       rl.question(`${COLORS.white}  MFA Code: ${COLORS.reset}`, (answer) => {
@@ -738,7 +811,7 @@ async function executeStep(
   try {
     if (step.announce?.before) {
       renderExecutionStatus();
-      console.log(`${stepNum} >> ${step.announce.before}`);
+      if (!cliOptions.quiet) console.log(`${stepNum} >> ${step.announce.before}`);
       await speak(step.announce.before);
     }
 
@@ -794,6 +867,13 @@ async function executeStep(
         }
         const element = page.locator(step.selector!).first();
         await element.scrollIntoViewIfNeeded();
+        // Auto-screenshot before submit clicks (captures filled form state in video)
+        const sel = (step.selector || '').toLowerCase();
+        if (sel.includes('submit') || sel.includes('create') || sel.includes('save')) {
+          const segTag = executionStatus.segment.replace(/[^a-zA-Z0-9]/g, '_');
+          await page.screenshot({ path: path.join(runOutputDir, `auto-pre-submit-${segTag}-step${stepIndex + 1}.png`) });
+          await new Promise(r => setTimeout(r, 1500)); // Hold for 1.5s so video captures the filled form
+        }
         if (step.force) {
           await element.click({ force: true });
         } else {
@@ -915,6 +995,71 @@ async function executeStep(
         break;
       }
 
+      case "apiPost": {
+        // Make an API POST call using the browser's auth context
+        const endpoint = resolveValue(step.endpoint || step.url || '');
+        // Support body as object (step.body) with template resolution, or legacy step.value as JSON string
+        let body: Record<string, unknown> = {};
+        if (step.body && typeof step.body === 'object') {
+          // Resolve template literals in each field value
+          body = Object.fromEntries(
+            Object.entries(step.body as Record<string, string>).map(([k, v]) => [k, resolveValue(String(v))])
+          );
+        } else if (step.value) {
+          body = JSON.parse(resolveValue(step.value));
+        }
+        const url = endpoint.startsWith('http') ? endpoint : `${currentConfig.baseUrl}${endpoint}`;
+        const response = await page.evaluate(async ({ url, body }) => {
+          const token = localStorage.getItem('zorbit_token');
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+            },
+            body: JSON.stringify(body),
+          });
+          const data = await res.json().catch(() => ({}));
+          return { status: res.status, data };
+        }, { url, body });
+        console.log(`${COLORS.dim}  API POST ${endpoint} → ${response.status}${COLORS.reset}`);
+        if (response.status >= 400) {
+          console.log(`${COLORS.yellow}  Response: ${JSON.stringify(response.data).substring(0, 300)}${COLORS.reset}`);
+        } else {
+          console.log(`${COLORS.dim}  Response keys: [${Object.keys(response.data).join(', ')}]${COLORS.reset}`);
+        }
+        // Enforce expectedStatus if provided
+        if (step.expectedStatus) {
+          const allowed = Array.isArray(step.expectedStatus) ? step.expectedStatus : [step.expectedStatus];
+          if (!allowed.includes(response.status)) {
+            throw new Error(`apiPost ${endpoint}: expected status ${allowed.join('|')} but got ${response.status}. Body: ${JSON.stringify(response.data).substring(0, 200)}`);
+          }
+        }
+        // Store response for later use (e.g., orgHashId)
+        if (step.description) {
+          console.log(`${COLORS.dim}  ${step.description}: ${JSON.stringify(response.data).substring(0, 100)}${COLORS.reset}`);
+        }
+        break;
+      }
+
+      case "apiGet": {
+        // Make an API GET call
+        const endpoint = resolveValue(step.endpoint || step.url || '');
+        const url = endpoint.startsWith('http') ? endpoint : `${currentConfig.baseUrl}${endpoint}`;
+        const response = await page.evaluate(async ({ url }) => {
+          const token = localStorage.getItem('zorbit_token');
+          const res = await fetch(url, {
+            headers: {
+              ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+            },
+          });
+          const data = await res.json().catch(() => ({}));
+          return { status: res.status, data };
+        }, { url });
+        console.log(`${COLORS.dim}  API GET ${endpoint} → ${response.status}${COLORS.reset}`);
+        break;
+      }
+
       case "selectOption": {
         const value = resolveValue(step.value!);
         await page.locator(step.selector!).first().selectOption(value);
@@ -923,18 +1068,65 @@ async function executeStep(
 
       case "custom": {
         // Execute custom handler (e.g., TOTP generation via SSH)
-        const result = await executeCustomHandler(step);
-        if (result && step.selector) {
-          // If a selector is provided, fill the result into that field
-          const locator = page.locator(step.selector).first();
-          await locator.waitFor({ state: "visible", timeout });
-          await locator.fill(result);
+        if (step.handler === "generateTotp" && step.selector) {
+          // Smart MFA: first check if MFA field is even visible (may not need MFA)
+          const mfaLocator = page.locator(step.selector).first();
+          try {
+            await mfaLocator.waitFor({ state: "visible", timeout: 5000 });
+          } catch {
+            // MFA field not visible — skip MFA entirely (already authenticated)
+            console.log(`${COLORS.dim}  MFA field not found — skipping (not required)${COLORS.reset}`);
+            break;
+          }
+          // MFA field is visible — generate and fill the code
+          const code = await executeCustomHandler(step);
+          if (code) {
+            await mfaLocator.fill(code);
+          }
+          if (step.description) {
+            console.log(`${COLORS.dim}  Custom: ${step.description} -> ${code || "(no output)"}${COLORS.reset}`);
+          }
+        } else {
+          const result = await executeCustomHandler(step);
+          if (result && step.selector) {
+            const locator = page.locator(step.selector).first();
+            await locator.waitFor({ state: "visible", timeout });
+            await locator.fill(result);
+          }
+          if (step.description) {
+            console.log(`${COLORS.dim}  Custom: ${step.description} -> ${result || "(no output)"}${COLORS.reset}`);
+          }
         }
-        if (step.description) {
-          console.log(
-            `${COLORS.dim}  Custom: ${step.description} -> ${result || "(no output)"}${COLORS.reset}`
-          );
-        }
+        break;
+      }
+
+      case "pause": {
+        // Give user time to interact with the browser (e.g., pin sidebar)
+        const pauseSeconds = step.timeout ? Math.round(step.timeout / 1000) : 5;
+        const pauseMsg = step.value || "You can interact with the browser now";
+        console.log(`\n${COLORS.cyan}  ┌──────────────────────────────────────────────────┐${COLORS.reset}`);
+        console.log(`${COLORS.cyan}  │  PAUSED — ${pauseMsg.padEnd(39)}│${COLORS.reset}`);
+        console.log(`${COLORS.cyan}  │  Press Enter to continue, or wait ${String(pauseSeconds).padStart(2)}s...         │${COLORS.reset}`);
+        console.log(`${COLORS.cyan}  └──────────────────────────────────────────────────┘${COLORS.reset}`);
+        await Promise.race([
+          new Promise<void>((resolve) => {
+            const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+            rl.once('line', () => { rl.close(); resolve(); });
+          }),
+          new Promise<void>((resolve) => setTimeout(resolve, pauseSeconds * 1000)),
+        ]);
+        break;
+      }
+
+      case "javascript": {
+        const script = resolveValue(step.value!);
+        await page.evaluate(script);
+        break;
+      }
+
+      case "select": {
+        const value = resolveValue(step.value!);
+        await page.locator(step.selector!).first().selectOption(value);
         break;
       }
 
@@ -980,6 +1172,19 @@ async function executeStep(
         break;
       }
 
+      case "captureCredential": {
+        // Store a runtime credential for later use (overrides config credentials)
+        const credKey = step.key!;
+        const credValue = resolveValue(step.value!);
+        const credParts = credKey.split('.');
+        if (credParts.length === 2) {
+          if (!runtimeCredentials[credParts[0]]) runtimeCredentials[credParts[0]] = {};
+          runtimeCredentials[credParts[0]][credParts[1]] = credValue;
+          console.log(`${COLORS.dim}  Captured credential: ${credKey} = ${credValue}${COLORS.reset}`);
+        }
+        break;
+      }
+
       default:
         console.log(
           `${COLORS.yellow}  Unknown action: ${step.action}${COLORS.reset}`
@@ -994,7 +1199,8 @@ async function executeStep(
     }
 
     // Auto-screenshot after every step (except screenshot/wait actions)
-    if (step.action !== 'screenshot' && step.action !== 'wait' && step.action !== 'apiCheck') {
+    const skipAutoScreenshot = ['screenshot', 'wait', 'apiCheck', 'apiPost', 'apiGet', 'pause', 'javascript', 'pressEscape', 'pressKey', 'captureCredential'];
+    if (!skipAutoScreenshot.includes(step.action)) {
       try {
         const autoName = `auto-${executionStatus.segment.replace(/[^a-zA-Z0-9]/g, '_')}-step${stepIndex + 1}.png`;
         await page.screenshot({ path: path.join(runOutputDir, autoName) });
@@ -1014,6 +1220,22 @@ async function executeStep(
   } catch (error) {
     const errorMsg =
       error instanceof Error ? error.message : String(error);
+
+    // Optional steps: log as skipped, don't fail the segment
+    if (step.optional) {
+      console.log(`${stepNum} SKIP: ${errorMsg.split('\n')[0]} (optional step)`);
+      logStep({
+        segment: executionStatus.segment,
+        journey: executionStatus.journey,
+        step: stepIndex + 1,
+        action: step.action,
+        selector: step.selector,
+        status: 'pass',
+        duration_ms: Date.now() - stepStartMs,
+      });
+      return true;
+    }
+
     try {
       await page.screenshot({
         path: path.join(runOutputDir, `error-${Date.now()}.png`),
@@ -1144,15 +1366,46 @@ async function executeBouquet(
     failed = results.filter((r) => !r).length;
   } else {
     for (const journeyId of bouquet.journeys) {
+      const harPath = path.join(runOutputDir, `har-${journeyId}.har`);
+      const videoDir = path.join(runOutputDir, 'videos');
+      if (!fs.existsSync(videoDir)) fs.mkdirSync(videoDir, { recursive: true });
       const context = await browser.newContext({
         viewport: currentConfig?.viewport || {
           width: 1280,
           height: 720,
         },
+        recordHar: { path: harPath, mode: 'minimal' },
+        recordVideo: { dir: videoDir, size: currentConfig?.viewport || { width: 1280, height: 720 } },
       });
       const page = await context.newPage();
+      // Pre-warm: navigate to base URL to eliminate white screen in video
+      try {
+        await page.goto(currentConfig!.baseUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
+      } catch { /* ignore pre-warm failures */ }
       const success = await executeJourney(page, journeyId);
-      await context.close();
+      const videoPath = await page.video()?.path();
+      await context.close(); // closing context saves the HAR + video file
+
+      // Post-process this journey's video immediately (MP4 + title slide + narration)
+      if (videoPath && fs.existsSync(videoPath)) {
+        try {
+          const { execSync } = require('child_process');
+          const journeyIdx = bouquet.journeys.indexOf(journeyId);
+          const mp4Dir = path.join(runOutputDir, 'mp4');
+          if (!fs.existsSync(mp4Dir)) fs.mkdirSync(mp4Dir, { recursive: true });
+          const safeName = journeyId.replace(/[^a-zA-Z0-9_-]/g, '_');
+          const mp4File = path.join(mp4Dir, `${journeyIdx}_${safeName}.mp4`);
+          const scriptPath = path.join(BUNDLE_ROOT, 'post-process-single.sh');
+          if (fs.existsSync(scriptPath)) {
+            console.log(`\n${COLORS.dim}  Converting to MP4: ${safeName}...${COLORS.reset}`);
+            execSync(`bash "${scriptPath}" "${videoPath}" "${mp4File}" "${journeyId}" "${journeyIdx}" "${bouquet.journeys.length}"`, { timeout: 120000, stdio: 'pipe' });
+            console.log(`${COLORS.green}  MP4 ready: ${mp4File}${COLORS.reset}`);
+          }
+        } catch (e: any) {
+          console.log(`${COLORS.dim}  MP4 conversion skipped: ${e.message?.slice(0, 60)}${COLORS.reset}`);
+        }
+      }
+
       if (success) {
         passed++;
         executionStatus.passed++;
@@ -1229,11 +1482,16 @@ async function runTest(type: string, id: string): Promise<void> {
     } else if (type === "journey") {
       executionStatus.journey =
         currentConfig.journeys[id]?.name || id;
+      const harPath = path.join(runOutputDir, `har-${id}.har`);
+      const videoDir = path.join(runOutputDir, 'videos');
+      if (!fs.existsSync(videoDir)) fs.mkdirSync(videoDir, { recursive: true });
       const context = await browser.newContext({
         viewport: currentConfig?.viewport || {
           width: 1280,
           height: 720,
         },
+        recordHar: { path: harPath, mode: 'minimal' },
+        recordVideo: { dir: videoDir, size: currentConfig?.viewport || { width: 1280, height: 720 } },
       });
       const page = await context.newPage();
       const success = await executeJourney(page, id);
@@ -1243,11 +1501,16 @@ async function runTest(type: string, id: string): Promise<void> {
     } else if (type === "segment") {
       executionStatus.segment =
         currentConfig.segments[id]?.name || id;
+      const harPath = path.join(runOutputDir, `har-${id}.har`);
+      const videoDir = path.join(runOutputDir, 'videos');
+      if (!fs.existsSync(videoDir)) fs.mkdirSync(videoDir, { recursive: true });
       const context = await browser.newContext({
         viewport: currentConfig?.viewport || {
           width: 1280,
           height: 720,
         },
+        recordHar: { path: harPath, mode: 'minimal' },
+        recordVideo: { dir: videoDir, size: currentConfig?.viewport || { width: 1280, height: 720 } },
       });
       const page = await context.newPage();
       await page.goto(currentConfig.baseUrl, {
@@ -1483,6 +1746,13 @@ async function cliMode(): Promise<void> {
   currentConfig = await loadConfig(configFile);
   currentConfigName = configFile.replace(".json", "");
 
+  // --url / -u overrides the baseUrl from config — use to target any environment
+  if (cliOptions.url) {
+    const overrideUrl = cliOptions.url.replace(/\/$/, ""); // strip trailing slash
+    console.log(`\x1b[33m  [URL OVERRIDE] baseUrl: ${currentConfig.baseUrl} → ${overrideUrl}\x1b[0m`);
+    currentConfig.baseUrl = overrideUrl;
+  }
+
   if (cliOptions.list) {
     console.log(`\n  Config: ${configFile}\n`);
     console.log("[B] BOUQUETS:");
@@ -1536,8 +1806,13 @@ async function cliMode(): Promise<void> {
     return;
   }
 
-  // Default: run smoke-test bouquet
-  await runTest("bouquet", "smoke-test");
+  // Default: run the first bouquet in the config
+  const bouquetKeys = Object.keys(currentConfig.bouquets || {});
+  if (bouquetKeys.length > 0) {
+    await runTest("bouquet", bouquetKeys[0]);
+  } else {
+    console.log(`${COLORS.red}No bouquets defined in config. Use --list to see available targets.${COLORS.reset}`);
+  }
 }
 
 // ============================================================================

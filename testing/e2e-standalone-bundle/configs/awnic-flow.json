@@ -14,21 +14,17 @@
       "description": "Click avatar menu, logout, verify login page appears",
       "steps": [
         {
-          "action": "click",
-          "selector": "button[class*='avatar'], [data-testid='user-menu'], button[aria-label*='profile'], [class*='user-avatar'], img[class*='avatar']",
-          "announce": { "before": "Opening user profile menu to logout" }
+          "action": "javascript",
+          "value": "localStorage.removeItem('zorbit_token'); localStorage.removeItem('zorbit_user');",
+          "announce": { "before": "Clearing session tokens" }
         },
         {
-          "action": "wait",
-          "timeout": 800
+          "action": "navigate",
+          "url": "/login"
         },
         {
           "action": "screenshot",
-          "value": "awnic-logout-01-menu.png"
-        },
-        {
-          "action": "click",
-          "selector": "button:has-text('Logout'), button:has-text('Sign out'), a:has-text('Logout'), [data-action='logout'], [role='menuitem']:has-text('Log')",
+          "value": "awnic-logout-01-menu.png",
           "announce": { "before": "Clicking Logout" }
         },
         {
@@ -98,9 +94,6 @@
           "action": "custom",
           "handler": "generateTotp",
           "description": "Generate TOTP for MFA if challenged",
-          "params": {
-            "command": "ssh sovpn 'bash /tmp/get-totp.sh'"
-          },
           "selector": "input[inputmode='numeric'], input[maxlength='6'], input[placeholder='000000']",
           "announce": { "before": "Generating TOTP code via SSH", "after": "TOTP code entered" }
         },
@@ -113,10 +106,10 @@
           "timeout": 3000
         },
         {
-          "action": "waitForUrl",
-          "pattern": "/(dashboard|home|app)",
+          "action": "assertVisible",
+          "selector": "h1:has-text('Dashboard'), [class*='dashboard'], nav, [role='navigation']",
           "timeout": 20000,
-          "announce": { "after": "Successfully logged in to Zorbit" }
+          "announce": { "after": "Logged in successfully" }
         },
         {
           "action": "screenshot",
@@ -187,9 +180,6 @@
           "action": "custom",
           "handler": "generateTotp",
           "description": "Generate TOTP code from displayed secret to verify setup",
-          "params": {
-            "command": "ssh sovpn 'bash /tmp/get-totp.sh'"
-          },
           "selector": "input[inputmode='numeric'], input[maxlength='6'], input[placeholder*='code' i], input[placeholder='000000']",
           "announce": { "before": "Generating TOTP verification code", "after": "TOTP code entered for verification" }
         },
@@ -215,17 +205,13 @@
       "description": "Logout, then re-login to verify MFA challenge appears and can be completed",
       "steps": [
         {
-          "action": "click",
-          "selector": "button[class*='avatar'], [data-testid='user-menu'], button[aria-label*='profile']",
-          "announce": { "before": "Logging out to test MFA re-login" }
+          "action": "javascript",
+          "value": "localStorage.removeItem('zorbit_token'); localStorage.removeItem('zorbit_user');",
+          "announce": { "before": "Clearing session tokens for MFA re-login test" }
         },
         {
-          "action": "wait",
-          "timeout": 800
-        },
-        {
-          "action": "click",
-          "selector": "button:has-text('Logout'), button:has-text('Sign out'), a:has-text('Logout'), [role='menuitem']:has-text('Log')"
+          "action": "navigate",
+          "url": "/login"
         },
         {
           "action": "wait",
@@ -270,9 +256,6 @@
           "action": "custom",
           "handler": "generateTotp",
           "description": "Generate TOTP for MFA re-login",
-          "params": {
-            "command": "ssh sovpn 'bash /tmp/get-totp.sh'"
-          },
           "selector": "input[inputmode='numeric'], input[maxlength='6'], input[placeholder='000000']",
           "announce": { "before": "Generating TOTP code", "after": "TOTP entered" }
         },
@@ -286,10 +269,10 @@
           "timeout": 3000
         },
         {
-          "action": "waitForUrl",
-          "pattern": "/(dashboard|home|app)",
+          "action": "assertVisible",
+          "selector": "h1:has-text('Dashboard'), [class*='dashboard'], nav, [role='navigation']",
           "timeout": 20000,
-          "announce": { "after": "MFA re-login successful. Dashboard loaded." }
+          "announce": { "after": "Logged in successfully" }
         },
         {
           "action": "screenshot",

@@ -1,0 +1,487 @@
+{
+  "_meta": {
+    "skill": "1024",
+    "module": "platform",
+    "description": "Full platform broadbrush: API health + UI sweep for all deployed Zorbit services",
+    "updated": "2026-04-13"
+  },
+  "baseUrl": "https://zorbit.scalatics.com",
+  "viewport": { "width": 1440, "height": 900 },
+  "defaults": {
+    "timeout": 15000,
+    "waitAfterAction": 600,
+    "waitForNetworkIdle": false
+  },
+
+  "segments": {
+
+    "platform-api-public": {
+      "name": "Platform API Health (public)",
+      "description": "Public health endpoints — no auth required",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/",
+          "announce": { "before": "Starting platform API health checks" }
+        },
+        { "action": "wait", "timeout": 1000 },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/identity/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Checking Identity service", "after": "Identity: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/authorization/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Checking Authorization", "after": "Authorization: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/navigation/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Checking Navigation", "after": "Navigation: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/pii-vault/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Checking PII Vault", "after": "PII Vault: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/audit/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Checking Audit", "after": "Audit: healthy" }
+        },
+        {
+          "action": "screenshot",
+          "value": "platform-00-api-health.png",
+          "announce": { "after": "All 5 core platform services confirmed healthy!" }
+        }
+      ]
+    },
+
+    "platform-login": {
+      "name": "Platform Login (superadmin)",
+      "description": "Login as superadmin and verify dashboard loads",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/login",
+          "announce": { "before": "Logging in to Zorbit platform" }
+        },
+        { "action": "wait", "timeout": 1500 },
+        {
+          "action": "assertVisible",
+          "selector": "input[type='email'], input[name='email'], input[placeholder*='email' i]"
+        },
+        {
+          "action": "fill",
+          "selector": "input[type='email'], input[name='email'], input[placeholder*='email' i]",
+          "value": "${credentials.admin.email}"
+        },
+        {
+          "action": "fill",
+          "selector": "input[type='password']",
+          "value": "${credentials.admin.password}"
+        },
+        {
+          "action": "click",
+          "selector": "button[type='submit'], button:has-text('Sign in'), button:has-text('Login')",
+          "announce": { "after": "Login submitted, waiting for dashboard" }
+        },
+        { "action": "wait", "timeout": 4000 },
+        {
+          "action": "assertVisible",
+          "selector": "nav, aside, [class*='sidebar'], [role='navigation'], h1, main",
+          "timeout": 15000,
+          "announce": { "after": "Logged in. Dashboard is live." }
+        },
+        {
+          "action": "screenshot",
+          "value": "platform-01-dashboard.png"
+        }
+      ]
+    },
+
+    "platform-assert-dashboard": {
+      "name": "Assert Dashboard Structure",
+      "description": "Verify dashboard has sidebar, header, and key widgets",
+      "steps": [
+        {
+          "action": "assertVisible",
+          "selector": "aside, nav[class*='sidebar'], [class*='sidebar'], [data-testid='sidebar']",
+          "announce": { "after": "Sidebar is present" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "header, [class*='header'], [class*='topbar']",
+          "announce": { "after": "Header is present" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "main, [class*='main-content'], [class*='content']",
+          "announce": { "after": "Main content area is present" }
+        },
+        {
+          "action": "screenshot",
+          "value": "platform-02-dashboard-verified.png"
+        }
+      ]
+    },
+
+    "platform-api-pfs": {
+      "name": "PFS Platform API Health",
+      "description": "HTTP health checks for Platform Feature Services via nginx",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/login",
+          "announce": { "before": "Stabilizing page context for PFS checks" }
+        },
+        { "action": "wait", "timeout": 1000 },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/datatable/api/v1/O/O-OZPY/datatable/views",
+          "expectedStatus": [200, 401, 403],
+          "announce": { "before": "Checking DataTable", "after": "DataTable: responding" }
+        },
+        { "action": "wait", "timeout": 300 },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/form-builder/api/v1/G/form-builder/public/forms",
+          "expectedStatus": [200, 401],
+          "announce": { "before": "Checking Form Builder", "after": "Form Builder: responding" }
+        },
+        { "action": "wait", "timeout": 300 },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/rtc/api/v1/G/health",
+          "expectedStatus": [200, 401, 404],
+          "_note": "404 = no /health route, service still alive. 200 = properly wired.",
+          "announce": { "before": "Checking RTC (nginx reachability)" }
+        },
+        { "action": "wait", "timeout": 300 },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/ai/api/v1/G/health",
+          "expectedStatus": [200, 401, 404],
+          "_note": "Accepts 404 — nginx reachability check only, not full health",
+          "announce": { "before": "Checking AI Gateway (nginx reachability)" }
+        },
+        { "action": "wait", "timeout": 300 },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/notification/api/v1/G/health",
+          "expectedStatus": [200, 401, 404],
+          "_note": "Accepts 404 — nginx reachability check only",
+          "announce": { "before": "Checking Notification (nginx reachability)" }
+        },
+        { "action": "wait", "timeout": 300 },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/product-pricing/api/v1/G/health",
+          "expectedStatus": [200, 401, 404],
+          "_note": "Accepts 404 — nginx reachability check only",
+          "announce": { "before": "Checking Product Pricing (nginx reachability)" }
+        },
+        {
+          "action": "screenshot",
+          "value": "platform-04-pfs-api-healthy.png",
+          "announce": { "after": "Platform Feature Services check complete" }
+        }
+      ]
+    },
+
+    "platform-navigate-identity": {
+      "name": "Navigate: Identity & Users",
+      "description": "Navigate to Users section and verify list renders",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/users",
+          "announce": { "before": "Navigating to Users section" }
+        },
+        { "action": "wait", "timeout": 2000 },
+        {
+          "action": "assertVisible",
+          "selector": "table, [class*='table'], [class*='data-table'], [role='table']",
+          "announce": { "after": "Users table is visible" }
+        },
+        {
+          "action": "screenshot",
+          "value": "platform-05-users.png",
+          "announce": { "after": "Users section confirmed" }
+        }
+      ]
+    },
+
+    "platform-navigate-organizations": {
+      "name": "Navigate: Organizations",
+      "description": "Navigate to Organizations section",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/organizations",
+          "announce": { "before": "Navigating to Organizations" }
+        },
+        { "action": "wait", "timeout": 2000 },
+        {
+          "action": "assertVisible",
+          "selector": "table, [class*='table'], [class*='card'], [class*='list']",
+          "announce": { "after": "Organizations view is loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "platform-06-organizations.png"
+        }
+      ]
+    },
+
+    "platform-navigate-audit": {
+      "name": "Navigate: Audit Logs",
+      "description": "Navigate to Audit section and verify logs render",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/audit",
+          "announce": { "before": "Navigating to Audit Logs" }
+        },
+        { "action": "wait", "timeout": 2000 },
+        {
+          "action": "assertVisible",
+          "selector": "table, [class*='table'], [class*='log'], [class*='list']",
+          "announce": { "after": "Audit log table is visible" }
+        },
+        {
+          "action": "screenshot",
+          "value": "platform-07-audit.png",
+          "announce": { "after": "Audit logs confirmed" }
+        }
+      ]
+    },
+
+    "platform-navigate-roles": {
+      "name": "Navigate: Roles & Privileges",
+      "description": "Navigate to Roles section",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/roles",
+          "announce": { "before": "Navigating to Roles and Privileges" }
+        },
+        { "action": "wait", "timeout": 2000 },
+        {
+          "action": "assertVisible",
+          "selector": "table, [class*='table'], [class*='role'], [class*='card']",
+          "announce": { "after": "Roles section loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "platform-08-roles.png"
+        }
+      ]
+    },
+
+    "platform-navigate-messaging": {
+      "name": "Navigate: Messaging / Event Bus",
+      "description": "Navigate to Messaging section",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/messaging",
+          "announce": { "before": "Navigating to Event Bus Messaging" }
+        },
+        { "action": "wait", "timeout": 2000 },
+        {
+          "action": "assertVisible",
+          "selector": "table, [class*='table'], [class*='topic'], [class*='card'], h1, h2",
+          "announce": { "after": "Messaging section loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "platform-09-messaging.png"
+        }
+      ]
+    },
+
+    "platform-navigate-pii-vault": {
+      "name": "Navigate: PII Vault",
+      "description": "Navigate to PII Vault section",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/pii-vault",
+          "announce": { "before": "Navigating to PII Vault" }
+        },
+        { "action": "wait", "timeout": 2000 },
+        {
+          "action": "assertVisible",
+          "selector": "table, [class*='table'], [class*='vault'], h1, h2, [class*='card']",
+          "announce": { "after": "PII Vault section loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "platform-10-pii-vault.png"
+        }
+      ]
+    },
+
+    "platform-navigate-pcg4": {
+      "name": "Navigate: PCG4 Configurator",
+      "description": "Navigate to PCG4 Product Configurator module",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/pcg4",
+          "announce": { "before": "Opening PCG4 Product Configurator" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "assertVisible",
+          "selector": "table, [class*='table'], [class*='config'], button, h1, h2",
+          "announce": { "after": "PCG4 configurator loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "platform-11-pcg4.png",
+          "announce": { "after": "Product Configurator confirmed" }
+        }
+      ]
+    },
+
+    "platform-navigate-hi-quotation": {
+      "name": "Navigate: HI Quotation",
+      "description": "Navigate to Health Insurance Quotation module",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/hi-quotation",
+          "announce": { "before": "Opening Health Insurance Quotation" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "assertVisible",
+          "selector": "table, [class*='table'], form, button, h1, h2",
+          "announce": { "after": "HI Quotation module loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "platform-12-hi-quotation.png"
+        }
+      ]
+    },
+
+    "platform-logout": {
+      "name": "Platform Logout",
+      "description": "Sign out and verify redirect to login",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/",
+          "announce": { "before": "Navigating to home before logout" }
+        },
+        { "action": "wait", "timeout": 1000 },
+        {
+          "action": "navigate",
+          "url": "/logout",
+          "announce": { "before": "Logging out" }
+        },
+        { "action": "wait", "timeout": 2000 },
+        {
+          "action": "screenshot",
+          "value": "platform-13-logout.png",
+          "announce": { "after": "Logout complete. Platform broadbrush test done!" }
+        }
+      ]
+    }
+
+  },
+
+  "journeys": {
+    "platform-api-sweep": {
+      "name": "Platform API Health Sweep",
+      "description": "All platform API health checks via nginx proxy — public endpoints only",
+      "segments": [
+        "platform-api-public",
+        "platform-api-pfs"
+      ]
+    },
+
+    "platform-ui-sweep": {
+      "name": "Platform UI Navigation Sweep",
+      "description": "Login then navigate all major platform sections with strict assertions",
+      "segments": [
+        "platform-login",
+        "platform-assert-dashboard",
+        "platform-navigate-identity",
+        "platform-navigate-organizations",
+        "platform-navigate-audit",
+        "platform-navigate-roles",
+        "platform-navigate-messaging",
+        "platform-navigate-pii-vault",
+        "platform-logout"
+      ]
+    },
+
+    "platform-module-sweep": {
+      "name": "Platform Module Sweep",
+      "description": "Navigate all deployed business modules and assert they load",
+      "segments": [
+        "platform-login",
+        "platform-navigate-pcg4",
+        "platform-navigate-hi-quotation",
+        "platform-logout"
+      ]
+    },
+
+    "platform-full-broadbrush": {
+      "name": "Full Platform Broadbrush",
+      "description": "API health + Login + UI navigation + module check + logout",
+      "segments": [
+        "platform-api-public",
+        "platform-login",
+        "platform-assert-dashboard",
+        "platform-api-pfs",
+        "platform-navigate-identity",
+        "platform-navigate-organizations",
+        "platform-navigate-audit",
+        "platform-navigate-roles",
+        "platform-navigate-messaging",
+        "platform-navigate-pii-vault",
+        "platform-navigate-pcg4",
+        "platform-navigate-hi-quotation",
+        "platform-logout"
+      ]
+    }
+  },
+
+  "bouquets": {
+    "platform-api": {
+      "name": "Platform API Health",
+      "description": "Quick: verify all platform APIs respond via nginx",
+      "mode": "sequential",
+      "journeys": ["platform-api-sweep"]
+    },
+    "platform-ui": {
+      "name": "Platform UI Sweep",
+      "description": "Navigate all major platform sections",
+      "mode": "sequential",
+      "journeys": ["platform-ui-sweep"]
+    },
+    "platform-modules": {
+      "name": "Platform Modules",
+      "description": "Validate all business modules load",
+      "mode": "sequential",
+      "journeys": ["platform-module-sweep"]
+    },
+    "platform-full": {
+      "name": "Full Platform Broadbrush",
+      "description": "Complete platform validation: APIs + UI + modules",
+      "mode": "sequential",
+      "journeys": ["platform-full-broadbrush"]
+    }
+  }
+}

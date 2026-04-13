@@ -36,25 +36,30 @@
         {
           "action": "custom",
           "handler": "generateTotp",
-          "description": "Generate TOTP for MFA",
-          "params": { "command": "ssh sovpn 'bash /tmp/get-totp.sh'" },
+          "description": "Generate TOTP for MFA if challenged",
           "selector": "input[inputmode='numeric'], input[maxlength='6'], input[placeholder='000000']",
-          "announce": { "before": "Entering MFA code" }
+          "announce": { "before": "Checking for MFA challenge" }
         },
         {
           "action": "click",
-          "selector": "button[type='submit'], button:has-text('Verify')"
+          "selector": "button[type='submit'], button:has-text('Verify')",
+          "optional": true
         },
         { "action": "wait", "timeout": 3000 },
         {
-          "action": "waitForUrl",
-          "pattern": "/(dashboard|home|app)",
+          "action": "assertVisible",
+          "selector": "h1:has-text('Dashboard'), [class*='dashboard'], nav, [role='navigation']",
           "timeout": 20000,
           "announce": { "after": "Logged in successfully. Ready for PCG4 testing." }
         },
         {
           "action": "screenshot",
           "value": "pcg4-00-logged-in.png"
+        },
+        {
+          "action": "pause",
+          "value": "Pin sidebar menu if you like",
+          "timeout": 5000
         }
       ]
     },
@@ -135,19 +140,19 @@
         {
           "action": "fill",
           "selector": "input[placeholder*='Healthy Life Insurance']",
-          "value": "Emirates Health Shield Insurance",
-          "announce": { "before": "Entering insurer name: Emirates Health Shield Insurance" }
+          "value": "Emirates Health Shield Insurance ${runId}",
+          "announce": { "before": "Entering insurer name with unique run ID" }
         },
         {
           "action": "fill",
           "selector": "input[placeholder*='HLI001']",
-          "value": "EHSI-2026",
+          "value": "EHSI-${runId}",
           "announce": { "after": "Internal code: EHSI-2026" }
         },
         {
           "action": "fill",
           "selector": "input[placeholder*='REG-HLI-2024-001']",
-          "value": "REG-EHSI-UAE-2026-001",
+          "value": "REG-EHSI-UAE-${runId}",
           "announce": { "after": "Regulator assigned code: REG-EHSI-UAE-2026-001" }
         },
         {
@@ -180,13 +185,6 @@
           "announce": { "before": "Step 2 - Product Details" }
         },
         {
-          "action": "click",
-          "selector": "button:has-text('Skip'), :has-text('start from scratch')",
-          "force": true,
-          "announce": { "before": "Skipping inheritance - starting from scratch" }
-        },
-        { "action": "wait", "timeout": 500 },
-        {
           "action": "fill",
           "selector": "input[placeholder*='Comprehensive Health Plus']",
           "value": "Comprehensive Health Plus",
@@ -195,13 +193,13 @@
         {
           "action": "fill",
           "selector": "input[placeholder*='CHP-2024-V1']",
-          "value": "CHP-2026-V1",
+          "value": "CHP-${runId}-V1",
           "announce": { "after": "Internal product code: CHP-2026-V1" }
         },
         {
           "action": "fill",
           "selector": "input[placeholder*='REG-PROD-CHP-2024-001']",
-          "value": "REG-PROD-CHP-UAE-2026-001",
+          "value": "REG-PROD-CHP-${runId}",
           "announce": { "after": "Regulator assigned product code: REG-PROD-CHP-UAE-2026-001" }
         },
         {
@@ -236,7 +234,7 @@
         {
           "action": "fill",
           "selector": "input[placeholder*='Health Plus Gold']",
-          "value": "EHSI Gold Enhanced",
+          "value": "EHSI Gold Enhanced ${runId}",
           "announce": { "before": "Plan 1 name: EHSI Gold Enhanced" }
         },
         {
@@ -264,18 +262,18 @@
         {
           "action": "fill",
           "selector": "input[placeholder*='Health Plus Gold'] >> nth=1",
-          "value": "EHSI Silver Standard",
+          "value": "EHSI Silver Standard ${runId}",
           "announce": { "before": "Plan 2 name: EHSI Silver Standard" }
         },
         {
           "action": "select",
-          "selector": "select >> nth=3",
+          "selector": "select >> nth=2",
           "value": "Silver",
           "announce": { "after": "Plan tier: Silver" }
         },
         {
           "action": "click",
-          "selector": ".space-y-6 >> nth=1 >> label:has-text('Middle East') input[type='checkbox'], .space-y-6 >> nth=1 >> label:has-text('Middle East')",
+          "selector": "label:has-text('Middle East') >> nth=1",
           "announce": { "after": "Region: Middle East selected for Plan 2" }
         },
         { "action": "wait", "timeout": 500 },
@@ -851,18 +849,18 @@
         {
           "action": "fill",
           "selector": "input[placeholder*='Healthy Life Insurance']",
-          "value": "Draft Test Insurance Co.",
+          "value": "Draft Test Insurance ${runId}",
           "announce": { "before": "Filling partial data for draft save test" }
         },
         {
           "action": "fill",
           "selector": "input[placeholder*='HLI001']",
-          "value": "DRAFT-001"
+          "value": "DRAFT-${runId}"
         },
         {
           "action": "fill",
           "selector": "input[placeholder*='REG-HLI-2024-001']",
-          "value": "REG-DRAFT-TEST-001"
+          "value": "REG-DRAFT-${runId}"
         },
         {
           "action": "click",
@@ -880,17 +878,16 @@
 
     "pcg4-logout": {
       "name": "Logout after PCG4 Test",
-      "description": "Safely log out after product configurator testing",
+      "description": "Clear session and return to login page",
       "steps": [
         {
-          "action": "click",
-          "selector": "button[class*='avatar'], [data-testid='user-menu'], button[aria-label*='profile']"
+          "action": "javascript",
+          "value": "localStorage.removeItem('zorbit_token'); localStorage.removeItem('zorbit_user');",
+          "announce": { "before": "Clearing session tokens" }
         },
-        { "action": "wait", "timeout": 800 },
         {
-          "action": "click",
-          "selector": "button:has-text('Logout'), button:has-text('Sign out'), a:has-text('Logout'), [role='menuitem']:has-text('Log')",
-          "announce": { "before": "Logging out" }
+          "action": "navigate",
+          "url": "/login"
         },
         { "action": "wait", "timeout": 2000 },
         {

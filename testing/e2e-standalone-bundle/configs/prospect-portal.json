@@ -1,0 +1,270 @@
+{
+  "baseUrl": "https://zorbit-prospect.scalatics.com",
+  "viewport": { "width": 1440, "height": 900 },
+  "defaults": {
+    "timeout": 15000,
+    "waitAfterAction": 800,
+    "waitForNetworkIdle": false
+  },
+
+  "segments": {
+
+    "prospect-landing": {
+      "name": "Prospect Landing Page",
+      "description": "Navigate to prospect portal landing, screenshot hero, click Get Quote on Individual card",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/",
+          "announce": { "before": "Navigating to the Prospect Portal landing page" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertVisible",
+          "selector": "h1",
+          "timeout": 15000,
+          "announce": { "after": "Landing page hero section is visible" }
+        },
+        {
+          "action": "screenshot",
+          "value": "prospect-01-landing.png",
+          "announce": { "after": "Captured landing page with hero and product cards" }
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Get Quote')",
+          "announce": { "before": "Clicking Get Quote on the Individual Health Insurance card" }
+        },
+        {
+          "action": "wait",
+          "timeout": 1500
+        },
+        {
+          "action": "screenshot",
+          "value": "prospect-02-after-get-quote.png",
+          "announce": { "after": "Navigated to verification step" }
+        }
+      ]
+    },
+
+    "prospect-verify": {
+      "name": "Phone OTP Verification",
+      "description": "Fill phone number, send OTP, enter mock OTP code, verify",
+      "steps": [
+        {
+          "action": "assertVisible",
+          "selector": "input[type='tel']",
+          "timeout": 15000,
+          "announce": { "after": "Phone verification form is ready" }
+        },
+        {
+          "action": "screenshot",
+          "value": "prospect-03-verify-form.png"
+        },
+        {
+          "action": "fill",
+          "selector": "input[type='tel']",
+          "value": "501234567",
+          "announce": { "before": "Entering UAE mobile number 501234567" }
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Send OTP')",
+          "announce": { "after": "Send OTP clicked" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertVisible",
+          "selector": "input[inputmode='numeric']",
+          "timeout": 15000,
+          "announce": { "after": "Six OTP digit inputs are visible" }
+        },
+        {
+          "action": "fill",
+          "selector": "input[inputmode='numeric'] >> nth=0",
+          "value": "1",
+          "announce": { "before": "Entering mock OTP code 123456" }
+        },
+        {
+          "action": "fill",
+          "selector": "input[inputmode='numeric'] >> nth=1",
+          "value": "2"
+        },
+        {
+          "action": "fill",
+          "selector": "input[inputmode='numeric'] >> nth=2",
+          "value": "3"
+        },
+        {
+          "action": "fill",
+          "selector": "input[inputmode='numeric'] >> nth=3",
+          "value": "4"
+        },
+        {
+          "action": "fill",
+          "selector": "input[inputmode='numeric'] >> nth=4",
+          "value": "5"
+        },
+        {
+          "action": "fill",
+          "selector": "input[inputmode='numeric'] >> nth=5",
+          "value": "6"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Verify & Continue')",
+          "announce": { "after": "OTP verification submitted" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "screenshot",
+          "value": "prospect-04-verified.png",
+          "announce": { "after": "Phone verification complete, application form loaded" }
+        }
+      ]
+    },
+
+    "prospect-apply": {
+      "name": "Fill Application Form",
+      "description": "Fill proposer details, select CN plan, get quote",
+      "steps": [
+        {
+          "action": "assertVisible",
+          "selector": "input[placeholder='Enter first name']",
+          "timeout": 15000,
+          "announce": { "after": "Application form is ready with proposer details" }
+        },
+        {
+          "action": "screenshot",
+          "value": "prospect-05-application-form.png"
+        },
+        {
+          "action": "fill",
+          "selector": "input[placeholder='Enter first name']",
+          "value": "Ahmed",
+          "announce": { "before": "Entering first name: Ahmed" }
+        },
+        {
+          "action": "fill",
+          "selector": "input[placeholder='Enter last name']",
+          "value": "Al Maktoum",
+          "announce": { "before": "Entering last name: Al Maktoum" }
+        },
+        {
+          "action": "fill",
+          "selector": "input[type='email']",
+          "value": "ahmed@test.com",
+          "announce": { "before": "Entering email: ahmed@test.com" }
+        },
+        {
+          "action": "fill",
+          "selector": "input[type='date']",
+          "value": "1991-03-15",
+          "announce": { "before": "Entering date of birth: 15 March 1991" }
+        },
+        {
+          "action": "fill",
+          "selector": "input[placeholder='784-XXXX-XXXXXXX-X']",
+          "value": "784-1991-1234567-1",
+          "announce": { "before": "Entering Emirates ID" }
+        },
+        {
+          "action": "click",
+          "selector": "label:has-text('Male')",
+          "announce": { "before": "Selecting gender: Male" }
+        },
+        {
+          "action": "screenshot",
+          "value": "prospect-06-proposer-filled.png",
+          "announce": { "after": "Proposer details filled" }
+        },
+        {
+          "action": "click",
+          "selector": "label:has-text('CN Network')",
+          "announce": { "before": "Selecting CN Network plan" }
+        },
+        {
+          "action": "wait",
+          "timeout": 1000
+        },
+        {
+          "action": "screenshot",
+          "value": "prospect-08-plan-selected.png",
+          "announce": { "after": "CN Network plan selected" }
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Get Quote')",
+          "announce": { "before": "Clicking Get Quote to calculate premium" }
+        },
+        {
+          "action": "wait",
+          "timeout": 3000
+        },
+        {
+          "action": "screenshot",
+          "value": "prospect-09-quote-submitted.png",
+          "announce": { "after": "Quote request submitted" }
+        }
+      ]
+    },
+
+    "prospect-result": {
+      "name": "Quote Result Page",
+      "description": "Verify quote result shows premium amount, screenshot the premium card",
+      "steps": [
+        {
+          "action": "assertVisible",
+          "selector": "text=AED",
+          "timeout": 15000,
+          "announce": { "after": "Quote result page is visible with premium details" }
+        },
+        {
+          "action": "wait",
+          "timeout": 1500
+        },
+        {
+          "action": "screenshot",
+          "value": "prospect-10-premium-result.png",
+          "announce": { "after": "Captured premium result with calculated amount" }
+        },
+        {
+          "action": "screenshot",
+          "value": "prospect-11-final.png",
+          "announce": { "after": "Final screenshot of the prospect quote flow" }
+        }
+      ]
+    }
+  },
+
+  "journeys": {
+    "prospect-flow": {
+      "name": "Complete Prospect Quote Flow",
+      "description": "End-to-end prospect journey: landing, phone verify, application form, quote result",
+      "segments": [
+        "prospect-landing",
+        "prospect-verify",
+        "prospect-apply",
+        "prospect-result"
+      ]
+    }
+  },
+
+  "bouquets": {
+    "prospect-demo": {
+      "name": "Prospect Portal - Demo Flow",
+      "description": "Full prospect journey from landing page through quote result",
+      "mode": "sequential",
+      "journeys": ["prospect-flow"]
+    }
+  }
+}

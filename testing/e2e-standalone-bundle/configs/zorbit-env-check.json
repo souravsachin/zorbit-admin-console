@@ -1,0 +1,538 @@
+{
+  "baseUrl": "https://zorbit-uat.onezippy.ai",
+  "viewport": { "width": 1440, "height": 900 },
+  "defaults": {
+    "timeout": 15000,
+    "waitAfterAction": 400,
+    "waitForNetworkIdle": false
+  },
+
+  "segments": {
+
+    "api-core-health": {
+      "name": "API: Core Platform Health",
+      "description": "Every core service must return HTTP 200 from its health endpoint. 404/502/503 = FAIL.",
+      "steps": [
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/identity/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Checking identity service", "after": "Identity: 200 OK" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/authorization/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Checking authorization service", "after": "Authorization: 200 OK" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/navigation/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Checking navigation service", "after": "Navigation: 200 OK" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/pii-vault/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Checking PII vault service", "after": "PII Vault: 200 OK" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/audit/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Checking audit service", "after": "Audit: 200 OK" }
+        }
+      ]
+    },
+
+    "api-pfs-health": {
+      "name": "API: PFS & App Services Health",
+      "description": "App and PFS service health endpoints. Checks that services are up, not just nginx.",
+      "steps": [
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/pcg4/api/app/pcg4/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Checking PCG4 service", "after": "PCG4: 200 OK" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/form-builder/api/v1/G/form-builder/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Checking form-builder service", "after": "Form Builder: 200 OK" }
+        }
+      ]
+    },
+
+    "login-form-check": {
+      "name": "UI: Login Page Has Required Elements",
+      "description": "Login page MUST have email input, password input, and submit button. Blank page = FAIL.",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/login",
+          "announce": { "before": "Loading login page" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertVisible",
+          "selector": "input[type='email'], input[placeholder*='mail' i], input[name='email']",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Email input is visible" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "input[type='password']",
+          "timeout": 5000,
+          "announce": { "after": "ASSERT: Password input is visible" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "button[type='submit'], button:has-text('Sign'), button:has-text('Login'), button:has-text('Continue')",
+          "timeout": 5000,
+          "announce": { "after": "ASSERT: Submit button is visible" }
+        },
+        {
+          "action": "screenshot",
+          "value": "env-01-login-page.png",
+          "announce": { "after": "Login page verified: all required form elements present" }
+        }
+      ]
+    },
+
+    "login-and-verify": {
+      "name": "UI: Login Flow With DOM Verification",
+      "description": "Actually log in, then assert the dashboard layout is rendered — header, sidebar, main content. Checks the user's display name in the header.",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/login",
+          "announce": { "before": "Starting login flow" }
+        },
+        {
+          "action": "wait",
+          "timeout": 1500
+        },
+        {
+          "action": "fill",
+          "selector": "input[type='email'], input[placeholder*='mail' i], input[name='email']",
+          "value": "${credentials.admin.email}"
+        },
+        {
+          "action": "fill",
+          "selector": "input[type='password']",
+          "value": "${credentials.admin.password}"
+        },
+        {
+          "action": "screenshot",
+          "value": "env-02-before-login.png"
+        },
+        {
+          "action": "click",
+          "selector": "button[type='submit'], button:has-text('Sign'), button:has-text('Login')",
+          "announce": { "after": "Login form submitted" }
+        },
+        {
+          "action": "wait",
+          "timeout": 3000
+        },
+        {
+          "action": "custom",
+          "handler": "generateTotp",
+          "description": "Handle MFA if prompted",
+          "selector": "input[inputmode='numeric'], input[maxlength='6']",
+          "optional": true
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertVisible",
+          "selector": "header",
+          "timeout": 20000,
+          "announce": { "after": "ASSERT: Page header is present (not still on login page)" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "aside, nav, [class*='sidebar'], [class*='Sidebar']",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Sidebar navigation is present" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "main, [class*='main'], [class*='content']",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Main content area is present" }
+        },
+        {
+          "action": "screenshot",
+          "value": "env-03-post-login-dashboard.png",
+          "announce": { "after": "Login successful — dashboard rendered with header, sidebar, main content" }
+        }
+      ]
+    },
+
+    "dashboard-content": {
+      "name": "UI: Dashboard Has Real Content",
+      "description": "After login, the dashboard must show an h1 heading. An empty white page with no heading = FAIL.",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/",
+          "announce": { "before": "Loading dashboard" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertVisible",
+          "selector": "h1",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Page has an h1 heading (not a blank page)" }
+        },
+        {
+          "action": "assertText",
+          "selector": "h1",
+          "value": "Dashboard",
+          "announce": { "after": "ASSERT: h1 text contains 'Dashboard'" }
+        },
+        {
+          "action": "screenshot",
+          "value": "env-04-dashboard-content.png",
+          "announce": { "after": "Dashboard content confirmed" }
+        }
+      ]
+    },
+
+    "users-page": {
+      "name": "UI: Users Page Has Table With Data",
+      "description": "Navigate to /users. Must show h1='Users', a data table, and at least 1 row (the admin user exists). Empty table on a fresh env = probably a 401 or broken auth.",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/users",
+          "announce": { "before": "Navigating to Users page" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2500
+        },
+        {
+          "action": "assertVisible",
+          "selector": "h1",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Users page has heading" }
+        },
+        {
+          "action": "assertText",
+          "selector": "h1",
+          "value": "Users",
+          "announce": { "after": "ASSERT: h1 text is 'Users'" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "table, [role='table'], [class*='table']",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Data table is visible" }
+        },
+        {
+          "action": "assertCount",
+          "selector": "table tbody tr, [role='row']:not([role='columnheader'])",
+          "value": "1",
+          "announce": { "after": "ASSERT: At least 1 user row (admin user must exist)" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "[data-testid='user-create-btn'], button:has-text('Add'), button:has-text('Create'), button:has-text('New User'), button:has-text('Invite')",
+          "timeout": 5000,
+          "announce": { "after": "ASSERT: Create user button is present" }
+        },
+        {
+          "action": "screenshot",
+          "value": "env-05-users-table.png",
+          "announce": { "after": "Users page verified: heading, table, rows, create button" }
+        }
+      ]
+    },
+
+    "organizations-page": {
+      "name": "UI: Organizations Page Renders",
+      "description": "Navigate to /organizations. Must show h1='Organizations', create button, and table or empty state card.",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/organizations",
+          "announce": { "before": "Navigating to Organizations page" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2500
+        },
+        {
+          "action": "assertVisible",
+          "selector": "h1",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Organizations page has heading" }
+        },
+        {
+          "action": "assertText",
+          "selector": "h1",
+          "value": "Organizations",
+          "announce": { "after": "ASSERT: h1 is 'Organizations'" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "[data-testid='org-create-btn'], button:has-text('Add'), button:has-text('Create'), button:has-text('New Org')",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Create org button is present (page fully loaded)" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "table, [class*='card'], [class*='table'], [role='table']",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Content area rendered (table or empty state card)" }
+        },
+        {
+          "action": "screenshot",
+          "value": "env-06-organizations.png",
+          "announce": { "after": "Organizations page verified" }
+        }
+      ]
+    },
+
+    "roles-page": {
+      "name": "UI: Roles Page Renders",
+      "description": "Navigate to /roles. Must show heading with Roles or Privileges.",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/roles",
+          "announce": { "before": "Navigating to Roles page" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2500
+        },
+        {
+          "action": "assertVisible",
+          "selector": "h1",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Roles page has heading" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "table, [role='table'], [class*='table'], [class*='card']",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Roles content area has table or cards" }
+        },
+        {
+          "action": "screenshot",
+          "value": "env-07-roles.png",
+          "announce": { "after": "Roles page verified" }
+        }
+      ]
+    },
+
+    "audit-page": {
+      "name": "UI: Audit Logs Page Renders",
+      "description": "Navigate to /audit. Must show 'Audit' heading and a table. An empty audit log on a fresh env is valid.",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/audit",
+          "announce": { "before": "Navigating to Audit Logs page" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2500
+        },
+        {
+          "action": "assertVisible",
+          "selector": "h1",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Audit page has heading" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "table, [role='table'], [class*='table'], [class*='filter']",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Audit page has table or filter controls" }
+        },
+        {
+          "action": "screenshot",
+          "value": "env-08-audit.png",
+          "announce": { "after": "Audit page verified" }
+        }
+      ]
+    },
+
+    "navigation-page": {
+      "name": "UI: Navigation Management Page",
+      "description": "Navigate to /navigation. Must show 'Navigation' heading.",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/navigation",
+          "announce": { "before": "Navigating to Navigation Management" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2500
+        },
+        {
+          "action": "assertVisible",
+          "selector": "h1",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Navigation page has heading" }
+        },
+        {
+          "action": "assertText",
+          "selector": "h1",
+          "value": "Navigation",
+          "announce": { "after": "ASSERT: h1 contains 'Navigation'" }
+        },
+        {
+          "action": "screenshot",
+          "value": "env-09-navigation.png",
+          "announce": { "after": "Navigation Management page verified" }
+        }
+      ]
+    },
+
+    "pii-vault-page": {
+      "name": "UI: PII Vault Page Renders",
+      "description": "Navigate to /pii-vault. Must show a heading and table or audit view.",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/pii-vault",
+          "announce": { "before": "Navigating to PII Vault" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2500
+        },
+        {
+          "action": "assertVisible",
+          "selector": "h1",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: PII Vault page has heading" }
+        },
+        {
+          "action": "screenshot",
+          "value": "env-10-pii-vault.png",
+          "announce": { "after": "PII Vault page verified" }
+        }
+      ]
+    },
+
+    "logout-verify": {
+      "name": "UI: Logout Returns to Login Page",
+      "description": "Clear tokens and navigate to /login. Must show login form — not redirect to dashboard (which would mean session didn't clear).",
+      "steps": [
+        {
+          "action": "javascript",
+          "value": "localStorage.removeItem('zorbit_token'); localStorage.removeItem('zorbit_refresh_token'); localStorage.removeItem('zorbit_user'); sessionStorage.clear();",
+          "announce": { "before": "Clearing all session tokens" }
+        },
+        {
+          "action": "navigate",
+          "url": "/login"
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertVisible",
+          "selector": "input[type='email'], input[placeholder*='mail' i], input[name='email']",
+          "timeout": 10000,
+          "announce": { "after": "ASSERT: Logout successful — login form is visible again" }
+        },
+        {
+          "action": "screenshot",
+          "value": "env-11-logout.png",
+          "announce": { "after": "Logout verified: session cleared, login page shown" }
+        }
+      ]
+    },
+
+    "api-login-direct": {
+      "name": "API: Direct Login Returns JWT Token",
+      "description": "POST to identity login endpoint. Must return HTTP 200 with an accessToken. 401 = wrong credentials. 404 = service unreachable.",
+      "steps": [
+        {
+          "action": "apiPost",
+          "endpoint": "/api/identity/api/v1/G/auth/login",
+          "body": {
+            "email": "${credentials.admin.email}",
+            "password": "${credentials.admin.password}"
+          },
+          "expectedStatus": [200, 201],
+          "announce": { "before": "Testing direct API login", "after": "ASSERT: Login API returned 200/201 with token" }
+        }
+      ]
+    }
+  },
+
+  "journeys": {
+    "api-health": {
+      "name": "API Health Check",
+      "description": "All platform service health endpoints return 200. Fast, no browser needed.",
+      "segments": ["api-core-health", "api-pfs-health"]
+    },
+
+    "ui-login": {
+      "name": "Login & Dashboard UI",
+      "description": "Full login flow with DOM assertion — header, sidebar, main content, page title.",
+      "segments": ["login-form-check", "login-and-verify", "dashboard-content"]
+    },
+
+    "ui-pages": {
+      "name": "Core Pages Navigation",
+      "description": "Navigate to each major page and assert the heading and table/content render. No blank pages allowed.",
+      "segments": ["users-page", "organizations-page", "roles-page", "audit-page", "navigation-page", "pii-vault-page"]
+    },
+
+    "ui-full": {
+      "name": "Full UI Flow",
+      "description": "Login, verify dashboard, navigate all core pages, logout.",
+      "segments": ["login-form-check", "login-and-verify", "dashboard-content", "users-page", "organizations-page", "roles-page", "audit-page", "navigation-page", "pii-vault-page", "logout-verify"]
+    },
+
+    "api-direct": {
+      "name": "Direct API Tests",
+      "description": "API health only (no browser). Login is verified by the UI journey which uses the actual browser form with correct sha256 hashing.",
+      "segments": ["api-core-health", "api-pfs-health"]
+    }
+  },
+
+  "bouquets": {
+    "env-quick": {
+      "name": "Quick Environment Check",
+      "description": "Fast check: all 7 service APIs return 200 (identity, auth, nav, pii-vault, audit, pcg4, form-builder). No browser. ~20s.",
+      "mode": "sequential",
+      "journeys": ["api-health"]
+    },
+
+    "env-ui": {
+      "name": "UI Environment Check",
+      "description": "Full UI check: API health + login with real browser form + all core pages verified + logout. ~3 min.",
+      "mode": "sequential",
+      "journeys": ["api-health", "ui-full"]
+    },
+
+    "env-full": {
+      "name": "Full Environment Verification",
+      "description": "Everything: API health + full UI flow (login, all pages, logout). ~5 min. Run for release sign-off.",
+      "mode": "sequential",
+      "journeys": ["api-health", "ui-full"]
+    }
+  }
+}

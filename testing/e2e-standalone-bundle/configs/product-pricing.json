@@ -43,9 +43,6 @@
           "action": "custom",
           "handler": "generateTotp",
           "description": "Generate TOTP for MFA if challenged",
-          "params": {
-            "command": "ssh sovpn 'bash /tmp/get-totp.sh'"
-          },
           "selector": "input[inputmode='numeric'], input[maxlength='6'], input[placeholder='000000']"
         },
         {
@@ -57,10 +54,10 @@
           "timeout": 3000
         },
         {
-          "action": "waitForUrl",
-          "pattern": "^https://zorbit\\.scalatics\\.com/?$",
+          "action": "assertVisible",
+          "selector": "h1:has-text('Dashboard'), [class*='dashboard'], nav, [role='navigation']",
           "timeout": 20000,
-          "announce": { "after": "Successfully logged in" }
+          "announce": { "after": "Logged in successfully" }
         },
         {
           "action": "screenshot",

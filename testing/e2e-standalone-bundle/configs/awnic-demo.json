@@ -1,0 +1,683 @@
+{
+  "baseUrl": "https://zorbit.scalatics.com",
+  "viewport": { "width": 1440, "height": 900 },
+  "defaults": {
+    "timeout": 15000,
+    "waitAfterAction": 500,
+    "waitForNetworkIdle": false
+  },
+
+  "segments": {
+
+    "login": {
+      "name": "Login",
+      "steps": [
+        { "action": "navigate", "url": "/login" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "javascript", "value": "localStorage.clear(); sessionStorage.clear();" },
+        {
+          "action": "javascript",
+          "value": "(async()=>{const r=await fetch('/api/identity/api/v1/G/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:'${credentials.admin.email}',password:await(async()=>{const e=new TextEncoder();const h=await crypto.subtle.digest('SHA-256',e.encode('${credentials.admin.password}'));return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('')})()})}); const d=await r.json(); if(d.accessToken){localStorage.setItem('zorbit_token',d.accessToken);localStorage.setItem('zorbit_user',JSON.stringify({token:d.accessToken,refreshToken:d.refreshToken}));}})()"
+        },
+        { "action": "wait", "timeout": 500 },
+        { "action": "navigate", "url": "/" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertVisible", "selector": "nav, [role='navigation'], [class*='Sidebar'], [class*='sidebar']", "timeout": 30000 },
+        { "action": "screenshot", "value": "00-logged-in.png" }
+      ]
+    },
+
+    "login-configurator": {
+      "name": "Login as Configurator (Fatima)",
+      "steps": [
+        { "action": "navigate", "url": "/login" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "javascript", "value": "localStorage.clear(); sessionStorage.clear();" },
+        {
+          "action": "javascript",
+          "value": "(async()=>{const r=await fetch('/api/identity/api/v1/G/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:'${credentials.configurator.email}',password:await(async()=>{const e=new TextEncoder();const h=await crypto.subtle.digest('SHA-256',e.encode('${credentials.configurator.password}'));return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('')})()})}); const d=await r.json(); if(d.accessToken){localStorage.setItem('zorbit_token',d.accessToken);localStorage.setItem('zorbit_user',JSON.stringify({token:d.accessToken,refreshToken:d.refreshToken}));}})()"
+        },
+        { "action": "wait", "timeout": 500 },
+        { "action": "navigate", "url": "/" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertVisible", "selector": "nav, [role='navigation'], [class*='Sidebar'], [class*='sidebar']", "timeout": 30000 },
+        { "action": "screenshot", "value": "00-logged-in-configurator.png" }
+      ]
+    },
+
+    "login-pricing": {
+      "name": "Login as Pricing Analyst (Ahmed)",
+      "steps": [
+        { "action": "navigate", "url": "/login" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "javascript", "value": "localStorage.clear(); sessionStorage.clear();" },
+        {
+          "action": "javascript",
+          "value": "(async()=>{const r=await fetch('/api/identity/api/v1/G/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:'${credentials.pricing.email}',password:await(async()=>{const e=new TextEncoder();const h=await crypto.subtle.digest('SHA-256',e.encode('${credentials.pricing.password}'));return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('')})()})}); const d=await r.json(); if(d.accessToken){localStorage.setItem('zorbit_token',d.accessToken);localStorage.setItem('zorbit_user',JSON.stringify({token:d.accessToken,refreshToken:d.refreshToken}));}})()"
+        },
+        { "action": "wait", "timeout": 500 },
+        { "action": "navigate", "url": "/" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertVisible", "selector": "nav, [role='navigation'], [class*='Sidebar'], [class*='sidebar']", "timeout": 30000 },
+        { "action": "screenshot", "value": "00-logged-in-pricing.png" }
+      ]
+    },
+
+    "login-quotation": {
+      "name": "Login as Quotation Officer (Hessa)",
+      "steps": [
+        { "action": "navigate", "url": "/login" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "javascript", "value": "localStorage.clear(); sessionStorage.clear();" },
+        {
+          "action": "javascript",
+          "value": "(async()=>{const r=await fetch('/api/identity/api/v1/G/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:'${credentials.quotation.email}',password:await(async()=>{const e=new TextEncoder();const h=await crypto.subtle.digest('SHA-256',e.encode('${credentials.quotation.password}'));return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('')})()})}); const d=await r.json(); if(d.accessToken){localStorage.setItem('zorbit_token',d.accessToken);localStorage.setItem('zorbit_user',JSON.stringify({token:d.accessToken,refreshToken:d.refreshToken}));}})()"
+        },
+        { "action": "wait", "timeout": 500 },
+        { "action": "navigate", "url": "/" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertVisible", "selector": "nav, [role='navigation'], [class*='Sidebar'], [class*='sidebar']", "timeout": 30000 },
+        { "action": "screenshot", "value": "00-logged-in-quotation.png" }
+      ]
+    },
+
+    "login-underwriter": {
+      "name": "Login as Underwriter (Omar)",
+      "steps": [
+        { "action": "navigate", "url": "/login" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "javascript", "value": "localStorage.clear(); sessionStorage.clear();" },
+        {
+          "action": "javascript",
+          "value": "(async()=>{const r=await fetch('/api/identity/api/v1/G/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:'${credentials.underwriter.email}',password:await(async()=>{const e=new TextEncoder();const h=await crypto.subtle.digest('SHA-256',e.encode('${credentials.underwriter.password}'));return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('')})()})}); const d=await r.json(); if(d.accessToken){localStorage.setItem('zorbit_token',d.accessToken);localStorage.setItem('zorbit_user',JSON.stringify({token:d.accessToken,refreshToken:d.refreshToken}));}})()"
+        },
+        { "action": "wait", "timeout": 500 },
+        { "action": "navigate", "url": "/" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertVisible", "selector": "nav, [role='navigation'], [class*='Sidebar'], [class*='sidebar']", "timeout": 30000 },
+        { "action": "screenshot", "value": "00-logged-in-underwriter.png" }
+      ]
+    },
+
+    "logout": {
+      "name": "Logout",
+      "steps": [
+        { "action": "javascript", "value": "localStorage.removeItem('zorbit_token'); localStorage.removeItem('zorbit_user');" },
+        { "action": "navigate", "url": "/login" },
+        { "action": "wait", "timeout": 1500 }
+      ]
+    },
+
+    "create-org": {
+      "name": "Create AWNIC Organization",
+      "steps": [
+        { "action": "navigate", "url": "/organizations" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertVisible", "selector": "h1:has-text('Organizations')", "timeout": 10000 },
+        { "action": "click", "selector": "[data-testid='org-create-btn'], button:has-text('Create Organization')" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "fill", "selector": "[data-testid='org-name'], form input.input-field", "value": "Al Wathba National Insurance ${runId}" },
+        { "action": "select", "selector": "[data-testid='org-type'], form select.input-field", "value": "Insurance Company" },
+        { "action": "screenshot", "value": "01-org-form.png" },
+        { "action": "click", "selector": "[data-testid='org-create-submit'], form button[type='submit']" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "screenshot", "value": "02-org-created.png" }
+      ]
+    },
+
+    "create-roles": {
+      "name": "Create AWNIC Roles",
+      "steps": [
+        { "action": "navigate", "url": "/roles" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertVisible", "selector": "h1:has-text('Roles')", "timeout": 10000 },
+
+        { "action": "click", "selector": "[data-testid='role-create-btn'], button:has-text('Create Role')" },
+        { "action": "wait", "timeout": 800 },
+        { "action": "fill", "selector": "[data-testid='role-name'], form input.input-field >> nth=0", "value": "Product Configurator ${runId}" },
+        { "action": "fill", "selector": "[data-testid='role-description'], form input.input-field >> nth=1", "value": "Configure insurance products and plans" },
+        { "action": "click", "selector": "[data-testid='role-create-submit'], form button[type='submit']" },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "pressEscape" },
+        { "action": "wait", "timeout": 300 },
+
+        { "action": "click", "selector": "[data-testid='role-create-btn'], button:has-text('Create Role')" },
+        { "action": "wait", "timeout": 800 },
+        { "action": "fill", "selector": "[data-testid='role-name'], form input.input-field >> nth=0", "value": "Pricing Analyst ${runId}" },
+        { "action": "fill", "selector": "[data-testid='role-description'], form input.input-field >> nth=1", "value": "Manage rate tables and premiums" },
+        { "action": "click", "selector": "[data-testid='role-create-submit'], form button[type='submit']" },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "pressEscape" },
+        { "action": "wait", "timeout": 300 },
+
+        { "action": "click", "selector": "[data-testid='role-create-btn'], button:has-text('Create Role')" },
+        { "action": "wait", "timeout": 800 },
+        { "action": "fill", "selector": "[data-testid='role-name'], form input.input-field >> nth=0", "value": "Quotation Officer ${runId}" },
+        { "action": "fill", "selector": "[data-testid='role-description'], form input.input-field >> nth=1", "value": "Create health insurance quotations" },
+        { "action": "click", "selector": "[data-testid='role-create-submit'], form button[type='submit']" },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "pressEscape" },
+        { "action": "wait", "timeout": 300 },
+
+        { "action": "click", "selector": "[data-testid='role-create-btn'], button:has-text('Create Role')" },
+        { "action": "wait", "timeout": 800 },
+        { "action": "fill", "selector": "[data-testid='role-name'], form input.input-field >> nth=0", "value": "Underwriter ${runId}" },
+        { "action": "fill", "selector": "[data-testid='role-description'], form input.input-field >> nth=1", "value": "Review and approve quotations" },
+        { "action": "click", "selector": "[data-testid='role-create-submit'], form button[type='submit']" },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "pressEscape" },
+        { "action": "wait", "timeout": 300 },
+
+        { "action": "click", "selector": "[data-testid='role-create-btn'], button:has-text('Create Role')" },
+        { "action": "wait", "timeout": 800 },
+        { "action": "fill", "selector": "[data-testid='role-name'], form input.input-field >> nth=0", "value": "Rules Manager ${runId}" },
+        { "action": "fill", "selector": "[data-testid='role-description'], form input.input-field >> nth=1", "value": "Configure STP rules and automation" },
+        { "action": "click", "selector": "[data-testid='role-create-submit'], form button[type='submit']" },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "pressEscape" },
+        { "action": "wait", "timeout": 300 },
+
+        { "action": "screenshot", "value": "03-roles-created.png" }
+      ]
+    },
+
+    "create-users": {
+      "name": "Create AWNIC Users",
+      "steps": [
+        { "action": "navigate", "url": "/users" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertVisible", "selector": "h1:has-text('Users')", "timeout": 10000 },
+
+        { "action": "click", "selector": "[data-testid='user-create-btn'], button:has-text('Create User') >> nth=0" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "fill", "selector": "[data-testid='user-display-name'], form input.input-field:not([type='email']):not([type='password'])", "value": "Fatima ${runId}" },
+        { "action": "fill", "selector": "[data-testid='user-email'], input[type='email']", "value": "fatima.${runId}@awnic-demo.ae" },
+        { "action": "fill", "selector": "input[type='password']", "value": "Awnic@2026!" },
+        { "action": "click", "selector": "[data-testid='user-create-submit'], form button.btn-primary" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "captureCredential", "key": "configurator.email", "value": "fatima.${runId}@awnic-demo.ae" },
+        { "action": "captureCredential", "key": "configurator.password", "value": "Awnic@2026!" },
+        { "action": "pressEscape" },
+        { "action": "wait", "timeout": 300 },
+
+        { "action": "click", "selector": "[data-testid='user-create-btn'], button:has-text('Create User') >> nth=0" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "fill", "selector": "[data-testid='user-display-name'], form input.input-field:not([type='email']):not([type='password'])", "value": "Ahmed ${runId}" },
+        { "action": "fill", "selector": "[data-testid='user-email'], input[type='email']", "value": "ahmed.${runId}@awnic-demo.ae" },
+        { "action": "fill", "selector": "input[type='password']", "value": "Awnic@2026!" },
+        { "action": "click", "selector": "[data-testid='user-create-submit'], form button.btn-primary" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "captureCredential", "key": "pricing.email", "value": "ahmed.${runId}@awnic-demo.ae" },
+        { "action": "captureCredential", "key": "pricing.password", "value": "Awnic@2026!" },
+        { "action": "pressEscape" },
+        { "action": "wait", "timeout": 300 },
+
+        { "action": "click", "selector": "[data-testid='user-create-btn'], button:has-text('Create User') >> nth=0" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "fill", "selector": "[data-testid='user-display-name'], form input.input-field:not([type='email']):not([type='password'])", "value": "Hessa ${runId}" },
+        { "action": "fill", "selector": "[data-testid='user-email'], input[type='email']", "value": "hessa.${runId}@awnic-demo.ae" },
+        { "action": "fill", "selector": "input[type='password']", "value": "Awnic@2026!" },
+        { "action": "click", "selector": "[data-testid='user-create-submit'], form button.btn-primary" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "captureCredential", "key": "quotation.email", "value": "hessa.${runId}@awnic-demo.ae" },
+        { "action": "captureCredential", "key": "quotation.password", "value": "Awnic@2026!" },
+        { "action": "pressEscape" },
+        { "action": "wait", "timeout": 300 },
+
+        { "action": "click", "selector": "[data-testid='user-create-btn'], button:has-text('Create User') >> nth=0" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "fill", "selector": "[data-testid='user-display-name'], form input.input-field:not([type='email']):not([type='password'])", "value": "Omar ${runId}" },
+        { "action": "fill", "selector": "[data-testid='user-email'], input[type='email']", "value": "omar.${runId}@awnic-demo.ae" },
+        { "action": "fill", "selector": "input[type='password']", "value": "Awnic@2026!" },
+        { "action": "click", "selector": "[data-testid='user-create-submit'], form button.btn-primary" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "captureCredential", "key": "underwriter.email", "value": "omar.${runId}@awnic-demo.ae" },
+        { "action": "captureCredential", "key": "underwriter.password", "value": "Awnic@2026!" },
+        { "action": "pressEscape" },
+        { "action": "wait", "timeout": 300 },
+
+        { "action": "click", "selector": "[data-testid='user-create-btn'], button:has-text('Create User') >> nth=0" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "fill", "selector": "[data-testid='user-display-name'], form input.input-field:not([type='email']):not([type='password'])", "value": "Khalid ${runId}" },
+        { "action": "fill", "selector": "[data-testid='user-email'], input[type='email']", "value": "khalid.${runId}@awnic-demo.ae" },
+        { "action": "fill", "selector": "input[type='password']", "value": "Awnic@2026!" },
+        { "action": "click", "selector": "[data-testid='user-create-submit'], form button.btn-primary" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "captureCredential", "key": "manager.email", "value": "khalid.${runId}@awnic-demo.ae" },
+        { "action": "captureCredential", "key": "manager.password", "value": "Awnic@2026!" },
+        { "action": "pressEscape" },
+        { "action": "wait", "timeout": 300 },
+
+        { "action": "screenshot", "value": "04-users-created.png" }
+      ]
+    },
+
+    "pcg4-new": {
+      "name": "PCG4: Start New Config",
+      "steps": [
+        { "action": "navigate", "url": "/app/pcg4/configurations" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertVisible", "selector": "h1:has-text('Product Configurator')", "timeout": 10000 },
+        { "action": "screenshot", "value": "pcg4-01-dashboard.png" },
+        { "action": "click", "selector": "[data-testid='pcg4-new-config'], button:has-text('New Configuration')" },
+        { "action": "wait", "timeout": 2500 },
+        { "action": "assertVisible", "selector": "h2:has-text('Insurer Details')", "timeout": 10000 }
+      ]
+    },
+
+    "pcg4-step1": {
+      "name": "PCG4 Step 1: Insurer Details",
+      "steps": [
+        { "action": "fill", "selector": "[data-testid='pcg4-insurer-name'], input[placeholder*='Healthy Life Insurance']", "value": "Al Wathba National Insurance ${runId}" },
+        { "action": "fill", "selector": "[data-testid='pcg4-insurer-code'], input[placeholder*='HLI001']", "value": "AWNIC-${runId}" },
+        { "action": "fill", "selector": "[data-testid='pcg4-regulator-code'], input[placeholder*='REG-HLI']", "value": "REG-AWNIC-${runId}" },
+        { "action": "fill", "selector": "[data-testid='pcg4-insurer-description'], textarea[placeholder*='description']", "value": "Al Wathba National Insurance Company — leading UAE insurer since 1996." },
+        { "action": "screenshot", "value": "pcg4-02-step1.png" },
+        { "action": "click", "selector": "[data-testid='pcg4-step1-next'], button:has-text('Next: Product Details')" },
+        { "action": "wait", "timeout": 2000 }
+      ]
+    },
+
+    "pcg4-step2": {
+      "name": "PCG4 Step 2: Product Details",
+      "steps": [
+        { "action": "assertVisible", "selector": "h2:has-text('Product Details')", "timeout": 10000 },
+        { "action": "fill", "selector": "[data-testid='pcg4-product-name'], input[placeholder*='Comprehensive Health Plus']", "value": "NAS Health Shield ${runId}" },
+        { "action": "fill", "selector": "[data-testid='pcg4-product-code'], input[placeholder*='CHP-2024']", "value": "NAS-${runId}" },
+        { "action": "fill", "selector": "[data-testid='pcg4-product-regulator-code'], input[placeholder*='REG-PROD']", "value": "REG-NAS-${runId}" },
+        { "action": "fill", "selector": "[data-testid='pcg4-product-description'], textarea[placeholder*='Describe']", "value": "NAS health insurance — DHA/DOH compliant. Gold and Silver tiers." },
+        { "action": "screenshot", "value": "pcg4-03-step2.png" },
+        { "action": "click", "selector": "[data-testid='pcg4-step2-next'], button:has-text('Next: Create Plans')" },
+        { "action": "wait", "timeout": 2000 }
+      ]
+    },
+
+    "pcg4-step3": {
+      "name": "PCG4 Step 3: Create Plans",
+      "steps": [
+        { "action": "assertVisible", "selector": "h2:has-text('Create Plans')", "timeout": 10000 },
+        { "action": "fill", "selector": "[data-testid='pcg4-plan-name-0'], input[placeholder*='Health Plus Gold']", "value": "NAS Gold ${runId}" },
+        { "action": "select", "selector": "[data-testid='pcg4-plan-tier-0'], select >> nth=0", "value": "Gold" },
+        { "action": "click", "selector": "label:has-text('Middle East')" },
+        { "action": "click", "selector": "[data-testid='pcg4-add-plan'], button:has-text('Add Another Plan')" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "fill", "selector": "[data-testid='pcg4-plan-name-1'], input[placeholder*='Health Plus Gold'] >> nth=1", "value": "NAS Silver ${runId}" },
+        { "action": "select", "selector": "[data-testid='pcg4-plan-tier-1'], select >> nth=2", "value": "Silver" },
+        { "action": "click", "selector": "label:has-text('Middle East') >> nth=1" },
+        { "action": "screenshot", "value": "pcg4-04-step3.png" },
+        { "action": "click", "selector": "[data-testid='pcg4-step3-next'], button:has-text('Next: Base')" },
+        { "action": "wait", "timeout": 2000 }
+      ]
+    },
+
+    "pcg4-step4": {
+      "name": "PCG4 Step 4: Base Config",
+      "steps": [
+        { "action": "assertVisible", "selector": "h2:has-text('Base Plan Configuration')", "timeout": 10000 },
+        { "action": "fill", "selector": "input[type='number'] >> nth=0", "value": "1000000" },
+        { "action": "fill", "selector": "input[type='number'] >> nth=1", "value": "500" },
+        { "action": "fill", "selector": "input[type='number'] >> nth=2", "value": "10000" },
+        { "action": "fill", "selector": "input[type='number'] >> nth=3", "value": "30" },
+        { "action": "screenshot", "value": "pcg4-05-step4.png" },
+        { "action": "click", "selector": "[data-testid='pcg4-step4-next'], button:has-text('Next: Encounter')" },
+        { "action": "wait", "timeout": 2000 }
+      ]
+    },
+
+    "pcg4-step5": {
+      "name": "PCG4 Step 5: Encounters",
+      "steps": [
+        { "action": "assertVisible", "selector": "h2:has-text('Encounter Configuration')", "timeout": 10000 },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "click", "selector": "button:has-text('Select All') >> nth=0", "optional": true },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "screenshot", "value": "pcg4-06-step5.png" },
+        { "action": "click", "selector": "[data-testid='pcg4-step5-next'], button:has-text('Next: Benefits')" },
+        { "action": "wait", "timeout": 2000 }
+      ]
+    },
+
+    "pcg4-step6": {
+      "name": "PCG4 Step 6: Benefits",
+      "steps": [
+        { "action": "assertVisible", "selector": "h2:has-text('Benefits Setup')", "timeout": 10000 },
+        { "action": "screenshot", "value": "pcg4-07-step6.png" },
+        { "action": "click", "selector": "[data-testid='pcg4-step6-next'], button:has-text('Next: Plan Overrides')" },
+        { "action": "wait", "timeout": 2000 }
+      ]
+    },
+
+    "pcg4-step7": {
+      "name": "PCG4 Step 7: Overrides",
+      "steps": [
+        { "action": "assertVisible", "selector": "h2:has-text('Plan Specific Overrides')", "timeout": 10000 },
+        { "action": "screenshot", "value": "pcg4-08-step7-general.png" },
+        { "action": "click", "selector": "[data-testid='pcg4-step7-tab-encounters'], button:has-text('Encounter Overrides')", "optional": true },
+        { "action": "wait", "timeout": 500 },
+        { "action": "screenshot", "value": "pcg4-09-step7-encounters.png" },
+        { "action": "click", "selector": "[data-testid='pcg4-step7-tab-regions'], button:has-text('Regional Settings')", "optional": true },
+        { "action": "wait", "timeout": 500 },
+        { "action": "screenshot", "value": "pcg4-10-step7-regions.png" },
+        { "action": "click", "selector": "[data-testid='pcg4-step7-next'], button:has-text('Next: Review')" },
+        { "action": "wait", "timeout": 2000 }
+      ]
+    },
+
+    "pcg4-step8": {
+      "name": "PCG4 Step 8: Review & Publish",
+      "steps": [
+        { "action": "assertVisible", "selector": "h2:has-text('Review & Publish')", "timeout": 10000 },
+        { "action": "screenshot", "value": "pcg4-11-step8-review.png" },
+        { "action": "click", "selector": "[data-testid='pcg4-step8-tab-publish'], button:has-text('Publish Settings')" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "select", "selector": "[data-testid='pcg4-step8-env-select'], select:has(option:has-text('Staging'))", "value": "staging" },
+        { "action": "fill", "selector": "[data-testid='pcg4-step8-notes'], textarea[placeholder*='notes']", "value": "AWNIC NAS Health Shield ${runId} — E2E test" },
+        { "action": "screenshot", "value": "pcg4-12-step8-publish.png" },
+        { "action": "scrollToBottom" },
+        { "action": "wait", "timeout": 500 },
+        { "action": "click", "selector": "[data-testid='pcg4-step8-publish'], button.bg-green-600", "force": true },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "screenshot", "value": "pcg4-13-step8-done.png" }
+      ]
+    },
+
+    "pricing-review": {
+      "name": "Product Pricing Review",
+      "steps": [
+        { "action": "navigate", "url": "/product-pricing/rate-tables" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertVisible", "selector": "h1:has-text('Rate Tables')", "timeout": 10000 },
+        { "action": "screenshot", "value": "pricing-01-tables.png" },
+        { "action": "click", "selector": "button:has-text('Calculate')", "optional": true },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "pricing-02-calc.png" }
+      ]
+    },
+
+    "quotation-create": {
+      "name": "Create HI Quotation (UAE)",
+      "steps": [
+        { "action": "navigate", "url": "/hi-quotation" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertVisible", "selector": "h1:has-text('HI Quotation')", "timeout": 10000 },
+        { "action": "screenshot", "value": "quote-01-system.png" },
+        { "action": "click", "selector": "[data-testid='hiq-new-application'], button:has-text('New Application')" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertVisible", "selector": "h1:has-text('New Health Insurance Application')", "timeout": 10000 },
+        { "action": "screenshot", "value": "quote-02-regions.png" },
+        { "action": "click", "selector": "[data-testid='hiq-region-uae'], button:has-text('UAE')" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "screenshot", "value": "quote-03-uae-form.png" },
+        { "action": "click", "selector": "[data-testid='hiq-form-next'], button:has-text('Next')", "optional": true },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "screenshot", "value": "quote-04-step2.png" },
+        { "action": "click", "selector": "[data-testid='hiq-form-next'], button:has-text('Next')", "optional": true },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "screenshot", "value": "quote-05-step3.png" },
+        { "action": "click", "selector": "[data-testid='hiq-form-next'], [data-testid='hiq-form-submit']", "optional": true },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "screenshot", "value": "quote-06-step4.png" },
+        { "action": "click", "selector": "[data-testid='hiq-form-submit'], [data-testid='hiq-form-next']", "optional": true },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "screenshot", "value": "quote-07-submitted.png" }
+      ]
+    },
+
+    "uw-dashboard": {
+      "name": "UW Workflow Dashboard",
+      "steps": [
+        { "action": "navigate", "url": "/uw-workflow" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertVisible", "selector": "h1:has-text('UW Workflow Engine')", "timeout": 10000 },
+        { "action": "screenshot", "value": "uw-01-dashboard.png" }
+      ]
+    },
+
+    "uw-approve": {
+      "name": "UW: Approve Quotation",
+      "steps": [
+        { "action": "navigate", "url": "/uw-workflow/wf/new-quotations-l1" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "screenshot", "value": "uw-02-new-queue.png" },
+        { "action": "click", "selector": "table tbody tr:first-child button, table tbody tr:first-child svg", "optional": true },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "uw-03-detail.png" },
+        { "action": "click", "selector": "[data-testid^='uw-action-approve'], button:has-text('Approve'), button:has-text('approve')", "optional": true },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "fill", "selector": "[data-testid='uw-comment'], textarea[placeholder*='comment']", "value": "AWNIC E2E demo — approved. ${runId}", "optional": true },
+        { "action": "click", "selector": "[data-testid='uw-confirm'], button:has-text('Confirm')", "optional": true },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "screenshot", "value": "uw-04-approved.png" }
+      ]
+    },
+
+    "uw-payment": {
+      "name": "UW: Generate Payment Link",
+      "steps": [
+        { "action": "click", "selector": "[data-testid='uw-generate-payment'], button:has-text('Generate Payment Link')", "optional": true },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "screenshot", "value": "uw-05-payment-link.png" }
+      ]
+    },
+
+    "uw-policy": {
+      "name": "UW: Issue Policy",
+      "steps": [
+        { "action": "click", "selector": "[data-testid='uw-issue-policy'], button:has-text('Issue Policy')", "optional": true },
+        { "action": "wait", "timeout": 5000 },
+        { "action": "screenshot", "value": "uw-06-policy-issued.png" },
+        { "action": "assertVisible", "selector": "[data-testid='uw-download-pdf'], a:has-text('Download Policy PDF'), :has-text('Policy Details')", "timeout": 10000, "optional": true },
+        { "action": "screenshot", "value": "uw-07-policy-pdf.png" }
+      ]
+    },
+
+    "decisioning-review": {
+      "name": "HI Decisioning Review",
+      "steps": [
+        { "action": "navigate", "url": "/hi-decisioning" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertVisible", "selector": "h1:has-text('HI UW Decisioning')", "timeout": 10000 },
+        { "action": "screenshot", "value": "decisioning-01-overview.png" },
+        { "action": "click", "selector": "button:has-text('Rules')" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "decisioning-02-rules.png" },
+        { "action": "click", "selector": "button:has-text('Evaluations')" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "decisioning-03-evals.png" }
+      ]
+    },
+
+    "policy-hub": {
+      "name": "Policy Issuance Review",
+      "steps": [
+        { "action": "navigate", "url": "/policy-issuance" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertVisible", "selector": "h1:has-text('Policy Issuance')", "timeout": 10000 },
+        { "action": "screenshot", "value": "policy-01-hub.png" }
+      ]
+    },
+
+    "channel-broker-setup": {
+      "name": "Channel & Broker Configuration",
+      "steps": [
+        { "action": "navigate", "url": "/channels" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertVisible", "selector": "h1:has-text('Channel'), h1:has-text('Distribution')", "timeout": 10000 },
+        { "action": "screenshot", "value": "channel-01-list.png" },
+        { "action": "click", "selector": "[data-testid='channel-create-btn'], button:has-text('New Channel'), button:has-text('Add Channel')", "optional": true },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "fill", "selector": "[data-testid='channel-name'], form input.input-field >> nth=0", "value": "AWNIC Direct Online ${runId}", "optional": true },
+        { "action": "select", "selector": "[data-testid='channel-type'], form select >> nth=0", "value": "direct", "optional": true },
+        { "action": "click", "selector": "form button[type='submit'], button:has-text('Save')", "optional": true },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "channel-02-created.png" },
+        { "action": "navigate", "url": "/brokers" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertVisible", "selector": "h1:has-text('Broker'), h1:has-text('Intermediar')", "timeout": 10000 },
+        { "action": "screenshot", "value": "broker-01-list.png" },
+        { "action": "click", "selector": "[data-testid='broker-create-btn'], button:has-text('New Broker'), button:has-text('Add Broker')", "optional": true },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "fill", "selector": "[data-testid='broker-name'], form input.input-field >> nth=0", "value": "Al Futtaim Insurance Brokers ${runId}", "optional": true },
+        { "action": "fill", "selector": "[data-testid='broker-license'], form input.input-field >> nth=1", "value": "BRK-${runId}", "optional": true },
+        { "action": "click", "selector": "form button[type='submit'], button:has-text('Save')", "optional": true },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "broker-02-created.png" }
+      ]
+    },
+
+    "quotation-api-calculate": {
+      "name": "API: Calculate Premium",
+      "steps": [
+        { "action": "apiPost", "endpoint": "/api/hi-quotation/quotations/latest/calculate-premium", "value": "{}", "description": "Calculate premium for latest quotation", "optional": true },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "quote-08-premium-calculated.png" }
+      ]
+    },
+
+    "quotation-api-submit-uw": {
+      "name": "API: Submit for Underwriting",
+      "steps": [
+        { "action": "apiPost", "endpoint": "/api/hi-quotation/quotations/latest/submit", "value": "{}", "description": "Submit quotation for UW review", "optional": true },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "quote-09-submitted-uw.png" }
+      ]
+    },
+
+    "uw-workflow-full": {
+      "name": "UW Workflow: Review & Approve",
+      "steps": [
+        { "action": "navigate", "url": "/uw-workflow" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertVisible", "selector": "h1:has-text('UW Workflow Engine')", "timeout": 10000 },
+        { "action": "screenshot", "value": "uw-10-dashboard.png" },
+        { "action": "navigate", "url": "/uw-workflow/wf/new-quotations-l1" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "screenshot", "value": "uw-11-queue.png" },
+        { "action": "click", "selector": "table tbody tr:first-child td:first-child, table tbody tr:first-child button, table tbody tr:first-child a", "optional": true },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "screenshot", "value": "uw-12-quotation-detail.png" },
+        { "action": "click", "selector": "[data-testid^='uw-action-approve'], button:has-text('Approve'), button:has-text('approve')", "optional": true },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "fill", "selector": "[data-testid='uw-comment'], textarea[placeholder*='comment'], textarea", "value": "AWNIC E2E — approved by underwriter. ${runId}", "optional": true },
+        { "action": "click", "selector": "[data-testid='uw-confirm'], button:has-text('Confirm'), button:has-text('Submit')", "optional": true },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "screenshot", "value": "uw-13-status-changed.png" },
+        { "action": "assertVisible", "selector": ":has-text('Approved'), :has-text('approved'), [class*='success']", "timeout": 10000, "optional": true },
+        { "action": "screenshot", "value": "uw-14-approved.png" }
+      ]
+    },
+
+    "payment-complete": {
+      "name": "Payment: Pay & Confirm",
+      "steps": [
+        { "action": "click", "selector": "[data-testid='uw-generate-payment'], button:has-text('Generate Payment Link'), button:has-text('Payment')", "optional": true },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "screenshot", "value": "pay-01-link-generated.png" },
+        { "action": "navigate", "url": "/payments", "optional": true },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "pay-02-payment-page.png" },
+        { "action": "click", "selector": "[data-testid='pay-now'], button:has-text('Pay Now'), button:has-text('Complete Payment')", "optional": true },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "screenshot", "value": "pay-03-confirmation.png" },
+        { "action": "assertVisible", "selector": ":has-text('Payment Successful'), :has-text('Payment Complete'), :has-text('completed'), [class*='success']", "timeout": 10000, "optional": true },
+        { "action": "screenshot", "value": "pay-04-done.png" }
+      ]
+    },
+
+    "policy-verify": {
+      "name": "Policy: Verify Issuance",
+      "steps": [
+        { "action": "navigate", "url": "/policy-issuance" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertVisible", "selector": "h1:has-text('Policy Issuance')", "timeout": 10000 },
+        { "action": "screenshot", "value": "policy-10-hub-after-payment.png" },
+        { "action": "click", "selector": "table tbody tr:first-child td:first-child, table tbody tr:first-child a", "optional": true },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "policy-11-detail.png" },
+        { "action": "assertVisible", "selector": ":has-text('Policy Number'), :has-text('POL-'), [data-testid='policy-number']", "timeout": 10000, "optional": true },
+        { "action": "screenshot", "value": "policy-12-verified.png" }
+      ]
+    }
+  },
+
+  "journeys": {
+    "setup": {
+      "name": "AWNIC Setup",
+      "description": "Create org, roles, users",
+      "segments": ["login", "create-org", "create-roles", "create-users", "logout"]
+    },
+    "pcg4": {
+      "name": "PCG4 Full Config",
+      "description": "8-step product configuration",
+      "segments": ["login-configurator", "pcg4-new", "pcg4-step1", "pcg4-step2", "pcg4-step3", "pcg4-step4", "pcg4-step5", "pcg4-step6", "pcg4-step7", "pcg4-step8", "logout"]
+    },
+    "pricing": {
+      "name": "Product Pricing",
+      "segments": ["login-pricing", "pricing-review", "logout"]
+    },
+    "quotation": {
+      "name": "HI Quotation (UAE)",
+      "description": "Create quotation, calculate premium, submit for UW",
+      "segments": ["login-quotation", "quotation-create", "quotation-api-calculate", "quotation-api-submit-uw", "logout"]
+    },
+    "underwriting": {
+      "name": "UW Workflow",
+      "description": "Approve, payment, policy",
+      "segments": ["login-underwriter", "uw-dashboard", "uw-approve", "uw-payment", "uw-policy", "logout"]
+    },
+    "decisioning": {
+      "name": "HI Decisioning",
+      "segments": ["login", "decisioning-review", "logout"]
+    },
+    "policy": {
+      "name": "Policy Issuance",
+      "segments": ["login-underwriter", "policy-hub", "logout"]
+    },
+    "channels-brokers": {
+      "name": "Channel & Broker Setup",
+      "description": "Create distribution channels and brokers",
+      "segments": ["login", "channel-broker-setup", "logout"]
+    },
+    "uw-workflow": {
+      "name": "UW Workflow (Full)",
+      "description": "Navigate to UW queue, open quotation, approve, verify status change",
+      "segments": ["login-underwriter", "uw-workflow-full", "logout"]
+    },
+    "payment-policy": {
+      "name": "Payment & Policy Issuance",
+      "description": "Complete payment and verify policy issuance",
+      "segments": ["login-underwriter", "payment-complete", "policy-verify", "logout"]
+    }
+  },
+
+  "bouquets": {
+    "awnic-complete": {
+      "name": "AWNIC Complete Demo",
+      "description": "Full end-to-end: Setup → PCG4 → Pricing → Quotation → UW Approve → Payment → Policy",
+      "mode": "sequential",
+      "journeys": ["setup", "pcg4", "pricing", "quotation", "uw-workflow", "payment-policy"]
+    },
+    "awnic-setup": {
+      "name": "AWNIC Setup Only",
+      "mode": "sequential",
+      "journeys": ["setup"]
+    },
+    "awnic-full": {
+      "name": "AWNIC Full Demo (legacy)",
+      "description": "Setup → PCG4 → Pricing → Quotation → UW → Decisioning → Policy",
+      "mode": "sequential",
+      "journeys": ["setup", "pcg4", "pricing", "quotation", "underwriting", "decisioning", "policy"]
+    },
+    "awnic-post-setup": {
+      "name": "AWNIC Demo (skip setup)",
+      "mode": "sequential",
+      "journeys": ["pcg4", "pricing", "quotation", "underwriting", "decisioning", "policy"]
+    },
+    "awnic-channels": {
+      "name": "AWNIC with Channels & Brokers",
+      "description": "Full flow including channel/broker setup",
+      "mode": "sequential",
+      "journeys": ["setup", "channels-brokers", "pcg4", "pricing", "quotation", "uw-workflow", "payment-policy"]
+    }
+  }
+}

@@ -1,0 +1,392 @@
+{
+  "baseUrl": "https://zorbit.scalatics.com",
+  "viewport": { "width": 1440, "height": 900 },
+  "defaults": {
+    "timeout": 15000,
+    "waitAfterAction": 600,
+    "waitForNetworkIdle": false
+  },
+
+  "segments": {
+
+    "zmb-login": {
+      "name": "ZMB Console Login",
+      "description": "Authenticate into the console and verify dashboard loads",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/login",
+          "announce": { "before": "Navigating to Zorbit console login" }
+        },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "javascript", "value": "localStorage.clear(); sessionStorage.clear();" },
+        {
+          "action": "javascript",
+          "value": "(async()=>{const r=await fetch('/api/identity/api/v1/G/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:'${credentials.admin.email}',password:await(async()=>{const e=new TextEncoder();const h=await crypto.subtle.digest('SHA-256',e.encode('${credentials.admin.password}'));return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('')})()})}); const d=await r.json(); if(d.accessToken){localStorage.setItem('zorbit_token',d.accessToken);localStorage.setItem('zorbit_user',JSON.stringify({token:d.accessToken,refreshToken:d.refreshToken}));}})()"
+        },
+        { "action": "wait", "timeout": 500 },
+        { "action": "navigate", "url": "/" },
+        { "action": "wait", "timeout": 3000 },
+        {
+          "action": "assertVisible",
+          "selector": "nav, [role='navigation'], [class*='Sidebar'], [class*='sidebar']",
+          "timeout": 20000,
+          "announce": { "after": "Logged in. Dashboard loaded." }
+        },
+        { "action": "screenshot", "value": "zmb-01-dashboard.png" }
+      ]
+    },
+
+    "zmb-nav-menu": {
+      "name": "Navigation Menu Verification",
+      "description": "Verify sidebar nav is present with key menu items",
+      "steps": [
+        {
+          "action": "assertVisible",
+          "selector": "nav, [role='navigation'], [class*='sidebar'], [class*='Sidebar']",
+          "timeout": 8000,
+          "announce": { "before": "Checking navigation menu", "after": "Navigation menu visible" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "a:has-text('Form Builder'), nav a[href*='form']",
+          "timeout": 8000,
+          "announce": { "after": "Form Builder menu item visible" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "a:has-text('Dev'), nav a[href*='dev']",
+          "timeout": 8000,
+          "announce": { "after": "Dev Center menu item visible" }
+        },
+        { "action": "screenshot", "value": "zmb-02-nav-menu.png" }
+      ]
+    },
+
+    "zmb-form-builder": {
+      "name": "Form Builder List",
+      "description": "Navigate to form builder and verify forms are listed",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/form-builder",
+          "announce": { "before": "Opening Form Builder" }
+        },
+        { "action": "wait", "timeout": 3000 },
+        {
+          "action": "assertVisible",
+          "selector": "h1, h2, [class*='heading'], [class*='title']",
+          "timeout": 10000,
+          "announce": { "after": "Form Builder page loaded" }
+        },
+        {
+          "action": "assertCount",
+          "selector": "table tr, [class*='row'], [class*='card'], [class*='list'] li",
+          "value": "1",
+          "announce": { "after": "At least 1 form record found" }
+        },
+        { "action": "screenshot", "value": "zmb-03-form-builder-list.png" }
+      ]
+    },
+
+    "zmb-form-builder-detail": {
+      "name": "Form Builder Detail View",
+      "description": "Open hi-application-uae-v2 form and verify it renders",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/form-builder/hi-application-uae-v2",
+          "announce": { "before": "Opening HI application form detail" }
+        },
+        { "action": "wait", "timeout": 3000 },
+        {
+          "action": "assertVisible",
+          "selector": "h1, h2, [class*='form-name'], [class*='FormName'], [class*='title']",
+          "timeout": 10000,
+          "announce": { "after": "Form detail page loaded" }
+        },
+        { "action": "screenshot", "value": "zmb-04-form-detail.png" }
+      ]
+    },
+
+    "zmb-form-builder-tokens": {
+      "name": "Form Builder Tokens",
+      "description": "Verify tokens page loads with Access Tokens heading and Create Token button",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/form-builder/tokens",
+          "announce": { "before": "Opening Form Builder Tokens page" }
+        },
+        { "action": "wait", "timeout": 3000 },
+        {
+          "action": "assertVisible",
+          "selector": "h1:has-text('Token'), h2:has-text('Token'), [class*='heading']:has-text('Token')",
+          "timeout": 10000,
+          "announce": { "after": "Access Tokens heading visible" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "button:has-text('Create'), button:has-text('New Token'), button:has-text('Generate')",
+          "timeout": 8000,
+          "announce": { "after": "Create Token button visible" }
+        },
+        { "action": "screenshot", "value": "zmb-05-form-tokens.png" }
+      ]
+    },
+
+    "zmb-dev-center": {
+      "name": "Dev Center",
+      "description": "Navigate to dev center and verify it loads",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/dev-center",
+          "announce": { "before": "Opening Developer Center" }
+        },
+        { "action": "wait", "timeout": 3000 },
+        {
+          "action": "assertVisible",
+          "selector": "h1, h2, [class*='heading'], [class*='title'], main",
+          "timeout": 10000,
+          "announce": { "after": "Dev Center page loaded" }
+        },
+        { "action": "screenshot", "value": "zmb-06-dev-center.png" }
+      ]
+    },
+
+    "zmb-dev-center-guide": {
+      "name": "Dev Center Guide",
+      "description": "Navigate to dev center guide and verify tabs render",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/dev-center/guide",
+          "announce": { "before": "Opening Dev Center Guide" }
+        },
+        { "action": "wait", "timeout": 3000 },
+        {
+          "action": "assertVisible",
+          "selector": "[role='tablist'], [class*='tab'], [class*='Tab'], button[class*='tab']",
+          "timeout": 10000,
+          "announce": { "after": "Dev Center Guide tabs visible" }
+        },
+        { "action": "screenshot", "value": "zmb-07-dev-guide.png" }
+      ]
+    },
+
+    "zmb-hi-quotation-form": {
+      "name": "HI Quotation New Form",
+      "description": "Open new HI quotation wizard and verify wizard steps render",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/hi-quotation/new/uae",
+          "announce": { "before": "Opening new HI Quotation wizard" }
+        },
+        { "action": "wait", "timeout": 4000 },
+        {
+          "action": "assertVisible",
+          "selector": "[class*='step'], [class*='wizard'], [class*='Step'], [class*='Wizard'], form, main",
+          "timeout": 10000,
+          "announce": { "after": "HI Quotation wizard loaded" }
+        },
+        { "action": "screenshot", "value": "zmb-08-hi-quotation-new.png" }
+      ]
+    },
+
+    "zmb-hi-quotation-list": {
+      "name": "HI Quotation List",
+      "description": "Navigate to quotation list and verify datatable loads",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/hi-quotation",
+          "announce": { "before": "Opening HI Quotation list" }
+        },
+        { "action": "wait", "timeout": 3000 },
+        {
+          "action": "assertVisible",
+          "selector": "table, [class*='DataTable'], [class*='datatable'], [class*='grid'], main",
+          "timeout": 10000,
+          "announce": { "after": "HI Quotation list/datatable loaded" }
+        },
+        { "action": "screenshot", "value": "zmb-09-hi-quotation-list.png" }
+      ]
+    },
+
+    "zmb-api-health": {
+      "name": "API Health Checks",
+      "description": "Verify health endpoints for all ZMB platform services",
+      "steps": [
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/identity/api/v1/G/health",
+          "expectedStatus": [200, 204],
+          "announce": { "before": "Checking Identity service health", "after": "Identity healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/form-builder/api/v1/G/form-builder/health",
+          "expectedStatus": [200, 204],
+          "announce": { "before": "Checking Form Builder service health", "after": "Form Builder healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/navigation/api/v1/G/health",
+          "expectedStatus": [200, 204],
+          "announce": { "before": "Checking Navigation service health", "after": "Navigation healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/datatable/api/v1/G/datatable/health",
+          "expectedStatus": [200, 204],
+          "announce": { "before": "Checking DataTable service health", "after": "DataTable healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/white-label/api/v1/G/white-label/health",
+          "expectedStatus": [200, 204],
+          "announce": { "before": "Checking White Label service health", "after": "White Label healthy" }
+        }
+      ]
+    },
+
+    "zmb-claims-portal": {
+      "name": "Claims Portal",
+      "description": "Verify claims portal loads at zorbit-claims.scalatics.com",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "https://zorbit-claims.scalatics.com",
+          "announce": { "before": "Opening Claims Portal" }
+        },
+        { "action": "wait", "timeout": 4000 },
+        {
+          "action": "assertVisible",
+          "selector": "body",
+          "timeout": 10000,
+          "announce": { "after": "Claims Portal responded" }
+        },
+        { "action": "screenshot", "value": "zmb-10-claims-portal.png" }
+      ]
+    },
+
+    "zmb-prospect-portal": {
+      "name": "Prospect Portal",
+      "description": "Verify prospect portal loads at zorbit-prospect.scalatics.com",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "https://zorbit-prospect.scalatics.com",
+          "announce": { "before": "Opening Prospect Portal" }
+        },
+        { "action": "wait", "timeout": 4000 },
+        {
+          "action": "assertVisible",
+          "selector": "body",
+          "timeout": 10000,
+          "announce": { "after": "Prospect Portal responded" }
+        },
+        { "action": "screenshot", "value": "zmb-11-prospect-portal.png" }
+      ]
+    },
+
+    "zmb-logout": {
+      "name": "Logout",
+      "description": "Clear session and return to login page",
+      "steps": [
+        {
+          "action": "javascript",
+          "value": "localStorage.removeItem('zorbit_token'); localStorage.removeItem('zorbit_user');",
+          "announce": { "before": "Clearing session" }
+        },
+        { "action": "navigate", "url": "/login" },
+        { "action": "wait", "timeout": 2000 },
+        {
+          "action": "waitForUrl",
+          "pattern": "/(login|signin|auth)",
+          "timeout": 15000,
+          "announce": { "after": "ZMB smoke test complete. Logged out." }
+        },
+        { "action": "screenshot", "value": "zmb-12-logged-out.png" }
+      ]
+    }
+
+  },
+
+  "journeys": {
+
+    "zmb-api-health": {
+      "name": "API Health",
+      "description": "Health check all ZMB platform service APIs",
+      "segments": ["zmb-api-health"]
+    },
+
+    "zmb-console-core": {
+      "name": "Console Core Features",
+      "description": "Login, check navigation, form builder, dev center, logout",
+      "segments": [
+        "zmb-login",
+        "zmb-nav-menu",
+        "zmb-form-builder",
+        "zmb-form-builder-detail",
+        "zmb-form-builder-tokens",
+        "zmb-dev-center",
+        "zmb-dev-center-guide",
+        "zmb-logout"
+      ]
+    },
+
+    "zmb-hi-quotation": {
+      "name": "HI Quotation Module",
+      "description": "Verify HI quotation wizard and list views",
+      "segments": [
+        "zmb-login",
+        "zmb-hi-quotation-list",
+        "zmb-hi-quotation-form",
+        "zmb-logout"
+      ]
+    },
+
+    "zmb-portals": {
+      "name": "External Portals",
+      "description": "Verify claims and prospect portals respond",
+      "segments": [
+        "zmb-claims-portal",
+        "zmb-prospect-portal"
+      ]
+    }
+
+  },
+
+  "bouquets": {
+
+    "zmb-smoke-test": {
+      "name": "ZMB Broad-Brush Smoke Test",
+      "description": "Full-coverage smoke test: APIs, console login, form builder, dev center, HI quotation, external portals",
+      "mode": "sequential",
+      "journeys": [
+        "zmb-api-health",
+        "zmb-console-core",
+        "zmb-hi-quotation",
+        "zmb-portals"
+      ]
+    },
+
+    "zmb-api-only": {
+      "name": "ZMB API Health Only",
+      "description": "Quick API health check without browser interactions",
+      "mode": "sequential",
+      "journeys": ["zmb-api-health"]
+    },
+
+    "zmb-console-only": {
+      "name": "ZMB Console Only",
+      "description": "Login, navigate, verify key pages, logout",
+      "mode": "sequential",
+      "journeys": ["zmb-console-core"]
+    }
+
+  }
+}

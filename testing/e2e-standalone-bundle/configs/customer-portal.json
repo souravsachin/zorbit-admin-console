@@ -1,0 +1,296 @@
+{
+  "baseUrl": "https://zorbit-customer.scalatics.com",
+  "viewport": { "width": 1440, "height": 900 },
+  "defaults": {
+    "timeout": 15000,
+    "waitAfterAction": 800,
+    "waitForNetworkIdle": false
+  },
+
+  "segments": {
+
+    "customer-login": {
+      "name": "Customer Login via Phone OTP",
+      "description": "Navigate to portal, enter phone, send OTP, verify with mock code",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/",
+          "announce": { "before": "Navigating to the Customer Portal login page" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertVisible",
+          "selector": "input[type='tel']",
+          "timeout": 15000,
+          "announce": { "after": "Phone login form is ready" }
+        },
+        {
+          "action": "screenshot",
+          "value": "customer-01-login.png",
+          "announce": { "after": "Captured login page" }
+        },
+        {
+          "action": "fill",
+          "selector": "input[type='tel']",
+          "value": "501234567",
+          "announce": { "before": "Entering phone number 501234567" }
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Send OTP')",
+          "announce": { "after": "Send OTP clicked" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertVisible",
+          "selector": "input[maxlength='6']",
+          "timeout": 15000,
+          "announce": { "after": "OTP input field is visible" }
+        },
+        {
+          "action": "fill",
+          "selector": "input[maxlength='6']",
+          "value": "123456",
+          "announce": { "before": "Entering mock OTP code 123456" }
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Verify')",
+          "force": true,
+          "announce": { "after": "OTP verification submitted" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "screenshot",
+          "value": "customer-02-verified.png",
+          "announce": { "after": "Customer login verified" }
+        }
+      ]
+    },
+
+    "customer-profiles": {
+      "name": "Profile Selection Grid",
+      "description": "Screenshot Netflix-style profile grid, select Ahmed Al Maktoum profile",
+      "steps": [
+        {
+          "action": "assertVisible",
+          "selector": "h1:has-text(\"Who's here?\")",
+          "timeout": 15000,
+          "announce": { "after": "Profile selection screen is visible" }
+        },
+        {
+          "action": "wait",
+          "timeout": 1000
+        },
+        {
+          "action": "screenshot",
+          "value": "customer-03-profiles-grid.png",
+          "announce": { "after": "Captured Netflix-style profile selection grid with 3 family members" }
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Ahmed Al Maktoum')",
+          "announce": { "before": "Selecting Ahmed Al Maktoum (Sponsor) profile" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "screenshot",
+          "value": "customer-04-profile-selected.png",
+          "announce": { "after": "Ahmed Al Maktoum profile selected, dashboard loading" }
+        }
+      ]
+    },
+
+    "customer-dashboard": {
+      "name": "Customer Dashboard",
+      "description": "Screenshot the welcome banner and feature tiles on the dashboard",
+      "steps": [
+        {
+          "action": "assertVisible",
+          "selector": "h1:has-text('Welcome back')",
+          "timeout": 15000,
+          "announce": { "after": "Customer dashboard is loaded with welcome banner" }
+        },
+        {
+          "action": "wait",
+          "timeout": 1500
+        },
+        {
+          "action": "screenshot",
+          "value": "customer-05-dashboard.png",
+          "announce": { "after": "Captured dashboard with welcome banner, policy card, and Quick Actions tiles" }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "h2:has-text('Quick Actions')",
+          "timeout": 10000,
+          "announce": { "after": "Quick Actions tiles are visible on the dashboard" }
+        },
+        {
+          "action": "screenshot",
+          "value": "customer-06-dashboard-tiles.png",
+          "announce": { "after": "Captured the Quick Actions grid with 9 feature tiles" }
+        }
+      ]
+    },
+
+    "customer-policies": {
+      "name": "My Policies Page",
+      "description": "Click My Policies tile, screenshot policy details",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "button:has-text('My Policies')",
+          "announce": { "before": "Clicking My Policies tile" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertVisible",
+          "selector": "h1:has-text('My Policies')",
+          "timeout": 15000,
+          "announce": { "after": "Policy details page is visible" }
+        },
+        {
+          "action": "screenshot",
+          "value": "customer-07-policies.png",
+          "announce": { "after": "Captured policy details page with coverage, members, and benefits" }
+        }
+      ]
+    },
+
+    "customer-coming-soon": {
+      "name": "Claims Coming Soon Page",
+      "description": "Click Claims tile, screenshot Coming Soon page, go back to dashboard",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Back to Dashboard')",
+          "announce": { "before": "Navigating back to dashboard" }
+        },
+        {
+          "action": "wait",
+          "timeout": 1500
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Claims')",
+          "announce": { "before": "Clicking Claims tile" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertVisible",
+          "selector": "h1:has-text('Claims')",
+          "timeout": 15000,
+          "announce": { "after": "Claims page is displayed" }
+        },
+        {
+          "action": "screenshot",
+          "value": "customer-08-claims-coming-soon.png",
+          "announce": { "after": "Captured Claims page showing Coming Soon status" }
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Back'), a:has-text('Back'), button:has-text('Dashboard')",
+          "announce": { "before": "Going back to dashboard" }
+        },
+        {
+          "action": "wait",
+          "timeout": 1500
+        }
+      ]
+    },
+
+    "customer-switch-profile": {
+      "name": "Switch to Fatima Profile",
+      "description": "Click profile menu, switch to Fatima, screenshot updated dashboard",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "button:has-text('Ahmed')",
+          "announce": { "before": "Opening profile dropdown menu" }
+        },
+        {
+          "action": "wait",
+          "timeout": 1000
+        },
+        {
+          "action": "screenshot",
+          "value": "customer-09-profile-menu.png",
+          "announce": { "after": "Profile dropdown opened with Switch Profile and Sign Out options" }
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Switch Profile')",
+          "announce": { "before": "Clicking Switch Profile to change family member" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Fatima Al Maktoum')",
+          "announce": { "before": "Switching to Fatima Al Maktoum (Spouse) profile" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertVisible",
+          "selector": "h1:has-text('Welcome back')",
+          "timeout": 15000,
+          "announce": { "after": "Dashboard updated for Fatima profile" }
+        },
+        {
+          "action": "screenshot",
+          "value": "customer-10-fatima-dashboard.png",
+          "announce": { "after": "Captured Fatima's dashboard after profile switch" }
+        }
+      ]
+    }
+  },
+
+  "journeys": {
+    "customer-flow": {
+      "name": "Complete Customer Portal Flow",
+      "description": "End-to-end customer journey: login, profile select, dashboard, policies, claims, profile switch",
+      "segments": [
+        "customer-login",
+        "customer-profiles",
+        "customer-dashboard",
+        "customer-policies",
+        "customer-coming-soon",
+        "customer-switch-profile"
+      ]
+    }
+  },
+
+  "bouquets": {
+    "customer-demo": {
+      "name": "Customer Portal - Demo Flow",
+      "description": "Full customer portal journey from OTP login through profile switching",
+      "mode": "sequential",
+      "journeys": ["customer-flow"]
+    }
+  }
+}

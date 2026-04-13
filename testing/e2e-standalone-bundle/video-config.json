@@ -1,0 +1,90 @@
+{
+  "branding": {
+    "platform": "ZORBIT PLATFORM",
+    "demo": "Zorbit Platform",
+    "bgColor": "#1e3a5f",
+    "titleColor": "#ffffff",
+    "subtitleColor": "#8ab4d6",
+    "accentColor": "#3b82f6",
+    "counterColor": "#4b7baa"
+  },
+  "tts": {
+    "engine": "edge-tts",
+    "voice": "en-US-AriaNeural",
+    "rate": "+15%",
+    "fallback": ["piper", "say"]
+  },
+  "titleSlide": {
+    "minDuration": 4,
+    "matchNarration": true,
+    "extraBuffer": 1
+  },
+  "preSubmitPause": 1.5,
+  "journeys": [
+    {
+      "id": "setup",
+      "title": "Organization Setup",
+      "subtitle": "Create org, roles & users",
+      "narration": "Setting up the organization, creating roles for team members, and onboarding users onto the platform.",
+      "titleDurationOverride": null
+    },
+    {
+      "id": "pcg4",
+      "title": "Product Configuration",
+      "subtitle": "PCG4 8-step wizard",
+      "narration": "Configuring the health insurance product using the PCG4 eight-step wizard. We define insurer details, plans, encounters, benefits, and publish.",
+      "titleDurationOverride": null
+    },
+    {
+      "id": "pricing",
+      "title": "Product Pricing",
+      "subtitle": "Rate tables & premium lookup",
+      "narration": "Reviewing the rate tables imported from the product rate card, covering regional networks with age and gender-based pricing.",
+      "titleDurationOverride": null
+    },
+    {
+      "id": "quotation",
+      "title": "Health Insurance Application",
+      "subtitle": "UAE quotation with PII protection",
+      "narration": "Creating a new UAE health insurance application. We fill in proposer details, add family members, and submit for underwriting.",
+      "titleDurationOverride": null
+    },
+    {
+      "id": "underwriting",
+      "title": "Underwriting Workflow",
+      "subtitle": "Queue routing, approve & issue policy",
+      "narration": "The underwriting workflow. Finding the application in the queue, approving it, generating the payment link, and issuing the policy certificate.",
+      "titleDurationOverride": null
+    },
+    {
+      "id": "decisioning",
+      "title": "HI UW AE Decisioning",
+      "subtitle": "Automated rules & STP evaluation",
+      "narration": "Reviewing the AI decisioning engine. Automated rules evaluate applications for straight-through processing or manual review.",
+      "titleDurationOverride": null
+    },
+    {
+      "id": "policy",
+      "title": "Policy Issuance",
+      "subtitle": "Certificate verification & PDF download",
+      "narration": "Finally, verifying the issued policy. The certificate is generated as a professional PDF document, ready for the policyholder.",
+      "titleDurationOverride": null
+    },
+    {
+      "id": "prospect-flow",
+      "aliases": ["Complete_Prospect_Quote_Flow"],
+      "title": "Prospect Portal",
+      "subtitle": "Get a health insurance quote online",
+      "narration": "The Prospect Portal. A customer visits the landing page, verifies their identity via phone OTP, fills out an application with proposer details, selects a plan, and receives an instant premium quote.",
+      "titleDurationOverride": null
+    },
+    {
+      "id": "customer-flow",
+      "aliases": ["Complete_Customer_Portal_Flow"],
+      "title": "Customer Portal",
+      "subtitle": "Policy holder self-service dashboard",
+      "narration": "The Customer Portal. A policyholder logs in via phone OTP, selects a family profile, views the dashboard with policy details and quick actions, checks policy coverage, and switches between family member profiles.",
+      "titleDurationOverride": null
+    }
+  ]
+}
