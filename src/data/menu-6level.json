@@ -682,16 +682,16 @@
                     ]
                   },
                   {
-                    "id": "biz-dist-pas-retail-hi-decisioning",
-                    "label": "HI UW AE Decisioning",
+                    "id": "biz-dist-pas-retail-hi-uw-decisioning",
+                    "label": "HI UW Decisioning",
                     "icon": "Scale",
                     "route": null,
                     "level": 5,
                     "children": [
-                      { "id": "biz-dist-pas-retail-hi-dec-guide", "label": "Guide", "icon": "BookOpen", "route": "/hi-decisioning/guide", "level": 6, "children": [] },
-                      { "id": "biz-dist-pas-retail-hi-dec-setup", "label": "Setup", "icon": "Settings", "route": "/hi-decisioning/setup", "level": 6, "children": [] },
-                      { "id": "biz-dist-pas-retail-hi-dec-deployments", "label": "Deployments", "icon": "Rocket", "route": "/hi-decisioning/deployments", "level": 6, "children": [] },
-                      { "id": "biz-dist-pas-retail-hi-dec-list", "label": "Decision Queue", "icon": "List", "route": "/hi-decisioning", "level": 6, "children": [] }
+                      { "id": "biz-dist-pas-retail-hi-dec-guide", "label": "Guide", "icon": "BookOpen", "route": "/hi-uw-decisioning/guide", "level": 6, "children": [] },
+                      { "id": "biz-dist-pas-retail-hi-dec-setup", "label": "Setup", "icon": "Settings", "route": "/hi-uw-decisioning/setup", "level": 6, "children": [] },
+                      { "id": "biz-dist-pas-retail-hi-dec-deployments", "label": "Deployments", "icon": "Rocket", "route": "/hi-uw-decisioning/deployments", "level": 6, "children": [] },
+                      { "id": "biz-dist-pas-retail-hi-dec-list", "label": "Decision Queue", "icon": "List", "route": "/hi-uw-decisioning", "level": 6, "children": [] }
                     ]
                   }
                 ]

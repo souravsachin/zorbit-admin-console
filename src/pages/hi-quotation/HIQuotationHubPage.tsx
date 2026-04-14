@@ -471,7 +471,7 @@ const HIQuotationHubPage: React.FC = () => {
         {
           icon: Shield,
           title: 'Underwriting Integration',
-          description: 'Seamless handoff to UW Workflow and HI Decisioning for automated and manual underwriting evaluation.',
+          description: 'Seamless handoff to UW Workflow and HI UW Decisioning for automated and manual underwriting evaluation.',
         },
         {
           icon: MapPin,
@@ -514,7 +514,7 @@ const HIQuotationHubPage: React.FC = () => {
       faqs={[
         { question: 'Which regions are supported?', answer: 'Currently India, UAE, and US. Each region has dedicated application forms with region-specific fields and compliance rules.' },
         { question: 'How is PII protected?', answer: 'All personally identifiable information (name, email, phone, address) is tokenized through the Zorbit PII Vault. Only PII tokens are stored in the quotation database.' },
-        { question: 'What happens after submission?', answer: 'The application is routed to the UW Workflow module for underwriting evaluation. HI Decisioning rules are applied automatically.' },
+        { question: 'What happens after submission?', answer: 'The application is routed to the UW Workflow module for underwriting evaluation. HI UW Decisioning rules are applied automatically.' },
         { question: 'Can applications be saved as drafts?', answer: 'Yes. The smart form auto-saves progress. Users can return to complete the application at any time.' },
       ]}
       resources={[

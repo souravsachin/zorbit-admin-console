@@ -70,6 +70,7 @@ const ArchitecturePage = lazyWithRetry(() => import('./pages/dev-center/Architec
 import DashboardViewPage from './pages/DashboardView/DashboardViewPage';
 import DashboardDesignerPage from './pages/DashboardDesigner/DashboardDesignerPage';
 import DataTableDemoPage from './pages/data-table-demo/DataTableDemoPage';
+const DataTableSetupPage = lazyWithRetry(() => import('./pages/data-table-demo/DataTableSetupPage'));
 import StepperDemoPage from './pages/stepper-demo/StepperDemoPage';
 import TreePickerDemoPage from './pages/tree-picker-demo/TreePickerDemoPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -177,6 +178,10 @@ const PolicyIssuanceSetupPage = lazyWithRetry(() => import('./pages/policy-issua
 const PolicyIssuanceDeploymentsPage = lazyWithRetry(() => import('./pages/policy-issuance/PolicyIssuanceDeploymentsPage'));
 const DocumentManagementSetupPage = lazyWithRetry(() => import('./pages/document-management/DocumentManagementSetupPage'));
 const DocumentManagementDeploymentsPage = lazyWithRetry(() => import('./pages/document-management/DocumentManagementDeploymentsPage'));
+
+// PFS Module Setup Pages
+const WhiteLabelSetupPage = lazyWithRetry(() => import('./pages/white-label/WhiteLabelSetupPage'));
+const DocGeneratorSetupPage = lazyWithRetry(() => import('./pages/doc-generator/DocGeneratorSetupPage'));
 
 // Module Hub Pages — Platform Core
 const IdentityHubPage = lazyWithRetry(() => import('./pages/identity/IdentityHubPage'));
@@ -540,8 +545,8 @@ function PageRoutes() {
       <Route path="hi-quotation/deployments" element={<SafeLazy><HIQuotationDeploymentsPage /></SafeLazy>} />
       <Route path="uw-workflow/setup" element={<SafeLazy><UWWorkflowSetupPage /></SafeLazy>} />
       <Route path="uw-workflow/deployments" element={<SafeLazy><UWWorkflowDeploymentsPage /></SafeLazy>} />
-      <Route path="hi-decisioning/setup" element={<SafeLazy><HIDecisioningSetupPage /></SafeLazy>} />
-      <Route path="hi-decisioning/deployments" element={<SafeLazy><HIDecisioningDeploymentsPage /></SafeLazy>} />
+      <Route path="hi-uw-decisioning/setup" element={<SafeLazy><HIDecisioningSetupPage /></SafeLazy>} />
+      <Route path="hi-uw-decisioning/deployments" element={<SafeLazy><HIDecisioningDeploymentsPage /></SafeLazy>} />
       <Route path="mi-quotation/setup" element={<SafeLazy><MIQuotationSetupPage /></SafeLazy>} />
       <Route path="mi-quotation/deployments" element={<SafeLazy><MIQuotationDeploymentsPage /></SafeLazy>} />
       <Route path="fee-management/setup" element={<SafeLazy><FeeManagementSetupPage /></SafeLazy>} />
@@ -559,11 +564,11 @@ function PageRoutes() {
       <Route path="uw-workflow/hub" element={<SafeLazy><UWWorkflowHubPage /></SafeLazy>} />
       <Route path="uw-workflow/help" element={<SafeLazy><UWWorkflowHelpPage /></SafeLazy>} />
       <Route path="uw-workflow/*" element={<SafeLazy><UWWorkflowPage /></SafeLazy>} />
-      <Route path="hi-decisioning" element={<SafeLazy><HIDecisioningPage /></SafeLazy>} />
-      <Route path="hi-decisioning/guide/*" element={<SafeLazy><HIDecisioningHubPage /></SafeLazy>} />
-      <Route path="hi-decisioning/hub" element={<SafeLazy><HIDecisioningHubPage /></SafeLazy>} />
-      <Route path="hi-decisioning/help" element={<SafeLazy><HIDecisioningHelpPage /></SafeLazy>} />
-      <Route path="hi-decisioning/*" element={<SafeLazy><HIDecisioningPage /></SafeLazy>} />
+      <Route path="hi-uw-decisioning" element={<SafeLazy><HIDecisioningPage /></SafeLazy>} />
+      <Route path="hi-uw-decisioning/guide/*" element={<SafeLazy><HIDecisioningHubPage /></SafeLazy>} />
+      <Route path="hi-uw-decisioning/hub" element={<SafeLazy><HIDecisioningHubPage /></SafeLazy>} />
+      <Route path="hi-uw-decisioning/help" element={<SafeLazy><HIDecisioningHelpPage /></SafeLazy>} />
+      <Route path="hi-uw-decisioning/*" element={<SafeLazy><HIDecisioningPage /></SafeLazy>} />
       <Route path="hi-quotation" element={<SafeLazy><HIQuotationPage /></SafeLazy>} />
       <Route path="hi-quotation/guide/*" element={<SafeLazy><HIQuotationHubPage /></SafeLazy>} />
       <Route path="hi-quotation/hub" element={<SafeLazy><HIQuotationHubPage /></SafeLazy>} />
@@ -691,6 +696,10 @@ function PageRoutes() {
       <Route path="document-management/setup" element={<SafeLazy><DocumentManagementSetupPage /></SafeLazy>} />
       <Route path="document-management/deployments" element={<SafeLazy><DocumentManagementDeploymentsPage /></SafeLazy>} />
 
+      {/* PFS Module Setup */}
+      <Route path="white-label/setup" element={<SafeLazy><WhiteLabelSetupPage /></SafeLazy>} />
+      <Route path="doc-generator/setup" element={<SafeLazy><DocGeneratorSetupPage /></SafeLazy>} />
+
       {/* Broker Dashboard */}
       <Route path="broker/dashboard" element={<SafeLazy><BrokerDashboardPage /></SafeLazy>} />
 
@@ -720,6 +729,7 @@ function PageRoutes() {
       <Route path="demo-training/segments/new" element={<DemoSegmentEditor />} />
       <Route path="demo-training/segments/:id/edit" element={<DemoSegmentEditor />} />
       <Route path="data-table-demo" element={<DataTableDemoPage />} />
+      <Route path="data-table-demo/setup" element={<SafeLazy><DataTableSetupPage /></SafeLazy>} />
       <Route path="stepper-demo" element={<StepperDemoPage />} />
       <Route path="tree-picker-demo" element={<TreePickerDemoPage />} />
 

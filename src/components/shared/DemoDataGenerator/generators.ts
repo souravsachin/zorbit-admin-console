@@ -165,7 +165,7 @@ export function generateHIQuotationPreview(
 }
 
 // ---------------------------------------------------------------------------
-// HI Decisioning generator
+// HI UW Decisioning generator
 // ---------------------------------------------------------------------------
 
 export function generateHIDecisioningPreview(

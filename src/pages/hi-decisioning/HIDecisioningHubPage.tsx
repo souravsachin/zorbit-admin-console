@@ -17,10 +17,10 @@ import { ModuleHubPage } from '../../components/shared/ModuleHubPage';
 const HIDecisioningHubPage: React.FC = () => {
   return (
     <ModuleHubPage
-      moduleId="hi-decisioning"
-      moduleName="HI Decisioning"
+      moduleId="hi-uw-decisioning"
+      moduleName="HI UW Decisioning"
       moduleDescription="Underwriting Rules Engine &mdash; 15 Rules, 11 Action Types"
-      moduleIntro="HI Decisioning is the automated underwriting rules engine for health insurance. It evaluates applications against 15 configurable rules with 11 action types including approve, decline, load premium, exclude condition, and refer to specialist. Rules support per-member evaluation for family policies, condition builders with AND/OR logic, and priority-based execution order."
+      moduleIntro="HI UW Decisioning is the automated underwriting rules engine for health insurance. It evaluates applications against 15 configurable rules with 11 action types including approve, decline, load premium, exclude condition, and refer to specialist. Rules support per-member evaluation for family policies, condition builders with AND/OR logic, and priority-based execution order."
       icon={Zap}
       capabilities={[
         {
@@ -69,8 +69,8 @@ const HIDecisioningHubPage: React.FC = () => {
       ]}
       recordings={[
         {
-          file: 'hi-decisioning-overview.mp4',
-          title: 'HI Decisioning Overview',
+          file: 'hi-uw-decisioning-overview.mp4',
+          title: 'HI UW Decisioning Overview',
           thumbnail: '',
           timestamp: '2026-03-18',
           duration: 120,
@@ -83,8 +83,8 @@ const HIDecisioningHubPage: React.FC = () => {
           ],
         },
       ]}
-      videosBaseUrl="/demos/hi-decisioning/"
-      swaggerUrl="/api/hi-decisioning/api-docs"
+      videosBaseUrl="/demos/hi-uw-decisioning/"
+      swaggerUrl="/api/hi-uw-decisioning/api-docs"
       faqs={[
         { question: 'What are the 15 rules?', answer: 'Age limit, BMI threshold, pre-existing condition exclusion, occupation hazard loading, geographic restriction, sum insured cap, family size loading, smoker loading, pregnancy waiting period, chronic condition sub-limit, adventure sports exclusion, senior citizen loading, NRI surcharge, group size discount, and loyalty discount.' },
         { question: 'How does per-member evaluation work?', answer: 'For family policies, each insured member is evaluated independently. A family of 4 generates 4 separate evaluation passes, each with their own loadings and exclusions.' },
@@ -92,7 +92,7 @@ const HIDecisioningHubPage: React.FC = () => {
         { question: 'How are conflicting rules handled?', answer: 'Rules execute in priority order (lowest number = highest priority). Terminal actions (approve/decline) stop execution. Non-terminal actions (loading, exclusion) accumulate.' },
       ]}
       resources={[
-        { label: 'HI Decisioning API (Swagger)', url: 'https://scalatics.com:3116/api', icon: FileText },
+        { label: 'HI UW Decisioning API (Swagger)', url: 'https://scalatics.com:3116/api', icon: FileText },
         { label: 'UW Workflow Integration', url: '/uw-workflow', icon: Shield },
         { label: 'Rule Condition Reference', url: '#', icon: Code },
       ]}

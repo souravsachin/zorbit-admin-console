@@ -157,6 +157,7 @@ const Step8_ReviewPublish: React.FC<StepProps> = ({
               key={tab}
               type="button"
               onClick={() => setActiveTab(tab)}
+              data-testid={`pcg4-step8-tab-${tab}`}
               className={`flex-1 px-3 py-2.5 text-xs font-medium border-b-2 -mb-px transition capitalize ${
                 activeTab === tab
                   ? 'border-orange-500 text-orange-600'
@@ -365,6 +366,7 @@ const Step8_ReviewPublish: React.FC<StepProps> = ({
                         target_environment: e.target.value as PublishSettings['target_environment'],
                       }))
                     }
+                    data-testid="pcg4-step8-env-select"
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm dark:bg-gray-800 dark:text-gray-100"
                   >
                     <option value="staging">Staging Environment</option>
@@ -397,6 +399,7 @@ const Step8_ReviewPublish: React.FC<StepProps> = ({
                   onChange={(e) =>
                     setPublishSettings((prev) => ({ ...prev, notes: e.target.value }))
                   }
+                  data-testid="pcg4-step8-notes"
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm dark:bg-gray-800 dark:text-gray-100"
                 />
               </div>
@@ -422,6 +425,7 @@ const Step8_ReviewPublish: React.FC<StepProps> = ({
             type="button"
             onClick={handleSaveDraft}
             disabled={saving}
+            data-testid="pcg4-step8-save-draft"
             className="px-4 py-2 text-sm font-medium border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50"
           >
             {saving ? 'Saving...' : 'Save as Draft'}
@@ -430,6 +434,7 @@ const Step8_ReviewPublish: React.FC<StepProps> = ({
             type="button"
             onClick={handleSubmitReview}
             disabled={!canPublish || saving}
+            data-testid="pcg4-step8-submit-review"
             className="px-4 py-2 text-sm font-medium border border-blue-500 text-blue-600 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/20 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Submit for Review
@@ -438,6 +443,7 @@ const Step8_ReviewPublish: React.FC<StepProps> = ({
             type="button"
             onClick={handlePublish}
             disabled={!canPublish || saving}
+            data-testid="pcg4-step8-publish"
             className="px-4 py-2 text-sm font-medium bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
           >
             {saving ? (

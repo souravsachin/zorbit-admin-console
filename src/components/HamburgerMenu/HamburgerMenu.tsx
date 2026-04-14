@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from 'react';
+import SidebarSwitcher from '../layout/SidebarSwitcher';
+import type { MenuStyle } from '../../hooks/useMenuPreference';
 import { Link, useLocation } from 'react-router-dom';
 import {
   ChevronRight,
@@ -111,7 +113,7 @@ const SECTION_COLORS: Record<string, { light: string; dark: string; border: stri
   'support center':   { light: '#a855f7', dark: '#c084fc', border: '#a855f7', bg: 'rgba(168,85,247,0.08)',darkBg: 'rgba(168,85,247,0.15)' },
   'hi quotation':      { light: '#22c55e', dark: '#4ade80', border: '#22c55e', bg: 'rgba(34,197,94,0.08)',  darkBg: 'rgba(34,197,94,0.15)' },
   'uw workflow':       { light: '#f97316', dark: '#fb923c', border: '#f97316', bg: 'rgba(249,115,22,0.08)', darkBg: 'rgba(249,115,22,0.15)' },
-  'hi decisioning':    { light: '#8b5cf6', dark: '#a78bfa', border: '#8b5cf6', bg: 'rgba(139,92,246,0.08)', darkBg: 'rgba(139,92,246,0.15)' },
+  'hi uw decisioning': { light: '#8b5cf6', dark: '#a78bfa', border: '#8b5cf6', bg: 'rgba(139,92,246,0.08)', darkBg: 'rgba(139,92,246,0.15)' },
   'motor insurance':   { light: '#3b82f6', dark: '#60a5fa', border: '#3b82f6', bg: 'rgba(59,130,246,0.08)', darkBg: 'rgba(59,130,246,0.15)' },
   'mi quotation':      { light: '#3b82f6', dark: '#60a5fa', border: '#3b82f6', bg: 'rgba(59,130,246,0.08)', darkBg: 'rgba(59,130,246,0.15)' },
   claims:             { light: '#ef4444', dark: '#f87171', border: '#ef4444', bg: 'rgba(239,68,68,0.08)',  darkBg: 'rgba(239,68,68,0.15)' },
@@ -333,9 +335,11 @@ interface HamburgerMenuProps {
   isOverlay: boolean;
   prefs: import('../../services/preferences').UserPreferences;
   updatePrefs: (partial: Partial<import('../../services/preferences').UserPreferences>) => void;
+  menuStyle?: MenuStyle;
+  onToggleMenuStyle?: () => void;
 }
 
-const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ open, onClose, isOverlay, prefs, updatePrefs }) => {
+const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ open, onClose, isOverlay, prefs, updatePrefs, menuStyle = 'classic', onToggleMenuStyle }) => {
   const { user, orgId } = useAuth();
   const location = useLocation();
   const {
@@ -418,11 +422,14 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ open, onClose, isOverlay,
         <div className="flex flex-col h-full" style={{ width: 240, minWidth: 240 }}>
 
           {/* Header: Logo */}
-          <div className={`flex items-center h-14 ${ICON_LEFT_PAD} border-b border-gray-100 dark:border-gray-800 shrink-0`}>
+          <div className={`flex items-center h-14 ${ICON_LEFT_PAD} pr-3 border-b border-gray-100 dark:border-gray-800 shrink-0 gap-2`}>
             <div className="w-7 h-7 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center shrink-0 shadow-sm">
               <span className="text-white font-bold text-xs">Z</span>
             </div>
-            <span className={`font-bold text-lg ${TEXT_LEFT_GAP} whitespace-nowrap bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent dark:from-primary-400 dark:to-primary-300`}>Zorbit</span>
+            <span className={`font-bold text-lg ${TEXT_LEFT_GAP} whitespace-nowrap flex-1 bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent dark:from-primary-400 dark:to-primary-300`}>Zorbit</span>
+            {onToggleMenuStyle && (
+              <SidebarSwitcher menuStyle={menuStyle} onToggle={onToggleMenuStyle} compact={true} />
+            )}
           </div>
 
           {/* User profile */}

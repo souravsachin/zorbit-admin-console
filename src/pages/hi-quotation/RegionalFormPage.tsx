@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/useAuth';
+import { API_CONFIG } from '../../config';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -77,6 +78,7 @@ interface RegionalFormPageProps {
 }
 
 const FORM_BUILDER_API = '/api/form-builder';
+const HI_QUOTATION_API = API_CONFIG.HI_QUOTATION_URL;
 
 /* ------------------------------------------------------------------ */
 /*  Field Renderer                                                     */
@@ -435,6 +437,8 @@ const RegionalFormPage: React.FC<RegionalFormPageProps> = ({
   const [formData, setFormData] = useState<Record<string, unknown>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [quotationNumber, setQuotationNumber] = useState<string | null>(null);
+  const [quotationHashId, setQuotationHashId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchForm = async () => {
@@ -465,11 +469,86 @@ const RegionalFormPage: React.FC<RegionalFormPageProps> = ({
   const handleSubmit = async () => {
     setSubmitting(true);
     try {
-      // Start a form submission
+      // 1. Persist form data in form_builder (data persistence)
       await api.post(
         `${FORM_BUILDER_API}/api/v1/O/${orgId}/form-builder/forms/${formSlug}/submissions`,
         { data: formData },
       );
+
+      // 2. Create a quotation in hi_quotation backend
+      const quotationBody = {
+        region: (formData.region as string) || regionName || 'UAE',
+        quotationType: (formData.quotationType as string) || 'retail',
+        productHashId: formData.productCode as string || undefined,
+        productName: formData.productName as string || formData.product as string || undefined,
+        variantName: formData.networkPlan as string || formData.network as string || undefined,
+        planType: formData.planType as string || formData.coverType as string || undefined,
+        source: 'portal',
+        proposer: {
+          firstName: formData.proposerFirstName as string || formData.firstName as string || undefined,
+          lastName: formData.proposerLastName as string || formData.lastName as string || undefined,
+          email: formData.proposerEmail as string || formData.email as string || undefined,
+          mobile: formData.proposerMobile as string || formData.phone as string || formData.mobile as string || undefined,
+          dateOfBirth: formData.proposerDob as string || formData.dateOfBirth as string || undefined,
+          nationality: formData.proposerNationality as string || formData.nationality as string || undefined,
+          emiratesId: formData.emiratesId as string || undefined,
+          passportNumber: formData.passportNumber as string || undefined,
+        },
+      };
+
+      const createRes = await api.post(
+        `${HI_QUOTATION_API}/api/v1/O/${orgId}/hi-quotation/quotations`,
+        quotationBody,
+      );
+      const qtHashId = createRes.data?.hashId;
+      const qtNumber = createRes.data?.quotationNumber;
+      setQuotationHashId(qtHashId);
+      setQuotationNumber(qtNumber);
+
+      // 3. Add members from the datagrid (try common field keys)
+      const membersData = (formData.members || formData.insuredMembers || formData.memberDetails) as
+        Array<Record<string, unknown>> | undefined;
+
+      if (qtHashId && membersData && Array.isArray(membersData) && membersData.length > 0) {
+        for (let i = 0; i < membersData.length; i++) {
+          const m = membersData[i];
+          const memberBody = {
+            relationship: (m.relationship as string) || (i === 0 ? 'self' : 'dependent'),
+            personalDetails: {
+              firstName: m.firstName as string || m.memberName as string || undefined,
+              lastName: m.lastName as string || undefined,
+              dateOfBirth: m.dateOfBirth as string || m.dob as string || undefined,
+              gender: m.gender as string || undefined,
+              nationality: m.nationality as string || undefined,
+              emiratesId: m.emiratesId as string || undefined,
+              passportNumber: m.passportNumber as string || undefined,
+              height: m.height ? Number(m.height) : undefined,
+              weight: m.weight ? Number(m.weight) : undefined,
+              maritalStatus: m.maritalStatus as string || undefined,
+            },
+          };
+          try {
+            await api.post(
+              `${HI_QUOTATION_API}/api/v1/O/${orgId}/hi-quotation/quotations/${qtHashId}/members`,
+              memberBody,
+            );
+          } catch (memberErr) {
+            console.warn(`Failed to add member ${i}`, memberErr);
+          }
+        }
+      }
+
+      // 4. Submit quotation for underwriting
+      if (qtHashId) {
+        try {
+          await api.post(
+            `${HI_QUOTATION_API}/api/v1/O/${orgId}/hi-quotation/quotations/${qtHashId}/submit`,
+          );
+        } catch (submitErr) {
+          console.warn('Quotation created but submit-for-UW failed (non-blocking)', submitErr);
+        }
+      }
+
       setSubmitted(true);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Submission failed');
@@ -512,8 +591,20 @@ const RegionalFormPage: React.FC<RegionalFormPageProps> = ({
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
             Application Submitted
           </h2>
+          {quotationNumber && (
+            <div className="mb-4 inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-lg border border-green-200 dark:border-green-800">
+              <FileText className="w-4 h-4 text-fuchsia-500" />
+              <span className="text-sm font-mono font-semibold text-gray-900 dark:text-white">
+                {quotationNumber}
+              </span>
+              {quotationHashId && (
+                <span className="text-xs text-gray-400 font-mono">({quotationHashId})</span>
+              )}
+            </div>
+          )}
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-            Your {regionName} health insurance application has been submitted successfully.
+            Your {regionName} health insurance application has been submitted successfully
+            {quotationNumber ? ' and sent for underwriting review' : ''}.
             PII fields have been tokenized and stored securely.
           </p>
           <div className="flex items-center justify-center gap-4">
@@ -575,6 +666,7 @@ const RegionalFormPage: React.FC<RegionalFormPageProps> = ({
             return (
               <button
                 key={panel.key}
+                data-testid={`hiq-form-step-${idx}`}
                 onClick={() => setCurrentStep(idx)}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
                   isActive
@@ -634,6 +726,7 @@ const RegionalFormPage: React.FC<RegionalFormPageProps> = ({
       {/* Navigation Buttons */}
       <div className="flex items-center justify-between">
         <button
+          data-testid="hiq-form-prev"
           onClick={() => setCurrentStep((s) => Math.max(0, s - 1))}
           disabled={isFirstStep}
           className="flex items-center gap-2 px-4 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/30 disabled:opacity-30"
@@ -648,6 +741,7 @@ const RegionalFormPage: React.FC<RegionalFormPageProps> = ({
 
         {isLastStep ? (
           <button
+            data-testid="hiq-form-submit"
             onClick={handleSubmit}
             disabled={submitting}
             className="flex items-center gap-2 px-5 py-2 text-sm rounded-lg bg-fuchsia-600 text-white hover:bg-fuchsia-700 disabled:opacity-50"
@@ -661,6 +755,7 @@ const RegionalFormPage: React.FC<RegionalFormPageProps> = ({
           </button>
         ) : (
           <button
+            data-testid="hiq-form-next"
             onClick={() => setCurrentStep((s) => Math.min(panels.length - 1, s + 1))}
             className="flex items-center gap-2 px-4 py-2 text-sm rounded-lg bg-fuchsia-600 text-white hover:bg-fuchsia-700"
           >

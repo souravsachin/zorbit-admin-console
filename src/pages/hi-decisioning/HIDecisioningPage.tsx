@@ -66,12 +66,12 @@ interface HealthStatus {
 /* ------------------------------------------------------------------ */
 
 const TABS = [
-  { key: 'overview', label: 'Overview', path: '/hi-decisioning', icon: Scale },
-  { key: 'rules', label: 'Rules', path: '/hi-decisioning/rules', icon: BookOpen },
-  { key: 'loading-tables', label: 'Loading Tables', path: '/hi-decisioning/loading-tables', icon: BarChart3 },
-  { key: 'stp-criteria', label: 'STP Criteria', path: '/hi-decisioning/stp-criteria', icon: Shield },
-  { key: 'evaluations', label: 'Evaluations', path: '/hi-decisioning/evaluations', icon: Activity },
-  { key: 'fields', label: 'Fields', path: '/hi-decisioning/fields', icon: Code },
+  { key: 'overview', label: 'Overview', path: '/hi-uw-decisioning', icon: Scale },
+  { key: 'rules', label: 'Rules', path: '/hi-uw-decisioning/rules', icon: BookOpen },
+  { key: 'loading-tables', label: 'Loading Tables', path: '/hi-uw-decisioning/loading-tables', icon: BarChart3 },
+  { key: 'stp-criteria', label: 'STP Criteria', path: '/hi-uw-decisioning/stp-criteria', icon: Shield },
+  { key: 'evaluations', label: 'Evaluations', path: '/hi-uw-decisioning/evaluations', icon: Activity },
+  { key: 'fields', label: 'Fields', path: '/hi-uw-decisioning/fields', icon: Code },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -79,24 +79,24 @@ const TABS = [
 /* ------------------------------------------------------------------ */
 
 const API_ENDPOINTS = [
-  { method: 'GET', path: '/api/v1/G/hi-decisioning/health', description: 'Service health check' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-decisioning/rules', description: 'List all rules' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-decisioning/rules', description: 'Create a rule' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-decisioning/rules/export', description: 'Export rules as JSON' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-decisioning/rules/:hashId', description: 'Get rule by ID' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-decisioning/rules/import', description: 'Import rules from JSON' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-decisioning/rules/load-preset', description: 'Load preset STP/NSTP rules (15 rules)' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-decisioning/evaluate/:quotationHashId', description: 'Evaluate quotation against rules' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-decisioning/evaluations', description: 'List evaluation history' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-decisioning/evaluations/:hashId', description: 'Get evaluation details' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-decisioning/available-fields', description: 'Available fields for rule conditions' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-decisioning/loading-tables', description: 'List loading tables' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-decisioning/loading-tables', description: 'Create loading table' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-decisioning/loading-tables/seed-defaults', description: 'Seed BMI + age defaults' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-decisioning/stp-criteria', description: 'List STP criteria' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-decisioning/stp-criteria', description: 'Create STP criteria' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-decisioning/stp-criteria/seed-defaults', description: 'Seed default STP criteria' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-decisioning/stp-criteria/check', description: 'Check STP eligibility' },
+  { method: 'GET', path: '/api/v1/G/hi-uw-decisioning/health', description: 'Service health check' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/rules', description: 'List all rules' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/rules', description: 'Create a rule' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/rules/export', description: 'Export rules as JSON' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/rules/:hashId', description: 'Get rule by ID' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/rules/import', description: 'Import rules from JSON' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/rules/load-preset', description: 'Load preset STP/NSTP rules (15 rules)' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/evaluate/:quotationHashId', description: 'Evaluate quotation against rules' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/evaluations', description: 'List evaluation history' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/evaluations/:hashId', description: 'Get evaluation details' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/available-fields', description: 'Available fields for rule conditions' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/loading-tables', description: 'List loading tables' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/loading-tables', description: 'Create loading table' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/loading-tables/seed-defaults', description: 'Seed BMI + age defaults' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/stp-criteria', description: 'List STP criteria' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/stp-criteria', description: 'Create STP criteria' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/stp-criteria/seed-defaults', description: 'Seed default STP criteria' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/stp-criteria/check', description: 'Check STP eligibility' },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -152,9 +152,9 @@ const OverviewTab: React.FC = () => {
     try {
       const base = API_CONFIG.HI_DECISIONING_URL;
       const [healthRes, rulesRes, evalsRes] = await Promise.allSettled([
-        api.get(`${base}/api/v1/G/hi-decisioning/health`),
-        api.get(`${base}/api/v1/O/${orgId}/hi-decisioning/rules`),
-        api.get(`${base}/api/v1/O/${orgId}/hi-decisioning/evaluations`),
+        api.get(`${base}/api/v1/G/hi-uw-decisioning/health`),
+        api.get(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/rules`),
+        api.get(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/evaluations`),
       ]);
 
       if (healthRes.status === 'fulfilled') setHealth(healthRes.value.data);
@@ -228,14 +228,14 @@ const OverviewTab: React.FC = () => {
       {/* Stats Cards — clickable */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div
-          onClick={() => navigate('/hi-decisioning/rules')}
+          onClick={() => navigate('/hi-uw-decisioning/rules')}
           className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 px-4 py-3 cursor-pointer hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors"
         >
           <p className="text-xs text-gray-500 dark:text-gray-400">Total Rules</p>
           <p className="text-2xl font-bold text-gray-900 dark:text-white">{rulesTotal}</p>
         </div>
         <div
-          onClick={() => navigate('/hi-decisioning/rules')}
+          onClick={() => navigate('/hi-uw-decisioning/rules')}
           className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 px-4 py-3 cursor-pointer hover:border-green-300 dark:hover:border-green-700 transition-colors"
         >
           <p className="text-xs text-gray-500 dark:text-gray-400">Active Rules</p>
@@ -246,7 +246,7 @@ const OverviewTab: React.FC = () => {
           <p className="text-2xl font-bold text-gray-900 dark:text-white">{categoryCounts.size}</p>
         </div>
         <div
-          onClick={() => navigate('/hi-decisioning/evaluations')}
+          onClick={() => navigate('/hi-uw-decisioning/evaluations')}
           className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 px-4 py-3 cursor-pointer hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors"
         >
           <p className="text-xs text-gray-500 dark:text-gray-400">Evaluations</p>
@@ -277,10 +277,10 @@ const OverviewTab: React.FC = () => {
       {/* Quick Links to Sub-Pages */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { label: 'Rules Engine', desc: 'Manage condition-action rules', path: '/hi-decisioning/rules', icon: BookOpen, color: 'rose' },
-          { label: 'Loading Tables', desc: 'BMI, age, occupation bands', path: '/hi-decisioning/loading-tables', icon: BarChart3, color: 'amber' },
-          { label: 'STP Criteria', desc: 'Auto-approval thresholds', path: '/hi-decisioning/stp-criteria', icon: Shield, color: 'green' },
-          { label: 'Field Introspection', desc: 'Available fields & operators', path: '/hi-decisioning/fields', icon: Code, color: 'violet' },
+          { label: 'Rules Engine', desc: 'Manage condition-action rules', path: '/hi-uw-decisioning/rules', icon: BookOpen, color: 'rose' },
+          { label: 'Loading Tables', desc: 'BMI, age, occupation bands', path: '/hi-uw-decisioning/loading-tables', icon: BarChart3, color: 'amber' },
+          { label: 'STP Criteria', desc: 'Auto-approval thresholds', path: '/hi-uw-decisioning/stp-criteria', icon: Shield, color: 'green' },
+          { label: 'Field Introspection', desc: 'Available fields & operators', path: '/hi-uw-decisioning/fields', icon: Code, color: 'violet' },
         ].map((link) => (
           <div
             key={link.path}
@@ -303,7 +303,7 @@ const OverviewTab: React.FC = () => {
             <span className="text-xs text-gray-400">({rulesTotal})</span>
           </div>
           <button
-            onClick={() => navigate('/hi-decisioning/rules')}
+            onClick={() => navigate('/hi-uw-decisioning/rules')}
             className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline"
           >
             View all
@@ -346,7 +346,7 @@ const OverviewTab: React.FC = () => {
             <span className="text-xs text-gray-400">({evalTotal})</span>
           </div>
           <button
-            onClick={() => navigate('/hi-decisioning/evaluations')}
+            onClick={() => navigate('/hi-uw-decisioning/evaluations')}
             className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline"
           >
             View all
@@ -421,7 +421,7 @@ const HIDecisioningPage: React.FC = () => {
         </div>
         <div className="flex items-center gap-3">
           <a
-            href="https://zorbit.scalatics.com/api/hi-decisioning/api-docs"
+            href="https://zorbit.scalatics.com/api/hi-uw-decisioning/api-docs"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg border border-indigo-200 dark:border-indigo-700 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors"

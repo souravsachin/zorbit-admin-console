@@ -275,6 +275,7 @@ const Step4_BasePlanConfig: React.FC<StepProps> = ({
         <button
           type="button"
           onClick={onPrevious}
+          data-testid="pcg4-step4-back"
           className="px-4 py-2 text-sm font-medium border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
         >
           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -287,6 +288,7 @@ const Step4_BasePlanConfig: React.FC<StepProps> = ({
             type="button"
             onClick={handleSave}
             disabled={saving}
+            data-testid="pcg4-step4-save"
             className="px-4 py-2 text-sm font-medium border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50"
           >
             {saving ? 'Saving...' : 'Save Draft'}
@@ -295,6 +297,7 @@ const Step4_BasePlanConfig: React.FC<StepProps> = ({
             type="button"
             onClick={handleNext}
             disabled={!isValid || saving}
+            data-testid="pcg4-step4-next"
             className="px-4 py-2 text-sm font-medium bg-orange-500 text-white rounded-md hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
           >
             Next: Encounter Config

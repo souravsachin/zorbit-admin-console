@@ -112,11 +112,28 @@ interface QuotationItem {
   submittedBy?: string;
   status: string;
   type?: string;
+  channel?: string;
   region?: string;
   memberCount?: number;
   basePremium?: number;
   totalPremium?: number;
+  loadingAmount?: number;
+  loadingPercentage?: number;
   currency?: string;
+  members?: Array<{
+    name?: string;
+    relation?: string;
+    age?: number;
+    gender?: string;
+    premium?: number;
+  }>;
+  premiumBreakdown?: {
+    basePremium?: number;
+    loading?: number;
+    discount?: number;
+    tax?: number;
+    total?: number;
+  };
   createdAt?: string;
   updatedAt?: string;
   submittedAt?: string;
@@ -154,9 +171,9 @@ const QUEUE_COLUMNS: ColumnConfig[] = [
   { key: 'quotationNumber', label: 'Quotation #', sortable: true },
   { key: 'proposerName', label: 'Proposer', sortable: true, piiSensitive: true },
   { key: 'productName', label: 'Product', sortable: true },
+  { key: 'channel', label: 'Channel', sortable: true },
   { key: 'status', label: 'Status', sortable: true },
   { key: 'totalPremium', label: 'Premium', sortable: true, align: 'right' },
-  { key: 'region', label: 'Region', sortable: true },
   { key: 'createdAt', label: 'Date', sortable: true },
   { key: 'assignment', label: 'Assigned To', sortable: false },
 ];
@@ -215,6 +232,16 @@ const STATUS_COLORS: Record<string, { bg: string; text: string; border: string }
 };
 
 const DEFAULT_STATUS_COLOR = { bg: 'bg-gray-50 dark:bg-gray-800', text: 'text-gray-600 dark:text-gray-300', border: 'border-gray-200 dark:border-gray-700' };
+
+const CHANNEL_COLORS: Record<string, { bg: string; text: string }> = {
+  direct: { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300' },
+  broker: { bg: 'bg-purple-100 dark:bg-purple-900/30', text: 'text-purple-700 dark:text-purple-300' },
+  aggregator: { bg: 'bg-orange-100 dark:bg-orange-900/30', text: 'text-orange-700 dark:text-orange-300' },
+  bancassurance: { bg: 'bg-teal-100 dark:bg-teal-900/30', text: 'text-teal-700 dark:text-teal-300' },
+  online: { bg: 'bg-cyan-100 dark:bg-cyan-900/30', text: 'text-cyan-700 dark:text-cyan-300' },
+};
+
+const DEFAULT_CHANNEL_COLOR = { bg: 'bg-gray-100 dark:bg-gray-700', text: 'text-gray-600 dark:text-gray-300' };
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -339,6 +366,16 @@ const StatusBadge: React.FC<{ status: string }> = ({ status }) => {
   return (
     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border ${colors.bg} ${colors.text} ${colors.border}`}>
       {formatStatus(status)}
+    </span>
+  );
+};
+
+const ChannelBadge: React.FC<{ channel?: string }> = ({ channel }) => {
+  if (!channel) return <span className="text-gray-300 dark:text-gray-600 text-xs">-</span>;
+  const colors = CHANNEL_COLORS[channel.toLowerCase()] || DEFAULT_CHANNEL_COLOR;
+  return (
+    <span className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium ${colors.bg} ${colors.text}`}>
+      {channel.charAt(0).toUpperCase() + channel.slice(1)}
     </span>
   );
 };
@@ -730,6 +767,7 @@ const QueueView: React.FC<{
           return (
             <button
               key={key}
+              data-testid={`uw-queue-tab-${key}`}
               onClick={() => onNavigateQueue(key)}
               className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap flex items-center gap-1.5 ${
                 isActive
@@ -757,6 +795,7 @@ const QueueView: React.FC<{
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
           <input
+            data-testid="uw-search"
             type="text"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
@@ -838,6 +877,7 @@ const QueueView: React.FC<{
                 items.map((item) => (
                   <tr
                     key={item.id}
+                    data-testid="uw-quotation-row"
                     onClick={() => onSelectItem(item)}
                     className="hover:bg-gray-50 dark:hover:bg-gray-700/20 cursor-pointer transition-colors"
                   >
@@ -859,12 +899,14 @@ const QueueView: React.FC<{
                       )}
                     </td>
                     <td className="px-4 py-3">
+                      <ChannelBadge channel={item.channel} />
+                    </td>
+                    <td className="px-4 py-3">
                       <StatusBadge status={item.status} />
                     </td>
                     <td className="px-4 py-3 font-mono text-sm text-right">
                       {formatCurrency(item.totalPremium, item.currency)}
                     </td>
-                    <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{item.region || '-'}</td>
                     <td className="px-4 py-3 text-gray-500 dark:text-gray-400 text-xs">
                       {formatDate(item.createdAt)}
                     </td>
@@ -882,10 +924,12 @@ const QueueView: React.FC<{
                     </td>
                     <td className="px-4 py-3 text-right">
                       <button
+                        data-testid="uw-view-btn"
                         onClick={(e) => { e.stopPropagation(); onSelectItem(item); }}
-                        className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-400 hover:text-amber-600 dark:hover:text-amber-400"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-amber-50 dark:hover:bg-amber-900/20 hover:text-amber-700 dark:hover:text-amber-400 hover:border-amber-300 dark:hover:border-amber-700 transition-colors"
                       >
-                        <Eye className="h-4 w-4" />
+                        <Eye className="h-3.5 w-3.5" />
+                        View
                       </button>
                     </td>
                   </tr>
@@ -979,6 +1023,11 @@ const DetailPanel: React.FC<{
   const [actionError, setActionError] = useState<string | null>(null);
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
 
+  // Loading amount for "Approve with Loading"
+  const [showLoadingForm, setShowLoadingForm] = useState(false);
+  const [loadingAmount, setLoadingAmount] = useState('');
+  const [loadingComment, setLoadingComment] = useState('');
+
   // Payment state
   const [paymentLink, setPaymentLink] = useState<string | null>(null);
   const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
@@ -990,18 +1039,37 @@ const DetailPanel: React.FC<{
   const [issuingPolicy, setIssuingPolicy] = useState(false);
   const [latestPaymentId, setLatestPaymentId] = useState<string | null>(null);
 
+  // Full quotation detail (includes members, premium breakdown)
+  const [detailedItem, setDetailedItem] = useState<QuotationItem>(item);
+
+  // Fetch full quotation detail
+  useEffect(() => {
+    const fetchDetail = async () => {
+      try {
+        const res = await api.get(`${base}/api/v1/O/${orgId}/uw-workflow/retail-quotes/${item.hashId || item.id}`);
+        if (res.data) {
+          setDetailedItem({ ...item, ...res.data });
+        }
+      } catch {
+        // Use the item as-is if detail fetch fails
+      }
+    };
+    fetchDetail();
+  }, [base, orgId, item.id, item.hashId]);
+
   // Key info grid items -- structured for easy config changes
   const infoGrid = useMemo(() => [
-    { label: 'Status', value: item.status, type: 'status' as const },
-    { label: 'Premium', value: formatCurrency(item.totalPremium, item.currency), type: 'text' as const },
-    { label: 'Product', value: item.productName || '-', sub: item.variantName, type: 'text' as const },
-    { label: 'Region', value: item.region || '-', type: 'text' as const },
-    { label: 'Type', value: item.type || 'retail', type: 'text' as const },
-    { label: 'Members', value: String(item.memberCount || 0), type: 'text' as const },
-    { label: 'Submitted', value: formatDateTime(item.submittedAt || item.createdAt), type: 'text' as const },
-    { label: 'Assigned To', value: item.assignment ? (item.assignment.assignedToName || item.assignment.assignedTo) : 'Unassigned', type: 'text' as const },
-    { label: 'Proposer', value: item.proposerName, type: 'pii' as const, piiColumn: 'proposerName' },
-  ], [item]);
+    { label: 'Status', value: detailedItem.status, type: 'status' as const },
+    { label: 'Premium', value: formatCurrency(detailedItem.totalPremium, detailedItem.currency), type: 'text' as const },
+    { label: 'Product', value: detailedItem.productName || '-', sub: detailedItem.variantName, type: 'text' as const },
+    { label: 'Region', value: detailedItem.region || '-', type: 'text' as const },
+    { label: 'Channel', value: detailedItem.channel || '-', type: 'channel' as const },
+    { label: 'Type', value: detailedItem.type || 'retail', type: 'text' as const },
+    { label: 'Members', value: String(detailedItem.memberCount || detailedItem.members?.length || 0), type: 'text' as const },
+    { label: 'Submitted', value: formatDateTime(detailedItem.submittedAt || detailedItem.createdAt), type: 'text' as const },
+    { label: 'Assigned To', value: detailedItem.assignment ? (detailedItem.assignment.assignedToName || detailedItem.assignment.assignedTo) : 'Unassigned', type: 'text' as const },
+    { label: 'Proposer', value: detailedItem.proposerName, type: 'pii' as const, piiColumn: 'proposerName' },
+  ], [detailedItem]);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -1136,7 +1204,7 @@ const DetailPanel: React.FC<{
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end">
+    <div className="fixed inset-0 z-50 flex justify-end" data-testid="uw-detail-panel">
       <div className="fixed inset-0 bg-black/40" onClick={onClose} />
       <div className="relative w-full max-w-xl bg-white dark:bg-gray-800 shadow-2xl overflow-y-auto animate-slide-in-right">
         {/* Header */}
@@ -1151,6 +1219,7 @@ const DetailPanel: React.FC<{
               </div>
             </div>
             <button
+              data-testid="uw-detail-close"
               onClick={onClose}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             >
@@ -1171,6 +1240,8 @@ const DetailPanel: React.FC<{
                 <div className="mt-1">
                   {field.type === 'status' ? (
                     <StatusBadge status={field.value || ''} />
+                  ) : field.type === 'channel' ? (
+                    <ChannelBadge channel={field.value !== '-' ? field.value : undefined} />
                   ) : field.type === 'pii' ? (
                     <PiiCell value={field.value} columnName={field.piiColumn || field.label} />
                   ) : (
@@ -1200,48 +1271,220 @@ const DetailPanel: React.FC<{
             </div>
           )}
 
-          {/* Actions */}
+          {/* Primary Action Buttons */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
-              Available Actions
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">
+              Workflow Actions
             </h3>
             {loadingActions ? (
               <Loader2 className="h-4 w-4 animate-spin text-gray-400" />
             ) : availableActions.length === 0 ? (
               <p className="text-sm text-gray-400 italic">No actions available for current status</p>
             ) : (
-              <div className="flex flex-wrap gap-2">
-                {availableActions.map((action) => (
-                  <button
-                    key={action.code}
-                    onClick={() => {
-                      setActionError(null);
-                      setActionSuccess(null);
-                      if (action.requiresComment) {
+              <div className="space-y-3">
+                {/* Primary action row: Approve / Approve with Loading / Decline / Refer */}
+                <div className="flex flex-wrap gap-2">
+                  {availableActions.filter(a => a.code === 'approve' || a.code === 'stp_approve').map((action) => (
+                    <button
+                      key={action.code}
+                      data-testid="uw-approve-btn"
+                      onClick={() => {
+                        setActionError(null);
+                        setActionSuccess(null);
+                        executeAction(action);
+                      }}
+                      disabled={executing}
+                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg bg-green-600 hover:bg-green-700 text-white disabled:opacity-50 transition-colors shadow-sm"
+                    >
+                      <CheckCircle2 className="h-4 w-4" />
+                      {action.label || 'Approve'}
+                    </button>
+                  ))}
+                  {availableActions.filter(a => a.code === 'approve_with_loading').map((action) => (
+                    <button
+                      key={action.code}
+                      data-testid="uw-approve-loading-btn"
+                      onClick={() => {
+                        setActionError(null);
+                        setActionSuccess(null);
+                        setShowLoadingForm(true);
+                        setLoadingAmount('');
+                        setLoadingComment('');
+                      }}
+                      disabled={executing}
+                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white disabled:opacity-50 transition-colors shadow-sm"
+                    >
+                      <DollarSign className="h-4 w-4" />
+                      {action.label || 'Approve with Loading'}
+                    </button>
+                  ))}
+                  {availableActions.filter(a => a.code === 'decline').map((action) => (
+                    <button
+                      key={action.code}
+                      data-testid="uw-decline-btn"
+                      onClick={() => {
+                        setActionError(null);
+                        setActionSuccess(null);
                         setShowComment(action);
                         setComment('');
-                      } else {
-                        executeAction(action);
-                      }
-                    }}
+                      }}
+                      disabled={executing}
+                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg bg-red-600 hover:bg-red-700 text-white disabled:opacity-50 transition-colors shadow-sm"
+                    >
+                      <XCircle className="h-4 w-4" />
+                      {action.label || 'Decline'}
+                    </button>
+                  ))}
+                  {availableActions.filter(a => a.code === 'refer' || a.code === 'refer_to_senior' || a.code === 'refer_to_medical').map((action) => (
+                    <button
+                      key={action.code}
+                      data-testid="uw-refer-btn"
+                      onClick={() => {
+                        setActionError(null);
+                        setActionSuccess(null);
+                        if (action.requiresComment) {
+                          setShowComment(action);
+                          setComment('');
+                        } else {
+                          executeAction(action);
+                        }
+                      }}
+                      disabled={executing}
+                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg bg-amber-500 hover:bg-amber-600 text-white disabled:opacity-50 transition-colors shadow-sm"
+                    >
+                      <MessageSquare className="h-4 w-4" />
+                      {action.label || 'Refer'}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Other actions (non-primary) */}
+                {availableActions.filter(a => !['approve', 'stp_approve', 'approve_with_loading', 'decline', 'refer', 'refer_to_senior', 'refer_to_medical'].includes(a.code)).length > 0 && (
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {availableActions.filter(a => !['approve', 'stp_approve', 'approve_with_loading', 'decline', 'refer', 'refer_to_senior', 'refer_to_medical'].includes(a.code)).map((action) => (
+                      <button
+                        key={action.code}
+                        data-testid={`uw-action-${action.code}`}
+                        onClick={() => {
+                          setActionError(null);
+                          setActionSuccess(null);
+                          if (action.requiresComment) {
+                            setShowComment(action);
+                            setComment('');
+                          } else {
+                            executeAction(action);
+                          }
+                        }}
+                        disabled={executing}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-amber-50 dark:hover:bg-amber-900/20 hover:border-amber-300 dark:hover:border-amber-700 disabled:opacity-50 transition-colors"
+                      >
+                        <Play className="h-3 w-3" />
+                        {action.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* Assign button */}
+                <div className="pt-1">
+                  <button
+                    onClick={() => { setShowAssign(true); setActionError(null); setActionSuccess(null); }}
                     disabled={executing}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-amber-50 dark:hover:bg-amber-900/20 hover:border-amber-300 dark:hover:border-amber-700 disabled:opacity-50 transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg border border-indigo-200 dark:border-indigo-700 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 disabled:opacity-50 transition-colors"
                   >
-                    <Play className="h-3 w-3" />
-                    {action.label}
+                    <UserPlus className="h-3 w-3" />
+                    Assign
                   </button>
-                ))}
-                <button
-                  onClick={() => { setShowAssign(true); setActionError(null); setActionSuccess(null); }}
-                  disabled={executing}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg border border-indigo-200 dark:border-indigo-700 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 disabled:opacity-50 transition-colors"
-                >
-                  <UserPlus className="h-3 w-3" />
-                  Assign
-                </button>
+                </div>
               </div>
             )}
           </div>
+
+          {/* Approve with Loading Form */}
+          {showLoadingForm && (
+            <div className="bg-emerald-50 dark:bg-emerald-900/20 rounded-lg p-4 border border-emerald-200 dark:border-emerald-800">
+              <h4 className="text-sm font-semibold text-emerald-800 dark:text-emerald-200 mb-3">
+                Approve with Loading
+              </h4>
+              <div className="space-y-3">
+                <div>
+                  <label className="text-xs text-gray-500 dark:text-gray-400 font-medium">Loading Amount ({item.currency || 'AED'})</label>
+                  <input
+                    data-testid="uw-loading-amount"
+                    type="number"
+                    value={loadingAmount}
+                    onChange={(e) => setLoadingAmount(e.target.value)}
+                    placeholder="e.g. 500"
+                    className="mt-1 w-full px-3 py-2 text-sm border border-emerald-200 dark:border-emerald-700 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500 outline-none"
+                  />
+                  {item.totalPremium && loadingAmount && (
+                    <p className="text-xs text-gray-500 mt-1">
+                      New premium: {formatCurrency((item.totalPremium || 0) + Number(loadingAmount), item.currency)}
+                      {' '}({((Number(loadingAmount) / (item.totalPremium || 1)) * 100).toFixed(1)}% loading)
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label className="text-xs text-gray-500 dark:text-gray-400 font-medium">Comment (optional)</label>
+                  <textarea
+                    value={loadingComment}
+                    onChange={(e) => setLoadingComment(e.target.value)}
+                    placeholder="Reason for loading..."
+                    rows={2}
+                    className="mt-1 w-full px-3 py-2 text-sm border border-emerald-200 dark:border-emerald-700 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500 outline-none resize-none"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-end gap-2 mt-3">
+                <button
+                  onClick={() => setShowLoadingForm(false)}
+                  className="px-3 py-1.5 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    const loadingAction = availableActions.find(a => a.code === 'approve_with_loading');
+                    if (loadingAction) {
+                      setExecuting(true);
+                      setActionError(null);
+                      setActionSuccess(null);
+                      api.post(
+                        `${base}/api/v1/O/${orgId}/uw-workflow/execute/${item.id}/${loadingAction.code}`,
+                        { comment: loadingComment || '', metadata: { loadingAmount: Number(loadingAmount) } },
+                      ).then((res) => {
+                        setActionSuccess(res.data?.message || 'Approved with loading successfully');
+                        setShowLoadingForm(false);
+                        onActionExecuted();
+                        return Promise.allSettled([
+                          api.get(`${base}/api/v1/O/${orgId}/uw-workflow/actions/available/${item.id}`),
+                          api.get(`${base}/api/v1/O/${orgId}/uw-workflow/history/${item.id}`),
+                        ]);
+                      }).then((results) => {
+                        if (results) {
+                          const [actionsRes, historyRes] = results;
+                          if (actionsRes.status === 'fulfilled') setAvailableActions(actionsRes.value.data.availableActions || []);
+                          if (historyRes.status === 'fulfilled') {
+                            const d = historyRes.value.data;
+                            setHistory(Array.isArray(d) ? d : d?.items || []);
+                          }
+                        }
+                      }).catch((err: unknown) => {
+                        const msg = (err as any)?.response?.data?.message || (err instanceof Error ? err.message : 'Action failed');
+                        setActionError(msg);
+                      }).finally(() => {
+                        setExecuting(false);
+                      });
+                    }
+                  }}
+                  disabled={!loadingAmount || Number(loadingAmount) <= 0 || executing}
+                  className="px-4 py-1.5 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg disabled:opacity-50 transition-colors"
+                >
+                  {executing ? 'Processing...' : 'Confirm Loading'}
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Comment Modal inline */}
           {showComment && (
@@ -1250,6 +1493,7 @@ const DetailPanel: React.FC<{
                 {showComment.label} -- Comment Required
               </h4>
               <textarea
+                data-testid="uw-comment"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="Enter your comment..."
@@ -1264,6 +1508,7 @@ const DetailPanel: React.FC<{
                   Cancel
                 </button>
                 <button
+                  data-testid="uw-confirm"
                   onClick={() => executeAction(showComment, comment)}
                   disabled={!comment.trim() || executing}
                   className="px-3 py-1.5 text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 rounded-lg disabled:opacity-50 transition-colors"
@@ -1313,6 +1558,7 @@ const DetailPanel: React.FC<{
                   Cancel
                 </button>
                 <button
+                  data-testid="uw-assign-submit"
                   onClick={handleAssign}
                   disabled={!assignTo || !assignQueue || executing}
                   className="px-3 py-1.5 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg disabled:opacity-50 transition-colors"
@@ -1399,6 +1645,7 @@ const DetailPanel: React.FC<{
                     }
                   }}
                   disabled={generatingPayment}
+                  data-testid="uw-generate-payment"
                   className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white disabled:opacity-50 transition-colors"
                 >
                   {generatingPayment ? (
@@ -1451,6 +1698,7 @@ const DetailPanel: React.FC<{
                     }
                   }}
                   disabled={issuingPolicy || !latestPaymentId}
+                  data-testid="uw-issue-policy"
                   className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white disabled:opacity-50 transition-colors"
                 >
                   {issuingPolicy ? (
@@ -1533,6 +1781,7 @@ const DetailPanel: React.FC<{
                 {/* PDF Download */}
                 <div className="flex items-center gap-2 pt-1">
                   <a
+                    data-testid="uw-download-pdf"
                     href={`${base}/api/v1/G/uw-workflow/policies/${policyData.policyHashId || policyData.hashId}/pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -1550,6 +1799,82 @@ const DetailPanel: React.FC<{
                     <Eye className="h-4 w-4" />
                     View
                   </a>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Member List */}
+          {detailedItem.members && detailedItem.members.length > 0 && (
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
+                Members ({detailedItem.members.length})
+              </h3>
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-gray-200 dark:border-gray-600">
+                      <th className="px-3 py-2 text-left text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Name</th>
+                      <th className="px-3 py-2 text-left text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Relation</th>
+                      <th className="px-3 py-2 text-center text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Age</th>
+                      <th className="px-3 py-2 text-center text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Gender</th>
+                      <th className="px-3 py-2 text-right text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Premium</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100 dark:divide-gray-600/50">
+                    {detailedItem.members.map((member, idx) => (
+                      <tr key={idx}>
+                        <td className="px-3 py-2">
+                          <PiiCell value={member.name} columnName="memberName" />
+                        </td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-400 text-xs">{member.relation || '-'}</td>
+                        <td className="px-3 py-2 text-center text-gray-600 dark:text-gray-400">{member.age || '-'}</td>
+                        <td className="px-3 py-2 text-center text-gray-600 dark:text-gray-400 text-xs">{member.gender || '-'}</td>
+                        <td className="px-3 py-2 text-right font-mono text-xs">{member.premium ? formatCurrency(member.premium, detailedItem.currency) : '-'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* Premium Breakdown */}
+          {detailedItem.premiumBreakdown && (
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
+                Premium Breakdown
+              </h3>
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-700 p-4 space-y-2">
+                {detailedItem.premiumBreakdown.basePremium !== undefined && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600 dark:text-gray-400">Base Premium</span>
+                    <span className="font-mono text-gray-800 dark:text-gray-200">{formatCurrency(detailedItem.premiumBreakdown.basePremium, detailedItem.currency)}</span>
+                  </div>
+                )}
+                {detailedItem.premiumBreakdown.loading !== undefined && detailedItem.premiumBreakdown.loading > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600 dark:text-gray-400">Loading</span>
+                    <span className="font-mono text-amber-600 dark:text-amber-400">+{formatCurrency(detailedItem.premiumBreakdown.loading, detailedItem.currency)}</span>
+                  </div>
+                )}
+                {detailedItem.premiumBreakdown.discount !== undefined && detailedItem.premiumBreakdown.discount > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600 dark:text-gray-400">Discount</span>
+                    <span className="font-mono text-green-600 dark:text-green-400">-{formatCurrency(detailedItem.premiumBreakdown.discount, detailedItem.currency)}</span>
+                  </div>
+                )}
+                {detailedItem.premiumBreakdown.tax !== undefined && detailedItem.premiumBreakdown.tax > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600 dark:text-gray-400">Tax / VAT</span>
+                    <span className="font-mono text-gray-800 dark:text-gray-200">+{formatCurrency(detailedItem.premiumBreakdown.tax, detailedItem.currency)}</span>
+                  </div>
+                )}
+                <div className="border-t border-gray-200 dark:border-gray-600 pt-2 mt-2">
+                  <div className="flex justify-between text-sm font-bold">
+                    <span className="text-gray-800 dark:text-gray-200">Total Premium</span>
+                    <span className="font-mono text-lg text-gray-900 dark:text-white">{formatCurrency(detailedItem.premiumBreakdown.total || detailedItem.totalPremium, detailedItem.currency)}</span>
+                  </div>
                 </div>
               </div>
             </div>

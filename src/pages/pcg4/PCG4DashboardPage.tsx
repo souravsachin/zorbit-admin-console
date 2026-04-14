@@ -158,6 +158,7 @@ const PCG4DashboardPage: React.FC = () => {
         </div>
         <button
           onClick={() => navigate(`/O/${orgId}/app/pcg4/configurations/new`)}
+          data-testid="pcg4-new-config"
           className="inline-flex items-center px-5 py-2.5 rounded-lg bg-primary-600 text-white font-medium text-sm hover:bg-primary-700 transition-colors shadow-sm"
         >
           <Plus size={18} className="mr-2" />

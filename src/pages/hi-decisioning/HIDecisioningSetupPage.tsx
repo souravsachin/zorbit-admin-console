@@ -26,20 +26,20 @@ const DEC_COHORTS: CohortOption[] = [
 export default function HIDecisioningSetupPage() {
   return (
     <ModuleSetupPage
-      moduleId="hi-decisioning"
-      moduleName="HI Decisioning"
+      moduleId="hi-uw-decisioning"
+      moduleName="HI UW Decisioning"
       icon={Brain}
-      seedEndpoint="/api/hi-decisioning/api/v1/G/hi-decisioning/seed"
-      demoSeedEndpoint="/api/hi-decisioning/api/v1/G/hi-decisioning/seed/demo"
-      demoFlushEndpoint="/api/hi-decisioning/api/v1/G/hi-decisioning/seed/demo"
-      flushEndpoint="/api/hi-decisioning/api/v1/G/hi-decisioning/seed/all"
-      healthEndpoint="/api/hi-decisioning/api/v1/G/hi-decisioning/health"
+      seedEndpoint="/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/seed"
+      demoSeedEndpoint="/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/seed/demo"
+      demoFlushEndpoint="/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/seed/demo"
+      flushEndpoint="/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/seed/all"
+      healthEndpoint="/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/health"
       demoGenerator={
         <DemoDataGenerator
-          moduleId="hi-decisioning"
-          moduleName="HI Decisioning"
-          seedEndpoint="/api/hi-decisioning/api/v1/G/hi-decisioning/seed/demo"
-          flushEndpoint="/api/hi-decisioning/api/v1/G/hi-decisioning/seed/demo"
+          moduleId="hi-uw-decisioning"
+          moduleName="HI UW Decisioning"
+          seedEndpoint="/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/seed/demo"
+          flushEndpoint="/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/seed/demo"
           columns={DEC_COLUMNS}
           cohortOptions={DEC_COHORTS}
           generatePreview={generateHIDecisioningPreview}

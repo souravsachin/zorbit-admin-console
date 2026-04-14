@@ -13,9 +13,9 @@ import type { ManifestEntry } from '../../components/shared/DemoTourPlayer';
 
 const HI_DECISIONING_RECORDINGS: ManifestEntry[] = [
   {
-    file: 'hi-decisioning/hi-decisioning-overview.mp4',
-    title: 'HI Decisioning — Rules Engine & Auto-Approval',
-    thumbnail: 'hi-decisioning/hi-decisioning-overview-thumb.jpg',
+    file: 'hi-uw-decisioning/hi-uw-decisioning-overview.mp4',
+    title: 'HI UW Decisioning — Rules Engine & Auto-Approval',
+    thumbnail: 'hi-uw-decisioning/hi-uw-decisioning-overview-thumb.jpg',
     timestamp: '2026-03-21T10:00:00.000Z',
     duration: 91,
     chapters: [
@@ -41,9 +41,9 @@ interface FAQItem {
 
 const FAQ_ITEMS: FAQItem[] = [
   {
-    question: 'What is the HI Decisioning module?',
+    question: 'What is the HI UW AE Decisioning module?',
     answer:
-      'HI Decisioning is the rules engine that powers automated underwriting decisions for health insurance. It evaluates quotation data against configured rules to determine whether a case should be auto-approved, referred, or declined.',
+      'HI UW AE Decisioning is the rules engine that powers automated underwriting decisions for health insurance. It evaluates quotation data against configured rules to determine whether a case should be auto-approved, referred, or declined.',
   },
   {
     question: 'How do I create a new decisioning rule?',
@@ -77,9 +77,9 @@ const HIDecisioningHelpPage: React.FC = () => {
     <div className="space-y-12">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold">HI Decisioning Help</h1>
+        <h1 className="text-2xl font-bold">HI UW AE Decisioning Help</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-          Videos, guides, and FAQ for Health Insurance Decisioning Rules Engine
+          Videos, guides, and FAQ for HI UW AE Decisioning Rules Engine
         </p>
       </div>
 

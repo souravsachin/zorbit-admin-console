@@ -3,14 +3,14 @@ import { Search, Filter, Users, Building2 } from 'lucide-react';
 import DataTable, { Column } from '../../components/shared/DataTable';
 import StatusBadge from '../../components/shared/StatusBadge';
 import { useAuth } from '../../hooks/useAuth';
-import { identityService, User } from '../../services/identity';
+import { identityService, User, Organization } from '../../services/identity';
 
 const UserDirectoryPage: React.FC = () => {
   const { orgId, user: currentUser } = useAuth();
   const isSuperAdmin = currentUser?.role === 'superadmin' || currentUser?.role === 'admin';
 
   const [allUsers, setAllUsers] = useState<User[]>([]);
-  const [organizations, setOrganizations] = useState<Array<{ hashId: string; name: string; orgType: string }>>([]);
+  const [organizations, setOrganizations] = useState<Organization[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [filterOrg, setFilterOrg] = useState<string>('');
@@ -32,7 +32,7 @@ const UserDirectoryPage: React.FC = () => {
           const allResults: User[] = [];
           for (const org of topLevelOrgs) {
             try {
-              const res = await identityService.getUsers(org.hashId, { tree: 'true' });
+              const res = await identityService.getUsers(org.hashId!, { tree: 'true' });
               const users = Array.isArray(res.data) ? res.data : [];
               allResults.push(...users);
             } catch { /* skip failed orgs */ }
@@ -55,7 +55,7 @@ const UserDirectoryPage: React.FC = () => {
   // Build org name lookup
   const orgNameMap = useMemo(() => {
     const map: Record<string, string> = {};
-    for (const o of organizations) map[o.hashId] = o.name;
+    for (const o of organizations) if (o.hashId) map[o.hashId] = o.name;
     return map;
   }, [organizations]);
 
@@ -109,7 +109,7 @@ const UserDirectoryPage: React.FC = () => {
 
   // Unique roles for filter
   const roles = useMemo(
-    () => [...new Set(allUsers.map((u) => u.role).filter(Boolean))].sort(),
+    () => [...new Set(allUsers.map((u) => u.role).filter((r): r is string => Boolean(r)))].sort(),
     [allUsers],
   );
 

@@ -27,7 +27,7 @@ const SERVICES: ServiceDef[] = [
   { name: 'PCG4',            url: '/api/app/pcg4/api/v1/G/health',                        layer: 'app' },
   { name: 'Product Pricing', url: '/api/product-pricing/api/v1/G/product-pricing/health', layer: 'app' },
   { name: 'UW Workflow',     url: '/api/uw-workflow/api/v1/G/uw-workflow/health',         layer: 'app' },
-  { name: 'HI Decisioning',  url: '/api/hi-decisioning/api/v1/G/hi-decisioning/health',  layer: 'app' },
+  { name: 'HI UW Decisioning', url: '/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/health', layer: 'app' },
   { name: 'HI Quotation',    url: '/api/hi-quotation/api/v1/G/hi-quotation/health',      layer: 'app' },
   { name: 'Console Server',  url: '/api/unified-console/api/v1/G/health',                 layer: 'console' },
 ];
@@ -491,7 +491,7 @@ const DeveloperPage: React.FC = () => {
             { name: 'PCG4',           path: '/api/app/pcg4' },
             { name: 'Form Builder',   path: '/api/form-builder' },
             { name: 'UW Workflow',    path: '/api/uw-workflow' },
-            { name: 'HI Decisioning', path: '/api/hi-decisioning' },
+            { name: 'HI UW Decisioning', path: '/api/hi-uw-decisioning' },
             { name: 'HI Quotation',   path: '/api/hi-quotation' },
             { name: 'Console Server', path: '/api/unified-console' },
           ].map((svc) => (

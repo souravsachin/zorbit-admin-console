@@ -18,6 +18,8 @@ import {
   Pencil,
   Table2,
   X,
+  FileEdit,
+  Code2,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -38,7 +40,9 @@ const navItems = [
   { to: '/audit', icon: ScrollText, label: 'Audit Logs' },
   { to: '/pii-vault', icon: Lock, label: 'PII Vault' },
   { to: '/api-docs', icon: FileText, label: 'API Docs' },
+  { to: '/form-builder', icon: FileEdit, label: 'Form Builder' },
   { to: '/settings', icon: Settings, label: 'Settings' },
+  { to: '/dev-center', icon: Code2, label: 'Dev Center' },
   { to: '/demo', icon: Play, label: 'Demo' },
   { to: '/demo-training', icon: GraduationCap, label: 'Training Center' },
   { to: '/data-table-demo', icon: Table2, label: 'Data Table Demo' },
@@ -85,6 +89,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
               <span>{item.label}</span>
             </NavLink>
           ))}
+
         </nav>
       </aside>
     </>

@@ -7,7 +7,7 @@ export default function ProductPricingSetupPage() {
       moduleId="product-pricing"
       moduleName="Product Pricing"
       icon={Calculator}
-      seedEndpoint="/api/product-pricing/api/v1/G/product-pricing/seed"
+      seedEndpoint="/api/product-pricing/api/v1/G/product-pricing/seed/system"
       demoSeedEndpoint="/api/product-pricing/api/v1/G/product-pricing/seed/demo"
       demoFlushEndpoint="/api/product-pricing/api/v1/G/product-pricing/seed/demo"
       flushEndpoint="/api/product-pricing/api/v1/G/product-pricing/seed/all"

@@ -5,7 +5,7 @@ import StatusBadge from '../../components/shared/StatusBadge';
 import Modal from '../../components/shared/Modal';
 import { useAuth } from '../../hooks/useAuth';
 import { useToast } from '../../components/shared/Toast';
-import { identityService, User } from '../../services/identity';
+import { identityService, User, Organization } from '../../services/identity';
 import api from '../../services/api';
 import { API_CONFIG } from '../../config';
 import PasswordField, { getPasswordScore } from '../../components/shared/PasswordField';
@@ -27,7 +27,7 @@ const UsersPage: React.FC = () => {
   const [showAssignRole, setShowAssignRole] = useState<User | null>(null);
   const [showResetPassword, setShowResetPassword] = useState<User | null>(null);
   const [showNonAdminWarning, setShowNonAdminWarning] = useState(false);
-  const [organizations, setOrganizations] = useState<Array<{hashId: string; name: string}>>([]);
+  const [organizations, setOrganizations] = useState<Organization[]>([]);
   const [form, setForm] = useState({ email: '', displayName: '', password: '', role: '', organizationId: '' });
   const [selectedOrg, setSelectedOrg] = useState<string>('');
   const [selectedDept, setSelectedDept] = useState<string>('');
@@ -353,7 +353,7 @@ const UsersPage: React.FC = () => {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Users</h1>
-        <button onClick={() => setShowCreate(true)} className="btn-primary flex items-center space-x-2">
+        <button data-testid="user-create-btn" onClick={() => setShowCreate(true)} className="btn-primary flex items-center space-x-2">
           <Plus size={18} />
           <span>Create User</span>
         </button>
@@ -378,6 +378,7 @@ const UsersPage: React.FC = () => {
               <label className="block text-sm font-medium mb-1">Organization <span className="text-red-500">*</span></label>
               {isSuperAdmin && topLevelOrgs.length > 1 ? (
                 <select
+                  data-testid="user-org"
                   value={selectedOrg}
                   onChange={(e) => {
                     setSelectedOrg(e.target.value);
@@ -457,11 +458,11 @@ const UsersPage: React.FC = () => {
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Display Name <span className="text-red-500">*</span></label>
-            <input value={form.displayName} onChange={(e) => setForm({ ...form, displayName: e.target.value })} className="input-field" required />
+            <input data-testid="user-display-name" value={form.displayName} onChange={(e) => setForm({ ...form, displayName: e.target.value })} className="input-field" required />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Email <span className="text-red-500">*</span></label>
-            <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="input-field" required />
+            <input data-testid="user-email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="input-field" required />
           </div>
           <PasswordField
             label="Password"
@@ -474,6 +475,7 @@ const UsersPage: React.FC = () => {
           <div>
             <label className="block text-sm font-medium mb-1">Role <span className="text-red-500">*</span></label>
             <select
+              data-testid="user-role"
               value={form.role}
               onChange={(e) => handleRoleChange(e.target.value)}
               className="input-field"
@@ -506,7 +508,7 @@ const UsersPage: React.FC = () => {
 
           <div className="flex justify-end space-x-3">
             <button type="button" onClick={() => { setShowCreate(false); setShowNonAdminWarning(false); setSelectedOrg(''); setSelectedDept(''); setSelectedSubDept(''); setHierarchy(null); }} className="btn-secondary">Cancel</button>
-            <button type="submit" disabled={creating} className="btn-primary">{creating ? 'Creating...' : 'Create User'}</button>
+            <button data-testid="user-create-submit" type="submit" disabled={creating} className="btn-primary">{creating ? 'Creating...' : 'Create User'}</button>
           </div>
         </form>
       </Modal>

@@ -168,6 +168,7 @@ const Step7_PlanOverrides: React.FC<StepProps> = ({
               key={tab}
               type="button"
               onClick={() => setActiveTab(tab)}
+              data-testid={`pcg4-step7-tab-${tab === 'encounters' ? 'encounters' : tab === 'regions' ? 'regions' : 'general'}`}
               className={`flex-1 px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition capitalize ${
                 activeTab === tab
                   ? 'border-orange-500 text-orange-600'
@@ -434,6 +435,7 @@ const Step7_PlanOverrides: React.FC<StepProps> = ({
             type="button"
             onClick={handleNext}
             disabled={saving}
+            data-testid="pcg4-step7-next"
             className="px-4 py-2 text-sm font-medium bg-orange-500 text-white rounded-md hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
           >
             Next: Review & Publish

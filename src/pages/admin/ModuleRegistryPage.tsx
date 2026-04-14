@@ -258,7 +258,7 @@ const MODULES: ModuleEntry[] = [
     dbType: 'MongoDB',
     description: 'Health insurance underwriting rules engine — 15 STP/NSTP rules, 11 action types, condition builder',
     menuSections: [
-      { section: 'Retail Insurance', items: ['HI Decisioning'] },
+      { section: 'Retail Insurance', items: ['HI UW Decisioning'] },
     ],
     endpoints: 10,
     events: ['uw.evaluation.completed'],

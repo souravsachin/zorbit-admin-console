@@ -83,6 +83,7 @@ const Step1_InsurerDetails: React.FC<StepProps> = ({
             value={form.name}
             onChange={(e) => handleChange('name', e.target.value)}
             onBlur={() => handleBlur('name')}
+            data-testid="pcg4-insurer-name"
             className={`w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 dark:bg-gray-800 dark:text-gray-100 ${
               showError('name') ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
             }`}
@@ -100,6 +101,7 @@ const Step1_InsurerDetails: React.FC<StepProps> = ({
             value={form.internal_code}
             onChange={(e) => handleChange('internal_code', e.target.value)}
             onBlur={() => handleBlur('internal_code')}
+            data-testid="pcg4-insurer-code"
             className={`w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 dark:bg-gray-800 dark:text-gray-100 ${
               showError('internal_code') ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
             }`}
@@ -119,6 +121,7 @@ const Step1_InsurerDetails: React.FC<StepProps> = ({
             value={form.regulator_assigned_code}
             onChange={(e) => handleChange('regulator_assigned_code', e.target.value)}
             onBlur={() => handleBlur('regulator_assigned_code')}
+            data-testid="pcg4-regulator-code"
             className={`w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 dark:bg-gray-800 dark:text-gray-100 ${
               showError('regulator_assigned_code')
                 ? 'border-red-500'
@@ -139,6 +142,7 @@ const Step1_InsurerDetails: React.FC<StepProps> = ({
             value={form.description}
             onChange={(e) => handleChange('description', e.target.value)}
             rows={4}
+            data-testid="pcg4-insurer-description"
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 dark:bg-gray-800 dark:text-gray-100"
           />
         </div>
@@ -159,6 +163,7 @@ const Step1_InsurerDetails: React.FC<StepProps> = ({
             type="button"
             onClick={handleNext}
             disabled={!isValid || saving}
+            data-testid="pcg4-step1-next"
             className="px-4 py-2 text-sm font-medium bg-orange-500 text-white rounded-md hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
           >
             Next: Product Details

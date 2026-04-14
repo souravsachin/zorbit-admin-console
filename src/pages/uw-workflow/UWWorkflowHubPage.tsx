@@ -89,13 +89,13 @@ const UWWorkflowHubPage: React.FC = () => {
       swaggerUrl="/api/uw-workflow/api-docs"
       faqs={[
         { question: 'What are the 13 queues?', answer: 'New Business, Renewal, Endorsement, Medical Review, Financial Review, Risk Assessment, Escalation, Refer to Specialist, Pending Info, Counter Offer, Declined Review, STP Auto-Approve, and Manager Override.' },
-        { question: 'How does STP work?', answer: 'Applications that pass all automated decisioning rules (from HI Decisioning) are routed to the STP queue and auto-approved without manual intervention.' },
+        { question: 'How does STP work?', answer: 'Applications that pass all automated decisioning rules (from HI UW Decisioning) are routed to the STP queue and auto-approved without manual intervention.' },
         { question: 'What triggers an escalation?', answer: 'High sum insured, adverse medical history, or when an underwriter explicitly escalates a case they cannot decide on.' },
         { question: 'How are SLAs tracked?', answer: 'Each queue has configurable SLA targets (e.g., 2 hours for STP, 24 hours for NSTP). Breaches trigger alerts and auto-escalation.' },
       ]}
       resources={[
         { label: 'UW Workflow API (Swagger)', url: 'https://scalatics.com:3115/api', icon: FileText },
-        { label: 'HI Decisioning Integration', url: '/hi-decisioning', icon: Shield },
+        { label: 'HI UW Decisioning Integration', url: '/hi-uw-decisioning', icon: Shield },
         { label: 'Audit Trail Viewer', url: '/audit', icon: ClipboardList },
       ]}
     />

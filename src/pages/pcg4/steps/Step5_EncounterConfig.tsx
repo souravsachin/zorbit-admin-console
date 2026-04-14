@@ -245,6 +245,7 @@ const Step5_EncounterConfig: React.FC<StepProps> = ({
             type="button"
             onClick={handleNext}
             disabled={saving}
+            data-testid="pcg4-step5-next"
             className="px-4 py-2 text-sm font-medium bg-orange-500 text-white rounded-md hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
           >
             Next: Benefits Setup

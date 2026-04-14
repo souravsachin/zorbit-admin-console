@@ -94,7 +94,7 @@ const OrganizationsPage: React.FC = () => {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Organizations</h1>
-        <button onClick={() => setShowCreate(true)} className="btn-primary flex items-center space-x-2">
+        <button data-testid="org-create-btn" onClick={() => setShowCreate(true)} className="btn-primary flex items-center space-x-2">
           <Plus size={18} />
           <span>Create Organization</span>
         </button>
@@ -106,11 +106,11 @@ const OrganizationsPage: React.FC = () => {
         <form onSubmit={handleCreate} className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-1">Name</label>
-            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="input-field" required />
+            <input data-testid="org-name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="input-field" required />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Organization Type <span className="text-red-500">*</span></label>
-            <select value={form.orgType} onChange={(e) => setForm({ ...form, orgType: e.target.value })} className="input-field" required>
+            <select data-testid="org-type" value={form.orgType} onChange={(e) => setForm({ ...form, orgType: e.target.value })} className="input-field" required>
               <option value="">Select type</option>
               {ORG_TYPES.map((t) => (
                 <option key={t} value={t}>{t}</option>
@@ -119,7 +119,7 @@ const OrganizationsPage: React.FC = () => {
           </div>
           <div className="flex justify-end space-x-3">
             <button type="button" onClick={() => setShowCreate(false)} className="btn-secondary">Cancel</button>
-            <button type="submit" disabled={creating} className="btn-primary">{creating ? 'Creating...' : 'Create'}</button>
+            <button data-testid="org-create-submit" type="submit" disabled={creating} className="btn-primary">{creating ? 'Creating...' : 'Create'}</button>
           </div>
         </form>
       </Modal>

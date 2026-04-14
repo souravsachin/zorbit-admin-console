@@ -7,7 +7,7 @@ export default function FormBuilderSetupPage() {
       moduleId="form-builder"
       moduleName="Form Builder"
       icon={FileInput}
-      seedEndpoint="/api/form-builder/api/v1/G/form-builder/seed"
+      seedEndpoint="/api/form-builder/api/v1/G/form-builder/seed/system"
       demoSeedEndpoint="/api/form-builder/api/v1/G/form-builder/seed/demo"
       demoFlushEndpoint="/api/form-builder/api/v1/G/form-builder/seed/demo"
       flushEndpoint="/api/form-builder/api/v1/G/form-builder/seed/all"

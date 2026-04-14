@@ -14,7 +14,7 @@ export const API_CONFIG = {
   RTC_WS_URL: import.meta.env.VITE_RTC_WS_URL || '',
   LIVEKIT_URL: import.meta.env.VITE_LIVEKIT_URL || 'wss://zorbit.scalatics.com:7881',
   UW_WORKFLOW_URL: import.meta.env.VITE_UW_WORKFLOW_URL || '/api/uw-workflow',
-  HI_DECISIONING_URL: import.meta.env.VITE_HI_DECISIONING_URL || '/api/hi-decisioning',
+  HI_DECISIONING_URL: import.meta.env.VITE_HI_DECISIONING_URL || '/api/hi-uw-decisioning',
   HI_QUOTATION_URL: import.meta.env.VITE_HI_QUOTATION_URL || '/api/hi-quotation',
   MI_QUOTATION_URL: import.meta.env.VITE_MI_QUOTATION_URL || '/api/mi-quotation',
   FORM_BUILDER_URL: import.meta.env.VITE_FORM_BUILDER_URL || '/api/form-builder',

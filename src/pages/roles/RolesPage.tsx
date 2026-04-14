@@ -69,7 +69,7 @@ const RolesPage: React.FC = () => {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Roles & Privileges</h1>
-        <button onClick={() => setShowCreate(true)} className="btn-primary flex items-center space-x-2">
+        <button data-testid="role-create-btn" onClick={() => setShowCreate(true)} className="btn-primary flex items-center space-x-2">
           <Plus size={18} />
           <span>Create Role</span>
         </button>
@@ -96,15 +96,15 @@ const RolesPage: React.FC = () => {
         <form onSubmit={handleCreate} className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-1">Role Name</label>
-            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="input-field" required />
+            <input data-testid="role-name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="input-field" required />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Description</label>
-            <input value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="input-field" />
+            <input data-testid="role-description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="input-field" />
           </div>
           <div className="flex justify-end space-x-3">
             <button type="button" onClick={() => setShowCreate(false)} className="btn-secondary">Cancel</button>
-            <button type="submit" disabled={creating} className="btn-primary">{creating ? 'Creating...' : 'Create'}</button>
+            <button data-testid="role-create-submit" type="submit" disabled={creating} className="btn-primary">{creating ? 'Creating...' : 'Create'}</button>
           </div>
         </form>
       </Modal>

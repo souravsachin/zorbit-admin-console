@@ -1,7 +1,166 @@
-import React, { useState, useEffect } from 'react';
-import { Calculator, Plus, Eye, RefreshCw } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Calculator, RefreshCw, Table2 } from 'lucide-react';
 
 const API_BASE = '/api/product-pricing/api/v1/O/O-OZPY/product-pricing';
+
+/* ─── helpers ─── */
+const fmtAED = (v: number | undefined) =>
+  v != null ? v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '—';
+
+/* ─── Rate Grid (pivoted, Excel-style) ─── */
+const RateGridPanel: React.FC<{ selected: any }> = ({ selected }) => {
+  const rates: any[] = selected.rates || [];
+  const params = selected.parameters || {};
+  const ageBands: string[] = params.ageBands || [];
+  const genders: string[] = params.genders || ['Male', 'Female'];
+  const groups: string[] = (params.networks?.length ? params.networks : params.plans) || [];
+  const copayOptions: string[] = params.copayOptions || [];
+  const groupLabel = params.networks?.length ? 'Network' : 'Plan';
+
+  // If multiple copay options, let user pick which to display
+  const [selectedCopay, setSelectedCopay] = useState(copayOptions[0] || '0%');
+
+  // Build lookup map: key = `${ageBand}|${gender}|${group}|${copay}` -> netRate
+  const rateMap = useMemo(() => {
+    const m = new Map<string, number>();
+    for (const r of rates) {
+      const g = r.network || r.plan || '';
+      const key = `${r.ageBand}|${r.gender}|${g}|${r.copay || '0%'}`;
+      m.set(key, r.netRate);
+    }
+    return m;
+  }, [rates]);
+
+  const lookup = (ageBand: string, gender: string, group: string) =>
+    rateMap.get(`${ageBand}|${gender}|${group}|${selectedCopay}`);
+
+  // Determine copay description for subtitle
+  const copayDesc = selectedCopay === '0%'
+    ? 'NET RATES \u2014 0% OP Diagnostics and 0% Pharmacy Co-pay'
+    : `NET RATES \u2014 ${selectedCopay} Co-pay`;
+
+  if (rates.length === 0) {
+    return (
+      <div className="p-5 rounded-xl border border-gray-200 dark:border-gray-700 text-center text-gray-400 py-8">
+        No rate data available
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      {/* Title block */}
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-5 py-4 text-white">
+        <div className="flex items-center gap-2">
+          <Table2 size={20} />
+          <h3 className="font-bold text-lg">
+            Individual Rates &mdash; {selected.insurerName} {selected.productName} {selected.region}
+          </h3>
+        </div>
+        <p className="text-blue-100 text-sm mt-1">{copayDesc}</p>
+        <div className="flex items-center gap-4 mt-2 text-xs text-blue-200">
+          <span>{selected.currency} &middot; {selected.variant}</span>
+          <span>{rates.length} rate entries</span>
+          <span>{ageBands.length} age bands &times; {groups.length} {groupLabel.toLowerCase()}s &times; {genders.length} genders</span>
+        </div>
+      </div>
+
+      {/* Copay selector (if multiple) */}
+      {copayOptions.length > 1 && (
+        <div className="px-5 py-2 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center gap-3">
+          <span className="text-sm text-gray-600 dark:text-gray-300 font-medium">Co-pay:</span>
+          {copayOptions.map((c) => (
+            <button
+              key={c}
+              onClick={() => setSelectedCopay(c)}
+              className={`text-sm px-3 py-1 rounded-full transition-colors ${
+                selectedCopay === c
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-300'
+              }`}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Scrollable table */}
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse min-w-[600px]">
+          {/* Top header row: group names spanning gender sub-columns */}
+          <thead>
+            <tr className="bg-gray-100 dark:bg-gray-800">
+              <th
+                rowSpan={2}
+                className="text-left px-3 py-2 font-semibold text-gray-700 dark:text-gray-200 border-b border-r border-gray-200 dark:border-gray-600 sticky left-0 bg-gray-100 dark:bg-gray-800 z-10 min-w-[100px]"
+              >
+                Age Band
+              </th>
+              {groups.map((g) => (
+                <th
+                  key={g}
+                  colSpan={genders.length}
+                  className="text-center px-2 py-2 font-bold text-gray-800 dark:text-gray-100 border-b border-r border-gray-200 dark:border-gray-600 bg-gray-100 dark:bg-gray-800"
+                >
+                  {g}
+                </th>
+              ))}
+            </tr>
+            {/* Sub-header row: gender names */}
+            <tr className="bg-gray-50 dark:bg-gray-750">
+              {groups.map((g) =>
+                genders.map((gen) => (
+                  <th
+                    key={`${g}-${gen}`}
+                    className="text-center px-2 py-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 border-b border-r border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/80 whitespace-nowrap"
+                  >
+                    {gen}
+                  </th>
+                ))
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {ageBands.map((band, rowIdx) => (
+              <tr
+                key={band}
+                className={`${
+                  rowIdx % 2 === 0
+                    ? 'bg-white dark:bg-gray-900'
+                    : 'bg-gray-50/70 dark:bg-gray-800/40'
+                } hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors`}
+              >
+                <td className="px-3 py-1.5 font-mono text-xs font-semibold text-gray-700 dark:text-gray-300 border-r border-gray-200 dark:border-gray-600 sticky left-0 bg-inherit whitespace-nowrap">
+                  {band}
+                </td>
+                {groups.map((g) =>
+                  genders.map((gen) => {
+                    const val = lookup(band, gen, g);
+                    return (
+                      <td
+                        key={`${g}-${gen}`}
+                        className="text-right px-2 py-1.5 font-mono text-xs tabular-nums border-r border-gray-100 dark:border-gray-700 whitespace-nowrap"
+                      >
+                        {fmtAED(val)}
+                      </td>
+                    );
+                  })
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Footer */}
+      <div className="px-5 py-2 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 text-xs text-gray-400 flex justify-between">
+        <span>All values in {selected.currency} per annum per person</span>
+        <span>{selected.effectiveFrom ? `Effective: ${selected.effectiveFrom}` : ''}</span>
+      </div>
+    </div>
+  );
+};
 
 const RateTablesPage: React.FC = () => {
   const [tables, setTables] = useState<any[]>([]);
@@ -167,37 +326,8 @@ const RateTablesPage: React.FC = () => {
                   )}
                 </div>
 
-                {/* Rate Grid */}
-                <div className="p-5 rounded-xl border border-gray-200 dark:border-gray-700">
-                  <h3 className="font-semibold mb-3">Rate Grid ({selected.rates?.length || 0} entries)</h3>
-                  <div className="overflow-x-auto max-h-96">
-                    <table className="w-full text-sm">
-                      <thead className="sticky top-0 bg-gray-50 dark:bg-gray-800">
-                        <tr>
-                          <th className="text-left p-2">Age Band</th>
-                          <th className="text-left p-2">Gender</th>
-                          <th className="text-left p-2">{selected.parameters?.networks?.length ? 'Network' : 'Plan'}</th>
-                          <th className="text-left p-2">Copay</th>
-                          <th className="text-right p-2">Net Rate ({selected.currency})</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {(selected.rates || []).slice(0, 100).map((r: any, i: number) => (
-                          <tr key={i} className="border-t border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50">
-                            <td className="p-2 font-mono text-xs">{r.ageBand}</td>
-                            <td className="p-2">{r.gender}</td>
-                            <td className="p-2">{r.network || r.plan || '-'}</td>
-                            <td className="p-2">{r.copay}</td>
-                            <td className="p-2 text-right font-mono">{r.netRate?.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    {(selected.rates?.length || 0) > 100 && (
-                      <div className="text-center py-2 text-gray-400 text-sm">Showing first 100 of {selected.rates.length} entries</div>
-                    )}
-                  </div>
-                </div>
+                {/* Rate Grid — Industry-Standard Pivoted View */}
+                <RateGridPanel selected={selected} />
               </div>
             ) : (
               <div className="flex items-center justify-center h-64 text-gray-400">

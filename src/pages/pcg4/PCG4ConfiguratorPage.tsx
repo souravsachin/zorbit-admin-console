@@ -87,12 +87,8 @@ const PCG4ConfiguratorPage: React.FC = () => {
         const stageIdx = STAGE_ORDER.indexOf(data.current_stage);
         if (stageIdx > 0) {
           wizard.goTo(stageIdx);
-          // Mark all previous steps completed
+          // Mark only steps up to (but not including) the current stage as completed
           for (let i = 0; i < stageIdx; i++) {
-            wizard.markCompleted(i);
-          }
-          // If config already exists (loaded from API), make all steps navigable for review
-          for (let i = 0; i < STEPS.length; i++) {
             wizard.markCompleted(i);
           }
         }

@@ -172,6 +172,7 @@ const HIQuotationPage: React.FC = () => {
         </div>
         <div className="flex items-center gap-3">
           <button
+            data-testid="hiq-new-application"
             onClick={() => navigate('new')}
             className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-fuchsia-600 text-white hover:bg-fuchsia-700 transition-colors"
           >
@@ -260,7 +261,7 @@ const HIQuotationPage: React.FC = () => {
       )}
 
       {/* Quotations List */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div data-testid="hiq-quotations-table" className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 flex items-center gap-2">
           <FileText className="h-4 w-4 text-fuchsia-500" />
           <h2 className="text-sm font-semibold text-gray-900 dark:text-white">Quotations</h2>

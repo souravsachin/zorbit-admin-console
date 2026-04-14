@@ -160,6 +160,7 @@ const Step3_CreatePlans: React.FC<StepProps> = ({
                     value={plan.plan_name}
                     onChange={(e) => handlePlanChange(index, 'plan_name', e.target.value)}
                     onBlur={() => handleBlur(`${index}_name`)}
+                    data-testid={`pcg4-plan-name-${index}`}
                     className={`w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 dark:bg-gray-800 dark:text-gray-100 ${
                       showError(`${index}_name`)
                         ? 'border-red-500'
@@ -180,6 +181,7 @@ const Step3_CreatePlans: React.FC<StepProps> = ({
                     value={plan.plan_tier}
                     onChange={(e) => handlePlanChange(index, 'plan_tier', e.target.value)}
                     onBlur={() => handleBlur(`${index}_tier`)}
+                    data-testid={`pcg4-plan-tier-${index}`}
                     className={`w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 dark:bg-gray-800 dark:text-gray-100 ${
                       showError(`${index}_tier`)
                         ? 'border-red-500'
@@ -254,6 +256,7 @@ const Step3_CreatePlans: React.FC<StepProps> = ({
         <button
           type="button"
           onClick={addPlan}
+          data-testid="pcg4-add-plan"
           className="px-4 py-2 text-sm font-medium border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 inline-flex items-center"
         >
           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -304,6 +307,7 @@ const Step3_CreatePlans: React.FC<StepProps> = ({
             type="button"
             onClick={handleNext}
             disabled={!isValid || saving}
+            data-testid="pcg4-step3-next"
             className="px-4 py-2 text-sm font-medium bg-orange-500 text-white rounded-md hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
           >
             Next: Base Plan Config

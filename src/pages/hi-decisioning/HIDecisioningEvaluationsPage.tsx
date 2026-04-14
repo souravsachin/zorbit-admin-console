@@ -97,7 +97,7 @@ const HIDecisioningEvaluationsPage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await api.get(`${base}/api/v1/O/${orgId}/hi-decisioning/evaluations?page=${p}&limit=${limit}`);
+      const res = await api.get(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/evaluations?page=${p}&limit=${limit}`);
       const d = res.data;
       const list = d?.evaluations || (Array.isArray(d) ? d : d?.data || []);
       setEvaluations(list);
@@ -115,7 +115,7 @@ const HIDecisioningEvaluationsPage: React.FC = () => {
     if (detailCache[hashId]) return;
     setLoadingDetail(hashId);
     try {
-      const res = await api.get(`${base}/api/v1/O/${orgId}/hi-decisioning/evaluations/${hashId}`);
+      const res = await api.get(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/evaluations/${hashId}`);
       const ev = res.data?.evaluation || res.data;
       setDetailCache((prev) => ({ ...prev, [hashId]: ev }));
     } catch {

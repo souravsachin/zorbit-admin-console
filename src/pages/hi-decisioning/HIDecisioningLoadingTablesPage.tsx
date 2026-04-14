@@ -84,7 +84,7 @@ const HIDecisioningLoadingTablesPage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await api.get(`${base}/api/v1/O/${orgId}/hi-decisioning/loading-tables`);
+      const res = await api.get(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/loading-tables`);
       const d = res.data;
       setTables(d?.tables || (Array.isArray(d) ? d : d?.data || []));
     } catch (err: unknown) {
@@ -99,7 +99,7 @@ const HIDecisioningLoadingTablesPage: React.FC = () => {
   const seedDefaults = async () => {
     setSeeding(true);
     try {
-      await api.post(`${base}/api/v1/O/${orgId}/hi-decisioning/loading-tables/seed-defaults`, {});
+      await api.post(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/loading-tables/seed-defaults`, {});
       await fetchTables();
     } catch {
       // ignore
@@ -111,7 +111,7 @@ const HIDecisioningLoadingTablesPage: React.FC = () => {
   const deleteTable = async (hashId: string) => {
     if (!confirm('Delete this loading table?')) return;
     try {
-      await api.delete(`${base}/api/v1/O/${orgId}/hi-decisioning/loading-tables/${hashId}`);
+      await api.delete(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/loading-tables/${hashId}`);
       setTables((prev) => prev.filter((t) => t.hashId !== hashId));
     } catch {
       // ignore

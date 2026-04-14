@@ -120,6 +120,11 @@ export type ConfigurationStage =
 
 export interface PCG4Configuration {
   id?: string;
+  name?: string;
+  description?: string;
+  effectiveDate?: string;
+  expiryDate?: string;
+  general_rules?: GeneralRules;
   insurer: InsurerDetails | null;
   product: ProductDetails | null;
   plans: Plan[];

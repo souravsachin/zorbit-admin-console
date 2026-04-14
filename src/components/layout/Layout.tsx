@@ -3,12 +3,15 @@ import { Outlet } from 'react-router-dom';
 import { HamburgerMenu } from '../HamburgerMenu';
 import Header from './Header';
 import ImpersonationBanner from './ImpersonationBanner';
+import Sidebar6Level from './Sidebar6Level';
 import { useAuth } from '../../hooks/useAuth';
 import { usePreferences } from '../../hooks/usePreferences';
+import { useMenuPreference } from '../../hooks/useMenuPreference';
 
 const Layout: React.FC = () => {
   const { user } = useAuth();
   const { prefs, update: updatePrefs } = usePreferences(user?.id);
+  const { menuStyle, toggleMenuStyle } = useMenuPreference();
 
   // Sidebar drawer open/close (controlled by hamburger button + close gesture)
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -46,13 +49,27 @@ const Layout: React.FC = () => {
     <div className="flex flex-col h-screen overflow-hidden bg-gray-50 dark:bg-gray-900">
       <ImpersonationBanner />
       <div className="flex flex-1 min-h-0">
-        <HamburgerMenu
-          open={sidebarVisible}
-          onClose={closeSidebar}
-          isOverlay={isMobile || !locked}
-          prefs={prefs}
-          updatePrefs={updatePrefs}
-        />
+        {menuStyle === '6level' ? (
+          <Sidebar6Level
+            open={sidebarVisible}
+            onClose={closeSidebar}
+            isOverlay={isMobile || !locked}
+            menuStyle={menuStyle}
+            onToggleMenuStyle={toggleMenuStyle}
+            prefs={prefs}
+            updatePrefs={updatePrefs}
+          />
+        ) : (
+          <HamburgerMenu
+            open={sidebarVisible}
+            onClose={closeSidebar}
+            isOverlay={isMobile || !locked}
+            prefs={prefs}
+            updatePrefs={updatePrefs}
+            menuStyle={menuStyle}
+            onToggleMenuStyle={toggleMenuStyle}
+          />
+        )}
         <div className="flex-1 flex flex-col min-w-0">
           <Header
             onMenuToggle={toggleSidebar}
