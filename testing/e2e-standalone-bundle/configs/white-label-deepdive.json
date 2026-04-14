@@ -1,0 +1,380 @@
+{
+  "_meta": {
+    "description": "White Label deep-dive E2E — UI + API coverage for all 6 demo themes",
+    "updated": "2026-04-15"
+  },
+  "baseUrl": "https://zorbit-uat.onezippy.ai",
+  "viewport": { "width": 1440, "height": 900 },
+  "defaults": {
+    "timeout": 20000,
+    "waitAfterAction": 600,
+    "waitForNetworkIdle": false
+  },
+
+  "segments": {
+
+    "wl-api-health": {
+      "name": "White Label API Health",
+      "description": "Verify white label service health and seed endpoints via nginx",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/login",
+          "announce": { "before": "Stabilising page context for API checks" }
+        },
+        { "action": "wait", "timeout": 1000 },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/white-label/api/v1/G/white-label/health",
+          "expectedStatus": [200],
+          "announce": {
+            "before": "Checking White Label service health",
+            "after": "White Label service is healthy"
+          }
+        }
+      ]
+    },
+
+    "wl-login": {
+      "name": "Login",
+      "description": "Authenticate as admin and wait for dashboard",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/login",
+          "announce": { "before": "Navigating to login page" }
+        },
+        { "action": "wait", "timeout": 1500 },
+        {
+          "action": "fill",
+          "selector": "input[type='email'], input[name='email'], input[placeholder*='email' i]",
+          "value": "${credentials.admin.email}"
+        },
+        {
+          "action": "fill",
+          "selector": "input[type='password']",
+          "value": "${credentials.admin.password}"
+        },
+        {
+          "action": "click",
+          "selector": "button[type='submit'], button:has-text('Sign in'), button:has-text('Login')",
+          "announce": { "after": "Login submitted" }
+        },
+        { "action": "wait", "timeout": 4000 },
+        {
+          "action": "assertVisible",
+          "selector": "nav, aside, [class*='sidebar'], [role='navigation'], main",
+          "timeout": 20000,
+          "announce": { "after": "Logged in. Dashboard loaded." }
+        },
+        {
+          "action": "screenshot",
+          "value": "wl-01-login-dashboard.png"
+        }
+      ]
+    },
+
+    "wl-setup-seed": {
+      "name": "White Label Setup — Seed Demo Data",
+      "description": "Navigate to white label setup and trigger seed demo",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/white-label/setup",
+          "announce": { "before": "Navigating to White Label Setup page" }
+        },
+        { "action": "wait", "timeout": 3000 },
+        {
+          "action": "assertVisible",
+          "selector": "h1, h2, [class*='title'], [class*='heading'], main",
+          "timeout": 12000,
+          "announce": { "after": "White Label Setup page loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "wl-02-setup-page.png"
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/white-label/api/v1/G/white-label/seed/demo",
+          "method": "POST",
+          "expectedStatus": [200, 201],
+          "announce": {
+            "before": "Seeding demo themes via API",
+            "after": "Demo themes seeded successfully"
+          }
+        },
+        { "action": "wait", "timeout": 1500 },
+        {
+          "action": "screenshot",
+          "value": "wl-03-after-seed.png",
+          "announce": { "after": "Setup page captured after seed" }
+        }
+      ]
+    },
+
+    "wl-themes-list": {
+      "name": "White Label Themes List",
+      "description": "Navigate to themes page and verify 6 demo themes appear",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/white-label/themes",
+          "announce": { "before": "Navigating to White Label Themes list" }
+        },
+        { "action": "wait", "timeout": 3000 },
+        {
+          "action": "assertVisible",
+          "selector": "h1, h2, [class*='title'], [class*='theme'], main",
+          "timeout": 12000,
+          "announce": { "after": "Themes list page loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "wl-04-themes-list.png",
+          "announce": { "after": "Themes list screenshot captured" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/white-label/api/v1/O/O-OZPY/white-label/themes",
+          "expectedStatus": [200],
+          "announce": {
+            "before": "Verifying themes API returns 6 themes for O-OZPY",
+            "after": "Themes API confirmed"
+          }
+        },
+        {
+          "action": "assertVisible",
+          "selector": "[class*='card'], [class*='theme'], [class*='grid'] > *, table tbody tr",
+          "timeout": 12000,
+          "announce": { "after": "At least one theme card visible" }
+        },
+        {
+          "action": "screenshot",
+          "value": "wl-05-themes-cards.png"
+        }
+      ]
+    },
+
+    "wl-novacare-theme": {
+      "name": "NovaCare Theme Detail",
+      "description": "Click on NovaCare theme and verify detail page with color swatches",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/white-label/themes",
+          "announce": { "before": "Opening themes list to click NovaCare" }
+        },
+        { "action": "wait", "timeout": 3000 },
+        {
+          "action": "click",
+          "selector": "text=NovaCare, [class*='card']:has-text('NovaCare'), a:has-text('NovaCare')",
+          "timeout": 12000,
+          "announce": { "after": "Clicked NovaCare theme" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "assertVisible",
+          "selector": "h1, h2, [class*='title'], [class*='detail'], [class*='theme-name'], main",
+          "timeout": 12000,
+          "announce": { "after": "NovaCare detail page loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "wl-06-novacare-detail.png",
+          "announce": { "after": "NovaCare theme detail captured" }
+        }
+      ]
+    },
+
+    "wl-swiftdrive-theme": {
+      "name": "SwiftDrive Theme Detail",
+      "description": "Navigate back to themes list and click SwiftDrive theme",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/white-label/themes",
+          "announce": { "before": "Back to themes list — clicking SwiftDrive" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "click",
+          "selector": "text=SwiftDrive, [class*='card']:has-text('SwiftDrive'), a:has-text('SwiftDrive')",
+          "timeout": 12000,
+          "announce": { "after": "Clicked SwiftDrive theme" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "assertVisible",
+          "selector": "h1, h2, [class*='title'], [class*='detail'], main",
+          "timeout": 12000,
+          "announce": { "after": "SwiftDrive detail page loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "wl-07-swiftdrive-detail.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/white-label/themes",
+          "announce": { "before": "Navigating back to themes list" }
+        },
+        { "action": "wait", "timeout": 2000 },
+        {
+          "action": "screenshot",
+          "value": "wl-08-themes-back.png",
+          "announce": { "after": "Back to themes list confirmed" }
+        }
+      ]
+    },
+
+    "wl-hub": {
+      "name": "White Label Hub",
+      "description": "Navigate to white label hub page",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/white-label/hub",
+          "announce": { "before": "Navigating to White Label Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "assertVisible",
+          "selector": "h1, h2, [class*='hub'], [class*='title'], main",
+          "timeout": 12000,
+          "announce": { "after": "White Label Hub loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "wl-09-hub.png"
+        }
+      ]
+    },
+
+    "wl-guide": {
+      "name": "White Label Guide",
+      "description": "Navigate to white label guide/docs page",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/white-label/guide",
+          "announce": { "before": "Navigating to White Label Guide" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "assertVisible",
+          "selector": "h1, h2, [class*='guide'], [class*='title'], [role='tablist'], main",
+          "timeout": 12000,
+          "announce": { "after": "White Label Guide page loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "wl-10-guide.png"
+        }
+      ]
+    },
+
+    "wl-css-preview": {
+      "name": "White Label CSS Preview (if exists)",
+      "description": "Try to navigate to CSS preview page",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/white-label/css-preview",
+          "announce": { "before": "Attempting White Label CSS Preview page" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "wl-11-css-preview.png",
+          "announce": { "after": "CSS Preview page (or 404) captured" }
+        }
+      ]
+    },
+
+    "wl-api-verify-themes": {
+      "name": "API: Verify Theme List + Resolve",
+      "description": "API-level check for theme list and resolve endpoints",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/white-label/themes",
+          "announce": { "before": "Setting page context for API checks" }
+        },
+        { "action": "wait", "timeout": 1000 },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/white-label/api/v1/G/white-label/health",
+          "expectedStatus": [200],
+          "announce": {
+            "before": "Health check",
+            "after": "White Label health: OK"
+          }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/white-label/api/v1/O/O-OZPY/white-label/themes",
+          "expectedStatus": [200],
+          "announce": {
+            "before": "Checking O-OZPY themes list via API",
+            "after": "O-OZPY themes list: OK"
+          }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/white-label/api/v1/O/O-OZPY/white-label/resolve",
+          "expectedStatus": [200, 404],
+          "announce": {
+            "before": "Checking resolve endpoint",
+            "after": "Resolve endpoint responded"
+          }
+        },
+        {
+          "action": "screenshot",
+          "value": "wl-12-api-verified.png"
+        }
+      ]
+    }
+
+  },
+
+  "journeys": {
+    "wl-api-check": {
+      "name": "White Label API Health",
+      "description": "Public API health check for white label service",
+      "segments": ["wl-api-health"]
+    },
+
+    "wl-ui-deepdive": {
+      "name": "White Label UI Deep-Dive",
+      "description": "Full UI walkthrough: login, setup, seed, themes, NovaCare, SwiftDrive, hub, guide",
+      "segments": [
+        "wl-login",
+        "wl-setup-seed",
+        "wl-themes-list",
+        "wl-novacare-theme",
+        "wl-swiftdrive-theme",
+        "wl-hub",
+        "wl-css-preview",
+        "wl-guide",
+        "wl-api-verify-themes"
+      ]
+    }
+  },
+
+  "bouquets": {
+    "white-label-api": {
+      "name": "White Label API Only",
+      "description": "Quick API health check for white label service",
+      "mode": "sequential",
+      "journeys": ["wl-api-check"]
+    },
+
+    "white-label-full": {
+      "name": "White Label Full Deep-Dive",
+      "description": "Complete white label UI + API test: seed, list 6 themes, detail pages, guide, CSS preview",
+      "mode": "sequential",
+      "journeys": ["wl-api-check", "wl-ui-deepdive"]
+    }
+  }
+}

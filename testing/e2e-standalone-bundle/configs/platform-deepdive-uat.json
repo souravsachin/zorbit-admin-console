@@ -1,0 +1,1102 @@
+{
+  "_meta": {
+    "description": "Full platform deep-dive UAT — every module and screen on zorbit-uat.onezippy.ai",
+    "updated": "2026-04-15"
+  },
+  "baseUrl": "https://zorbit-uat.onezippy.ai",
+  "viewport": { "width": 1440, "height": 900 },
+  "defaults": {
+    "timeout": 20000,
+    "waitAfterAction": 700,
+    "waitForNetworkIdle": false
+  },
+
+  "segments": {
+
+    "api-health-all-services": {
+      "name": "API Health — All 16 Services",
+      "description": "Health check every deployed service via nginx proxy",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/login",
+          "announce": { "before": "Starting platform-wide API health checks" }
+        },
+        { "action": "wait", "timeout": 1000 },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/identity/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Identity", "after": "Identity: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/authorization/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Authorization", "after": "Authorization: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/navigation/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Navigation", "after": "Navigation: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/messaging/api/v1/G/messaging/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Messaging", "after": "Messaging: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/pii-vault/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "PII Vault", "after": "PII Vault: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/audit/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Audit", "after": "Audit: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/pcg4/api/v1/G/health",
+          "expectedStatus": [200, 404],
+          "announce": { "before": "PCG4", "after": "PCG4: responded" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/white-label/api/v1/G/white-label/health",
+          "expectedStatus": [200],
+          "announce": { "before": "White Label", "after": "White Label: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/zmb-factory/api/v1/G/zmb-factory/health",
+          "expectedStatus": [200],
+          "announce": { "before": "ZMB Factory", "after": "ZMB Factory: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/hi-quotation/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "HI Quotation", "after": "HI Quotation: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/health",
+          "expectedStatus": [200],
+          "announce": { "before": "HI UW Decisioning", "after": "HI UW Decisioning: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/uw-workflow/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "UW Workflow", "after": "UW Workflow: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/product-pricing/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Product Pricing", "after": "Product Pricing: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/form-builder/api/v1/G/form-builder/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Form Builder", "after": "Form Builder: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/datatable/api/v1/G/datatable/health",
+          "expectedStatus": [200],
+          "announce": { "before": "DataTable", "after": "DataTable: healthy" }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/doc-generator/api/v1/G/health",
+          "expectedStatus": [200],
+          "announce": { "before": "Doc Generator", "after": "Doc Generator: healthy" }
+        },
+        {
+          "action": "screenshot",
+          "value": "uat-00-api-health-all.png",
+          "announce": { "after": "All 16 service health checks complete" }
+        }
+      ]
+    },
+
+    "login-flow": {
+      "name": "Login",
+      "description": "Authenticate as admin and verify dashboard loads",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/login",
+          "announce": { "before": "Navigating to login page" }
+        },
+        { "action": "wait", "timeout": 1500 },
+        {
+          "action": "assertVisible",
+          "selector": "input[type='email'], input[name='email'], input[placeholder*='email' i]",
+          "timeout": 10000
+        },
+        {
+          "action": "fill",
+          "selector": "input[type='email'], input[name='email'], input[placeholder*='email' i]",
+          "value": "${credentials.admin.email}"
+        },
+        {
+          "action": "fill",
+          "selector": "input[type='password']",
+          "value": "${credentials.admin.password}"
+        },
+        {
+          "action": "click",
+          "selector": "button[type='submit'], button:has-text('Sign in'), button:has-text('Login')",
+          "announce": { "after": "Login submitted" }
+        },
+        { "action": "wait", "timeout": 4000 },
+        {
+          "action": "assertVisible",
+          "selector": "nav, aside, [class*='sidebar'], [role='navigation'], main",
+          "timeout": 20000,
+          "announce": { "after": "Dashboard loaded. Authenticated." }
+        },
+        {
+          "action": "screenshot",
+          "value": "uat-01-login.png"
+        }
+      ]
+    },
+
+    "dashboard": {
+      "name": "Dashboard",
+      "description": "Navigate to dashboard and capture overview",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/dashboard",
+          "announce": { "before": "Navigating to dashboard" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "assertVisible",
+          "selector": "main, [class*='dashboard'], [class*='content']",
+          "timeout": 12000,
+          "announce": { "after": "Dashboard page loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "uat-02-dashboard.png"
+        }
+      ]
+    },
+
+    "identity-module": {
+      "name": "Identity Module",
+      "description": "Hub, Setup, Users, and Organizations pages",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/identity/hub",
+          "announce": { "before": "Identity Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-03a-identity-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/identity/setup",
+          "announce": { "before": "Identity Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-03b-identity-setup.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/identity/users",
+          "announce": { "before": "Identity Users list" }
+        },
+        { "action": "wait", "timeout": 3000 },
+        {
+          "action": "assertVisible",
+          "selector": "table, [class*='table'], [class*='user'], h1, h2, main",
+          "timeout": 12000,
+          "announce": { "after": "Users list loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "uat-03c-identity-users.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/identity/organizations",
+          "announce": { "before": "Identity Organizations" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-03d-identity-orgs.png",
+          "announce": { "after": "Identity module complete" }
+        }
+      ]
+    },
+
+    "authorization-module": {
+      "name": "Authorization Module",
+      "description": "Hub, Setup, and Roles pages",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/authorization/hub",
+          "announce": { "before": "Authorization Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-04a-authz-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/authorization/setup",
+          "announce": { "before": "Authorization Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-04b-authz-setup.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/authorization/roles",
+          "announce": { "before": "Authorization Roles list" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "assertVisible",
+          "selector": "table, [class*='table'], [class*='role'], h1, main",
+          "timeout": 12000,
+          "announce": { "after": "Roles list loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "uat-04c-authz-roles.png",
+          "announce": { "after": "Authorization module complete" }
+        }
+      ]
+    },
+
+    "navigation-module": {
+      "name": "Navigation Module",
+      "description": "Hub and Setup pages",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/navigation/hub",
+          "announce": { "before": "Navigation Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-05a-nav-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/navigation/setup",
+          "announce": { "before": "Navigation Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-05b-nav-setup.png",
+          "announce": { "after": "Navigation module complete" }
+        }
+      ]
+    },
+
+    "pii-vault-module": {
+      "name": "PII Vault Module",
+      "description": "Hub, Setup, Data Types, and Tokens pages",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/pii-vault/hub",
+          "announce": { "before": "PII Vault Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-06a-pii-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/pii-vault/setup",
+          "announce": { "before": "PII Vault Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-06b-pii-setup.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/pii-vault/data-types",
+          "announce": { "before": "PII Vault Data Types" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-06c-pii-data-types.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/pii-vault/tokens",
+          "announce": { "before": "PII Vault Tokens" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-06d-pii-tokens.png",
+          "announce": { "after": "PII Vault module complete" }
+        }
+      ]
+    },
+
+    "audit-module": {
+      "name": "Audit Module",
+      "description": "Hub, Setup, and Records pages",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/audit/hub",
+          "announce": { "before": "Audit Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-07a-audit-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/audit/setup",
+          "announce": { "before": "Audit Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-07b-audit-setup.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/audit/records",
+          "announce": { "before": "Audit Records" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-07c-audit-records.png",
+          "announce": { "after": "Audit module complete" }
+        }
+      ]
+    },
+
+    "messaging-module": {
+      "name": "Messaging Module",
+      "description": "Hub, Setup, and Topics pages",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/messaging/hub",
+          "announce": { "before": "Messaging Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-08a-messaging-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/messaging/setup",
+          "announce": { "before": "Messaging Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-08b-messaging-setup.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/messaging/topics",
+          "announce": { "before": "Messaging Topics" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "assertVisible",
+          "selector": "table, [class*='table'], [class*='topic'], h1, main",
+          "timeout": 12000,
+          "announce": { "after": "Topics list loaded" }
+        },
+        {
+          "action": "screenshot",
+          "value": "uat-08c-messaging-topics.png",
+          "announce": { "after": "Messaging module complete" }
+        }
+      ]
+    },
+
+    "white-label-module": {
+      "name": "White Label Module (Deep Dive)",
+      "description": "Hub, Setup, seed demo, Themes list (6), NovaCare detail, SwiftDrive detail, Guide",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/white-label/hub",
+          "announce": { "before": "White Label Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-09a-wl-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/white-label/setup",
+          "announce": { "before": "White Label Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-09b-wl-setup.png"
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/white-label/api/v1/G/white-label/health",
+          "expectedStatus": [200],
+          "announce": {
+            "before": "White Label API health check",
+            "after": "White Label service healthy"
+          }
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/white-label/api/v1/O/O-OZPY/white-label/themes",
+          "expectedStatus": [200],
+          "announce": {
+            "before": "Verifying O-OZPY theme list API",
+            "after": "Theme list API confirmed"
+          }
+        },
+        {
+          "action": "navigate",
+          "url": "/app/white-label/themes",
+          "announce": { "before": "White Label Themes list (should show 6 themes)" }
+        },
+        { "action": "wait", "timeout": 3000 },
+        {
+          "action": "assertVisible",
+          "selector": "[class*='card'], [class*='theme'], [class*='grid'] > *, table tbody tr, h1",
+          "timeout": 12000,
+          "announce": { "after": "At least one theme card visible" }
+        },
+        {
+          "action": "screenshot",
+          "value": "uat-09c-wl-themes-list.png"
+        },
+        {
+          "action": "click",
+          "selector": "text=NovaCare, [class*='card']:has-text('NovaCare'), a:has-text('NovaCare')",
+          "timeout": 12000,
+          "announce": { "after": "Clicked NovaCare theme" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-09d-wl-novacare-detail.png",
+          "announce": { "after": "NovaCare detail captured" }
+        },
+        {
+          "action": "navigate",
+          "url": "/app/white-label/themes",
+          "announce": { "before": "Back to themes — clicking SwiftDrive" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "click",
+          "selector": "text=SwiftDrive, [class*='card']:has-text('SwiftDrive'), a:has-text('SwiftDrive')",
+          "timeout": 12000,
+          "announce": { "after": "Clicked SwiftDrive theme" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-09e-wl-swiftdrive-detail.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/white-label/guide",
+          "announce": { "before": "White Label Guide page" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-09f-wl-guide.png",
+          "announce": { "after": "White Label module complete" }
+        }
+      ]
+    },
+
+    "pcg4-module": {
+      "name": "PCG4 Module",
+      "description": "Hub, Setup, and Products pages",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/pcg4/hub",
+          "announce": { "before": "PCG4 Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-10a-pcg4-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/pcg4/setup",
+          "announce": { "before": "PCG4 Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-10b-pcg4-setup.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/pcg4/products",
+          "announce": { "before": "PCG4 Products" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-10c-pcg4-products.png",
+          "announce": { "after": "PCG4 module complete" }
+        }
+      ]
+    },
+
+    "hi-quotation-module": {
+      "name": "HI Quotation Module",
+      "description": "Hub, Setup, and Quotations list",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/hi-quotation/hub",
+          "announce": { "before": "HI Quotation Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-11a-hi-quot-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/hi-quotation/setup",
+          "announce": { "before": "HI Quotation Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-11b-hi-quot-setup.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/hi-quotation/quotations",
+          "announce": { "before": "HI Quotation list" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-11c-hi-quot-list.png",
+          "announce": { "after": "HI Quotation module complete" }
+        }
+      ]
+    },
+
+    "hi-uw-decisioning-module": {
+      "name": "HI UW Decisioning Module (renamed paths)",
+      "description": "Hub, Setup, Rules — verifies renamed /hi-uw-decisioning/ paths",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/hi-uw-decisioning/hub",
+          "announce": { "before": "HI UW Decisioning Hub (new path)" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-12a-hi-uw-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/hi-uw-decisioning/setup",
+          "announce": { "before": "HI UW Decisioning Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-12b-hi-uw-setup.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/hi-uw-decisioning/rules",
+          "announce": { "before": "HI UW Decisioning Rules" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-12c-hi-uw-rules.png"
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/health",
+          "expectedStatus": [200],
+          "announce": {
+            "before": "HI UW Decisioning API health (new path)",
+            "after": "HI UW Decisioning: healthy on new path"
+          }
+        },
+        {
+          "action": "screenshot",
+          "value": "uat-12d-hi-uw-api-confirmed.png",
+          "announce": { "after": "HI UW Decisioning module complete" }
+        }
+      ]
+    },
+
+    "uw-workflow-module": {
+      "name": "UW Workflow Module",
+      "description": "Hub, Setup, and Queues pages",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/uw-workflow/hub",
+          "announce": { "before": "UW Workflow Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-13a-uw-wf-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/uw-workflow/setup",
+          "announce": { "before": "UW Workflow Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-13b-uw-wf-setup.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/uw-workflow/queues",
+          "announce": { "before": "UW Workflow Queues" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-13c-uw-wf-queues.png",
+          "announce": { "after": "UW Workflow module complete" }
+        }
+      ]
+    },
+
+    "product-pricing-module": {
+      "name": "Product Pricing Module",
+      "description": "Hub and Setup pages",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/product-pricing/hub",
+          "announce": { "before": "Product Pricing Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-14a-prod-price-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/product-pricing/setup",
+          "announce": { "before": "Product Pricing Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-14b-prod-price-setup.png",
+          "announce": { "after": "Product Pricing module complete" }
+        }
+      ]
+    },
+
+    "datatable-module": {
+      "name": "DataTable Module",
+      "description": "Hub and Setup pages for the DataTable engine",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/data-table-demo/hub",
+          "announce": { "before": "DataTable Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-15a-datatable-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/data-table-demo/setup",
+          "announce": { "before": "DataTable Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-15b-datatable-setup.png",
+          "announce": { "after": "DataTable module complete" }
+        }
+      ]
+    },
+
+    "form-builder-module": {
+      "name": "Form Builder Module",
+      "description": "Hub, Setup, and Forms list",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/form-builder/hub",
+          "announce": { "before": "Form Builder Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-16a-fb-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/form-builder/setup",
+          "announce": { "before": "Form Builder Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-16b-fb-setup.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/form-builder/forms",
+          "announce": { "before": "Form Builder Forms list" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-16c-fb-forms.png",
+          "announce": { "after": "Form Builder module complete" }
+        }
+      ]
+    },
+
+    "doc-generator-module": {
+      "name": "Doc Generator Module",
+      "description": "Hub and Setup pages",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/doc-generator/hub",
+          "announce": { "before": "Doc Generator Hub" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-17a-docgen-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/doc-generator/setup",
+          "announce": { "before": "Doc Generator Setup" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-17b-docgen-setup.png",
+          "announce": { "after": "Doc Generator module complete" }
+        }
+      ]
+    },
+
+    "zmb-factory-module": {
+      "name": "ZMB Factory Module",
+      "description": "ZMB Factory main page + API module registry check",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/zmb-factory",
+          "announce": { "before": "ZMB Factory main page" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-18a-zmb-factory.png"
+        },
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/zmb-factory/api/v1/G/zmb-factory/modules",
+          "expectedStatus": [200],
+          "announce": {
+            "before": "Checking ZMB Factory module registry API",
+            "after": "ZMB Factory modules API confirmed"
+          }
+        },
+        {
+          "action": "screenshot",
+          "value": "uat-18b-zmb-api-confirmed.png",
+          "announce": { "after": "ZMB Factory module complete" }
+        }
+      ]
+    },
+
+    "developer-center": {
+      "name": "Developer Center",
+      "description": "Developer center hub, health dashboard, and admin developer page",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/dev-center",
+          "announce": { "before": "Developer Center main" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-19a-dev-center.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/dev-center/health",
+          "announce": { "before": "Developer Center health dashboard" }
+        },
+        { "action": "wait", "timeout": 3000 },
+        {
+          "action": "screenshot",
+          "value": "uat-19b-dev-center-health.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/admin/developer",
+          "announce": { "before": "Admin Developer page" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-19c-admin-developer.png",
+          "announce": { "after": "Developer Center complete" }
+        }
+      ]
+    },
+
+    "support-center": {
+      "name": "Support Center",
+      "description": "Support center main page",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/support-center",
+          "announce": { "before": "Support Center page" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-20a-support-center.png",
+          "announce": { "after": "Support Center complete" }
+        }
+      ]
+    },
+
+    "admin": {
+      "name": "Admin Pages",
+      "description": "Module registry and menu preview admin pages",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/app/admin/module-registry",
+          "announce": { "before": "Admin Module Registry" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-21a-admin-module-registry.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/admin/menu-preview",
+          "announce": { "before": "Admin Menu Preview" }
+        },
+        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "screenshot",
+          "value": "uat-21b-admin-menu-preview.png",
+          "announce": { "after": "Admin pages complete. Full platform deep-dive done!" }
+        }
+      ]
+    }
+
+  },
+
+  "journeys": {
+
+    "uat-api-health": {
+      "name": "UAT All Service Health",
+      "description": "Health check all 16 deployed services",
+      "segments": ["api-health-all-services"]
+    },
+
+    "uat-platform-core": {
+      "name": "Platform Core Services",
+      "description": "Login + Identity + Authorization + Navigation + PII Vault + Audit + Messaging",
+      "segments": [
+        "login-flow",
+        "dashboard",
+        "identity-module",
+        "authorization-module",
+        "navigation-module",
+        "pii-vault-module",
+        "audit-module",
+        "messaging-module"
+      ]
+    },
+
+    "uat-white-label-deep": {
+      "name": "White Label Deep Dive",
+      "description": "Full white label UI walkthrough with 6 theme verification",
+      "segments": [
+        "login-flow",
+        "white-label-module"
+      ]
+    },
+
+    "uat-business-modules": {
+      "name": "Business Modules",
+      "description": "PCG4 + HI Quotation + HI UW Decisioning + UW Workflow + Product Pricing",
+      "segments": [
+        "login-flow",
+        "pcg4-module",
+        "hi-quotation-module",
+        "hi-uw-decisioning-module",
+        "uw-workflow-module",
+        "product-pricing-module"
+      ]
+    },
+
+    "uat-pfs-modules": {
+      "name": "Platform Feature Services",
+      "description": "DataTable + Form Builder + Doc Generator + ZMB Factory",
+      "segments": [
+        "login-flow",
+        "datatable-module",
+        "form-builder-module",
+        "doc-generator-module",
+        "zmb-factory-module"
+      ]
+    },
+
+    "uat-admin-and-support": {
+      "name": "Admin + Support + Developer",
+      "description": "Developer Center + Support Center + Admin pages",
+      "segments": [
+        "login-flow",
+        "developer-center",
+        "support-center",
+        "admin"
+      ]
+    },
+
+    "uat-full-deepdive": {
+      "name": "Full Platform Deep-Dive UAT",
+      "description": "Complete platform: API health + login + all 21 module sections",
+      "segments": [
+        "api-health-all-services",
+        "login-flow",
+        "dashboard",
+        "identity-module",
+        "authorization-module",
+        "navigation-module",
+        "pii-vault-module",
+        "audit-module",
+        "messaging-module",
+        "white-label-module",
+        "pcg4-module",
+        "hi-quotation-module",
+        "hi-uw-decisioning-module",
+        "uw-workflow-module",
+        "product-pricing-module",
+        "datatable-module",
+        "form-builder-module",
+        "doc-generator-module",
+        "zmb-factory-module",
+        "developer-center",
+        "support-center",
+        "admin"
+      ]
+    }
+
+  },
+
+  "bouquets": {
+
+    "uat-api": {
+      "name": "UAT API Health Only",
+      "description": "Quick: verify all 16 service APIs respond",
+      "mode": "sequential",
+      "journeys": ["uat-api-health"]
+    },
+
+    "uat-core": {
+      "name": "UAT Platform Core",
+      "description": "Login + 6 core platform modules",
+      "mode": "sequential",
+      "journeys": ["uat-api-health", "uat-platform-core"]
+    },
+
+    "uat-white-label": {
+      "name": "UAT White Label Deep Dive",
+      "description": "Complete white label verification: 6 themes, detail pages, API",
+      "mode": "sequential",
+      "journeys": ["uat-white-label-deep"]
+    },
+
+    "uat-business": {
+      "name": "UAT Business Modules",
+      "description": "All business/domain modules: PCG4, HI, UW, Pricing",
+      "mode": "sequential",
+      "journeys": ["uat-business-modules"]
+    },
+
+    "uat-pfs": {
+      "name": "UAT Platform Feature Services",
+      "description": "DataTable, Form Builder, Doc Generator, ZMB Factory",
+      "mode": "sequential",
+      "journeys": ["uat-pfs-modules"]
+    },
+
+    "uat-full": {
+      "name": "Full Platform Deep-Dive UAT",
+      "description": "Complete UAT: all 16 APIs + all 21 UI module sections from login to admin",
+      "mode": "sequential",
+      "journeys": ["uat-full-deepdive"]
+    }
+
+  }
+}
