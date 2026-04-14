@@ -1,0 +1,135 @@
+{
+  "baseUrl": "https://zorbit-uat.onezippy.ai",
+  "viewport": { "width": 1280, "height": 720 },
+  "defaults": {
+    "timeout": 15000,
+    "waitAfterAction": 500,
+    "waitForNetworkIdle": false
+  },
+  "segments": {
+    "login-flow": {
+      "name": "Login",
+      "description": "Authenticate as admin",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/login",
+          "announce": { "before": "Navigating to login" }
+        },
+        {
+          "action": "wait",
+          "timeout": 1500
+        },
+        {
+          "action": "fill",
+          "selector": "input[type='email'], input[placeholder*='email' i], input[name='email']",
+          "value": "${credentials.admin.email}"
+        },
+        {
+          "action": "fill",
+          "selector": "input[type='password']",
+          "value": "${credentials.admin.password}"
+        },
+        {
+          "action": "click",
+          "selector": "button[type='submit'], button:has-text('Sign in'), button:has-text('Login')",
+          "announce": { "after": "Login submitted" }
+        },
+        {
+          "action": "wait",
+          "timeout": 3000
+        },
+        {
+          "action": "assertVisible",
+          "selector": "h1:has-text('Dashboard'), [class*='dashboard'], nav, [role='navigation']",
+          "timeout": 20000,
+          "announce": { "after": "Logged in successfully" }
+        }
+      ]
+    },
+
+    "navigate-to-messaging": {
+      "name": "Navigate to Messaging Topics",
+      "description": "Open the Messaging > Topics page",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/messaging/topics",
+          "announce": { "before": "Navigating to messaging topics page" }
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "screenshot",
+          "value": "messaging-01-topics-page.png",
+          "announce": { "after": "Topics page loaded" }
+        }
+      ]
+    },
+
+    "assert-topics-visible": {
+      "name": "Assert Topics List Not Empty",
+      "description": "Verify at least one topic is shown in the topics list",
+      "steps": [
+        {
+          "action": "assertVisible",
+          "selector": "table tbody tr, [class*='topic'], [data-testid*='topic']",
+          "timeout": 10000,
+          "announce": { "after": "Topic list element is visible" }
+        },
+        {
+          "action": "assertText",
+          "selector": "table tbody, [class*='topics-list'], main",
+          "pattern": "identity\\.user\\.created|identity\\.user\\.login|authorization\\.role\\.assigned|audit\\.event\\.logged|zmb\\.module\\.generated",
+          "timeout": 10000,
+          "announce": { "after": "At least one expected topic name is visible" }
+        },
+        {
+          "action": "screenshot",
+          "value": "messaging-02-topics-list.png",
+          "announce": { "after": "Topics list verified - not empty" }
+        }
+      ]
+    },
+
+    "messaging-api-health": {
+      "name": "Messaging API Health",
+      "description": "Verify messaging service health endpoint",
+      "steps": [
+        {
+          "action": "apiCheck",
+          "endpoint": "/api/messaging/api/v1/G/messaging/health",
+          "expectedStatus": [200],
+          "announce": {
+            "before": "Checking messaging service health",
+            "after": "Messaging service is healthy"
+          }
+        }
+      ]
+    }
+  },
+
+  "journeys": {
+    "messaging-topics-journey": {
+      "name": "Messaging Topics Journey",
+      "description": "Login, navigate to messaging topics, assert list is not empty",
+      "segments": [
+        "login-flow",
+        "messaging-api-health",
+        "navigate-to-messaging",
+        "assert-topics-visible"
+      ]
+    }
+  },
+
+  "bouquets": {
+    "messaging-smoke": {
+      "name": "Messaging Smoke Test",
+      "description": "Verify messaging topics page loads and shows topics on UAT",
+      "mode": "sequential",
+      "journeys": ["messaging-topics-journey"]
+    }
+  }
+}
