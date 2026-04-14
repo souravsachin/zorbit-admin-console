@@ -8,7 +8,7 @@ import { Repository } from 'typeorm';
 import { PlanBenefit } from '../models/entities/pcg4/plan-benefit.entity';
 import { HashIdService } from './hash-id.service';
 import { EventPublisherService } from '../events/event-publisher.service';
-import { PCG4Events } from '../events/admin-console.events';
+import { PCG4Events } from '../events/unified-console.events';
 import { CreatePlanBenefitDto } from '../models/dto/pcg4/create-plan-benefit.dto';
 import { UpdatePlanBenefitDto } from '../models/dto/pcg4/update-plan-benefit.dto';
 

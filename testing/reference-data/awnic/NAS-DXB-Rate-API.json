@@ -1,0 +1,2982 @@
+{
+  "insurerName": "AWNIC",
+  "productName": "NAS Dubai Individual",
+  "variant": "Dubai",
+  "region": "UAE",
+  "currency": "AED",
+  "status": "active",
+  "parameters": {
+    "ageBands": [
+      "[00-01]",
+      "[02-05]",
+      "[06-15]",
+      "[16-20]",
+      "[21-25]",
+      "[26-30]",
+      "[31-35]",
+      "[36-40]",
+      "[41-45]",
+      "[46-50]",
+      "[51-55]",
+      "[56-60]",
+      "[61-65]",
+      "[66-99]"
+    ],
+    "genders": [
+      "Male",
+      "Female"
+    ],
+    "networks": [
+      "CN",
+      "GN",
+      "RN",
+      "SRN",
+      "WN"
+    ],
+    "copayOptions": [
+      "0%"
+    ]
+  },
+  "rates": [
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 14136.91
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 14136.91
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 12607.55
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 12607.55
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 9623.37
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 9623.37
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 7427.17
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 7427.17
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4007.74
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4007.74
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 9795.44
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 9795.44
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 8693.35
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 8693.35
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 6683.59
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 6683.59
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 5144.42
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 5144.42
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2810.19
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2810.19
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 9447.56
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 9447.56
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 8367.0
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 8367.0
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 6396.5
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 6396.5
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4887.15
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4887.15
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2598.7
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2598.7
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8024.68
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 9016.71
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 6875.24
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7962.68
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5252.05
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 6103.25
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4018.02
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4650.36
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2137.65
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2476.32
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 7481.52
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 15971.64
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 6753.9
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 14333.62
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5188.17
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 10998.12
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 3935.49
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 8239.37
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2062.85
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4382.13
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8232.94
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 18222.07
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7419.72
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 16429.34
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5707.54
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 12550.16
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4322.0
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 9447.25
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2266.06
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 5011.73
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8840.86
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 17177.36
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7950.27
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 15559.66
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 6126.87
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 11838.93
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4629.38
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 8949.06
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2428.48
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4738.73
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 9846.33
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 14559.48
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 8871.22
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 13098.88
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 6823.99
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 10027.08
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 5165.01
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 7533.17
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2705.63
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4002.71
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 10901.73
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 14584.61
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 9823.32
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 13071.1
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 7548.76
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 10038.63
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 5718.7
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 7516.51
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2994.44
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4000.39
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 12986.37
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 16925.02
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 11777.21
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 15105.82
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 9031.23
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 11641.16
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 6855.03
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 8734.49
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 3583.49
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4627.72
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 16751.18
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 19449.11
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 15154.88
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 17345.04
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 11605.63
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 13375.4
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 8819.06
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 9969.41
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4602.92
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 5313.56
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 18806.59
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 22087.62
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 17027.83
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 19735.43
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 13020.89
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 15188.89
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 9917.5
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 11345.06
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 5171.45
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 6039.0
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 28433.41
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 35127.09
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 25785.33
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 31372.89
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 19692.65
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 24149.36
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 14999.75
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 18027.63
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 7810.92
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 9590.02
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 42127.08
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 42127.08
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 38173.46
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 37959.0
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 29155.77
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 28991.05
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 22200.88
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 21819.8
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 11559.55
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 11559.55
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 12910.42
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 12910.42
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 11513.75
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 11513.75
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 8788.47
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 8788.47
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 6782.8
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 6782.8
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 3660.04
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 3660.04
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8945.61
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8945.61
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7939.14
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7939.14
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 6103.73
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 6103.73
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4698.1
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4698.1
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2566.38
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2566.38
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8627.91
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8627.91
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7641.1
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7641.1
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5841.55
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5841.55
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4463.15
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4463.15
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2373.24
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2373.24
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 7328.48
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8234.44
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 6278.76
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7271.85
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 4796.39
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5573.74
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 3669.42
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4246.9
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 1952.19
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2261.48
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 6832.43
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 14585.97
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 6167.94
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 13090.07
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 4738.05
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 10043.94
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 3594.06
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 7524.54
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 1883.88
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4001.95
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 7518.66
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 16641.16
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 6776.0
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 15003.96
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5212.36
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 11461.34
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 3947.03
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 8627.63
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2069.46
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4576.93
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8073.85
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 15687.09
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7260.52
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 14209.73
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5595.32
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 10811.81
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4227.74
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 8172.65
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2217.79
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4327.61
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8992.08
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 13296.33
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 8101.57
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 11962.45
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 6231.96
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 9157.15
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4716.9
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 6879.6
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2470.89
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 3655.45
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 9955.92
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 13319.28
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 8971.06
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 11937.08
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 6893.84
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 9167.69
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 5222.55
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 6864.39
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2734.65
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 3653.32
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 11859.7
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 15456.64
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 10755.44
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 13795.27
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 8247.7
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 10631.19
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 6260.3
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 7976.7
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 3272.59
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4226.22
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 15297.88
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 17761.74
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 13840.07
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 15840.22
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 10598.75
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 12214.98
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 8053.93
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 9104.49
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4203.58
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4852.57
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 17174.97
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 20171.34
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 15550.53
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 18023.22
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 11891.22
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 13871.13
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 9057.08
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 10360.78
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4722.79
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 5515.07
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 25966.59
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 32079.53
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 23548.25
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 28651.04
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 17984.15
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 22054.21
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 13698.4
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 16463.59
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 7133.26
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 8758.01
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 38472.22
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 38472.22
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 34861.6
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 34665.75
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 26626.27
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 26475.84
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 20274.78
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 19926.76
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 10556.67
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 10556.67
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 12264.9
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 12264.9
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 10938.06
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 10938.06
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 8349.05
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 8349.05
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 6443.66
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 6443.66
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 3477.04
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 3477.04
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8498.33
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8498.33
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7542.18
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7542.18
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5798.54
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5798.54
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4463.19
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4463.19
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2438.06
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2438.06
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8196.51
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8196.51
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7259.04
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7259.04
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5549.48
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5549.48
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4240.0
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4240.0
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2254.58
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2254.58
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 6962.06
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 7822.72
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 5964.82
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 6908.26
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 4556.57
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5295.05
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 3485.95
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4034.56
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 1854.58
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2148.41
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 6490.81
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 13856.67
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 5859.55
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 12435.56
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 4501.15
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 9541.75
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 3414.35
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 7148.31
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 1789.69
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 3801.85
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 7142.73
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 15809.11
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 6437.2
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 14253.77
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 4951.74
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 10888.27
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 3749.68
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 8196.25
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 1965.99
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4348.08
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 7670.15
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 14902.74
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 6897.49
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 13499.25
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5315.55
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 10271.22
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4016.36
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 7764.02
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2106.9
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4111.23
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 8542.48
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 12631.51
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 7696.49
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 11364.33
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 5920.36
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 8699.3
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4481.06
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 6535.62
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2347.35
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 3472.67
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 9458.12
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 12653.32
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 8522.51
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 11340.23
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 6549.15
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 8709.31
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 4961.43
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 6521.17
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 2597.92
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 3470.66
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 11266.72
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 14683.81
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 10217.67
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 13105.51
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 7835.31
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 10099.63
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 5947.29
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 7577.87
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 3108.96
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4014.91
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 14532.98
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 16873.66
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 13148.07
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 15048.21
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 10068.82
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 11604.23
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 7651.24
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 8649.26
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 3993.4
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4609.94
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 16316.22
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 19162.78
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 14773.0
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 17122.06
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 11296.66
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 13177.57
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 8604.23
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 9842.74
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 4486.65
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 5239.32
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 24668.26
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 30475.56
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 22370.84
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 27218.49
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 17084.95
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 20951.5
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 13013.48
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 15640.41
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 6776.6
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 8320.11
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 36548.61
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "CN",
+      "copay": "0%",
+      "netRate": 36548.61
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 33118.52
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "GN",
+      "copay": "0%",
+      "netRate": 32932.47
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 25294.96
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "RN",
+      "copay": "0%",
+      "netRate": 25152.05
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 19261.04
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "SRN",
+      "copay": "0%",
+      "netRate": 18930.42
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 10028.84
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "WN",
+      "copay": "0%",
+      "netRate": 10028.84
+    }
+  ]
+}

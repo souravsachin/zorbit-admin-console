@@ -35,7 +35,7 @@ async function bootstrap(): Promise<void> {
   const port = configService.get<number>('PORT', 3020);
 
   await app.listen(port);
-  console.log(`zorbit-admin-console-server listening on port ${port}`);
+  console.log(`zorbit-unified-console-server listening on port ${port}`);
   console.log(`Swagger UI: http://localhost:${port}/api-docs`);
 }
 

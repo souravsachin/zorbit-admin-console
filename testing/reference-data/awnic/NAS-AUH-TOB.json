@@ -1,0 +1,377 @@
+{
+  "insurer": "Al Wathba National Insurance (AWNIC)",
+  "product": "NAS Abu Dhabi Individual",
+  "region": "Abu Dhabi",
+  "plans": [
+    "Plan1",
+    "Plan2",
+    "Plan3",
+    "Plan4",
+    "Plan5"
+  ],
+  "benefits": [
+    {
+      "section": "",
+      "benefit": "Plan1",
+      "plans": {
+        "Plan1": "Plan1",
+        "Plan2": "Plan2",
+        "Plan3": "Plan3",
+        "Plan4": "Plan4",
+        "Plan5": "Plan5"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Worldwide",
+      "plans": {
+        "Plan1": "Worldwide",
+        "Plan2": "Worldwide",
+        "Plan3": "Worldwide",
+        "Plan4": "Worldwide",
+        "Plan5": "Worldwide"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "AED 1 Million",
+      "plans": {
+        "Plan1": "AED 1 Million",
+        "Plan2": "AED 750,000",
+        "Plan3": "AED 500,000",
+        "Plan4": "AED 300,000",
+        "Plan5": "AED 250,000"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "NAS - CN",
+      "plans": {
+        "Plan1": "NAS - CN",
+        "Plan2": "NAS - GN",
+        "Plan3": "NAS -  RN",
+        "Plan4": "NAS- SRN",
+        "Plan5": "NAS - WN"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Private",
+      "plans": {
+        "Plan1": "Private",
+        "Plan2": "Private",
+        "Plan3": "Private",
+        "Plan4": "Private",
+        "Plan5": "Semi-Private"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "AED 450 / day",
+      "plans": {
+        "Plan1": "AED 450 / day",
+        "Plan2": "AED 400 / day",
+        "Plan3": "AED 350 / day",
+        "Plan4": "AED 250 / day",
+        "Plan5": "AED 150 / day"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "AED 450 / day",
+      "plans": {
+        "Plan1": "AED 450 / day",
+        "Plan2": "AED 400 / day",
+        "Plan3": "AED 350 / day",
+        "Plan4": "AED 250 / day",
+        "Plan5": "AED 150 / day"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Covered (on reimbursement) up to Maximum AED 7,500 per person per annum",
+      "plans": {
+        "Plan1": "Covered (on reimbursement) up to Maximum AED 7,500 per person per annum",
+        "Plan2": "Covered (on reimbursement) up to Maximum AED 7,500 per person per annum",
+        "Plan3": "Covered (on reimbursement) up to Maximum AED 5,000 per person per annum",
+        "Plan4": "Covered (on reimbursement) up to Maximum AED 5,000 per person per annum",
+        "Plan5": "Not covered"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Covered",
+      "plans": {
+        "Plan1": "Covered",
+        "Plan2": "Covered",
+        "Plan3": "Covered",
+        "Plan4": "Covered",
+        "Plan5": "Covered"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "AED 50/-",
+      "plans": {
+        "Plan1": "AED 50/-",
+        "Plan2": "AED 50/-",
+        "Plan3": "AED 50/-",
+        "Plan4": "AED 50/-",
+        "Plan5": "AED 50/-"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Option1- Covered up to AED 15,000 subject to 0% Co-Insurance\nOption2- Covered up to AED 15,000 subject to 15% Co-Insurance\nOption3- Covered up to AED 15,000 subject to 20% Co-Insurance",
+      "plans": {
+        "Plan1": "Option1- Covered up to AED 15,000 subject to 0% Co-Insurance\nOption2- Covered up to AED 15,000 subject to 15% Co-Insurance\nOption3- Covered up to AED 15,000 subject to 20% Co-Insurance",
+        "Plan2": "Current - Covered up to AED 10,000 subject to 15% Co-Insurance\nOption1 -Covered up to AED 10,000 subject to 0% Co-Insurance\nOption2 -Covered up to AED 10,000 subject to 20% Co-Insurance",
+        "Plan3": "Current - Covered up to AED 7,500 subject to 15% Co-Insurance\nOption1 -Covered up to AED 7,500 subject to 0% Co-Insurance\nOption2 -Covered up to AED 7,500 subject to 20% Co-Insurance",
+        "Plan4": "Current - Covered up to AED 5000 subject to 15% Co-Insurance\nOption1 -Covered up to AED 5000  subject to 0% Co-Insurance\nOption2 -Covered up to AED 5000  subject to 20% Co-Insurance",
+        "Plan5": "Current - Covered up to AED 5000 subject to 15% Co-Insurance\nOption1 -Covered up to AED 5000  subject to 0% Co-Insurance\nOption2 -Covered up to AED 5000  subject to 20% Co-Insurance"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Covered without Co-pay and up to aggregate annual limit",
+      "plans": {
+        "Plan1": "Covered without Co-pay and up to aggregate annual limit",
+        "Plan2": "Covered without Co-pay and up to aggregate annual limit",
+        "Plan3": "Covered without Co-pay and up to aggregate annual limit",
+        "Plan4": "Covered without Co-pay and up to aggregate annual limit",
+        "Plan5": "Covered without Co-pay and up to aggregate annual limit"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Direct billing available. Reimbursement is also possible but will be settled at 80% of the usual & customary rates of the selected Network.",
+      "plans": {
+        "Plan1": "Direct billing available. Reimbursement is also possible but will be settled at 80% of the usual & customary rates of the selected Network.",
+        "Plan2": "Direct billing available. Reimbursement is also possible but will be settled at 80% of the usual & customary rates of the selected Network.",
+        "Plan3": "Direct billing available. Reimbursement is also possible but will be settled at 80% of the usual & customary rates of the selected Network.",
+        "Plan4": "Direct billing available. Reimbursement is also possible but will be settled at 80% of the usual & customary rates of the selected Network.",
+        "Plan5": "Direct billing available. Reimbursement is also possible but will be settled at 80% of the usual & customary rates of the selected Network."
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Reimbursement at 100% of actual costs (subject to be reasonable) or 100% of the usual & customary rates of the network, whichever is less",
+      "plans": {
+        "Plan1": "Reimbursement at 100% of actual costs (subject to be reasonable) or 100% of the usual & customary rates of the network, whichever is less",
+        "Plan2": "Reimbursement at 100% of actual costs (subject to be reasonable) or 100% of the usual & customary rates of the network, whichever is less",
+        "Plan3": "Reimbursement at 100% of actual costs (subject to be reasonable) or 100% of the usual & customary rates of the network, whichever is less",
+        "Plan4": "Reimbursement at 100% of actual costs (subject to be reasonable) or 100% of the usual & customary rates of the network, whichever is less",
+        "Plan5": "Reimbursement at 100% of actual costs (subject to be reasonable) or 100% of the usual & customary rates of the network, whichever is less"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Reimbursement at 80% of actual costs (subject to be reasonable) or 80% of the usual & customary rates of the network, whichever is less",
+      "plans": {
+        "Plan1": "Reimbursement at 80% of actual costs (subject to be reasonable) or 80% of the usual & customary rates of the network, whichever is less",
+        "Plan2": "Reimbursement at 80% of actual costs (subject to be reasonable) or 80% of the usual & customary rates of the network, whichever is less",
+        "Plan3": "Reimbursement at 80% of actual costs (subject to be reasonable) or 80% of the usual & customary rates of the network, whichever is less",
+        "Plan4": "Reimbursement at 80% of actual costs (subject to be reasonable) or 80% of the usual & customary rates of the network, whichever is less",
+        "Plan5": "Reimbursement at 80% of actual costs (subject to be reasonable) or 80% of the usual & customary rates of the network, whichever is less"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "All pre-existing conditions should be declared in the Medical Application Form and is subject to medical underwriting. Undeclared pre-existing conditions will not be covered during the policy period and will be underwritten at renewal. o waiting period applies if evidence of continuity(from any other individual plan- without any break is provided) of coverage is provided; otherwise a waiting period of 6 months applies to the first scheme membership on Inpatient treatment for the following medical conditions: Diabetes mellitus, Arterial diseases, COPD , All cancers cases, Neurosurgery, Cerebro Vascular diseases, All delivery cases (Maternity) All adverse findings on health declarations would be priced on each case basis. In case of misrepresentation insurer reserves the right to cancel the policy and refund the premium less paid claims",
+      "plans": {
+        "Plan1": "All pre-existing conditions should be declared in the Medical Application Form and is subject to medical underwriting. Undeclared pre-existing conditions will not be covered during the policy period and will be underwritten at renewal. o waiting period applies if evidence of continuity(from any other individual plan- without any break is provided) of coverage is provided; otherwise a waiting period of 6 months applies to the first scheme membership on Inpatient treatment for the following medical conditions: Diabetes mellitus, Arterial diseases, COPD , All cancers cases, Neurosurgery, Cerebro Vascular diseases, All delivery cases (Maternity) All adverse findings on health declarations would be priced on each case basis. In case of misrepresentation insurer reserves the right to cancel the policy and refund the premium less paid claims",
+        "Plan2": "All pre-existing conditions should be declared in the Medical Application Form and is subject to medical underwriting. Undeclared pre-existing conditions will not be covered during the policy period and will be underwritten at renewal. o waiting period applies if evidence of continuity(from any other individual plan- without any break is provided) of coverage is provided; otherwise a waiting period of 6 months applies to the first scheme membership on Inpatient treatment for the following medical conditions: Diabetes mellitus, Arterial diseases, COPD , All cancers cases, Neurosurgery, Cerebro Vascular diseases, All delivery cases (Maternity) All adverse findings on health declarations would be priced on each case basis. In case of misrepresentation insurer reserves the right to cancel the policy and refund the premium less paid claims",
+        "Plan3": "All pre-existing conditions should be declared in the Medical Application Form and is subject to medical underwriting. Undeclared pre-existing conditions will not be covered during the policy period and will be underwritten at renewal. o waiting period applies if evidence of continuity(from any other individual plan- without any break is provided) of coverage is provided; otherwise a waiting period of 6 months applies to the first scheme membership on Inpatient treatment for the following medical conditions: Diabetes mellitus, Arterial diseases, COPD , All cancers cases, Neurosurgery, Cerebro Vascular diseases, All delivery cases (Maternity) All adverse findings on health declarations would be priced on each case basis. In case of misrepresentation insurer reserves the right to cancel the policy and refund the premium less paid claims",
+        "Plan4": "All pre-existing conditions should be declared in the Medical Application Form and is subject to medical underwriting. Undeclared pre-existing conditions will not be covered during the policy period and will be underwritten at renewal. o waiting period applies if evidence of continuity(from any other individual plan- without any break is provided) of coverage is provided; otherwise a waiting period of 6 months applies to the first scheme membership on Inpatient treatment for the following medical conditions: Diabetes mellitus, Arterial diseases, COPD , All cancers cases, Neurosurgery, Cerebro Vascular diseases, All delivery cases (Maternity) All adverse findings on health declarations would be priced on each case basis. In case of misrepresentation insurer reserves the right to cancel the policy and refund the premium less paid claims",
+        "Plan5": "All pre-existing conditions should be declared in the Medical Application Form and is subject to medical underwriting. Undeclared pre-existing conditions will not be covered during the policy period and will be underwritten at renewal. o waiting period applies if evidence of continuity(from any other individual plan- without any break is provided) of coverage is provided; otherwise a waiting period of 6 months applies to the first scheme membership on Inpatient treatment for the following medical conditions: Diabetes mellitus, Arterial diseases, COPD , All cancers cases, Neurosurgery, Cerebro Vascular diseases, All delivery cases (Maternity) All adverse findings on health declarations would be priced on each case basis. In case of misrepresentation insurer reserves the right to cancel the policy and refund the premium less paid claims"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Any form of Cancer shall fall within the definition of Chronic conditions. Waiting period of 6 months shall apply in line with regulatory mandates.   \u00a0If cancer or any other chronic condition manifested after the policy start date, a waiting period of 6 months from policy start date shall apply.",
+      "plans": {
+        "Plan1": "Any form of Cancer shall fall within the definition of Chronic conditions. Waiting period of 6 months shall apply in line with regulatory mandates.   \u00a0If cancer or any other chronic condition manifested after the policy start date, a waiting period of 6 months from policy start date shall apply.",
+        "Plan2": "Any form of Cancer shall fall within the definition of Chronic conditions. Waiting period of 6 months shall apply in line with regulatory mandates.   \u00a0If cancer or any other chronic condition manifested after the policy start date, a waiting period of 6 months from policy start date shall apply.",
+        "Plan3": "Any form of Cancer shall fall within the definition of Chronic conditions. Waiting period of 6 months shall apply in line with regulatory mandates.   \u00a0If cancer or any other chronic condition manifested after the policy start date, a waiting period of 6 months from policy start date shall apply.",
+        "Plan4": "Any form of Cancer shall fall within the definition of Chronic conditions. Waiting period of 6 months shall apply in line with regulatory mandates.   \u00a0If cancer or any other chronic condition manifested after the policy start date, a waiting period of 6 months from policy start date shall apply.",
+        "Plan5": "Any form of Cancer shall fall within the definition of Chronic conditions. Waiting period of 6 months shall apply in line with regulatory mandates.   \u00a0If cancer or any other chronic condition manifested after the policy start date, a waiting period of 6 months from policy start date shall apply."
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Covered on Reimbursement up to AED 300 per night and a maximum of 10 nights. The Cash Indemnity claim must be submitted within 15 days after discharge from the hospital with a proof of hospitalization including a discharge summary.",
+      "plans": {
+        "Plan1": "Covered on Reimbursement up to AED 300 per night and a maximum of 10 nights. The Cash Indemnity claim must be submitted within 15 days after discharge from the hospital with a proof of hospitalization including a discharge summary.",
+        "Plan2": "Covered on Reimbursement up to AED 300 per night and a maximum of 10 nights. The Cash Indemnity claim must be submitted within 15 days after discharge from the hospital with a proof of hospitalization including a discharge summary.",
+        "Plan3": "Covered on Reimbursement up to AED 250 per night and a maximum of 10 nights. The Cash Indemnity claim must be submitted within 15 days after discharge from the hospital with a proof of hospitalization including a discharge summary.",
+        "Plan4": "Covered on Reimbursement up to AED 250 per night and a maximum of 10 nights. The Cash Indemnity claim must be submitted within 15 days after discharge from the hospital with a proof of hospitalization including a discharge summary.",
+        "Plan5": "Covered on Reimbursement up to AED 200 per night and a maximum of 10 nights. The Cash Indemnity claim must be submitted within 15 days after discharge from the hospital with a proof of hospitalization including a discharge summary."
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Inside Network: 100% Actual Cost. Outside Network : UCR Basis",
+      "plans": {
+        "Plan1": "Inside Network: 100% Actual Cost. Outside Network : UCR Basis",
+        "Plan2": "Inside Network: 100% Actual Cost. Outside Network : UCR Basis",
+        "Plan3": "Inside Network: 100% Actual Cost, Outside Network : UCR Basis",
+        "Plan4": "Inside Network: 100% Actual Cost, Outside Network : UCR Basis",
+        "Plan5": "Inside Network: 100% Actual Cost, Outside Network : UCR Basis"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Covered",
+      "plans": {
+        "Plan1": "Covered",
+        "Plan2": "Covered",
+        "Plan3": "Covered",
+        "Plan4": "Covered",
+        "Plan5": "Covered"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Covered, Dental emergency is any injury to your teeth or gums that can put you at a risk of permanent damage, such as Chipped or broken teeth, Knocked-out tooth ,Soft-tissue injuries etc",
+      "plans": {
+        "Plan1": "Covered, Dental emergency is any injury to your teeth or gums that can put you at a risk of permanent damage, such as Chipped or broken teeth, Knocked-out tooth ,Soft-tissue injuries etc",
+        "Plan2": "Covered, Dental emergency is any injury to your teeth or gums that can put you at a risk of permanent damage, such as Chipped or broken teeth, Knocked-out tooth ,Soft-tissue injuries etc",
+        "Plan3": "Covered, Dental emergency is any injury to your teeth or gums that can put you at a risk of permanent damage, such as Chipped or broken teeth, Knocked-out tooth ,Soft-tissue injuries etc",
+        "Plan4": "Covered, Dental emergency is any injury to your teeth or gums that can put you at a risk of permanent damage, such as Chipped or broken teeth, Knocked-out tooth ,Soft-tissue injuries etc",
+        "Plan5": "Covered, Dental emergency is any injury to your teeth or gums that can put you at a risk of permanent damage, such as Chipped or broken teeth, Knocked-out tooth ,Soft-tissue injuries etc"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Covered",
+      "plans": {
+        "Plan1": "Covered",
+        "Plan2": "Covered",
+        "Plan3": "Covered",
+        "Plan4": "Covered",
+        "Plan5": "Covered"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Covered",
+      "plans": {
+        "Plan1": "Covered",
+        "Plan2": "Covered",
+        "Plan3": "Covered",
+        "Plan4": "Covered",
+        "Plan5": "Covered"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Covered",
+      "plans": {
+        "Plan1": "Covered",
+        "Plan2": "Covered",
+        "Plan3": "Covered",
+        "Plan4": "Covered",
+        "Plan5": "Covered"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Maternity service",
+      "plans": {
+        "Plan1": "Maternity service",
+        "Plan2": "",
+        "Plan3": "",
+        "Plan4": "",
+        "Plan5": ""
+      }
+    },
+    {
+      "section": "",
+      "benefit": "In-patient Maternity services: Inside Emirate of Abu Dhabi: Covered up to the Annual Limit of the policy ( In-Patient & Out-Patient) Delivery inside Emirate of Abu Dhabi  is subject to a deductible of AED 500/- as per HAAD law. Outside Emirate of Abu Dhabi (within UAE): -Normal Delivery is covered up to AED 10,000/-, C-Section and maternity complications are covered up to AED 12,000/-, Medical Emergency related to Maternity is covered up to Annual Limit of the policy.   Out-patient Maternity services : covered up to the Annual Limit of the policy subject to the same deductible in the selected plan on consultation.                                                                                                                                                                                                                                                                                                                                                                        An undeclared pregnancy, known or unknown to Insured at the time of buying policy, will be considered as pre-existing and all pregnancy related op and IP claims would be subjected to charge of additional annual premium or cancellation of policy with recovery of all already settled claims.",
+      "plans": {
+        "Plan1": "In-patient Maternity services: Inside Emirate of Abu Dhabi: Covered up to the Annual Limit of the policy ( In-Patient & Out-Patient) Delivery inside Emirate of Abu Dhabi  is subject to a deductible of AED 500/- as per HAAD law. Outside Emirate of Abu Dhabi (within UAE): -Normal Delivery is covered up to AED 10,000/-, C-Section and maternity complications are covered up to AED 12,000/-, Medical Emergency related to Maternity is covered up to Annual Limit of the policy.   Out-patient Maternity services : covered up to the Annual Limit of the policy subject to the same deductible in the selected plan on consultation.                                                                                                                                                                                                                                                                                                                                                                        An undeclared pregnancy, known or unknown to Insured at the time of buying policy, will be considered as pre-existing and all pregnancy related op and IP claims would be subjected to charge of additional annual premium or cancellation of policy with recovery of all already settled claims.",
+        "Plan2": "",
+        "Plan3": "",
+        "Plan4": "",
+        "Plan5": ""
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Out Patient Covered up to Maximum AED 3,000/- per person per annum. IN Patient Covered up to Maximum AED 10,000/- per person per annum",
+      "plans": {
+        "Plan1": "Out Patient Covered up to Maximum AED 3,000/- per person per annum. IN Patient Covered up to Maximum AED 10,000/- per person per annum",
+        "Plan2": "Out Patient Covered up to Maximum AED 3,000/- per person per annum. IN Patient Covered up to Maximum AED 10,000/- per person per annum",
+        "Plan3": "Out Patient Covered up to Maximum AED 1,500/- per person per annum. IN Patient Covered up to Maximum AED 6,000/- per person per annum",
+        "Plan4": "Out Patient Covered up to Maximum AED 1,500/- per person per annum. IN Patient Covered up to Maximum AED 6,000/- per person per annum",
+        "Plan5": "Not covered"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Organ transplantation shall cover the organ transplantation as recipient excluding any cost related to donor, and excluding the acquisition and organ cost. Organs covered are: heart, lung, kidney, pancreas, liver, Allogeneic & autologous bone marrow.",
+      "plans": {
+        "Plan1": "Organ transplantation shall cover the organ transplantation as recipient excluding any cost related to donor, and excluding the acquisition and organ cost. Organs covered are: heart, lung, kidney, pancreas, liver, Allogeneic & autologous bone marrow.",
+        "Plan2": "Organ transplantation shall cover the organ transplantation as recipient excluding any cost related to donor, and excluding the acquisition and organ cost. Organs covered are: heart, lung, kidney, pancreas, liver, Allogeneic & autologous bone marrow.",
+        "Plan3": "Organ transplantation shall cover the organ transplantation as recipient excluding any cost related to donor, and excluding the acquisition and organ cost. Organs covered are: heart, lung, kidney, pancreas, liver, Allogeneic & autologous bone marrow.",
+        "Plan4": "Organ transplantation shall cover the organ transplantation as recipient excluding any cost related to donor, and excluding the acquisition and organ cost. Organs covered are: heart, lung, kidney, pancreas, liver, Allogeneic & autologous bone marrow.",
+        "Plan5": "Organ transplantation shall cover the organ transplantation as recipient excluding any cost related to donor, and excluding the acquisition and organ cost. Organs covered are: heart, lung, kidney, pancreas, liver, Allogeneic & autologous bone marrow."
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Covered up to Maximum AED 20,000 per person per annum settled on Reimbursement basis with no co-pay",
+      "plans": {
+        "Plan1": "Covered up to Maximum AED 20,000 per person per annum settled on Reimbursement basis with no co-pay",
+        "Plan2": "Covered up to Maximum AED 15,000 per person per annum settled on Reimbursement basis with no co-pay",
+        "Plan3": "Covered up to Maximum AED 10,000 per person per annum settled on Reimbursement basis with no co-pay",
+        "Plan4": "Covered up to Maximum AED 10,000 per person per annum settled on Reimbursement basis with no co-pay",
+        "Plan5": "Not Covered"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "This benefit gives members access through respective TPA mobile application to world renowned providers to re-evaluate their earlier diagnosis, medical history and treatment plan for non-emergency cases.",
+      "plans": {
+        "Plan1": "This benefit gives members access through respective TPA mobile application to world renowned providers to re-evaluate their earlier diagnosis, medical history and treatment plan for non-emergency cases.",
+        "Plan2": "",
+        "Plan3": "",
+        "Plan4": "",
+        "Plan5": ""
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Covered up to AED 3,000/- subject to 20% Co-pay. In-Network: Direct Billing, Out of Network: Reimbursement",
+      "plans": {
+        "Plan1": "Covered up to AED 3,000/- subject to 20% Co-pay. In-Network: Direct Billing, Out of Network: Reimbursement",
+        "Plan2": "Covered up to AED 3,000/- subject to 20% Co-pay. In-Network: Direct Billing, Out of Network: Reimbursement",
+        "Plan3": "Covered up to AED 2,500/- subject to 20% Co-pay. In-Network: Direct Billing, Out of Network: Reimbursement",
+        "Plan4": "Covered up to AED 1,500/- subject to 20% Co-pay. In-Network: Direct Billing, Out of Network: Reimbursement",
+        "Plan5": "Not covered"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Covered subject to 20% Co-pay and up to AED 1,500 in total and up the following sub-limits: AED 350 for Frames - one pair per year. AED 250 per pair per single vision lenses - once per year. AED 300 per pair per bifocal or tri-focal vision lenses - once per year. AED 350 for contact lenses per year",
+      "plans": {
+        "Plan1": "Covered subject to 20% Co-pay and up to AED 1,500 in total and up the following sub-limits: AED 350 for Frames - one pair per year. AED 250 per pair per single vision lenses - once per year. AED 300 per pair per bifocal or tri-focal vision lenses - once per year. AED 350 for contact lenses per year",
+        "Plan2": "Covered subject to 20% Co-pay and up to AED 1,500 in total and up the following sub-limits: AED 350 for Frames - one pair per year. AED 250 per pair per single vision lenses - once per year. AED 300 per pair per bifocal or tri-focal vision lenses - once per year. AED 350 for contact lenses per year",
+        "Plan3": "Covered subject to 20% Co-pay and up to AED 1,250 in total and up the following sub-limits: AED 300 for Frames - one pair per year. AED 200 per pair per single vision lenses - once per year. AED 250 per pair per bifocal or tri-focal vision lenses - once per year. AED 300 for contact lenses per year",
+        "Plan4": "Covered subject to 20% Co-pay and up to AED 1,000 in total and up the following sub-limits: AED 300 for Frames - one pair per year. AED 200 per pair per single vision lenses - once per year. AED 250 per pair per bifocal or tri-focal vision lenses - once per year. AED 300 for contact lenses per year",
+        "Plan5": "Not Covered"
+      }
+    },
+    {
+      "section": "",
+      "benefit": "Limited to AED 2,500  per person per annum",
+      "plans": {
+        "Plan1": "Limited to AED 2,500  per person per annum",
+        "Plan2": "Limited to AED 2,000  per person per annum",
+        "Plan3": "Limited to AED 1,500  per person per annum",
+        "Plan4": "Limited to AED 1,000  per person per annum",
+        "Plan5": "Not Covered"
+      }
+    }
+  ]
+}

@@ -30,7 +30,7 @@ Check pending: `curl https://gmeet.scalatics.com/api/requests?status=pending`
 
 This repository implements the Unified Console for the Zorbit platform.
 
-> **Note:** The repository folder is still named `zorbit-admin-console` for backward compatibility. The displayed name everywhere is "Zorbit Unified Console".
+> **Note:** This repository is named `zorbit-unified-console`. The name "admin-console" is retired — do not use it anywhere.
 
 Zorbit is a MACH-compliant shared platform infrastructure used to build enterprise applications.
 

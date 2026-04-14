@@ -14,7 +14,7 @@ import { CreateWorkflowInstanceDto } from '../models/dto/create-workflow-instanc
 import { TransitionWorkflowDto } from '../models/dto/transition-workflow.dto';
 import { HashIdService } from './hash-id.service';
 import { EventPublisherService } from '../events/event-publisher.service';
-import { WorkflowEvents } from '../events/admin-console.events';
+import { WorkflowEvents } from '../events/unified-console.events';
 
 @Injectable()
 export class WorkflowService {

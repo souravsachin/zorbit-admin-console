@@ -9,7 +9,7 @@ import { ProductPlan } from '../models/entities/pcg4/product-plan.entity';
 import { PlanBenefit } from '../models/entities/pcg4/plan-benefit.entity';
 import { HashIdService } from './hash-id.service';
 import { EventPublisherService } from '../events/event-publisher.service';
-import { PCG4Events } from '../events/admin-console.events';
+import { PCG4Events } from '../events/unified-console.events';
 import { CreatePlanDto } from '../models/dto/pcg4/create-plan.dto';
 import { UpdatePlanDto } from '../models/dto/pcg4/update-plan.dto';
 

@@ -16,7 +16,7 @@ import { ProductPlan } from '../models/entities/pcg4/product-plan.entity';
 import { PlanBenefit } from '../models/entities/pcg4/plan-benefit.entity';
 import { HashIdService } from './hash-id.service';
 import { EventPublisherService } from '../events/event-publisher.service';
-import { PCG4Events } from '../events/admin-console.events';
+import { PCG4Events } from '../events/unified-console.events';
 import { CreateConfigurationDto } from '../models/dto/pcg4/create-configuration.dto';
 import { UpdateConfigurationStageDto } from '../models/dto/pcg4/update-configuration-stage.dto';
 

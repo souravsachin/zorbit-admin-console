@@ -1,0 +1,366 @@
+{
+  "insurer": "Al Wathba National Insurance (AWNIC)",
+  "product": "NAS Dubai Individual",
+  "region": "Dubai",
+  "plans": [
+    "Plan1",
+    "Plan2",
+    "Plan3",
+    "Plan4",
+    "Plan5"
+  ],
+  "benefits": [
+    {
+      "section": "Plan Details",
+      "benefit": "Territorial Scope of Coverage",
+      "plans": {
+        "Plan1": "Worldwide",
+        "Plan2": "Worldwide",
+        "Plan3": "Worldwide",
+        "Plan4": "Worldwide",
+        "Plan5": "Worldwide"
+      }
+    },
+    {
+      "section": "Plan Details",
+      "benefit": "Aggregate Annual Limit",
+      "plans": {
+        "Plan1": "AED 1 Million",
+        "Plan2": "AED 1 Million",
+        "Plan3": "AED 1 Million",
+        "Plan4": "AED 1 Million",
+        "Plan5": "AED 1 Million"
+      }
+    },
+    {
+      "section": "Plan Details",
+      "benefit": "Medical Network (NAS)",
+      "plans": {
+        "Plan1": "CN",
+        "Plan2": "GN",
+        "Plan3": "RN",
+        "Plan4": "SRM",
+        "Plan5": "WN (OP Restricted to Clinics)"
+      }
+    },
+    {
+      "section": "Plan Details",
+      "benefit": "Coverage Criteria for Treatment outside UAE",
+      "plans": {
+        "Plan1": "Coverage outside UAE is limited to 90 days per treatment",
+        "Plan2": "Coverage outside UAE is limited to 90 days per treatment",
+        "Plan3": "Coverage outside UAE is limited to 90 days per treatment",
+        "Plan4": "Coverage outside UAE is limited to 90 days per treatment",
+        "Plan5": "Coverage outside UAE is limited to 90 days per treatment"
+      }
+    },
+    {
+      "section": "Plan Details",
+      "benefit": "Pre-existing & Chronic Conditions Subject to Medical Application Form (MAF)",
+      "plans": {
+        "Plan1": "Covered up to a limit of AED 150,000 per member per year. Pre-existing and chronic medical conditions are subject to medical",
+        "Plan2": "Covered up to a limit of AED 150,000 per member per year. Pre-existing and chronic medical conditions are subject to medical",
+        "Plan3": "Covered up to a limit of AED 150,000 per member per year. Pre-existing and chronic medical conditions are subject to medical",
+        "Plan4": "Covered up to a limit of AED 150,000 per member per year. Pre-existing and chronic medical conditions are subject to medical",
+        "Plan5": "Covered up to a limit of AED 150,000 per member per year. Pre-existing and chronic medical conditions are subject to medical"
+      }
+    },
+    {
+      "section": "In-patient Benefits",
+      "benefit": "Doctor, Surgeon, Anesthesist Fees",
+      "plans": {
+        "Plan1": "Covered",
+        "Plan2": "Covered",
+        "Plan3": "Covered",
+        "Plan4": "Covered",
+        "Plan5": "Covered"
+      }
+    },
+    {
+      "section": "In-patient Benefits",
+      "benefit": "Parent Accommodation for child under 18 years of age",
+      "plans": {
+        "Plan1": "AED 100 / day",
+        "Plan2": "AED 100 / day",
+        "Plan3": "AED 100 / day",
+        "Plan4": "AED 100 / day",
+        "Plan5": "AED 100 / day"
+      }
+    },
+    {
+      "section": "In-patient Benefits",
+      "benefit": "Accommodation of an accompanying person in the same room as per recommendation of attending physician, subject to prior approval.",
+      "plans": {
+        "Plan1": "AED 100 / day",
+        "Plan2": "AED 100 / day",
+        "Plan3": "AED 100 / day",
+        "Plan4": "AED 100 / day",
+        "Plan5": "AED 100 / day"
+      }
+    },
+    {
+      "section": "In-patient Benefits",
+      "benefit": "Emergency road ambulance services to and from hospital by registered ambulance services provider",
+      "plans": {
+        "Plan1": "Covered",
+        "Plan2": "Covered",
+        "Plan3": "Covered",
+        "Plan4": "Covered",
+        "Plan5": "Covered"
+      }
+    },
+    {
+      "section": "Out-patient Benefits",
+      "benefit": "Prescribed Drugs & Medicines",
+      "plans": {
+        "Plan1": "Covered",
+        "Plan2": "Covered",
+        "Plan3": "Covered",
+        "Plan4": "Covered",
+        "Plan5": "Covered"
+      }
+    },
+    {
+      "section": "Out-patient Benefits",
+      "benefit": "Diagnostics ( X-ray, MRI, CT-Scan, Ultra Sound& Endoscopy diagnostic services )",
+      "plans": {
+        "Plan1": "Covered",
+        "Plan2": "Covered",
+        "Plan3": "Covered",
+        "Plan4": "Covered",
+        "Plan5": "Covered"
+      }
+    },
+    {
+      "section": "Out-patient Benefits",
+      "benefit": "Physiotherapy ( Subject to pre-approval)",
+      "plans": {
+        "Plan1": "15  sessions per member per annum with 10% co-pay",
+        "Plan2": "15  sessions per member per annum with 10% co-pay",
+        "Plan3": "15  sessions per member per annum with 10% co-pay",
+        "Plan4": "15  sessions per member per annum with 10% co-pay",
+        "Plan5": "15  sessions per member per annum with 10% co-pay"
+      }
+    },
+    {
+      "section": "*Other Benefits",
+      "benefit": "Cancer Treatment",
+      "plans": {
+        "Plan1": "Covered as per terms, conditions and exclusions of the program defined by DHA",
+        "Plan2": "Covered as per terms, conditions and exclusions of the program defined by DHA",
+        "Plan3": "Covered as per terms, conditions and exclusions of the program defined by DHA",
+        "Plan4": "Covered as per terms, conditions and exclusions of the program defined by DHA",
+        "Plan5": "Covered as per terms, conditions and exclusions of the program defined by DHA"
+      }
+    },
+    {
+      "section": "*Other Benefits",
+      "benefit": "HCV Hepatitis C Virus Infection",
+      "plans": {
+        "Plan1": "Covered as per terms, conditions and exclusions of the program defined by DHA",
+        "Plan2": "Covered as per terms, conditions and exclusions of the program defined by DHA",
+        "Plan3": "Covered as per terms, conditions and exclusions of the program defined by DHA",
+        "Plan4": "Covered as per terms, conditions and exclusions of the program defined by DHA",
+        "Plan5": "Covered as per terms, conditions and exclusions of the program defined by DHA"
+      }
+    },
+    {
+      "section": "*Other Benefits",
+      "benefit": "Preventive services",
+      "plans": {
+        "Plan1": "As per DHA Regulations",
+        "Plan2": "As per DHA Regulations",
+        "Plan3": "As per DHA Regulations",
+        "Plan4": "As per DHA Regulations",
+        "Plan5": "As per DHA Regulations"
+      }
+    },
+    {
+      "section": "*Other Benefits",
+      "benefit": "Diagnostic and treatment services for dental and gum treatments( Emergency cases Only)",
+      "plans": {
+        "Plan1": "Covered",
+        "Plan2": "Covered",
+        "Plan3": "Covered",
+        "Plan4": "Covered",
+        "Plan5": "Covered"
+      }
+    },
+    {
+      "section": "*Other Benefits",
+      "benefit": "Hearing and vision aids, and vision correction by surgeries and laser (Emergency cases Only)",
+      "plans": {
+        "Plan1": "Covered",
+        "Plan2": "Covered",
+        "Plan3": "Covered",
+        "Plan4": "Covered",
+        "Plan5": "Covered"
+      }
+    },
+    {
+      "section": "*Other Benefits",
+      "benefit": "Mental Health Outpatient counselling only",
+      "plans": {
+        "Plan1": "Covered up to AED 800 with 30% coinsurance payable by the insured per visit",
+        "Plan2": "Covered up to AED 800 with 30% coinsurance payable by the insured per visit",
+        "Plan3": "Covered up to AED 800 with 30% coinsurance payable by the insured per visit",
+        "Plan4": "Covered up to AED 800 with 30% coinsurance payable by the insured per visit",
+        "Plan5": "Covered up to AED 800 with 30% coinsurance payable by the insured per visit"
+      }
+    },
+    {
+      "section": "*Other Benefits",
+      "benefit": "Organ Transplant",
+      "plans": {
+        "Plan1": "Organ transplantation shall cover the organ transplantation as recipient excluding any cost related to donor, and excluding the acquisition and organ cost",
+        "Plan2": "Organ transplantation shall cover the organ transplantation as recipient excluding any cost related to donor, and excluding the acquisition and organ cost",
+        "Plan3": "Organ transplantation shall cover the organ transplantation as recipient excluding any cost related to donor, and excluding the acquisition and organ cost",
+        "Plan4": "Organ transplantation shall cover the organ transplantation as recipient excluding any cost related to donor, and excluding the acquisition and organ cost",
+        "Plan5": "Organ transplantation shall cover the organ transplantation as recipient excluding any cost related to donor, and excluding the acquisition and organ cost"
+      }
+    },
+    {
+      "section": "*Other Benefits",
+      "benefit": "Alternative Medicines/ therapies",
+      "plans": {
+        "Plan1": "Limited to AED 1,600 per person per annum",
+        "Plan2": "Limited to AED 1,600 per person per annum",
+        "Plan3": "Limited to AED 1,600 per person per annum",
+        "Plan4": "Limited to AED 1,600 per person per annum",
+        "Plan5": "Limited to AED 1,600 per person per annum"
+      }
+    },
+    {
+      "section": "*Other Benefits",
+      "benefit": "Repatriation of Mortal Remains to Home Country",
+      "plans": {
+        "Plan1": "Covered up to Maximum AED 7,500 per person per annum  settled on Reimbursement basis with no co-pay",
+        "Plan2": "Covered up to Maximum AED 7,500 per person per annum  settled on Reimbursement basis with no co-pay",
+        "Plan3": "Covered up to Maximum AED 7,500 per person per annum  settled on Reimbursement basis with no co-pay",
+        "Plan4": "Covered up to Maximum AED 7,500 per person per annum  settled on Reimbursement basis with no co-pay",
+        "Plan5": "Covered up to Maximum AED 7,500 per person per annum  settled on Reimbursement basis with no co-pay"
+      }
+    },
+    {
+      "section": "*Other Benefits",
+      "benefit": "Herpes zoster (shingles)- \nShingrix Vaccine (GSK) is a \nrecombinant sub-unit vaccine \nwhich is to be offered to people \nabove the age of 50 and \nimmunocompromised patients \nabove the age of 18. Dose: 2 \ndoses, 2 to 6 months apart once \nper lifetime (As per DHA/DHIC \nguidelines).",
+      "plans": {
+        "Plan1": "Covered \n(under reimbursement \nbasis)",
+        "Plan2": "Covered \n(under reimbursement \nbasis)",
+        "Plan3": "Covered \n(under reimbursement \nbasis)",
+        "Plan4": "Covered \n(under reimbursement \nbasis)",
+        "Plan5": "Covered \n(under reimbursement \nbasis)"
+      }
+    },
+    {
+      "section": "*Other Benefits",
+      "benefit": "International Assistance Services",
+      "plans": {
+        "Plan1": "Covered",
+        "Plan2": "Covered",
+        "Plan3": "Covered",
+        "Plan4": "Covered",
+        "Plan5": "Covered"
+      }
+    },
+    {
+      "section": "Maternity Benefits",
+      "benefit": "Subject to Medical Application Form (MAF)",
+      "plans": {
+        "Plan1": "In case of any condition developing into an emergency, the medically necessary expenses will be covered up to the annual aggregate limit.",
+        "Plan2": "In case of any condition developing into an emergency, the medically necessary expenses will be covered up to the annual aggregate limit.",
+        "Plan3": "In case of any condition developing into an emergency, the medically necessary expenses will be covered up to the annual aggregate limit.",
+        "Plan4": "In case of any condition developing into an emergency, the medically necessary expenses will be covered up to the annual aggregate limit.",
+        "Plan5": "In case of any condition developing into an emergency, the medically necessary expenses will be covered up to the annual aggregate limit."
+      }
+    },
+    {
+      "section": "Maternity Benefits",
+      "benefit": "Out-patient maternity services:",
+      "plans": {
+        "Plan1": "Covered subject to 10% coinsurance, and a maximum of 15 visits and 8 ante-natal ultrasound scans",
+        "Plan2": "Covered subject to 10% coinsurance, and a maximum of 15 visits and 8 ante-natal ultrasound scans",
+        "Plan3": "Covered subject to 10% coinsurance, and a maximum of 12 visits and 6 ante-natal ultrasound scans",
+        "Plan4": "Covered subject to 10% coinsurance, and a maximum of 12 visits and 6 ante-natal ultrasound scans",
+        "Plan5": "Covered subject to 10% coinsurance, and a maximum of 10 visits and 4 ante-natal ultrasound scans"
+      }
+    },
+    {
+      "section": "Maternity Benefits",
+      "benefit": "Initial investigations to include FBC and Platelets, Blood group, Rhesus status and antibodies, VDRL, MSU & urinalysis, Rubella serology, HIV, Hep C (for high risk patients), GTT (if high risk), FBS, random s or A1c.",
+      "plans": {
+        "Plan1": "Pregnancy at time of application should be declared in the medical application form and is subject to medical underwriting",
+        "Plan2": "Pregnancy at time of application should be declared in the medical application form and is subject to medical underwriting",
+        "Plan3": "Pregnancy at time of application should be declared in the medical application form and is subject to medical underwriting",
+        "Plan4": "Pregnancy at time of application should be declared in the medical application form and is subject to medical underwriting",
+        "Plan5": "Pregnancy at time of application should be declared in the medical application form and is subject to medical underwriting"
+      }
+    },
+    {
+      "section": "Maternity Benefits",
+      "benefit": "Visits to include reviews, checks and tests in accordance with DHA Antenatal Care Protocols",
+      "plans": {
+        "Plan1": "For any Undeclared Pregnancy, the policy will be subject to re- underwriting to be able to avail the medical coverage.",
+        "Plan2": "For any Undeclared Pregnancy, the policy will be subject to re- underwriting to be able to avail the medical coverage.",
+        "Plan3": "For any Undeclared Pregnancy, the policy will be subject to re- underwriting to be able to avail the medical coverage.",
+        "Plan4": "For any Undeclared Pregnancy, the policy will be subject to re- underwriting to be able to avail the medical coverage.",
+        "Plan5": "For any Undeclared Pregnancy, the policy will be subject to re- underwriting to be able to avail the medical coverage."
+      }
+    },
+    {
+      "section": "Maternity Benefits",
+      "benefit": "New born cover",
+      "plans": {
+        "Plan1": "Cover for 30 days from birth. BCG, Hepatitis B and neonatal screening tests (Phenylketonuria (PKU), Congenital Hypothyroidism, sickle cell screening, congenital adrenal hyperplasia)",
+        "Plan2": "Cover for 30 days from birth. BCG, Hepatitis B and neonatal screening tests (Phenylketonuria (PKU), Congenital Hypothyroidism, sickle cell screening, congenital adrenal hyperplasia)",
+        "Plan3": "Cover for 30 days from birth. BCG, Hepatitis B and neonatal screening tests (Phenylketonuria (PKU), Congenital Hypothyroidism, sickle cell screening, congenital adrenal hyperplasia)",
+        "Plan4": "Cover for 30 days from birth. BCG, Hepatitis B and neonatal screening tests (Phenylketonuria (PKU), Congenital Hypothyroidism, sickle cell screening, congenital adrenal hyperplasia)",
+        "Plan5": "Cover for 30 days from birth. BCG, Hepatitis B and neonatal screening tests (Phenylketonuria (PKU), Congenital Hypothyroidism, sickle cell screening, congenital adrenal hyperplasia)"
+      }
+    },
+    {
+      "section": "Maternity Benefits",
+      "benefit": "Dental benefit",
+      "plans": {
+        "Plan1": "Covered up to AED 3,500 subject to 20% Co-pay",
+        "Plan2": "Covered up to AED 2,500 subject to 20% Co-pay",
+        "Plan3": "Covered up to AED 1,500 subject to 20% Co-pay",
+        "Plan4": "Covered up to AED 500 subject to 20% Co-pay",
+        "Plan5": "Covered up to AED 500 subject to 20% Co-pay"
+      }
+    },
+    {
+      "section": "Maternity Benefits",
+      "benefit": "Claims Settlement Basis (after application of Co-payments)",
+      "plans": {
+        "Plan1": "- Direct billing available.",
+        "Plan2": "- Direct billing available.",
+        "Plan3": "- Direct billing available.",
+        "Plan4": "- Direct billing available.",
+        "Plan5": "- Direct billing available."
+      }
+    },
+    {
+      "section": "Maternity Benefits",
+      "benefit": "- Within the Network",
+      "plans": {
+        "Plan1": "- Reimbursement at 80% of the UCR rates of the selected Network.",
+        "Plan2": "- Reimbursement at 80% of the UCR rates of the selected Network.",
+        "Plan3": "- Reimbursement at 80% of the UCR rates of the selected Network.",
+        "Plan4": "- Reimbursement at 80% of the UCR rates of the selected Network.",
+        "Plan5": "- Reimbursement at 80% of the UCR rates of the selected Network."
+      }
+    },
+    {
+      "section": "Maternity Benefits",
+      "benefit": "- Outside the Network within UAE",
+      "plans": {
+        "Plan1": "- Reimbursement at 100% of actual costs (subject to be reasonable) or 100% of the UCR rates of the network, whichever is less",
+        "Plan2": "- Reimbursement at 100% of actual costs (subject to be reasonable) or 100% of the UCR rates of the network, whichever is less",
+        "Plan3": "- Reimbursement at 100% of actual costs (subject to be reasonable) or 100% of the UCR rates of the network, whichever is less",
+        "Plan4": "- Reimbursement at 100% of actual costs (subject to be reasonable) or 100% of the UCR rates of the network, whichever is less",
+        "Plan5": "- Reimbursement at 100% of actual costs (subject to be reasonable) or 100% of the UCR rates of the network, whichever is less"
+      }
+    }
+  ]
+}

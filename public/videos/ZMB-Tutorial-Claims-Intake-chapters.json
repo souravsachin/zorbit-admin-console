@@ -1,0 +1,118 @@
+[
+  {
+    "title": "Introduction",
+    "startTime": 0
+  },
+  {
+    "title": "The 4 Capabilities",
+    "startTime": 13
+  },
+  {
+    "title": "Growing Platform",
+    "startTime": 34
+  },
+  {
+    "title": "Login to Console",
+    "startTime": 82
+  },
+  {
+    "title": "Dashboard",
+    "startTime": 92
+  },
+  {
+    "title": "Design the Form",
+    "startTime": 103
+  },
+  {
+    "title": "Form Builder List",
+    "startTime": 111
+  },
+  {
+    "title": "Create Form Dialog",
+    "startTime": 122
+  },
+  {
+    "title": "Create Form Filled",
+    "startTime": 131
+  },
+  {
+    "title": "Visual Form Builder",
+    "startTime": 140
+  },
+  {
+    "title": "Form Structure",
+    "startTime": 149
+  },
+  {
+    "title": "Access Tokens Page",
+    "startTime": 160
+  },
+  {
+    "title": "Token Modal Filled",
+    "startTime": 170
+  },
+  {
+    "title": "Token Created",
+    "startTime": 180
+  },
+  {
+    "title": "Token API",
+    "startTime": 191
+  },
+  {
+    "title": "Generate via CLI",
+    "startTime": 203
+  },
+  {
+    "title": "Code Structure",
+    "startTime": 223
+  },
+  {
+    "title": "The Manifest File",
+    "startTime": 250
+  },
+  {
+    "title": "Manifest: Module Identity",
+    "startTime": 263
+  },
+  {
+    "title": "Manifest: Navigation",
+    "startTime": 281
+  },
+  {
+    "title": "Manifest: Platform Wiring",
+    "startTime": 300
+  },
+  {
+    "title": "Module Registration",
+    "startTime": 331
+  },
+  {
+    "title": "Module In Action",
+    "startTime": 366
+  },
+  {
+    "title": "Form Step 1: Plan Selection",
+    "startTime": 382
+  },
+  {
+    "title": "Form Step 2: Member Details",
+    "startTime": 393
+  },
+  {
+    "title": "Form Step 3: Medical Declarations",
+    "startTime": 401
+  },
+  {
+    "title": "Listing Page",
+    "startTime": 411
+  },
+  {
+    "title": "Traditional vs ZMB",
+    "startTime": 418
+  },
+  {
+    "title": "Next Steps",
+    "startTime": 436
+  }
+]

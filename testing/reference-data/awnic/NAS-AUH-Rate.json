@@ -1,0 +1,2184 @@
+{
+  "insurerName": "Al Wathba National Insurance (AWNIC)",
+  "productName": "NAS Abu Dhabi Individual",
+  "region": "Abu Dhabi",
+  "currency": "AED",
+  "copayDescription": "NAS AUH 0% Copay - Net",
+  "parameters": {
+    "plans": [
+      "Plan1",
+      "Plan2",
+      "Plan3",
+      "Plan4",
+      "Plan5"
+    ],
+    "visaCategories": [
+      "Employee/Worker",
+      "Dependent",
+      "Small Investor",
+      "Individual Sponsor Dependent"
+    ]
+  },
+  "rates": [
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 7838.12,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 7838.12,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 6431.01,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 6431.01,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 4371.42,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 4371.42,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 3676.38,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 3676.38,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2757.82,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2757.82,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan1",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 10564.01,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 10564.01,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan1",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 10564.01,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 10564.01,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan2",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 9547.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 9547.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan2",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 9547.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 9547.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan3",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 6455.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 6455.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan3",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 6455.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 6455.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan4",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 4323.53,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 4323.53,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan4",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 4323.53,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 4323.53,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan5",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 3264.46,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 3264.46,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan5",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 3264.46,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 3264.46,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan1",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 19363.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 19363.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan1",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 19363.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 19363.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan2",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 18496.86,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 18496.86,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan2",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 18496.86,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 18496.86,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan3",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 8655.57,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 8655.57,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan3",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 8655.57,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 8655.57,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan4",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 7817.9,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 7817.9,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan4",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 7817.9,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 7817.9,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan5",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 7675.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 7675.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan5",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 7675.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 7675.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan1",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 30834.13,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 30834.13,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan1",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 30834.13,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 30834.13,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan2",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 25977.35,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 25977.35,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan2",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 25977.35,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 25977.35,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan3",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 17135.51,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 22408.47,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan3",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 17135.51,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 22408.47,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan4",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 14922.66,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 21848.6,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan4",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 14922.66,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 21848.6,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan5",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 14105.21,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 21287.67,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan5",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 14105.21,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 21287.67,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan1",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 4534.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 4534.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan1",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 4534.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 4534.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan2",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 3744.6,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 3744.6,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan2",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 3744.6,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 3744.6,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan3",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 2925.53,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2925.53,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan3",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 2925.53,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2925.53,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan4",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 2581.89,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2581.89,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan4",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 2581.89,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2581.89,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan5",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 2531.21,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2531.21,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan5",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 2531.21,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2531.21,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 5435.12,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 5435.12,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 4459.2,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 4459.2,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 3031.08,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 3031.08,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2549.34,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2549.34,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 1912.2,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 1912.2,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan1",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 7325.56,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 7325.56,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan1",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 7325.56,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 7325.56,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan2",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 6620.82,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 6620.82,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan2",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 6620.82,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 6620.82,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan3",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 4476.3,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 4476.3,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan3",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 4476.3,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 4476.3,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan4",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 2997.67,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2997.67,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan4",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 2997.67,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2997.67,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan5",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 2263.4,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2263.4,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan5",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 2263.4,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2263.4,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan1",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 13428.11,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 13428.11,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan1",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 13428.11,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 13428.11,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan2",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 12827.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 12827.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan2",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 12827.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 12827.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan3",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 6002.32,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 6002.32,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan3",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 6002.32,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 6002.32,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan4",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 5421.13,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 5421.13,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan4",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 5421.13,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 5421.13,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan5",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 5322.45,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 5322.45,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan5",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 5322.45,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 5322.45,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan1",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 21383.04,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 21383.04,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan1",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 21383.04,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 21383.04,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan2",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 18014.74,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 18014.74,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan2",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 18014.74,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 18014.74,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan3",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 11883.44,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 15540.0,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan3",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 11883.44,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 15540.0,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan4",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 10348.86,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 15151.5,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan4",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 10348.86,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 15151.5,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan5",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 9781.65,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 14763.0,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan5",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 9781.65,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 14763.0,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan1",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 3144.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 3144.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan1",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 3144.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 3144.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan2",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 2596.66,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2596.66,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan2",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 2596.66,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2596.66,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan3",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 2028.34,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2028.34,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan3",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 2028.34,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2028.34,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan4",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 1790.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 1790.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan4",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 1790.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 1790.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan5",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 1755.28,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 1755.28,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan5",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 1755.28,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 1755.28,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 5381.5,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 5381.5,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 4414.91,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 4414.91,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 3000.77,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 3000.77,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2524.47,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2524.47,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 1893.55,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-17]",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 1893.55,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan1",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 7252.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 7252.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan1",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 7252.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 7252.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan2",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 6554.77,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 6554.77,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan2",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 6554.77,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 6554.77,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan3",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 4432.01,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 4432.01,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan3",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 4432.01,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 4432.01,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan4",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 2968.14,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2968.14,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan4",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 2968.14,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2968.14,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan5",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 2240.87,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2240.87,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan5",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 2240.87,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[18-40]",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2240.87,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan1",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 13294.47,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 13294.47,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan1",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 13294.47,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 13294.47,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan2",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 12699.29,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 12699.29,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan2",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 12699.29,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 12699.29,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan3",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 5942.5,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 5942.5,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan3",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 5942.5,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 5942.5,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan4",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 5367.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 5367.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan4",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 5367.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 5367.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan5",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 5269.61,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 5269.61,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan5",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 5269.61,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-59]",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 5269.61,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan1",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 21169.37,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 21169.37,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan1",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 21169.37,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 21169.37,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan2",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 17835.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 17835.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan2",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 17835.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 17835.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan3",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 11765.33,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 15384.6,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan3",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 11765.33,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 15384.6,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan4",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 10245.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 14999.99,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan4",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 10245.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 14999.99,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan5",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 9684.53,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 14615.37,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan5",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 9684.53,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[60+]",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 14615.37,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan1",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 3113.18,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan1",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 3113.18,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan1",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 3113.18,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan1",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 3113.18,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan2",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 2570.76,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan2",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2570.76,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan2",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 2570.76,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan2",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2570.76,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan3",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 2008.36,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan3",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 2008.36,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan3",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 2008.36,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan3",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 2008.36,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan4",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 1772.3,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan4",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 1772.3,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan4",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 1772.3,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan4",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 1772.3,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan5",
+      "visaCategory": "Employee/Worker",
+      "gender": "Male/Female",
+      "netRate": 1738.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan5",
+      "visaCategory": "Dependent",
+      "gender": "Male/Female",
+      "netRate": 1738.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan5",
+      "visaCategory": "Small Investor",
+      "gender": "Male/Female",
+      "netRate": 1738.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "plan": "Plan5",
+      "visaCategory": "Individual Sponsor Dependent",
+      "gender": "Male/Female",
+      "netRate": 1738.26,
+      "currency": "AED"
+    }
+  ]
+}

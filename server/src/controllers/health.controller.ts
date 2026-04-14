@@ -6,7 +6,7 @@ export class HealthController {
   check() {
     return {
       status: 'ok',
-      service: 'zorbit-admin-console-server',
+      service: 'zorbit-unified-console-server',
       timestamp: new Date().toISOString(),
     };
   }

@@ -12,7 +12,7 @@ import { UpdateDemoSegmentDto } from '../models/dto/update-demo-segment.dto';
 import { DemoSegmentResponseDto } from '../models/dto/demo-segment-response.dto';
 import { HashIdService } from './hash-id.service';
 import { EventPublisherService } from '../events/event-publisher.service';
-import { DemoEvents } from '../events/admin-console.events';
+import { DemoEvents } from '../events/unified-console.events';
 
 @Injectable()
 export class DemoSegmentService {

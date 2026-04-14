@@ -1,0 +1,2198 @@
+{
+  "insurerName": "AWNIC",
+  "productName": "NAS Abu Dhabi Individual",
+  "variant": "Abu Dhabi",
+  "region": "UAE",
+  "currency": "AED",
+  "status": "active",
+  "parameters": {
+    "ageBands": [
+      "[00-17]",
+      "[18-40]",
+      "[41-59]",
+      "[60+]",
+      "MAT(18-50 years)"
+    ],
+    "genders": [
+      "Male/Female"
+    ],
+    "plans": [
+      "Plan1",
+      "Plan2",
+      "Plan3",
+      "Plan4",
+      "Plan5"
+    ],
+    "memberCategories": [
+      "Employee/Worker",
+      "Dependent",
+      "Small Investor",
+      "Individual Sponsor Dependent"
+    ],
+    "copayOptions": [
+      "0%"
+    ]
+  },
+  "rates": [
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 7838.12
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 7838.12
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 6431.01
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 6431.01
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 4371.42
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 4371.42
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 3676.38
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 3676.38
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2757.82
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2757.82
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 10564.01
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 10564.01
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 10564.01
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 10564.01
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 9547.52
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 9547.52
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 9547.52
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 9547.52
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 6455.49
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 6455.49
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 6455.49
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 6455.49
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 4323.53
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 4323.53
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 4323.53
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 4323.53
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 3264.46
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 3264.46
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 3264.46
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 3264.46
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 19363.27
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 19363.27
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 19363.27
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 19363.27
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 18496.86
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 18496.86
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 18496.86
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 18496.86
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 8655.57
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 8655.57
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 8655.57
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 8655.57
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 7817.9
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 7817.9
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 7817.9
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 7817.9
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 7675.27
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 7675.27
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 7675.27
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 7675.27
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 30834.13
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 30834.13
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 30834.13
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 30834.13
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 25977.35
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 25977.35
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 25977.35
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 25977.35
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 17135.51
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 22408.47
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 17135.51
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 22408.47
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 14922.66
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 21848.6
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 14922.66
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 21848.6
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 14105.21
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 21287.67
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 14105.21
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 21287.67
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 4534.27
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 4534.27
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 4534.27
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 4534.27
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 3744.6
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 3744.6
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 3744.6
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 3744.6
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 2925.53
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2925.53
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 2925.53
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2925.53
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 2581.89
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2581.89
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 2581.89
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2581.89
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 2531.21
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2531.21
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 2531.21
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2531.21
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 5435.12
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 5435.12
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 4459.2
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 4459.2
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 3031.08
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 3031.08
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2549.34
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2549.34
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 1912.2
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 1912.2
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 7325.56
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 7325.56
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 7325.56
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 7325.56
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 6620.82
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 6620.82
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 6620.82
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 6620.82
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 4476.3
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 4476.3
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 4476.3
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 4476.3
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 2997.67
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2997.67
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 2997.67
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2997.67
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 2263.4
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2263.4
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 2263.4
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2263.4
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 13428.11
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 13428.11
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 13428.11
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 13428.11
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 12827.49
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 12827.49
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 12827.49
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 12827.49
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 6002.32
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 6002.32
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 6002.32
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 6002.32
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 5421.13
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 5421.13
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 5421.13
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 5421.13
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 5322.45
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 5322.45
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 5322.45
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 5322.45
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 21383.04
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 21383.04
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 21383.04
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 21383.04
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 18014.74
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 18014.74
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 18014.74
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 18014.74
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 11883.44
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 15540.0
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 11883.44
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 15540.0
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 10348.86
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 15151.5
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 10348.86
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 15151.5
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 9781.65
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 14763.0
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 9781.65
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 14763.0
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 3144.26
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 3144.26
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 3144.26
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 3144.26
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 2596.66
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2596.66
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 2596.66
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2596.66
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 2028.34
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2028.34
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 2028.34
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2028.34
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 1790.06
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 1790.06
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 1790.06
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 1790.06
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 1755.28
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 1755.28
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 1755.28
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 1755.28
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 5381.5
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 5381.5
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 4414.91
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 4414.91
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 3000.77
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 3000.77
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2524.47
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2524.47
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 1893.55
+    },
+    {
+      "ageBand": "[00-17]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 1893.55
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 7252.52
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 7252.52
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 7252.52
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 7252.52
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 6554.77
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 6554.77
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 6554.77
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 6554.77
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 4432.01
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 4432.01
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 4432.01
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 4432.01
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 2968.14
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2968.14
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 2968.14
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2968.14
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 2240.87
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2240.87
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 2240.87
+    },
+    {
+      "ageBand": "[18-40]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2240.87
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 13294.47
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 13294.47
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 13294.47
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 13294.47
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 12699.29
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 12699.29
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 12699.29
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 12699.29
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 5942.5
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 5942.5
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 5942.5
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 5942.5
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 5367.52
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 5367.52
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 5367.52
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 5367.52
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 5269.61
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 5269.61
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 5269.61
+    },
+    {
+      "ageBand": "[41-59]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 5269.61
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 21169.37
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 21169.37
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 21169.37
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 21169.37
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 17835.26
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 17835.26
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 17835.26
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 17835.26
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 11765.33
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 15384.6
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 11765.33
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 15384.6
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 10245.52
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 14999.99
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 10245.52
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 14999.99
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 9684.53
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 14615.37
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 9684.53
+    },
+    {
+      "ageBand": "[60+]",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 14615.37
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 3113.18
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 3113.18
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 3113.18
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan1",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 3113.18
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 2570.76
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2570.76
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 2570.76
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan2",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2570.76
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 2008.36
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 2008.36
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 2008.36
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan3",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 2008.36
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 1772.3
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 1772.3
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 1772.3
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan4",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 1772.3
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Employee/Worker",
+      "copay": "0%",
+      "netRate": 1738.26
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Dependent",
+      "copay": "0%",
+      "netRate": 1738.26
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Small Investor",
+      "copay": "0%",
+      "netRate": 1738.26
+    },
+    {
+      "ageBand": "MAT(18-50 years)",
+      "gender": "Male/Female",
+      "plan": "Plan5",
+      "memberCategory": "Individual Sponsor Dependent",
+      "copay": "0%",
+      "netRate": 1738.26
+    }
+  ]
+}

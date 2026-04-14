@@ -11,7 +11,7 @@ import { UpdateDemoPlaylistDto } from '../models/dto/update-demo-playlist.dto';
 import { DemoPlaylistResponseDto } from '../models/dto/demo-playlist-response.dto';
 import { HashIdService } from './hash-id.service';
 import { EventPublisherService } from '../events/event-publisher.service';
-import { DemoEvents } from '../events/admin-console.events';
+import { DemoEvents } from '../events/unified-console.events';
 
 @Injectable()
 export class DemoPlaylistService {

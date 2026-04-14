@@ -21,13 +21,13 @@ echo "  Done: .env updated"
 # Step 3: Remove old PM2 processes
 echo "Step 3: Removing old PM2 processes..."
 source ~/.nvm/nvm.sh && nvm use 20 > /dev/null
-pm2 delete zorbit-admin-console 2>/dev/null || true
+pm2 delete zorbit-unified-console 2>/dev/null || true
 pm2 delete sample-customer-service 2>/dev/null || true
 echo "  Done: old processes removed"
 
 # Step 4: Delete old folders
 echo "Step 4: Deleting old folders..."
-rm -rf admin-console admin-console-server demos-backup TO_BE_DELETED
+rm -rf zorbit-admin-console admin-console-server demos-backup TO_BE_DELETED
 echo "  Done: old folders deleted"
 
 # Step 5: Save PM2 state
@@ -40,7 +40,7 @@ echo "=== Cleanup complete ==="
 echo ""
 echo "MANUAL STEP NEEDED (requires sudo):"
 echo "  sudo sed -i \\"
-echo "    's|/api/admin-console/|/api/unified-console/|g; s|admin-console deployments|unified-console deployments|g' \\"
+echo "    's|/api/unified-console/|/api/unified-console/|g; s|unified-console deployments|unified-console deployments|g' \\"
 echo "    /etc/nginx/sites-enabled/zorbit.scalatics.com && \\"
 echo "  sudo nginx -t && \\"
 echo "  sudo systemctl reload nginx"

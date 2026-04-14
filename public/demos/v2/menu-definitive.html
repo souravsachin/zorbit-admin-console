@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zorbit Menu -- Definitive 6-Level Edition</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f3f4f6; display: flex; height: 100vh; transition: background 0.3s, color 0.3s; }
+
+  /* ============================================================
+     Dark mode
+     ============================================================ */
+  body.dark { background: #111827; color: #e5e7eb; }
+  body.dark .sidebar { background: #1f2937; border-right-color: #374151; box-shadow: 2px 0 8px rgba(0,0,0,0.3); }
+  body.dark .sidebar-header { border-bottom-color: #374151; }
+  body.dark .user-card { border-bottom-color: #374151; }
+  body.dark .brand { color: #818cf8; }
+  body.dark .user-name { color: #f3f4f6; }
+  body.dark .user-role { color: #9ca3af; }
+  body.dark .search-wrap input { background: #374151; border-color: #4b5563; color: #e5e7eb; }
+  body.dark .search-wrap input::placeholder { color: #6b7280; }
+  body.dark .L2-header { color: #9ca3af; }
+  body.dark .L2-header:hover { background: #374151; }
+  body.dark .L3-label { color: #d1d5db; }
+  body.dark .L3-header:hover { background: #374151; }
+  body.dark .L3:not(.collapsed) .L3-content { background: rgba(55,65,81,0.4); }
+  body.dark .L4-label { color: #d1d5db; }
+  body.dark .L4-header:hover { background: #374151; }
+  body.dark .L5 { color: #9ca3af; }
+  body.dark .L5:hover { background: #374151; color: #e5e7eb; }
+  body.dark .L5.active { background: rgba(99,102,241,0.15); color: #818cf8; }
+  body.dark .L6 { color: #9ca3af; }
+  body.dark .L6:hover { background: #374151; color: #e5e7eb; }
+  body.dark .L6.active { background: rgba(99,102,241,0.15); color: #818cf8; }
+  body.dark .separator { background: #374151; }
+  body.dark .footer { border-top-color: #374151; color: #6b7280; }
+  body.dark .main { background: #111827; }
+  body.dark .main h1 { color: #f3f4f6; }
+  body.dark .main p { color: #9ca3af; }
+  body.dark .card { background: #1f2937; border-color: #374151; }
+  body.dark .breadcrumb { color: #6b7280; }
+  body.dark .nav-scroll::-webkit-scrollbar-thumb { background: #4b5563; }
+  body.dark .stat { background: #1f2937; border-color: #374151; color: #9ca3af; }
+  body.dark .stat b { color: #d1d5db; }
+  body.dark .toast { background: #374151; color: #e5e7eb; border-color: #4b5563; }
+  body.dark .customize-btn { background: #374151; border-color: #4b5563; color: #9ca3af; }
+  body.dark .customize-btn:hover { background: #4b5563; color: #e5e7eb; }
+
+  /* ============================================================
+     Sidebar shell
+     ============================================================ */
+  .sidebar { width: 310px; background: #fff; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column; height: 100vh; overflow: hidden; box-shadow: 2px 0 8px rgba(0,0,0,0.04); }
+  .sidebar-header { padding: 14px 16px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .logo { width: 30px; height: 30px; background: linear-gradient(135deg, #6366f1, #4f46e5); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 13px; }
+  .brand { font-size: 17px; font-weight: 700; color: #4f46e5; }
+  .badge { font-size: 9px; background: linear-gradient(135deg, #fef3c7, #fde68a); color: #92400e; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .user-card { padding: 10px 16px; border-bottom: 1px solid #f0f0f0; flex-shrink: 0; display: flex; align-items: center; gap: 8px; }
+  .avatar { width: 28px; height: 28px; background: #6366f1; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 10px; font-weight: 600; }
+  .user-name { font-size: 12px; font-weight: 600; color: #111; }
+  .user-role { font-size: 10px; color: #6b7280; }
+
+  /* ============================================================
+     Edition Selector (HERO FEATURE)
+     ============================================================ */
+  .edition-selector { margin: 6px 10px; padding: 0; border-radius: 10px; flex-shrink: 0; overflow: hidden; transition: all 0.3s ease; }
+  .edition-banner { padding: 8px 12px 4px; display: flex; align-items: center; justify-content: space-between; }
+  .edition-banner-label { font-size: 9px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.8px; }
+  .edition-banner-active { font-size: 11px; font-weight: 600; }
+  .edition-select-wrap { padding: 0 10px 8px; display: flex; gap: 4px; }
+  .edition-select { flex: 1; padding: 6px 8px; border-radius: 6px; background: rgba(255,255,255,0.9); font-size: 11.5px; font-weight: 500; cursor: pointer; outline: none; transition: border-color 0.2s; }
+  body.dark .edition-select { background: rgba(55,65,81,0.9); color: #e5e7eb; }
+  .edition-select optgroup { font-weight: 700; font-size: 12px; }
+  .edition-select option { font-weight: 400; font-size: 12px; padding: 4px; }
+  .customize-btn { width: 28px; height: 28px; border-radius: 6px; border: 1px solid #e5e7eb; background: #f9fafb; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: all 0.2s; flex-shrink: 0; }
+  .customize-btn:hover { background: #e5e7eb; }
+
+  /* Edition color themes -- light */
+  .edition-selector[data-edition="insurer"] { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #86efac; }
+  .edition-selector[data-edition="insurer"] .edition-banner-label { color: #15803d; }
+  .edition-selector[data-edition="insurer"] .edition-banner-active { color: #166534; }
+  .edition-selector[data-edition="insurer"] .edition-select { border: 1px solid #86efac; color: #166534; }
+
+  .edition-selector[data-edition="uhc"] { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 1px solid #7dd3fc; }
+  .edition-selector[data-edition="uhc"] .edition-banner-label { color: #0284c7; }
+  .edition-selector[data-edition="uhc"] .edition-banner-active { color: #0369a1; }
+  .edition-selector[data-edition="uhc"] .edition-select { border: 1px solid #7dd3fc; color: #0369a1; }
+
+  .edition-selector[data-edition="tpa"] { background: linear-gradient(135deg, #fff7ed, #ffedd5); border: 1px solid #fdba74; }
+  .edition-selector[data-edition="tpa"] .edition-banner-label { color: #c2410c; }
+  .edition-selector[data-edition="tpa"] .edition-banner-active { color: #9a3412; }
+  .edition-selector[data-edition="tpa"] .edition-select { border: 1px solid #fdba74; color: #9a3412; }
+
+  .edition-selector[data-edition="broker"] { background: linear-gradient(135deg, #f5f3ff, #ede9fe); border: 1px solid #a78bfa; }
+  .edition-selector[data-edition="broker"] .edition-banner-label { color: #7c3aed; }
+  .edition-selector[data-edition="broker"] .edition-banner-active { color: #6d28d9; }
+  .edition-selector[data-edition="broker"] .edition-select { border: 1px solid #a78bfa; color: #6d28d9; }
+
+  .edition-selector[data-edition="provider"] { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border: 1px solid #5eead4; }
+  .edition-selector[data-edition="provider"] .edition-banner-label { color: #0f766e; }
+  .edition-selector[data-edition="provider"] .edition-banner-active { color: #115e59; }
+  .edition-selector[data-edition="provider"] .edition-select { border: 1px solid #5eead4; color: #115e59; }
+
+  .edition-selector[data-edition="regulator"] { background: linear-gradient(135deg, #fef2f2, #fee2e2); border: 1px solid #fca5a5; }
+  .edition-selector[data-edition="regulator"] .edition-banner-label { color: #dc2626; }
+  .edition-selector[data-edition="regulator"] .edition-banner-active { color: #b91c1c; }
+  .edition-selector[data-edition="regulator"] .edition-select { border: 1px solid #fca5a5; color: #b91c1c; }
+
+  .edition-selector[data-edition="reinsurer"] { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #fcd34d; }
+  .edition-selector[data-edition="reinsurer"] .edition-banner-label { color: #b45309; }
+  .edition-selector[data-edition="reinsurer"] .edition-banner-active { color: #92400e; }
+  .edition-selector[data-edition="reinsurer"] .edition-select { border: 1px solid #fcd34d; color: #92400e; }
+
+  .edition-selector[data-edition="distributor"] { background: linear-gradient(135deg, #eef2ff, #e0e7ff); border: 1px solid #a5b4fc; }
+  .edition-selector[data-edition="distributor"] .edition-banner-label { color: #4338ca; }
+  .edition-selector[data-edition="distributor"] .edition-banner-active { color: #3730a3; }
+  .edition-selector[data-edition="distributor"] .edition-select { border: 1px solid #a5b4fc; color: #3730a3; }
+
+  /* Edition color themes -- dark */
+  body.dark .edition-selector[data-edition="insurer"] { background: linear-gradient(135deg, #052e16, #064e3b); border-color: #065f46; }
+  body.dark .edition-selector[data-edition="uhc"] { background: linear-gradient(135deg, #0c4a6e, #075985); border-color: #0369a1; }
+  body.dark .edition-selector[data-edition="tpa"] { background: linear-gradient(135deg, #431407, #7c2d12); border-color: #9a3412; }
+  body.dark .edition-selector[data-edition="broker"] { background: linear-gradient(135deg, #2e1065, #4c1d95); border-color: #6d28d9; }
+  body.dark .edition-selector[data-edition="provider"] { background: linear-gradient(135deg, #042f2e, #134e4a); border-color: #115e59; }
+  body.dark .edition-selector[data-edition="regulator"] { background: linear-gradient(135deg, #450a0a, #7f1d1d); border-color: #991b1b; }
+  body.dark .edition-selector[data-edition="reinsurer"] { background: linear-gradient(135deg, #451a03, #78350f); border-color: #92400e; }
+  body.dark .edition-selector[data-edition="distributor"] { background: linear-gradient(135deg, #1e1b4b, #312e81); border-color: #4338ca; }
+
+  /* ============================================================
+     Search
+     ============================================================ */
+  .search-wrap { padding: 6px 10px; flex-shrink: 0; }
+  .search-wrap input { width: 100%; padding: 6px 10px; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 11px; outline: none; background: #f9fafb; transition: border-color 0.2s; }
+  .search-wrap input:focus { border-color: #6366f1; }
+
+  /* ============================================================
+     Nav scroll area
+     ============================================================ */
+  .nav-scroll { flex: 1; overflow-y: auto; padding: 2px 0; }
+  .nav-scroll::-webkit-scrollbar { width: 3px; }
+  .nav-scroll::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+
+  /* ============================================================
+     Level 1: Drawer header
+     ============================================================ */
+  .L1 { margin-bottom: 1px; }
+  .L1-header { padding: 8px 12px 5px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
+  .L1-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+  .L1-chevron { font-size: 9px; color: #9ca3af; transition: transform 0.2s; }
+  .L1.collapsed .L1-chevron { transform: rotate(-90deg); }
+  .L1.collapsed .L1-content { display: none; }
+
+  /* L1 color coding */
+  .L1[data-color="blue"] .L1-label { color: #3b82f6; }
+  .L1[data-color="blue"] .L1-header { border-left: 3px solid #3b82f6; }
+  .L1[data-color="indigo"] .L1-label { color: #6366f1; }
+  .L1[data-color="indigo"] .L1-header { border-left: 3px solid #6366f1; }
+  .L1[data-color="green"] .L1-label { color: #22c55e; }
+  .L1[data-color="green"] .L1-header { border-left: 3px solid #22c55e; }
+  .L1[data-color="purple"] .L1-label { color: #8b5cf6; }
+  .L1[data-color="purple"] .L1-header { border-left: 3px solid #8b5cf6; }
+  .L1[data-color="gray"] .L1-label { color: #6b7280; }
+  .L1[data-color="gray"] .L1-header { border-left: 3px solid #9ca3af; }
+  .L1[data-color="teal"] .L1-label { color: #14b8a6; }
+  .L1[data-color="teal"] .L1-header { border-left: 3px solid #14b8a6; }
+  .L1[data-color="red"] .L1-label { color: #ef4444; }
+  .L1[data-color="red"] .L1-header { border-left: 3px solid #ef4444; }
+  .L1[data-color="orange"] .L1-label { color: #f97316; }
+  .L1[data-color="orange"] .L1-header { border-left: 3px solid #f97316; }
+
+  /* Dynamic business L1 edition coloring */
+  .L1.biz-group[data-edition-color="green"] .L1-header { border-left: 3px solid #22c55e; }
+  .L1.biz-group[data-edition-color="green"] .L1-label { color: #22c55e; }
+  .L1.biz-group[data-edition-color="sky"] .L1-header { border-left: 3px solid #0ea5e9; }
+  .L1.biz-group[data-edition-color="sky"] .L1-label { color: #0ea5e9; }
+  .L1.biz-group[data-edition-color="orange"] .L1-header { border-left: 3px solid #f97316; }
+  .L1.biz-group[data-edition-color="orange"] .L1-label { color: #f97316; }
+  .L1.biz-group[data-edition-color="violet"] .L1-header { border-left: 3px solid #8b5cf6; }
+  .L1.biz-group[data-edition-color="violet"] .L1-label { color: #8b5cf6; }
+  .L1.biz-group[data-edition-color="teal"] .L1-header { border-left: 3px solid #14b8a6; }
+  .L1.biz-group[data-edition-color="teal"] .L1-label { color: #14b8a6; }
+  .L1.biz-group[data-edition-color="red"] .L1-header { border-left: 3px solid #ef4444; }
+  .L1.biz-group[data-edition-color="red"] .L1-label { color: #ef4444; }
+  .L1.biz-group[data-edition-color="amber"] .L1-header { border-left: 3px solid #f59e0b; }
+  .L1.biz-group[data-edition-color="amber"] .L1-label { color: #f59e0b; }
+  .L1.biz-group[data-edition-color="indigo"] .L1-header { border-left: 3px solid #6366f1; }
+  .L1.biz-group[data-edition-color="indigo"] .L1-label { color: #6366f1; }
+
+  /* ============================================================
+     Level 2: Business Line / Service Group
+     ============================================================ */
+  .L2 { margin: 1px 0; position: relative; }
+  .L2-header { padding: 6px 16px; display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; font-size: 11px; font-weight: 600; color: #4b5563; border-left: 2px solid transparent; margin-left: 8px; transition: background 0.15s; }
+  .L2-header:hover { background: #f9fafb; }
+  .L2-chevron { font-size: 9px; color: #9ca3af; transition: transform 0.2s; margin-left: auto; }
+  .L2.collapsed .L2-chevron { transform: rotate(-90deg); }
+  .L2.collapsed .L2-content { display: none; }
+  .L2-icon { font-size: 12px; }
+  .L2-count { font-size: 9px; color: #9ca3af; background: #f3f4f6; padding: 1px 5px; border-radius: 8px; margin-left: auto; margin-right: 4px; }
+  body.dark .L2-count { background: #374151; color: #6b7280; }
+
+  /* L2 color coding */
+  .L2[data-color="blue"] .L2-header { border-left-color: #3b82f6; color: #1d4ed8; }
+  .L2[data-color="green"] .L2-header { border-left-color: #22c55e; color: #15803d; }
+  .L2[data-color="orange"] .L2-header { border-left-color: #f97316; color: #c2410c; }
+  .L2[data-color="red"] .L2-header { border-left-color: #ef4444; color: #b91c1c; }
+  .L2[data-color="purple"] .L2-header { border-left-color: #8b5cf6; color: #6d28d9; }
+  .L2[data-color="amber"] .L2-header { border-left-color: #f59e0b; color: #b45309; }
+  .L2[data-color="indigo"] .L2-header { border-left-color: #6366f1; color: #4338ca; }
+  .L2[data-color="teal"] .L2-header { border-left-color: #14b8a6; color: #0f766e; }
+
+  /* ============================================================
+     Level 3: Capability Area
+     ============================================================ */
+  .L3 { margin: 0; position: relative; }
+  .L3-header { padding: 5px 16px 5px 28px; display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; transition: background 0.15s; border-left: 2px solid transparent; margin-left: 12px; }
+  .L3-header:hover { background: #f9fafb; }
+  .L3-icon { font-size: 11px; width: 16px; text-align: center; }
+  .L3-label { font-size: 11px; font-weight: 600; color: #4b5563; flex: 1; }
+  .L3-chevron { font-size: 9px; color: #9ca3af; transition: transform 0.2s; }
+  .L3.collapsed .L3-chevron { transform: rotate(-90deg); }
+  .L3.collapsed .L3-content { display: none; }
+  .L3:not(.collapsed) .L3-content { background: rgba(249, 250, 251, 0.6); border-radius: 0 0 4px 4px; padding-bottom: 2px; }
+
+  /* L3 color coding */
+  .L3[data-color="teal"] .L3-header { border-left-color: #14b8a6; }
+  .L3[data-color="teal"] .L3-label { color: #0f766e; }
+  .L3[data-color="rose"] .L3-header { border-left-color: #f43f5e; }
+  .L3[data-color="rose"] .L3-label { color: #be123c; }
+  .L3[data-color="sky"] .L3-header { border-left-color: #0ea5e9; }
+  .L3[data-color="sky"] .L3-label { color: #0369a1; }
+  .L3[data-color="amber"] .L3-header { border-left-color: #f59e0b; }
+  .L3[data-color="amber"] .L3-label { color: #b45309; }
+  .L3[data-color="violet"] .L3-header { border-left-color: #8b5cf6; }
+  .L3[data-color="violet"] .L3-label { color: #6d28d9; }
+  .L3[data-color="emerald"] .L3-header { border-left-color: #10b981; }
+  .L3[data-color="emerald"] .L3-label { color: #047857; }
+  .L3[data-color="blue"] .L3-header { border-left-color: #3b82f6; }
+  .L3[data-color="blue"] .L3-label { color: #1d4ed8; }
+  .L3[data-color="orange"] .L3-header { border-left-color: #f97316; }
+  .L3[data-color="orange"] .L3-label { color: #c2410c; }
+  .L3[data-color="indigo"] .L3-header { border-left-color: #6366f1; }
+  .L3[data-color="indigo"] .L3-label { color: #4338ca; }
+  .L3[data-color="pink"] .L3-header { border-left-color: #ec4899; }
+  .L3[data-color="pink"] .L3-label { color: #be185d; }
+  .L3[data-color="cyan"] .L3-header { border-left-color: #06b6d4; }
+  .L3[data-color="cyan"] .L3-label { color: #0e7490; }
+  .L3[data-color="green"] .L3-header { border-left-color: #22c55e; }
+  .L3[data-color="green"] .L3-label { color: #15803d; }
+  .L3[data-color="red"] .L3-header { border-left-color: #ef4444; }
+  .L3[data-color="red"] .L3-label { color: #b91c1c; }
+
+  /* ============================================================
+     Level 4: Module
+     ============================================================ */
+  .L4 { margin: 0; position: relative; }
+  .L4-header { padding: 4px 16px 4px 44px; display: flex; align-items: center; gap: 7px; cursor: pointer; user-select: none; transition: background 0.15s; }
+  .L4-header:hover { background: #f3f4f6; }
+  .L4-icon { font-size: 12px; width: 16px; text-align: center; }
+  .L4-label { font-size: 12px; font-weight: 500; color: #374151; flex: 1; }
+  .L4-code { font-size: 9px; color: #9ca3af; font-family: monospace; margin-left: auto; margin-right: 4px; }
+  body.dark .L4-code { color: #6b7280; }
+  .L4-chevron { font-size: 9px; color: #9ca3af; transition: transform 0.2s; }
+  .L4.collapsed .L4-chevron { transform: rotate(-90deg); }
+  .L4.collapsed .L4-content { display: none; }
+
+  /* ============================================================
+     Level 5: Feature
+     ============================================================ */
+  .L5 { padding: 3px 16px 3px 60px; font-size: 11.5px; color: #6b7280; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 6px; position: relative; }
+  .L5:hover { background: #f3f4f6; color: #374151; }
+  .L5.active { background: rgba(99,102,241,0.08); color: #4f46e5; font-weight: 500; }
+  .L5-icon { font-size: 10px; opacity: 0.6; }
+  .L5 .route-hint { display: none; font-size: 9px; color: #a5b4fc; margin-left: auto; font-weight: 400; }
+  .L5:hover .route-hint { display: inline; }
+
+  /* ============================================================
+     CONNECTING LINES (tree lines)
+     ============================================================ */
+
+  /* -- L2-content: vertical line from L2 down through its children -- */
+  .L2-content { position: relative; margin-left: 16px; padding-left: 8px; }
+  .L2-content::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 8px;
+    width: 1.5px;
+    background: var(--line-color, #d1d5db);
+    opacity: 0.5;
+  }
+  .L2:not(.collapsed) .L2-content > .L3 { position: relative; }
+  .L2:not(.collapsed) .L2-content > .L3::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 14px;
+    width: 8px;
+    height: 1.5px;
+    background: var(--line-color, #d1d5db);
+    opacity: 0.5;
+  }
+
+  /* -- L3-content: vertical line from L3 down through its children -- */
+  .L3-content { position: relative; margin-left: 8px; padding-left: 10px; }
+  .L3-content::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0;
+    bottom: 6px;
+    width: 1px;
+    background: var(--line-color-l3, #e5e7eb);
+    opacity: 0.6;
+  }
+  .L3:not(.collapsed) .L3-content > .L4 { position: relative; }
+  .L3:not(.collapsed) .L3-content > .L4::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 12px;
+    width: 6px;
+    height: 1px;
+    background: var(--line-color-l3, #e5e7eb);
+    opacity: 0.6;
+  }
+
+  /* -- L4-content: vertical line from L4 down through L5 children -- */
+  .L4-content { position: relative; margin-left: 6px; padding-left: 8px; }
+  .L4-content::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 4px;
+    width: 1px;
+    background: #e5e7eb;
+    opacity: 0.4;
+  }
+  .L4:not(.collapsed) .L4-content > .L5 { position: relative; }
+  .L4:not(.collapsed) .L4-content > .L5::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    width: 5px;
+    height: 1px;
+    background: #e5e7eb;
+    opacity: 0.4;
+  }
+
+  /* Connecting line color overrides for L2 */
+  .L2[data-color="blue"] .L2-content { --line-color: #93c5fd; }
+  .L2[data-color="green"] .L2-content { --line-color: #86efac; }
+  .L2[data-color="orange"] .L2-content { --line-color: #fdba74; }
+  .L2[data-color="red"] .L2-content { --line-color: #fca5a5; }
+  .L2[data-color="purple"] .L2-content { --line-color: #c4b5fd; }
+  .L2[data-color="amber"] .L2-content { --line-color: #fcd34d; }
+  .L2[data-color="indigo"] .L2-content { --line-color: #a5b4fc; }
+  .L2[data-color="teal"] .L2-content { --line-color: #5eead4; }
+
+  /* Connecting line color overrides for L3 */
+  .L3[data-color="teal"] .L3-content { --line-color-l3: #99f6e4; }
+  .L3[data-color="rose"] .L3-content { --line-color-l3: #fda4af; }
+  .L3[data-color="sky"] .L3-content { --line-color-l3: #bae6fd; }
+  .L3[data-color="amber"] .L3-content { --line-color-l3: #fde68a; }
+  .L3[data-color="violet"] .L3-content { --line-color-l3: #c4b5fd; }
+  .L3[data-color="emerald"] .L3-content { --line-color-l3: #a7f3d0; }
+  .L3[data-color="blue"] .L3-content { --line-color-l3: #bfdbfe; }
+  .L3[data-color="orange"] .L3-content { --line-color-l3: #fed7aa; }
+  .L3[data-color="indigo"] .L3-content { --line-color-l3: #c7d2fe; }
+  .L3[data-color="pink"] .L3-content { --line-color-l3: #fbcfe8; }
+  .L3[data-color="cyan"] .L3-content { --line-color-l3: #a5f3fc; }
+  .L3[data-color="green"] .L3-content { --line-color-l3: #bbf7d0; }
+  .L3[data-color="red"] .L3-content { --line-color-l3: #fecaca; }
+
+  /* Dark mode connecting lines */
+  body.dark .L2-content::before { opacity: 0.25; }
+  body.dark .L2:not(.collapsed) .L2-content > .L3::before { opacity: 0.25; }
+  body.dark .L3-content::before { opacity: 0.2; }
+  body.dark .L3:not(.collapsed) .L3-content > .L4::before { opacity: 0.2; }
+  body.dark .L4-content::before { opacity: 0.15; }
+
+  /* ============================================================
+     Misc UI
+     ============================================================ */
+  .separator { height: 1px; background: #e5e7eb; margin: 3px 12px; }
+
+  .main { flex: 1; padding: 24px; overflow-y: auto; }
+  .main h1 { font-size: 22px; color: #111; margin-bottom: 6px; }
+  .main p { color: #6b7280; font-size: 13px; line-height: 1.6; }
+  .breadcrumb { font-size: 11px; color: #9ca3af; margin-bottom: 12px; }
+  .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px; margin-top: 12px; }
+  .level-tag { display: inline-block; font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: 600; margin-right: 4px; }
+  .level-tag.l1 { background: #dbeafe; color: #1d4ed8; }
+  .level-tag.l2 { background: #dcfce7; color: #15803d; }
+  .level-tag.l3 { background: #ccfbf1; color: #0f766e; }
+  .level-tag.l4 { background: #fef3c7; color: #b45309; }
+  .level-tag.l5 { background: #f3e8ff; color: #6d28d9; }
+
+  .footer { padding: 6px 12px; border-top: 1px solid #f0f0f0; font-size: 9px; color: #9ca3af; flex-shrink: 0; line-height: 1.8; }
+
+  /* Edition card colors in main area */
+  .edition-card { border-left: 4px solid transparent; }
+  .edition-card.insurer { border-left-color: #22c55e; }
+  .edition-card.uhc { border-left-color: #0ea5e9; }
+  .edition-card.tpa { border-left-color: #f97316; }
+  .edition-card.broker { border-left-color: #8b5cf6; }
+  .edition-card.provider { border-left-color: #14b8a6; }
+  .edition-card.regulator { border-left-color: #ef4444; }
+  .edition-card.reinsurer { border-left-color: #f59e0b; }
+  .edition-card.distributor { border-left-color: #6366f1; }
+
+  /* Stats bar */
+  .stats-bar { display: flex; gap: 8px; margin: 8px 10px 4px; flex-shrink: 0; flex-wrap: wrap; }
+  .stat { font-size: 9px; color: #6b7280; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 4px; padding: 2px 6px; }
+  .stat b { color: #374151; }
+
+  /* Toast notification */
+  .toast { position: fixed; bottom: 20px; right: 20px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-size: 12px; z-index: 1000; display: flex; align-items: center; gap: 8px; transform: translateY(100px); opacity: 0; transition: all 0.3s ease; max-width: 400px; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast-route { font-family: monospace; font-size: 11px; color: #6366f1; background: #eef2ff; padding: 2px 6px; border-radius: 4px; }
+
+  /* Dark mode toggle */
+  .dark-toggle { position: fixed; top: 12px; right: 12px; z-index: 100; width: 32px; height: 32px; border-radius: 50%; border: 1px solid #e5e7eb; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.2s; }
+  .dark-toggle:hover { background: #f3f4f6; }
+  body.dark .dark-toggle { background: #374151; border-color: #4b5563; }
+
+  /* Search highlight */
+  .search-hidden { display: none !important; }
+
+  /* Detail panel in main area */
+  .detail-panel { margin-top: 16px; }
+  .detail-panel .detail-path { font-size: 11px; color: #6b7280; margin-bottom: 4px; }
+  .detail-panel .detail-title { font-size: 18px; font-weight: 600; color: #111; margin-bottom: 8px; }
+  body.dark .detail-panel .detail-title { color: #f3f4f6; }
+  .detail-panel .detail-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+  .detail-meta-item { font-size: 10px; padding: 3px 8px; border-radius: 4px; background: #f3f4f6; color: #4b5563; }
+  body.dark .detail-meta-item { background: #374151; color: #d1d5db; }
+
+  /* Coming soon placeholder */
+  .coming-soon-msg { padding: 12px 16px; margin: 6px 10px; border-radius: 8px; background: #f9fafb; border: 1px dashed #d1d5db; color: #9ca3af; font-size: 11px; text-align: center; font-style: italic; }
+  body.dark .coming-soon-msg { background: #1f2937; border-color: #4b5563; color: #6b7280; }
+
+  /* Customize modal */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 200; display: flex; align-items: center; justify-content: center; }
+  .modal-box { background: #fff; border-radius: 12px; padding: 24px; max-width: 400px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+  body.dark .modal-box { background: #1f2937; color: #e5e7eb; }
+  .modal-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+  .modal-body { font-size: 13px; color: #6b7280; line-height: 1.6; margin-bottom: 16px; }
+  .modal-close { padding: 6px 16px; border-radius: 6px; border: none; background: #6366f1; color: #fff; font-size: 12px; font-weight: 500; cursor: pointer; }
+  .modal-close:hover { background: #4f46e5; }
+
+  /* Hierarchy legend table */
+  .hierarchy-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 11px; }
+  .hierarchy-table th { text-align: left; padding: 4px 8px; background: #f3f4f6; color: #4b5563; font-weight: 600; }
+  .hierarchy-table td { padding: 4px 8px; border-bottom: 1px solid #f0f0f0; }
+  body.dark .hierarchy-table th { background: #374151; color: #d1d5db; }
+  body.dark .hierarchy-table td { border-bottom-color: #374151; }
+</style>
+</head>
+<body>
+
+<button class="dark-toggle" onclick="toggleDark()" title="Toggle dark mode">&#x1F319;</button>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">Z</div>
+    <div class="brand">Zorbit</div>
+    <div class="badge">DEFINITIVE</div>
+  </div>
+  <div class="user-card">
+    <div class="avatar">SS</div>
+    <div><div class="user-name">Sourav Sachin</div><div class="user-role">admin &#xB7; O-OZPY</div></div>
+  </div>
+
+  <!-- Edition Selector Banner -->
+  <div class="edition-selector" id="edition-selector" data-edition="insurer">
+    <div class="edition-banner">
+      <span class="edition-banner-label">Edition</span>
+      <span class="edition-banner-active" id="edition-active-label">Insurer Edition</span>
+    </div>
+    <div class="edition-select-wrap">
+      <select class="edition-select" id="edition-dropdown" onchange="switchEdition(this.value)">
+        <optgroup label="Private Sector">
+          <option value="insurer" selected>Insurer Edition</option>
+          <option value="reinsurer">Reinsurer Edition</option>
+          <option value="tpa">TPA Edition</option>
+          <option value="broker">Broker Edition</option>
+          <option value="provider">Provider Edition</option>
+          <option value="distributor">Distributor Edition</option>
+        </optgroup>
+        <optgroup label="Government / Public Sector">
+          <option value="uhc">UHC Edition</option>
+          <option value="regulator">Regulator Edition</option>
+        </optgroup>
+      </select>
+      <button class="customize-btn" onclick="showCustomize()" title="Customize menu">&#x2699;&#xFE0F;</button>
+    </div>
+  </div>
+
+  <div class="search-wrap">
+    <input type="text" id="search-input" placeholder="Search all items..." oninput="filterMenu(this.value)">
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat">Total: <b id="stat-total">0</b></div>
+    <div class="stat">Visible: <b id="stat-visible">0</b></div>
+    <div class="stat">Edition: <b id="stat-edition">Insurer</b></div>
+  </div>
+
+  <div class="nav-scroll" id="nav-scroll">
+    <!-- Rendered by JS -->
+  </div>
+
+  <div class="footer">
+    <span class="level-tag l1">L1</span> Drawer
+    <span class="level-tag l2">L2</span> Biz Line
+    <span class="level-tag l3">L3</span> Capability
+    <span class="level-tag l4">L4</span> Module
+    <span class="level-tag l5">L5</span> Feature
+  </div>
+</div>
+
+<div class="main">
+  <div class="breadcrumb" id="breadcrumb">Zorbit Unified Console</div>
+  <h1>Zorbit Menu -- Definitive Edition</h1>
+  <p>The canonical 5-level business menu aligned with Zorbit's standardized terminology. Edition > Business Line > Capability Area > Module > Feature. Full module catalog from <code>02-business-module-catalog.md</code>.</p>
+
+  <div id="edition-description" class="card edition-card insurer" style="margin-top:16px;">
+    <div style="font-size:14px;font-weight:600;margin-bottom:6px;" id="edition-desc-title">Insurer Edition</div>
+    <div style="font-size:12px;color:#6b7280;" id="edition-desc-body">Full insurance operations: Distribution (Product Management, Policy Administration) + Servicing (Network Management, Claim Management, Customer Portal, FWA). All 67 business modules.</div>
+  </div>
+
+  <div class="card" style="margin-top: 12px;">
+    <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Standardized Hierarchy (Cover Note 2026-03-13)</div>
+    <table class="hierarchy-table">
+      <tr><th>Level</th><th>Term</th><th>Old Term</th><th>Example</th></tr>
+      <tr><td><span class="level-tag l1">L1</span></td><td><b>Edition</b></td><td>Suite</td><td>Insurer, UHC, TPA</td></tr>
+      <tr><td><span class="level-tag l2">L2</span></td><td><b>Business Line</b></td><td>Product Category</td><td>Distribution, Servicing</td></tr>
+      <tr><td><span class="level-tag l3">L3</span></td><td><b>Capability Area</b></td><td>Product Line</td><td>Product Management, Claim Management</td></tr>
+      <tr><td><span class="level-tag l4">L4</span></td><td><b>Module</b></td><td>Module</td><td>Product Design (PM.01), Medical Adjudication (CM.IPD.12)</td></tr>
+      <tr><td><span class="level-tag l5">L5</span></td><td><b>Feature</b></td><td>Sub-module</td><td>New Application, Queue Management</td></tr>
+    </table>
+  </div>
+
+  <div class="detail-panel" id="detail-panel" style="display:none;">
+    <div class="detail-path" id="detail-path"></div>
+    <div class="detail-title" id="detail-title"></div>
+    <div class="detail-meta" id="detail-meta"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <span id="toast-label"></span>
+  <span class="toast-route" id="toast-route"></span>
+</div>
+
+<div id="customize-modal" style="display:none;"></div>
+
+<script>
+// ============================================================
+// Icon map (emoji fallbacks)
+// ============================================================
+const ICON_MAP = {
+  Server: '\uD83D\uDDA5\uFE0F', Fingerprint: '\uD83D\uDD10', ShieldCheck: '\uD83D\uDEE1\uFE0F', Navigation: '\uD83E\uDDED', Radio: '\uD83D\uDCE1',
+  ClipboardCheck: '\uD83D\uDCDC', Lock: '\uD83D\uDD12', KeyRound: '\uD83D\uDD10', ShieldAlert: '\uD83D\uDEE1\uFE0F', BadgeCheck: '\u2705',
+  Table: '\uD83D\uDCCA', FormInput: '\uD83D\uDCDD', GitBranch: '\uD83D\uDD00', Brain: '\uD83E\uDDE0', Wifi: '\uD83D\uDCF6',
+  Disc: '\uD83C\uDFA5', Bell: '\uD83D\uDD14', Plug: '\uD83D\uDD0C', BookUser: '\uD83D\uDCD6', Briefcase: '\uD83D\uDCBC',
+  TrendingUp: '\uD83D\uDCC8', Wrench: '\uD83D\uDD27', Package: '\uD83D\uDCE6', UserCheck: '\uD83D\uDC64', Building: '\uD83C\uDFE2',
+  Globe: '\uD83C\uDF10', FileWarning: '\u26A0\uFE0F', HeadSet: '\uD83C\uDFA7', AlertTriangle: '\u26A0\uFE0F',
+  Phone: '\uD83D\uDCDE', PhoneCall: '\uD83D\uDCDE', Mic: '\uD83C\uDF99\uFE0F', LifeBuoy: '\uD83D\uDEDF', Headphones: '\uD83C\uDFA7',
+  Code2: '\uD83D\uDCBB', GraduationCap: '\uD83C\uDF93', UserCog: '\u2699\uFE0F', Settings: '\u2699\uFE0F', Cog: '\u2699\uFE0F',
+  LayoutDashboard: '\uD83D\uDCCA', BookOpen: '\uD83D\uDCD6', Info: '\u2139\uFE0F', Presentation: '\uD83C\uDFAC', RefreshCw: '\uD83D\uDD04',
+  Video: '\uD83C\uDFA5', FileText: '\uD83D\uDCC4', DollarSign: '$', Rocket: '\uD83D\uDE80', Users: '\uD83D\uDC65',
+  Contact: '\uD83D\uDCCB', Building2: '\uD83C\uDFE2', Shield: '\uD83D\uDEE1\uFE0F', Key: '\uD83D\uDD11', Menu: '\u2630',
+  Route: '\uD83D\uDEE3\uFE0F', List: '\uD83D\uDCCB', Activity: '\u26A1', ScrollText: '\uD83D\uDCDC', Hash: '#',
+  Eye: '\uD83D\uDC41\uFE0F', Upload: '\u2B06\uFE0F', Play: '\u25B6\uFE0F', PenTool: '\u270F\uFE0F', LayoutTemplate: '\uD83D\uDCCB',
+  Plus: '\u2795', Inbox: '\uD83D\uDCE5', Filter: '\uD83D\uDD0D', ListOrdered: '\uD83D\uDCCB', Workflow: '\uD83D\uDD00',
+  MessageSquare: '\uD83D\uDCAC', Search: '\uD83D\uDD0D', Cpu: '\uD83D\uDDA5\uFE0F', Calculator: '\uD83E\uDDEE', BarChart3: '\uD83D\uDCCA',
+  TestTube2: '\uD83E\uDDEA', Network: '\uD83C\uDF10', HeartPulse: '\u2764\uFE0F', Car: '\uD83D\uDE97', ClipboardList: '\uD83D\uDCCB',
+  GitMerge: '\uD83D\uDD00', Scale: '\u2696\uFE0F', CreditCard: '\uD83D\uDCB3', Receipt: '\uD83E\uDDFE', FileSearch: '\uD83D\uDD0D',
+  CheckCircle2: '\u2705', FileStack: '\uD83D\uDCC1', FileCheck: '\u2705', Files: '\uD83D\uDCC1', FileOutput: '\uD83D\uDCC4',
+  Stamp: '\uD83D\uDCE8', Landmark: '\uD83C\uDFDB\uFE0F', Repeat: '\uD83D\uDD04', ArrowRightLeft: '\u2194\uFE0F', Stethoscope: '\uD83E\uDE7A',
+  FileCog: '\u2699\uFE0F', FileEdit: '\u270F\uFE0F', FileSignature: '\uD83D\uDCDD', RotateCcw: '\uD83D\uDD04', RefreshCcw: '\uD83D\uDD04',
+  BarChart: '\uD83D\uDCCA', PieChart: '\uD83D\uDCCA', Bot: '\uD83E\uDD16', Plug2: '\uD83D\uDD0C', Link2: '\uD83D\uDD17',
+  History: '\uD83D\uDCDC', PhoneOutgoing: '\uD83D\uDCDE', SlidersHorizontal: '\u2699\uFE0F', ShieldCheck2: '\uD83D\uDEE1\uFE0F',
+  Map: '\uD83D\uDDFA\uFE0F', Terminal: '\uD83D\uDCBB', Award: '\uD83C\uDFC6', LayoutList: '\uD83D\uDCCB', Image: '\uD83D\uDDBC\uFE0F',
+  Footprints: '\uD83D\uDC63', TreePine: '\uD83C\uDF32', Library: '\uD83D\uDCDA', Layers: '\uD83C\uDF02', HelpCircle: '\u2753',
+  Clock: '\u23F0', Table2: '\uD83D\uDCCA', Ambulance: '\uD83D\uDE91', Pill: '\uD83D\uDC8A', Microscope: '\uD83D\uDD2C',
+  Syringe: '\uD83D\uDC89', Hospital: '\uD83C\uDFE5', UserPlus: '\uD83D\uDC64', Clipboard: '\uD83D\uDCCB', FileSignature2: '\uD83D\uDCDD',
+  Wallet: '\uD83D\uDCB0', ArrowDownUp: '\u2195\uFE0F', Target: '\uD83C\uDFAF', Truck: '\uD83D\uDE9A', BarChart2: '\uD83D\uDCCA',
+  AlertOctagon: '\uD83D\uDED1', Scan: '\uD83D\uDCF7', FileSpreadsheet: '\uD83D\uDCC4', Handshake: '\uD83E\uDD1D',
+  CalendarDays: '\uD83D\uDCC5', SendHorizonal: '\uD83D\uDCE8', BookOpenCheck: '\uD83D\uDCD6', Banknote: '\uD83D\uDCB5',
+  CircleDollarSign: '\uD83D\uDCB2', Repeat2: '\uD83D\uDD04', BookHeart: '\uD83D\uDCD6', MicroscopeIcon: '\uD83D\uDD2C',
+  Beaker: '\uD83E\uDDEA', Binary: '\uD83D\uDCBB', Gauge: '\uD83D\uDCCA', ClipboardPlus: '\uD83D\uDCCB',
+  PersonStanding: '\uD83E\uDDCD', Shapes: '\uD83D\uDD36', NotepadText: '\uD83D\uDCDD', Timer: '\u23F1\uFE0F',
+  ShieldBan: '\uD83D\uDEAB', Gavel: '\u2696\uFE0F', FileBarChart: '\uD83D\uDCCA'
+};
+
+function getIcon(name) { return ICON_MAP[name] || '\uD83D\uDCBB'; }
+function esc(s) { if (!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+// ============================================================
+// EDITION CONFIGS -- aligned with standardized terminology
+// ============================================================
+const EDITION_CONFIGS = {
+  insurer: {
+    label: 'Insurer Edition',
+    color: 'green',
+    desc: 'Full insurance operations: Distribution (Product Management, Policy Administration, Reporting) + Servicing (Network Management, Claim Management, Customer Portal, FWA, Reporting). All 67+ business modules.',
+    businessLines: ['distribution', 'servicing']
+  },
+  uhc: {
+    label: 'UHC Edition',
+    color: 'sky',
+    desc: 'Universal Health Coverage / Managed Care. Government-run health programs with focus on enrollment, network management, claims adjudication, and population health reporting.',
+    businessLines: ['distribution', 'servicing']
+  },
+  tpa: {
+    label: 'TPA Edition',
+    color: 'orange',
+    desc: 'Third-Party Administrator focus. Claims processing, provider network management, payment reconciliation, and compliance monitoring.',
+    businessLines: ['servicing']
+  },
+  broker: {
+    label: 'Broker Edition',
+    color: 'violet',
+    desc: 'Insurance brokerage operations. Distribution channel management, multi-carrier quotation, commission tracking, and client portfolio management.',
+    businessLines: ['distribution']
+  },
+  provider: {
+    label: 'Provider Edition',
+    color: 'teal',
+    desc: 'Healthcare provider operations. Empanelment, tariff management, claim initiation, payment reconciliation, and medical records.',
+    businessLines: ['servicing']
+  },
+  regulator: {
+    label: 'Regulator Edition',
+    color: 'red',
+    desc: 'Regulatory oversight and compliance. FWA detection, market conduct monitoring, solvency tracking, and regulatory reporting.',
+    businessLines: ['compliance']
+  },
+  reinsurer: {
+    label: 'Reinsurer Edition',
+    color: 'amber',
+    desc: 'Reinsurance operations. Treaty management, cession workflows, retrocession, claims bordereaux, and reinsurance accounting.',
+    businessLines: ['distribution', 'servicing']
+  },
+  distributor: {
+    label: 'Distributor Edition',
+    color: 'indigo',
+    desc: 'Distribution channel operations. Multi-carrier product shelf, agent management, aggregator APIs, and channel performance analytics.',
+    businessLines: ['distribution']
+  }
+};
+
+let currentEdition = 'insurer';
+let searchTerm = '';
+
+// ============================================================
+// COMPLETE MODULE CATALOG
+// From 02-business-module-catalog.md -- every module listed
+// ============================================================
+
+// -- PLATFORM CORE SERVICES (always visible) --
+const PLATFORM_CORE = {
+  id: 'platform-core',
+  label: 'PLATFORM CORE',
+  color: 'blue',
+  children: [
+    { id: 'core-identity', label: 'Identity', icon: 'Fingerprint', children: [
+      { id: 'core-identity-guide', label: 'Guide', icon: 'BookOpen', route: '/identity/guide' },
+      { id: 'core-identity-setup', label: 'Setup', icon: 'Settings', route: '/identity/setup' },
+      { id: 'core-identity-users', label: 'Users', icon: 'Users', route: '/users' },
+      { id: 'core-identity-user-directory', label: 'User Directory', icon: 'Contact', route: '/user-directory' },
+      { id: 'core-identity-organizations', label: 'Organizations', icon: 'Building2', route: '/organizations' }
+    ]},
+    { id: 'core-authorization', label: 'Authorization', icon: 'ShieldCheck', children: [
+      { id: 'core-auth-guide', label: 'Guide', icon: 'BookOpen', route: '/authorization/guide' },
+      { id: 'core-auth-setup', label: 'Setup', icon: 'Settings', route: '/authorization/setup' },
+      { id: 'core-auth-roles', label: 'Roles', icon: 'Shield', route: '/roles' },
+      { id: 'core-auth-privileges', label: 'Privileges', icon: 'Key', route: '/privileges' }
+    ]},
+    { id: 'core-navigation', label: 'Navigation', icon: 'Navigation', children: [
+      { id: 'core-nav-guide', label: 'Guide', icon: 'BookOpen', route: '/navigation/guide' },
+      { id: 'core-nav-setup', label: 'Setup', icon: 'Settings', route: '/navigation/setup' },
+      { id: 'core-nav-menus', label: 'Menu Management', icon: 'Menu', route: '/navigation/menus' },
+      { id: 'core-nav-routes', label: 'Route Registry', icon: 'Route', route: '/navigation/routes' }
+    ]},
+    { id: 'core-messaging', label: 'Event Bus (Messaging)', icon: 'Radio', children: [
+      { id: 'core-msg-guide', label: 'Guide', icon: 'BookOpen', route: '/messaging/guide' },
+      { id: 'core-msg-setup', label: 'Setup', icon: 'Settings', route: '/messaging/setup' },
+      { id: 'core-msg-topics', label: 'Topics', icon: 'List', route: '/messaging/topics' },
+      { id: 'core-msg-events', label: 'Event Log', icon: 'Activity', route: '/messaging/events' }
+    ]},
+    { id: 'core-audit', label: 'Audit', icon: 'ClipboardCheck', children: [
+      { id: 'core-audit-guide', label: 'Guide', icon: 'BookOpen', route: '/audit/guide' },
+      { id: 'core-audit-setup', label: 'Setup', icon: 'Settings', route: '/audit/setup' },
+      { id: 'core-audit-logs', label: 'Audit Logs', icon: 'ScrollText', route: '/audit/logs' }
+    ]},
+    { id: 'core-pii-vault', label: 'PII Vault', icon: 'Lock', children: [
+      { id: 'core-pii-guide', label: 'Guide', icon: 'BookOpen', route: '/pii-vault/guide' },
+      { id: 'core-pii-setup', label: 'Setup', icon: 'Settings', route: '/pii-vault/setup' },
+      { id: 'core-pii-tokens', label: 'Token Registry', icon: 'Hash', route: '/pii-vault/tokens' }
+    ]},
+    { id: 'core-secrets', label: 'Secrets Vault', icon: 'KeyRound', children: [
+      { id: 'core-sec-guide', label: 'Guide', icon: 'BookOpen', route: '/secrets/guide' },
+      { id: 'core-sec-setup', label: 'Setup', icon: 'Settings', route: '/secrets/setup' },
+      { id: 'core-sec-list', label: 'Secrets List', icon: 'List', route: '/secrets/list' }
+    ]},
+    { id: 'core-observability', label: 'Observability', icon: 'Activity', children: [
+      { id: 'core-obs-guide', label: 'Guide', icon: 'BookOpen', route: '/observability/guide' },
+      { id: 'core-obs-setup', label: 'Setup', icon: 'Settings', route: '/observability/setup' },
+      { id: 'core-obs-traces', label: 'Traces', icon: 'Footprints', route: '/observability/traces' },
+      { id: 'core-obs-metrics', label: 'Metrics', icon: 'BarChart', route: '/observability/metrics' }
+    ]},
+    { id: 'core-data-platform', label: 'Data Platform', icon: 'Table', children: [
+      { id: 'core-dp-guide', label: 'Guide', icon: 'BookOpen', route: '/data-platform/guide' },
+      { id: 'core-dp-setup', label: 'Setup', icon: 'Settings', route: '/data-platform/setup' },
+      { id: 'core-dp-pipelines', label: 'Pipelines', icon: 'Workflow', route: '/data-platform/pipelines' }
+    ]},
+    { id: 'core-licensing', label: 'Licensing', icon: 'Award', children: [
+      { id: 'core-lic-guide', label: 'Guide', icon: 'BookOpen', route: '/licensing/guide' },
+      { id: 'core-lic-setup', label: 'Setup', icon: 'Settings', route: '/licensing/setup' },
+      { id: 'core-lic-entitlements', label: 'Entitlements', icon: 'Key', route: '/licensing/entitlements' }
+    ]},
+    { id: 'core-seeding', label: 'Seeding', icon: 'TreePine', children: [
+      { id: 'core-seed-guide', label: 'Guide', icon: 'BookOpen', route: '/seeding/guide' },
+      { id: 'core-seed-setup', label: 'Setup', icon: 'Settings', route: '/seeding/setup' },
+      { id: 'core-seed-run', label: 'Run Seeds', icon: 'Play', route: '/seeding/run' }
+    ]}
+  ]
+};
+
+// -- PLATFORM FEATURE SERVICES (always visible) --
+const PLATFORM_SERVICES = {
+  id: 'platform-services',
+  label: 'PLATFORM FEATURE SERVICES',
+  color: 'indigo',
+  children: [
+    { id: 'pfs-datatable', label: 'DataTable Engine', icon: 'Table', children: [
+      { id: 'pfs-dt-guide', label: 'Guide', icon: 'BookOpen', route: '/dashboard/guide' },
+      { id: 'pfs-dt-setup', label: 'Setup', icon: 'Settings', route: '/dashboard/setup' },
+      { id: 'pfs-dt-demo', label: 'DataTable Demo', icon: 'Play', route: '/data-table-demo' },
+      { id: 'pfs-dt-designer', label: 'Dashboard Designer', icon: 'PenTool', route: '/dashboard/designer' }
+    ]},
+    { id: 'pfs-form-builder', label: 'Form Builder', icon: 'FormInput', children: [
+      { id: 'pfs-fb-guide', label: 'Guide', icon: 'BookOpen', route: '/form-builder/guide' },
+      { id: 'pfs-fb-setup', label: 'Setup', icon: 'Settings', route: '/form-builder/setup' },
+      { id: 'pfs-fb-templates', label: 'Templates', icon: 'LayoutTemplate', route: '/form-builder/templates' },
+      { id: 'pfs-fb-create', label: 'Create Form', icon: 'Plus', route: '/form-builder/create' },
+      { id: 'pfs-fb-submissions', label: 'Submissions', icon: 'Inbox', route: '/form-builder/submissions' }
+    ]},
+    { id: 'pfs-workflow', label: 'Workflow Engine (FQP)', icon: 'GitBranch', children: [
+      { id: 'pfs-wf-guide', label: 'Guide', icon: 'BookOpen', route: '/workflow-engine/guide' },
+      { id: 'pfs-wf-setup', label: 'Setup', icon: 'Settings', route: '/workflow-engine/setup' },
+      { id: 'pfs-wf-filters', label: 'Filters', icon: 'Filter', route: '/workflow-engine/filters' },
+      { id: 'pfs-wf-queues', label: 'Queues', icon: 'ListOrdered', route: '/workflow-engine/queues' },
+      { id: 'pfs-wf-pipelines', label: 'Pipelines', icon: 'Workflow', route: '/workflow-engine/pipelines' }
+    ]},
+    { id: 'pfs-ai-gateway', label: 'AI Gateway', icon: 'Brain', children: [
+      { id: 'pfs-ai-guide', label: 'Guide', icon: 'BookOpen', route: '/ai-gateway/guide' },
+      { id: 'pfs-ai-setup', label: 'Setup', icon: 'Settings', route: '/ai-gateway/setup' },
+      { id: 'pfs-ai-models', label: 'Models', icon: 'Cpu', route: '/ai-gateway/models' },
+      { id: 'pfs-ai-prompts', label: 'Prompt Templates', icon: 'FileText', route: '/ai-gateway/prompts' }
+    ]},
+    { id: 'pfs-rtc', label: 'Realtime (WebRTC)', icon: 'PhoneCall', children: [
+      { id: 'pfs-rtc-guide', label: 'Guide', icon: 'BookOpen', route: '/rtc/guide' },
+      { id: 'pfs-rtc-setup', label: 'Setup', icon: 'Settings', route: '/rtc/setup' }
+    ]},
+    { id: 'pfs-chat', label: 'Chat Engine', icon: 'MessageSquare', children: [
+      { id: 'pfs-chat-guide', label: 'Guide', icon: 'BookOpen', route: '/chat/guide' },
+      { id: 'pfs-chat-setup', label: 'Setup', icon: 'Settings', route: '/chat/setup' }
+    ]},
+    { id: 'pfs-interaction-recorder', label: 'Interaction Recorder', icon: 'Disc', children: [
+      { id: 'pfs-ir-guide', label: 'Guide', icon: 'BookOpen', route: '/interaction-recorder/guide' },
+      { id: 'pfs-ir-setup', label: 'Setup', icon: 'Settings', route: '/interaction-recorder/setup' }
+    ]},
+    { id: 'pfs-notification', label: 'Notification Service', icon: 'Bell', children: [
+      { id: 'pfs-notif-guide', label: 'Guide', icon: 'BookOpen', route: '/notification/guide' },
+      { id: 'pfs-notif-setup', label: 'Setup', icon: 'Settings', route: '/notification/setup' }
+    ]},
+    { id: 'pfs-integration', label: 'Integration Service', icon: 'Plug', children: [
+      { id: 'pfs-integ-guide', label: 'Guide', icon: 'BookOpen', route: '/api-integration/guide' },
+      { id: 'pfs-integ-setup', label: 'Setup', icon: 'Settings', route: '/api-integration/setup' }
+    ]},
+    { id: 'pfs-verification', label: 'Verification', icon: 'BadgeCheck', children: [
+      { id: 'pfs-verif-guide', label: 'Guide', icon: 'BookOpen', route: '/verification/guide' },
+      { id: 'pfs-verif-setup', label: 'Setup', icon: 'Settings', route: '/verification/setup' },
+      { id: 'pfs-verif-help', label: 'Help', icon: 'HelpCircle', route: '/verification/help' }
+    ]},
+    { id: 'pfs-pii-showcase', label: 'PII Showcase', icon: 'ShieldAlert', children: [
+      { id: 'pfs-piis-guide', label: 'Guide', icon: 'BookOpen', route: '/pii-showcase/guide' },
+      { id: 'pfs-piis-setup', label: 'Setup', icon: 'Settings', route: '/pii-showcase/setup' },
+      { id: 'pfs-piis-dashboard', label: 'Dashboard', icon: 'LayoutDashboard', route: '/pii-showcase/dashboard' },
+      { id: 'pfs-piis-upload', label: 'Upload', icon: 'Upload', route: '/pii-showcase/upload' }
+    ]},
+    { id: 'pfs-directory', label: 'Organization Directory', icon: 'BookUser', children: [
+      { id: 'pfs-dir-guide', label: 'Guide', icon: 'BookOpen', route: '/directory/guide' },
+      { id: 'pfs-dir-setup', label: 'Setup', icon: 'Settings', route: '/directory/setup' },
+      { id: 'pfs-dir-browse', label: 'Browse Directory', icon: 'Search', route: '/directory' }
+    ]}
+  ]
+};
+
+// ============================================================
+// BUSINESS MODULE CATALOG
+// Complete from 02-business-module-catalog.md
+// Organized as: Business Line > Capability Area > Module > Features
+// ============================================================
+
+const BIZ_DISTRIBUTION = {
+  id: 'biz-distribution',
+  label: 'Distribution',
+  icon: 'TrendingUp',
+  desc: 'Revenue center -- activities that produce revenue',
+  children: [
+    // --- CAPABILITY AREA: Product Management ---
+    {
+      id: 'cap-product-mgmt',
+      label: 'Product Management',
+      icon: 'Package',
+      children: [
+        { id: 'pm01', label: 'Product Design', icon: 'Cpu', code: 'PM.01', children: [
+          { id: 'pm01-guide', label: 'Guide', icon: 'BookOpen', route: '/app/pcg4/guide' },
+          { id: 'pm01-setup', label: 'Setup', icon: 'Settings', route: '/app/pcg4/setup' },
+          { id: 'pm01-configurations', label: 'Configurations', icon: 'SlidersHorizontal', route: '/app/pcg4/configurations' },
+          { id: 'pm01-ref-library', label: 'Reference Library', icon: 'Library', route: '/app/pcg4/reference-library' },
+          { id: 'pm01-coverage-mapper', label: 'Coverage Mapper', icon: 'Map', route: '/app/pcg4/coverage-mapper' },
+          { id: 'pm01-encounters', label: 'Encounter Types', icon: 'Layers', route: '/app/pcg4/encounters' }
+        ]},
+        { id: 'pm02', label: 'Medical Terms to Medical Code', icon: 'Binary', code: 'PM.02', children: [
+          { id: 'pm02-guide', label: 'Guide', icon: 'BookOpen', route: '/medical-coding/guide' },
+          { id: 'pm02-setup', label: 'Setup', icon: 'Settings', route: '/medical-coding/setup' },
+          { id: 'pm02-lookup', label: 'Code Lookup', icon: 'Search', route: '/medical-coding/lookup' }
+        ]},
+        { id: 'pm03', label: 'Product Pricing', icon: 'Calculator', code: 'PM.03', children: [
+          { id: 'pm03-guide', label: 'Guide', icon: 'BookOpen', route: '/product-pricing/guide' },
+          { id: 'pm03-setup', label: 'Setup', icon: 'Settings', route: '/product-pricing/setup' },
+          { id: 'pm03-rate-tables', label: 'Rate Tables', icon: 'Table2', route: '/product-pricing/rate-tables' },
+          { id: 'pm03-import', label: 'Rate Card Import', icon: 'Upload', route: '/product-pricing/import' }
+        ]},
+        { id: 'pm04', label: 'Product Testing', icon: 'TestTube2', code: 'PM.04', children: [
+          { id: 'pm04-guide', label: 'Guide', icon: 'BookOpen', route: '/product-testing/guide' },
+          { id: 'pm04-setup', label: 'Setup', icon: 'Settings', route: '/product-testing/setup' },
+          { id: 'pm04-simulations', label: 'Simulations', icon: 'Play', route: '/product-testing/simulations' }
+        ]},
+        { id: 'pm05', label: 'Reinsurer Management', icon: 'Handshake', code: 'PM.05', children: [
+          { id: 'pm05-guide', label: 'Guide', icon: 'BookOpen', route: '/reinsurer-mgmt/guide' },
+          { id: 'pm05-setup', label: 'Setup', icon: 'Settings', route: '/reinsurer-mgmt/setup' },
+          { id: 'pm05-treaties', label: 'Treaties', icon: 'FileSignature', route: '/reinsurer-mgmt/treaties' },
+          { id: 'pm05-cessions', label: 'Cession Workflows', icon: 'ArrowRightLeft', route: '/reinsurer-mgmt/cessions' }
+        ]}
+      ]
+    },
+    // --- CAPABILITY AREA: Policy Administration ---
+    {
+      id: 'cap-policy-admin',
+      label: 'Policy Administration',
+      icon: 'ClipboardList',
+      children: [
+        { id: 'pas01', label: 'Distribution Channel Management', icon: 'Network', code: 'PAS.01', children: [
+          { id: 'pas01-guide', label: 'Guide', icon: 'BookOpen', route: '/channel-mgmt/guide' },
+          { id: 'pas01-setup', label: 'Setup', icon: 'Settings', route: '/channel-mgmt/setup' },
+          { id: 'pas01-channels', label: 'Channels', icon: 'List', route: '/channel-mgmt/channels' },
+          { id: 'pas01-hi-quotation', label: 'HI Quotation', icon: 'HeartPulse', route: '/hi-quotation' },
+          { id: 'pas01-mi-quotation', label: 'MI Quotation', icon: 'Car', route: '/mi-quotation' }
+        ]},
+        { id: 'pas02', label: 'Document Digitization', icon: 'Scan', code: 'PAS.02', children: [
+          { id: 'pas02-guide', label: 'Guide', icon: 'BookOpen', route: '/doc-digitization/guide' },
+          { id: 'pas02-setup', label: 'Setup', icon: 'Settings', route: '/doc-digitization/setup' },
+          { id: 'pas02-upload', label: 'Upload Documents', icon: 'Upload', route: '/doc-digitization/upload' },
+          { id: 'pas02-processing', label: 'Processing Queue', icon: 'ListOrdered', route: '/doc-digitization/queue' }
+        ]},
+        { id: 'pas03', label: 'Underwriting', icon: 'Scale', code: 'PAS.03', children: [
+          { id: 'pas03-guide', label: 'Guide', icon: 'BookOpen', route: '/uw-workflow/guide' },
+          { id: 'pas03-setup', label: 'Setup', icon: 'Settings', route: '/uw-workflow/setup' },
+          { id: 'pas03-queue', label: 'UW Workflow Queue', icon: 'List', route: '/uw-workflow' },
+          { id: 'pas03-decisioning', label: 'UW AE Decisioning', icon: 'GitMerge', route: '/hi-decisioning' },
+          { id: 'pas03-rules', label: 'RPB Rule Engine', icon: 'Workflow', route: '/uw-workflow/rules' },
+          { id: 'pas03-documents', label: 'UW Document Mgmt', icon: 'FileStack', route: '/uw-workflow/documents' }
+        ]},
+        { id: 'pas04', label: 'Endorsements', icon: 'FileEdit', code: 'PAS.04', children: [
+          { id: 'pas04-guide', label: 'Guide', icon: 'BookOpen', route: '/endorsements/guide' },
+          { id: 'pas04-setup', label: 'Setup', icon: 'Settings', route: '/endorsements/setup' },
+          { id: 'pas04-additions', label: 'Additions', icon: 'Plus', route: '/endorsements/additions' },
+          { id: 'pas04-deletions', label: 'Deletions', icon: 'List', route: '/endorsements/deletions' },
+          { id: 'pas04-modifications', label: 'Modifications', icon: 'FileEdit', route: '/endorsements/modifications' }
+        ]},
+        { id: 'pas05', label: 'Premium Shortfall / Refunds', icon: 'Banknote', code: 'PAS.05', children: [
+          { id: 'pas05-guide', label: 'Guide', icon: 'BookOpen', route: '/premium-adjustments/guide' },
+          { id: 'pas05-setup', label: 'Setup', icon: 'Settings', route: '/premium-adjustments/setup' },
+          { id: 'pas05-shortfalls', label: 'Shortfall Recovery', icon: 'AlertTriangle', route: '/premium-adjustments/shortfalls' },
+          { id: 'pas05-refunds', label: 'Refund Processing', icon: 'RefreshCcw', route: '/premium-adjustments/refunds' }
+        ]},
+        { id: 'pas06', label: 'Renewals', icon: 'Repeat2', code: 'PAS.06', children: [
+          { id: 'pas06-guide', label: 'Guide', icon: 'BookOpen', route: '/renewals/guide' },
+          { id: 'pas06-setup', label: 'Setup', icon: 'Settings', route: '/renewals/setup' },
+          { id: 'pas06-reminders', label: 'Renewal Reminders', icon: 'Bell', route: '/renewals/reminders' },
+          { id: 'pas06-collection', label: 'Payment Collection', icon: 'CreditCard', route: '/renewals/collection' },
+          { id: 'pas06-certificates', label: 'Certificate Generation', icon: 'FileOutput', route: '/renewals/certificates' }
+        ]},
+        { id: 'pas07', label: 'Channel Partner Management', icon: 'Handshake', code: 'PAS.07', children: [
+          { id: 'pas07-guide', label: 'Guide', icon: 'BookOpen', route: '/channel-partners/guide' },
+          { id: 'pas07-setup', label: 'Setup', icon: 'Settings', route: '/channel-partners/setup' },
+          { id: 'pas07-enrollment', label: 'Partner Enrollment', icon: 'UserPlus', route: '/channel-partners/enrollment' },
+          { id: 'pas07-negotiation', label: 'Negotiation Workflows', icon: 'ArrowRightLeft', route: '/channel-partners/negotiation' }
+        ]},
+        { id: 'pas08', label: 'Health Advisory', icon: 'BookHeart', code: 'PAS.08', children: [
+          { id: 'pas08-guide', label: 'Guide', icon: 'BookOpen', route: '/health-advisory/guide' },
+          { id: 'pas08-setup', label: 'Setup', icon: 'Settings', route: '/health-advisory/setup' },
+          { id: 'pas08-infographics', label: 'Infographics', icon: 'Image', route: '/health-advisory/infographics' },
+          { id: 'pas08-content', label: 'Health Content', icon: 'Video', route: '/health-advisory/content' }
+        ]}
+      ]
+    },
+    // --- CAPABILITY AREA: Reporting & Analytics (Distribution) ---
+    {
+      id: 'cap-dist-reporting',
+      label: 'Reporting & Analytics',
+      icon: 'BarChart3',
+      children: [
+        { id: 'dist-rpt-sales', label: 'Sales Analytics', icon: 'BarChart', code: 'RPT.D1', children: [
+          { id: 'dist-rpt-sales-guide', label: 'Guide', icon: 'BookOpen', route: '/dist-analytics/guide' },
+          { id: 'dist-rpt-sales-dashboard', label: 'Dashboard', icon: 'LayoutDashboard', route: '/dist-analytics/dashboard' }
+        ]},
+        { id: 'dist-rpt-channel', label: 'Channel Performance', icon: 'PieChart', code: 'RPT.D2', children: [
+          { id: 'dist-rpt-channel-guide', label: 'Guide', icon: 'BookOpen', route: '/channel-analytics/guide' },
+          { id: 'dist-rpt-channel-dashboard', label: 'Dashboard', icon: 'LayoutDashboard', route: '/channel-analytics/dashboard' }
+        ]}
+      ]
+    }
+  ]
+};
+
+const BIZ_SERVICING = {
+  id: 'biz-servicing',
+  label: 'Servicing',
+  icon: 'Wrench',
+  desc: 'Cost center -- activities that fulfill the promise',
+  children: [
+    // --- CAPABILITY AREA: Network Management ---
+    {
+      id: 'cap-network-mgmt',
+      label: 'Network Management',
+      icon: 'Globe',
+      children: [
+        { id: 'nm01', label: 'HCP Sign-up', icon: 'UserPlus', code: 'NM.01', children: [
+          { id: 'nm01-guide', label: 'Guide', icon: 'BookOpen', route: '/hcp-signup/guide' },
+          { id: 'nm01-setup', label: 'Setup', icon: 'Settings', route: '/hcp-signup/setup' },
+          { id: 'nm01-register', label: 'Registration', icon: 'Plus', route: '/hcp-signup/register' }
+        ]},
+        { id: 'nm02', label: 'PMT Empanelment', icon: 'CheckCircle2', code: 'NM.02', children: [
+          { id: 'nm02-guide', label: 'Guide', icon: 'BookOpen', route: '/empanelment/guide' },
+          { id: 'nm02-setup', label: 'Setup', icon: 'Settings', route: '/empanelment/setup' },
+          { id: 'nm02-workflow', label: 'Empanelment Workflow', icon: 'Workflow', route: '/empanelment/workflow' }
+        ]},
+        { id: 'nm03', label: 'Tariff Submission', icon: 'FileSpreadsheet', code: 'NM.03', children: [
+          { id: 'nm03-guide', label: 'Guide', icon: 'BookOpen', route: '/tariff-submission/guide' },
+          { id: 'nm03-setup', label: 'Setup', icon: 'Settings', route: '/tariff-submission/setup' },
+          { id: 'nm03-submit', label: 'Submit Tariff', icon: 'Upload', route: '/tariff-submission/submit' },
+          { id: 'nm03-review', label: 'Review Queue', icon: 'ListOrdered', route: '/tariff-submission/review' }
+        ]},
+        { id: 'nm04', label: 'Tariff Finalization / UCR', icon: 'DollarSign', code: 'NM.04', children: [
+          { id: 'nm04-guide', label: 'Guide', icon: 'BookOpen', route: '/tariff-ucr/guide' },
+          { id: 'nm04-setup', label: 'Setup', icon: 'Settings', route: '/tariff-ucr/setup' },
+          { id: 'nm04-finalize', label: 'Finalization Queue', icon: 'List', route: '/tariff-ucr/finalize' }
+        ]},
+        { id: 'nm05', label: 'Payment Reconciliation', icon: 'Wallet', code: 'NM.05', children: [
+          { id: 'nm05-guide', label: 'Guide', icon: 'BookOpen', route: '/payment-recon/guide' },
+          { id: 'nm05-setup', label: 'Setup', icon: 'Settings', route: '/payment-recon/setup' },
+          { id: 'nm05-reconcile', label: 'Reconciliation', icon: 'ArrowRightLeft', route: '/payment-recon/reconcile' }
+        ]},
+        { id: 'nm06', label: 'Notification & Communication', icon: 'SendHorizonal', code: 'NM.06', children: [
+          { id: 'nm06-guide', label: 'Guide', icon: 'BookOpen', route: '/provider-comms/guide' },
+          { id: 'nm06-setup', label: 'Setup', icon: 'Settings', route: '/provider-comms/setup' },
+          { id: 'nm06-templates', label: 'Templates', icon: 'LayoutTemplate', route: '/provider-comms/templates' }
+        ]},
+        { id: 'nm07', label: 'Ultra-fast OPD Empanelment', icon: 'Rocket', code: 'NM.07', children: [
+          { id: 'nm07-guide', label: 'Guide', icon: 'BookOpen', route: '/opd-empanelment/guide' },
+          { id: 'nm07-setup', label: 'Setup', icon: 'Settings', route: '/opd-empanelment/setup' },
+          { id: 'nm07-workflow', label: 'Fast-track Workflow', icon: 'Workflow', route: '/opd-empanelment/workflow' }
+        ]},
+        { id: 'nm08', label: 'Outstanding / Payables Analysis', icon: 'BarChart2', code: 'NM.08', children: [
+          { id: 'nm08-guide', label: 'Guide', icon: 'BookOpen', route: '/payables-analysis/guide' },
+          { id: 'nm08-dashboard', label: 'Dashboard', icon: 'LayoutDashboard', route: '/payables-analysis/dashboard' }
+        ]},
+        { id: 'nm09', label: 'Appointment Booking', icon: 'CalendarDays', code: 'NM.09', children: [
+          { id: 'nm09-guide', label: 'Guide', icon: 'BookOpen', route: '/appointment/guide' },
+          { id: 'nm09-setup', label: 'Setup', icon: 'Settings', route: '/appointment/setup' },
+          { id: 'nm09-book', label: 'Book Appointment', icon: 'Plus', route: '/appointment/book' }
+        ]},
+        { id: 'nm10', label: 'Policy Decoder', icon: 'BookOpenCheck', code: 'NM.10', children: [
+          { id: 'nm10-guide', label: 'Guide', icon: 'BookOpen', route: '/policy-decoder/guide' },
+          { id: 'nm10-decode', label: 'Decode Policy', icon: 'Search', route: '/policy-decoder/decode' }
+        ]},
+        { id: 'nm11', label: 'Initiate New Claim (UCI)', icon: 'ClipboardPlus', code: 'NM.11', children: [
+          { id: 'nm11-guide', label: 'Guide', icon: 'BookOpen', route: '/uci/guide' },
+          { id: 'nm11-setup', label: 'Setup', icon: 'Settings', route: '/uci/setup' },
+          { id: 'nm11-initiate', label: 'Initiate Claim', icon: 'Plus', route: '/uci/initiate' }
+        ]},
+        { id: 'nm12', label: 'Catalog Master', icon: 'Library', code: 'NM.12', children: [
+          { id: 'nm12-guide', label: 'Guide', icon: 'BookOpen', route: '/catalog-master/guide' },
+          { id: 'nm12-browse', label: 'Browse Catalog', icon: 'Search', route: '/catalog-master/browse' }
+        ]},
+        { id: 'nm13', label: 'Catalog Analyser', icon: 'BarChart3', code: 'NM.13', children: [
+          { id: 'nm13-guide', label: 'Guide', icon: 'BookOpen', route: '/catalog-analyser/guide' },
+          { id: 'nm13-compare', label: 'Compare', icon: 'ArrowRightLeft', route: '/catalog-analyser/compare' }
+        ]},
+        { id: 'nm14', label: 'Medical Coding Repository', icon: 'Binary', code: 'NM.14', children: [
+          { id: 'nm14-guide', label: 'Guide', icon: 'BookOpen', route: '/medical-codes/guide' },
+          { id: 'nm14-browse', label: 'Browse Codes', icon: 'Search', route: '/medical-codes/browse' }
+        ]},
+        { id: 'nm15', label: 'RCMS AI', icon: 'Brain', code: 'NM.15', children: [
+          { id: 'nm15-guide', label: 'Guide', icon: 'BookOpen', route: '/rcms-ai/guide' },
+          { id: 'nm15-scoring', label: 'RCM Scoring', icon: 'Gauge', route: '/rcms-ai/scoring' }
+        ]},
+        { id: 'nm16', label: 'MAI', icon: 'Stethoscope', code: 'NM.16', children: [
+          { id: 'nm16-guide', label: 'Guide', icon: 'BookOpen', route: '/mai/guide' },
+          { id: 'nm16-analysis', label: 'Admissibility Analysis', icon: 'Scale', route: '/mai/analysis' }
+        ]},
+        { id: 'nm17', label: 'RCM Bill Assessment', icon: 'Receipt', code: 'NM.17', children: [
+          { id: 'nm17-guide', label: 'Guide', icon: 'BookOpen', route: '/rcm-bill/guide' },
+          { id: 'nm17-assess', label: 'Bill Assessment', icon: 'FileSearch', route: '/rcm-bill/assess' }
+        ]},
+        { id: 'nm18', label: 'DMS (Patient Records)', icon: 'FileStack', code: 'NM.18', children: [
+          { id: 'nm18-guide', label: 'Guide', icon: 'BookOpen', route: '/patient-dms/guide' },
+          { id: 'nm18-records', label: 'Patient Records', icon: 'Files', route: '/patient-dms/records' }
+        ]},
+        { id: 'nm19', label: 'Consulting Doctor Payout Calculator', icon: 'Calculator', code: 'NM.19', children: [
+          { id: 'nm19-guide', label: 'Guide', icon: 'BookOpen', route: '/doctor-payout/guide' },
+          { id: 'nm19-calculate', label: 'Calculate Payout', icon: 'DollarSign', route: '/doctor-payout/calculate' }
+        ]},
+        { id: 'nm20', label: 'Revenue Leakage Comparison', icon: 'AlertTriangle', code: 'NM.20', children: [
+          { id: 'nm20-guide', label: 'Guide', icon: 'BookOpen', route: '/revenue-leakage/guide' },
+          { id: 'nm20-analysis', label: 'Leakage Analysis', icon: 'BarChart', route: '/revenue-leakage/analysis' }
+        ]},
+        { id: 'nm21', label: 'Network Management (List & Profile)', icon: 'Users', code: 'NM.21', children: [
+          { id: 'nm21-guide', label: 'Guide', icon: 'BookOpen', route: '/network-directory/guide' },
+          { id: 'nm21-browse', label: 'Provider Directory', icon: 'Search', route: '/network-directory/browse' }
+        ]},
+        { id: 'nm22', label: 'Medical Roster', icon: 'PersonStanding', code: 'NM.22', children: [
+          { id: 'nm22-guide', label: 'Guide', icon: 'BookOpen', route: '/medical-roster/guide' },
+          { id: 'nm22-manage', label: 'Manage Roster', icon: 'List', route: '/medical-roster/manage' }
+        ]},
+        { id: 'nm23', label: 'Medical Transcription', icon: 'NotepadText', code: 'NM.23', children: [
+          { id: 'nm23-guide', label: 'Guide', icon: 'BookOpen', route: '/medical-transcription/guide' },
+          { id: 'nm23-transcribe', label: 'Transcribe', icon: 'Mic', route: '/medical-transcription/transcribe' }
+        ]}
+      ]
+    },
+    // --- CAPABILITY AREA: Claim Management ---
+    {
+      id: 'cap-claim-mgmt',
+      label: 'Claim Management',
+      icon: 'ClipboardCheck',
+      children: [
+        // OPD Claims
+        { id: 'cmopd01', label: 'OPD NEC', icon: 'Stethoscope', code: 'CM.OPD.01', children: [
+          { id: 'cmopd01-guide', label: 'Guide', icon: 'BookOpen', route: '/opd-nec/guide' },
+          { id: 'cmopd01-setup', label: 'Setup', icon: 'Settings', route: '/opd-nec/setup' },
+          { id: 'cmopd01-check', label: 'Eligibility Check', icon: 'CheckCircle2', route: '/opd-nec/check' },
+          { id: 'cmopd01-book', label: 'Appointment Booking', icon: 'CalendarDays', route: '/opd-nec/book' }
+        ]},
+        { id: 'cmopd02', label: 'OPD eRx / PIXEL', icon: 'Pill', code: 'CM.OPD.02', children: [
+          { id: 'cmopd02-guide', label: 'Guide', icon: 'BookOpen', route: '/opd-erx/guide' },
+          { id: 'cmopd02-setup', label: 'Setup', icon: 'Settings', route: '/opd-erx/setup' },
+          { id: 'cmopd02-erx', label: 'eRx Module', icon: 'FileText', route: '/opd-erx/erx' },
+          { id: 'cmopd02-pixel', label: 'PIXEL Processing', icon: 'Scan', route: '/opd-erx/pixel' }
+        ]},
+        { id: 'cmopd03', label: 'OPD Pharmacy Pre-Auth & Adjudication', icon: 'Pill', code: 'CM.OPD.03', children: [
+          { id: 'cmopd03-guide', label: 'Guide', icon: 'BookOpen', route: '/opd-pharmacy/guide' },
+          { id: 'cmopd03-setup', label: 'Setup', icon: 'Settings', route: '/opd-pharmacy/setup' },
+          { id: 'cmopd03-preauth', label: 'Pre-Authorization', icon: 'Shield', route: '/opd-pharmacy/preauth' },
+          { id: 'cmopd03-adjudicate', label: 'Adjudication', icon: 'Scale', route: '/opd-pharmacy/adjudicate' }
+        ]},
+        { id: 'cmopd04', label: 'OPD Investigation Pre-Auth & Adjudication', icon: 'Microscope', code: 'CM.OPD.04', children: [
+          { id: 'cmopd04-guide', label: 'Guide', icon: 'BookOpen', route: '/opd-investigation/guide' },
+          { id: 'cmopd04-setup', label: 'Setup', icon: 'Settings', route: '/opd-investigation/setup' },
+          { id: 'cmopd04-preauth', label: 'Pre-Authorization', icon: 'Shield', route: '/opd-investigation/preauth' },
+          { id: 'cmopd04-adjudicate', label: 'Adjudication', icon: 'Scale', route: '/opd-investigation/adjudicate' }
+        ]},
+        { id: 'cmopd05', label: 'OPD Procedure Pre-Auth & Adjudication', icon: 'Syringe', code: 'CM.OPD.05', children: [
+          { id: 'cmopd05-guide', label: 'Guide', icon: 'BookOpen', route: '/opd-procedure/guide' },
+          { id: 'cmopd05-setup', label: 'Setup', icon: 'Settings', route: '/opd-procedure/setup' },
+          { id: 'cmopd05-preauth', label: 'Pre-Authorization', icon: 'Shield', route: '/opd-procedure/preauth' },
+          { id: 'cmopd05-adjudicate', label: 'Adjudication', icon: 'Scale', route: '/opd-procedure/adjudicate' }
+        ]},
+        // IPD / General Claims
+        { id: 'cmipd01', label: 'Claim Initiation (Pre-Auth / Auth)', icon: 'ClipboardPlus', code: 'CM.IPD.01', children: [
+          { id: 'cmipd01-guide', label: 'Guide', icon: 'BookOpen', route: '/claim-init/guide' },
+          { id: 'cmipd01-setup', label: 'Setup', icon: 'Settings', route: '/claim-init/setup' },
+          { id: 'cmipd01-preauth', label: 'Pre-Auth Request', icon: 'Plus', route: '/claim-init/preauth' },
+          { id: 'cmipd01-auth', label: 'Authorization', icon: 'Shield', route: '/claim-init/auth' }
+        ]},
+        { id: 'cmipd02', label: 'SynEng', icon: 'Binary', code: 'CM.IPD.02', children: [
+          { id: 'cmipd02-guide', label: 'Guide', icon: 'BookOpen', route: '/syneng/guide' },
+          { id: 'cmipd02-convert', label: 'Term to Code', icon: 'ArrowRightLeft', route: '/syneng/convert' }
+        ]},
+        { id: 'cmipd03', label: 'Claim Authorization Response', icon: 'FileCheck', code: 'CM.IPD.03', children: [
+          { id: 'cmipd03-guide', label: 'Guide', icon: 'BookOpen', route: '/claim-auth-response/guide' },
+          { id: 'cmipd03-queue', label: 'Response Queue', icon: 'List', route: '/claim-auth-response/queue' }
+        ]},
+        { id: 'cmipd04', label: 'Document Submission / Query Mgmt', icon: 'FileStack', code: 'CM.IPD.04', children: [
+          { id: 'cmipd04-guide', label: 'Guide', icon: 'BookOpen', route: '/claim-docs/guide' },
+          { id: 'cmipd04-submit', label: 'Submit Documents', icon: 'Upload', route: '/claim-docs/submit' },
+          { id: 'cmipd04-queries', label: 'Query Management', icon: 'MessageSquare', route: '/claim-docs/queries' }
+        ]},
+        { id: 'cmipd05', label: 'Document Digitization', icon: 'Scan', code: 'CM.IPD.05', children: [
+          { id: 'cmipd05-guide', label: 'Guide', icon: 'BookOpen', route: '/claim-digitization/guide' },
+          { id: 'cmipd05-process', label: 'Processing', icon: 'Workflow', route: '/claim-digitization/process' }
+        ]},
+        { id: 'cmipd06', label: 'Document Approval / Queries', icon: 'FileCheck', code: 'CM.IPD.06', children: [
+          { id: 'cmipd06-guide', label: 'Guide', icon: 'BookOpen', route: '/doc-approval/guide' },
+          { id: 'cmipd06-queue', label: 'Approval Queue', icon: 'ListOrdered', route: '/doc-approval/queue' }
+        ]},
+        { id: 'cmipd07', label: 'Interim Enhancement Auth Request', icon: 'ArrowDownUp', code: 'CM.IPD.07', children: [
+          { id: 'cmipd07-guide', label: 'Guide', icon: 'BookOpen', route: '/interim-auth-req/guide' },
+          { id: 'cmipd07-request', label: 'Enhancement Request', icon: 'Plus', route: '/interim-auth-req/request' }
+        ]},
+        { id: 'cmipd08', label: 'Interim Enhancement Auth Response', icon: 'ArrowDownUp', code: 'CM.IPD.08', children: [
+          { id: 'cmipd08-guide', label: 'Guide', icon: 'BookOpen', route: '/interim-auth-resp/guide' },
+          { id: 'cmipd08-queue', label: 'Response Queue', icon: 'List', route: '/interim-auth-resp/queue' }
+        ]},
+        { id: 'cmipd09', label: 'Claim Initiation (Discharge / Claim)', icon: 'FileOutput', code: 'CM.IPD.09', children: [
+          { id: 'cmipd09-guide', label: 'Guide', icon: 'BookOpen', route: '/discharge-claim/guide' },
+          { id: 'cmipd09-initiate', label: 'Initiate Discharge Claim', icon: 'Plus', route: '/discharge-claim/initiate' }
+        ]},
+        { id: 'cmipd10', label: 'Discharge Summary', icon: 'FileText', code: 'CM.IPD.10', children: [
+          { id: 'cmipd10-guide', label: 'Guide', icon: 'BookOpen', route: '/discharge-summary/guide' },
+          { id: 'cmipd10-process', label: 'Process Summary', icon: 'Workflow', route: '/discharge-summary/process' }
+        ]},
+        { id: 'cmipd11', label: 'NPL / NPPA / Negotiated Tariff', icon: 'DollarSign', code: 'CM.IPD.11', children: [
+          { id: 'cmipd11-guide', label: 'Guide', icon: 'BookOpen', route: '/npl-nppa/guide' },
+          { id: 'cmipd11-rules', label: 'NPL Rules', icon: 'Workflow', route: '/npl-nppa/rules' }
+        ]},
+        { id: 'cmipd12', label: 'Medical Adjudication', icon: 'Stethoscope', code: 'CM.IPD.12', children: [
+          { id: 'cmipd12-guide', label: 'Guide', icon: 'BookOpen', route: '/medical-adjudication/guide' },
+          { id: 'cmipd12-setup', label: 'Setup', icon: 'Settings', route: '/medical-adjudication/setup' },
+          { id: 'cmipd12-queue', label: 'Adjudication Queue', icon: 'ListOrdered', route: '/medical-adjudication/queue' },
+          { id: 'cmipd12-ai', label: 'AI-assisted Coding', icon: 'Brain', route: '/medical-adjudication/ai' }
+        ]},
+        { id: 'cmipd13', label: 'Claim Adjudication (Discharge)', icon: 'Scale', code: 'CM.IPD.13', children: [
+          { id: 'cmipd13-guide', label: 'Guide', icon: 'BookOpen', route: '/claim-adjudication/guide' },
+          { id: 'cmipd13-queue', label: 'Adjudication Queue', icon: 'ListOrdered', route: '/claim-adjudication/queue' }
+        ]},
+        { id: 'cmipd14', label: 'Claim Audit', icon: 'Eye', code: 'CM.IPD.14', children: [
+          { id: 'cmipd14-guide', label: 'Guide', icon: 'BookOpen', route: '/claim-audit/guide' },
+          { id: 'cmipd14-audit', label: 'Audit Queue', icon: 'ListOrdered', route: '/claim-audit/audit' }
+        ]},
+        { id: 'cmipd15', label: 'Claim Router', icon: 'GitMerge', code: 'CM.IPD.15', children: [
+          { id: 'cmipd15-guide', label: 'Guide', icon: 'BookOpen', route: '/claim-router/guide' },
+          { id: 'cmipd15-rules', label: 'Routing Rules', icon: 'Workflow', route: '/claim-router/rules' }
+        ]},
+        { id: 'cmipd16', label: 'TPA Payout', icon: 'Banknote', code: 'CM.IPD.16', children: [
+          { id: 'cmipd16-guide', label: 'Guide', icon: 'BookOpen', route: '/tpa-payout/guide' },
+          { id: 'cmipd16-settlement', label: 'Settlement Processing', icon: 'CreditCard', route: '/tpa-payout/settlement' }
+        ]}
+      ]
+    },
+    // --- CAPABILITY AREA: Customer Portal ---
+    {
+      id: 'cap-customer-portal',
+      label: 'Customer Portal',
+      icon: 'Users',
+      children: [
+        { id: 'cp-hr', label: 'HR Portal', icon: 'Building', code: 'CP.01', children: [
+          { id: 'cp-hr-guide', label: 'Guide', icon: 'BookOpen', route: '/customer-portal/hr/guide' },
+          { id: 'cp-hr-portal', label: 'HR Dashboard', icon: 'LayoutDashboard', route: '/customer-portal/hr' }
+        ]},
+        { id: 'cp-employee', label: 'Employee Portal', icon: 'UserCheck', code: 'CP.02', children: [
+          { id: 'cp-emp-guide', label: 'Guide', icon: 'BookOpen', route: '/customer-portal/employee/guide' },
+          { id: 'cp-emp-portal', label: 'Employee Dashboard', icon: 'LayoutDashboard', route: '/customer-portal/employee' }
+        ]},
+        { id: 'cp-individual', label: 'Individual Portal', icon: 'Contact', code: 'CP.03', children: [
+          { id: 'cp-ind-guide', label: 'Guide', icon: 'BookOpen', route: '/customer-portal/individual/guide' },
+          { id: 'cp-ind-portal', label: 'Self-Service', icon: 'LayoutDashboard', route: '/customer-portal/individual' }
+        ]}
+      ]
+    },
+    // --- CAPABILITY AREA: FWA ---
+    {
+      id: 'cap-fwa',
+      label: 'Fraud, Waste & Abuse (FWA)',
+      icon: 'ShieldBan',
+      children: [
+        { id: 'fwa-detection', label: 'FWA Detection Engine', icon: 'AlertOctagon', code: 'FWA.01', children: [
+          { id: 'fwa-det-guide', label: 'Guide', icon: 'BookOpen', route: '/fwa/guide' },
+          { id: 'fwa-det-setup', label: 'Setup', icon: 'Settings', route: '/fwa/setup' },
+          { id: 'fwa-det-dashboard', label: 'FWA Dashboard', icon: 'LayoutDashboard', route: '/fwa/dashboard' },
+          { id: 'fwa-det-rules', label: 'Detection Rules', icon: 'Workflow', route: '/fwa/rules' },
+          { id: 'fwa-det-alerts', label: 'Alerts', icon: 'Bell', route: '/fwa/alerts' }
+        ]},
+        { id: 'fwa-investigation', label: 'Investigation Workflow', icon: 'FileSearch', code: 'FWA.02', children: [
+          { id: 'fwa-inv-guide', label: 'Guide', icon: 'BookOpen', route: '/fwa-investigation/guide' },
+          { id: 'fwa-inv-queue', label: 'Investigation Queue', icon: 'ListOrdered', route: '/fwa-investigation/queue' }
+        ]}
+      ]
+    },
+    // --- CAPABILITY AREA: Reporting & Analytics (Servicing) ---
+    {
+      id: 'cap-svc-reporting',
+      label: 'Reporting & Analytics',
+      icon: 'BarChart3',
+      children: [
+        { id: 'svc-rpt-claims', label: 'Claims Analytics', icon: 'BarChart', code: 'RPT.S1', children: [
+          { id: 'svc-rpt-claims-guide', label: 'Guide', icon: 'BookOpen', route: '/claims-analytics/guide' },
+          { id: 'svc-rpt-claims-dashboard', label: 'Dashboard', icon: 'LayoutDashboard', route: '/claims-analytics/dashboard' }
+        ]},
+        { id: 'svc-rpt-network', label: 'Network Analytics', icon: 'PieChart', code: 'RPT.S2', children: [
+          { id: 'svc-rpt-network-guide', label: 'Guide', icon: 'BookOpen', route: '/network-analytics/guide' },
+          { id: 'svc-rpt-network-dashboard', label: 'Dashboard', icon: 'LayoutDashboard', route: '/network-analytics/dashboard' }
+        ]},
+        { id: 'svc-rpt-performance', label: 'Servicing Performance', icon: 'Gauge', code: 'RPT.S3', children: [
+          { id: 'svc-rpt-perf-guide', label: 'Guide', icon: 'BookOpen', route: '/servicing-performance/guide' },
+          { id: 'svc-rpt-perf-dashboard', label: 'Dashboard', icon: 'LayoutDashboard', route: '/servicing-performance/dashboard' }
+        ]}
+      ]
+    }
+  ]
+};
+
+// Compliance business line (for Regulator edition)
+const BIZ_COMPLIANCE = {
+  id: 'biz-compliance',
+  label: 'Compliance & Oversight',
+  icon: 'Gavel',
+  desc: 'Regulatory monitoring and enforcement',
+  children: [
+    {
+      id: 'cap-reg-monitoring',
+      label: 'Regulatory Monitoring',
+      icon: 'Eye',
+      children: [
+        { id: 'reg-fwa', label: 'FWA Oversight', icon: 'ShieldBan', code: 'REG.01', children: [
+          { id: 'reg-fwa-guide', label: 'Guide', icon: 'BookOpen', route: '/regulator/fwa/guide' },
+          { id: 'reg-fwa-dashboard', label: 'FWA Dashboard', icon: 'LayoutDashboard', route: '/regulator/fwa/dashboard' }
+        ]},
+        { id: 'reg-market', label: 'Market Conduct', icon: 'BarChart', code: 'REG.02', children: [
+          { id: 'reg-market-guide', label: 'Guide', icon: 'BookOpen', route: '/regulator/market/guide' },
+          { id: 'reg-market-dashboard', label: 'Dashboard', icon: 'LayoutDashboard', route: '/regulator/market/dashboard' }
+        ]},
+        { id: 'reg-solvency', label: 'Solvency Tracking', icon: 'Gauge', code: 'REG.03', children: [
+          { id: 'reg-solv-guide', label: 'Guide', icon: 'BookOpen', route: '/regulator/solvency/guide' },
+          { id: 'reg-solv-dashboard', label: 'Dashboard', icon: 'LayoutDashboard', route: '/regulator/solvency/dashboard' }
+        ]}
+      ]
+    },
+    {
+      id: 'cap-reg-reporting',
+      label: 'Regulatory Reporting',
+      icon: 'FileBarChart',
+      children: [
+        { id: 'reg-reports', label: 'Compliance Reports', icon: 'FileSpreadsheet', code: 'REG.04', children: [
+          { id: 'reg-rpt-guide', label: 'Guide', icon: 'BookOpen', route: '/regulator/reports/guide' },
+          { id: 'reg-rpt-generate', label: 'Generate Reports', icon: 'FileOutput', route: '/regulator/reports/generate' }
+        ]}
+      ]
+    }
+  ]
+};
+
+// AI & AUTOMATION (always visible)
+const AI_AUTOMATION = {
+  id: 'ai-automation',
+  label: 'AI & AUTOMATION',
+  color: 'purple',
+  children: [
+    { id: 'ai-jayna', label: 'Jayna (AI Agent)', icon: 'Bot', children: [
+      { id: 'ai-jayna-guide', label: 'Guide', icon: 'BookOpen', route: '/jayna/guide' },
+      { id: 'ai-jayna-setup', label: 'Setup', icon: 'Settings', route: '/jayna/setup' },
+      { id: 'ai-jayna-conversations', label: 'Conversations', icon: 'MessageSquare', route: '/jayna/conversations' }
+    ]},
+    { id: 'ai-voice', label: 'Voice Platform', icon: 'Mic', children: [
+      { id: 'ai-voice-guide', label: 'Guide', icon: 'BookOpen', route: '/voice/guide' },
+      { id: 'ai-voice-setup', label: 'Setup', icon: 'Settings', route: '/voice/setup' },
+      { id: 'ai-voice-tts', label: 'Text-to-Speech', icon: 'PhoneOutgoing', route: '/voice/tts' },
+      { id: 'ai-voice-stt', label: 'Speech-to-Text', icon: 'Mic', route: '/voice/stt' }
+    ]}
+  ]
+};
+
+// ADMINISTRATION (always visible)
+const ADMINISTRATION = {
+  id: 'administration',
+  label: 'ADMINISTRATION',
+  color: 'gray',
+  children: [
+    { id: 'admin-help', label: 'Help & Support', icon: 'LifeBuoy', children: [
+      { id: 'admin-help-guide', label: 'Guide', icon: 'BookOpen', route: '/help/guide' },
+      { id: 'admin-help-tickets', label: 'Support Tickets', icon: 'Inbox', route: '/help/tickets' },
+      { id: 'admin-help-knowledge', label: 'Knowledge Base', icon: 'Library', route: '/help/knowledge' }
+    ]},
+    { id: 'admin-developer', label: 'Developer Tools', icon: 'Terminal', children: [
+      { id: 'admin-dev-health', label: 'Health Check Bundle', icon: 'Activity', route: '/developer/health' },
+      { id: 'admin-dev-api-docs', label: 'API Documentation', icon: 'Code2', route: '/api-docs' },
+      { id: 'admin-dev-demos', label: 'Demo Gallery', icon: 'Play', route: '/demos' }
+    ]},
+    { id: 'admin-profile', label: 'User Profile', icon: 'UserCog', children: [
+      { id: 'admin-profile-settings', label: 'Settings', icon: 'Settings', route: '/settings' },
+      { id: 'admin-profile-sessions', label: 'Active Sessions', icon: 'History', route: '/settings/sessions' }
+    ]}
+  ]
+};
+
+// ============================================================
+// Edition -> Business Lines mapping
+// Which business lines does each edition show?
+// ============================================================
+function getBusinessLinesForEdition(edition) {
+  const cfg = EDITION_CONFIGS[edition];
+  const lines = [];
+  for (const blKey of cfg.businessLines) {
+    if (blKey === 'distribution') lines.push(BIZ_DISTRIBUTION);
+    else if (blKey === 'servicing') lines.push(BIZ_SERVICING);
+    else if (blKey === 'compliance') lines.push(BIZ_COMPLIANCE);
+  }
+  return lines;
+}
+
+// ============================================================
+// Color assignment
+// ============================================================
+const L2_COLORS = ['blue','green','orange','purple','teal','amber','indigo','red'];
+const L3_COLORS = ['teal','rose','sky','amber','violet','emerald','blue','orange','indigo','pink','cyan','green','red'];
+
+// ============================================================
+// Count items recursively
+// ============================================================
+function countItems(items) {
+  let c = 0;
+  if (!items) return 0;
+  for (const n of items) {
+    c++;
+    if (n.children && n.children.length) c += countItems(n.children);
+  }
+  return c;
+}
+
+// ============================================================
+// Render L5 features
+// ============================================================
+function renderFeatures(features) {
+  let html = '';
+  for (const f of features) {
+    const routeHint = f.route ? `<span class="route-hint">${esc(f.route)}</span>` : '';
+    const onclick = f.route ? `onclick="leafClick('${esc(f.route)}','${esc(f.label)}',event)"` : '';
+    html += `<div class="L5" data-id="${f.id}" data-label="${esc(f.label)}" ${onclick}><span class="L5-icon">${getIcon(f.icon)}</span> ${esc(f.label)}${routeHint}</div>`;
+  }
+  return html;
+}
+
+// ============================================================
+// Render a Module (L4) with its Features (L5)
+// ============================================================
+function renderModule(mod) {
+  const hasChildren = mod.children && mod.children.length > 0;
+  const codeTag = mod.code ? `<span class="L4-code">${esc(mod.code)}</span>` : '';
+
+  if (!hasChildren) {
+    const onclick = mod.route ? `onclick="leafClick('${esc(mod.route)}','${esc(mod.label)}',event)"` : '';
+    return `<div class="L4" data-id="${mod.id}" data-label="${esc(mod.label)}"><div class="L4-header" ${onclick}><span class="L4-icon">${getIcon(mod.icon)}</span><span class="L4-label">${esc(mod.label)}</span>${codeTag}</div></div>`;
+  }
+
+  let html = `<div class="L4 collapsed" data-id="${mod.id}" data-label="${esc(mod.label)}">`;
+  html += `<div class="L4-header" onclick="toggleL4(this)"><span class="L4-icon">${getIcon(mod.icon)}</span><span class="L4-label">${esc(mod.label)}</span>${codeTag}<span class="L4-chevron">\u25BC</span></div>`;
+  html += `<div class="L4-content">`;
+  html += renderFeatures(mod.children);
+  html += `</div></div>`;
+  return html;
+}
+
+// ============================================================
+// Render a Capability Area (L3) with its Modules (L4)
+// ============================================================
+function renderCapability(cap, colorIdx) {
+  const l3Color = L3_COLORS[colorIdx % L3_COLORS.length];
+  const hasChildren = cap.children && cap.children.length > 0;
+
+  if (!hasChildren) {
+    const onclick = cap.route ? `onclick="leafClick('${esc(cap.route)}','${esc(cap.label)}',event)"` : '';
+    return `<div class="L3" data-color="${l3Color}" data-id="${cap.id}" data-label="${esc(cap.label)}"><div class="L3-header" ${onclick}><span class="L3-icon">${getIcon(cap.icon)}</span><span class="L3-label">${esc(cap.label)}</span></div></div>`;
+  }
+
+  let html = `<div class="L3 collapsed" data-color="${l3Color}" data-id="${cap.id}" data-label="${esc(cap.label)}">`;
+  html += `<div class="L3-header" onclick="toggleL3(this)"><span class="L3-icon">${getIcon(cap.icon)}</span><span class="L3-label">${esc(cap.label)}</span><span class="L3-chevron">\u25BC</span></div>`;
+  html += `<div class="L3-content">`;
+  for (const mod of cap.children) {
+    html += renderModule(mod);
+  }
+  html += `</div></div>`;
+  return html;
+}
+
+// ============================================================
+// Render a Business Line (L2) with its Capability Areas (L3)
+// ============================================================
+function renderBusinessLine(bl, colorIdx) {
+  const l2Color = L2_COLORS[colorIdx % L2_COLORS.length];
+  const hasChildren = bl.children && bl.children.length > 0;
+
+  if (!hasChildren) {
+    return `<div class="L2" data-color="${l2Color}" data-id="${bl.id}" data-label="${esc(bl.label)}"><div class="L2-header"><span class="L2-icon">${getIcon(bl.icon)}</span> ${esc(bl.label)}</div></div>`;
+  }
+
+  let html = `<div class="L2 collapsed" data-color="${l2Color}" data-id="${bl.id}" data-label="${esc(bl.label)}">`;
+  html += `<div class="L2-header" onclick="toggleL2(this)"><span class="L2-icon">${getIcon(bl.icon)}</span> ${esc(bl.label)}<span class="L2-count">${bl.children.length}</span><span class="L2-chevron">\u25BC</span></div>`;
+  html += `<div class="L2-content">`;
+  let l3i = 0;
+  for (const cap of bl.children) {
+    html += renderCapability(cap, l3i++);
+  }
+  html += `</div></div>`;
+  return html;
+}
+
+// ============================================================
+// Render a static section (Platform Core, Platform Services, AI, Admin)
+// These use L2 = service, L3 = features
+// ============================================================
+function renderStaticSection(section) {
+  let html = '';
+  let l2i = 0;
+  for (const svc of section.children) {
+    const l2Color = L2_COLORS[l2i % L2_COLORS.length];
+    l2i++;
+    const hasChildren = svc.children && svc.children.length > 0;
+
+    if (!hasChildren) {
+      const onclick = svc.route ? `onclick="leafClick('${esc(svc.route)}','${esc(svc.label)}',event)"` : '';
+      html += `<div class="L2" data-color="${l2Color}" data-id="${svc.id}" data-label="${esc(svc.label)}"><div class="L2-header" ${onclick}><span class="L2-icon">${getIcon(svc.icon)}</span> ${esc(svc.label)}</div></div>`;
+      continue;
+    }
+
+    html += `<div class="L2 collapsed" data-color="${l2Color}" data-id="${svc.id}" data-label="${esc(svc.label)}">`;
+    html += `<div class="L2-header" onclick="toggleL2(this)"><span class="L2-icon">${getIcon(svc.icon)}</span> ${esc(svc.label)}<span class="L2-chevron">\u25BC</span></div>`;
+    html += `<div class="L2-content">`;
+
+    for (const feat of svc.children) {
+      const hasSubChildren = feat.children && feat.children.length > 0;
+
+      if (!hasSubChildren) {
+        const routeHint = feat.route ? `<span class="route-hint">${esc(feat.route)}</span>` : '';
+        const onclick = feat.route ? `onclick="leafClick('${esc(feat.route)}','${esc(feat.label)}',event)"` : '';
+        html += `<div class="L5" data-id="${feat.id}" data-label="${esc(feat.label)}" ${onclick}><span class="L5-icon">${getIcon(feat.icon)}</span> ${esc(feat.label)}${routeHint}</div>`;
+      } else {
+        // render as L3 > L5
+        const l3Color = L3_COLORS[0];
+        html += `<div class="L3 collapsed" data-color="${l3Color}" data-id="${feat.id}" data-label="${esc(feat.label)}">`;
+        html += `<div class="L3-header" onclick="toggleL3(this)"><span class="L3-icon">${getIcon(feat.icon)}</span><span class="L3-label">${esc(feat.label)}</span><span class="L3-chevron">\u25BC</span></div>`;
+        html += `<div class="L3-content">`;
+        html += renderFeatures(feat.children);
+        html += `</div></div>`;
+      }
+    }
+
+    html += `</div></div>`;
+  }
+  return html;
+}
+
+// ============================================================
+// Main render function
+// ============================================================
+function renderMenu() {
+  const nav = document.getElementById('nav-scroll');
+  const edCfg = EDITION_CONFIGS[currentEdition];
+  let html = '';
+
+  // --- PLATFORM CORE ---
+  html += `<div class="L1 collapsed" data-color="${PLATFORM_CORE.color}">`;
+  html += `<div class="L1-header" onclick="toggleL1(this)"><span class="L1-label">${esc(PLATFORM_CORE.label)}</span><span class="L1-chevron">\u25BC</span></div>`;
+  html += `<div class="L1-content">`;
+  html += renderStaticSection(PLATFORM_CORE);
+  html += `</div></div>`;
+  html += `<div class="separator"></div>`;
+
+  // --- PLATFORM FEATURE SERVICES ---
+  html += `<div class="L1 collapsed" data-color="${PLATFORM_SERVICES.color}">`;
+  html += `<div class="L1-header" onclick="toggleL1(this)"><span class="L1-label">${esc(PLATFORM_SERVICES.label)}</span><span class="L1-chevron">\u25BC</span></div>`;
+  html += `<div class="L1-content">`;
+  html += renderStaticSection(PLATFORM_SERVICES);
+  html += `</div></div>`;
+  html += `<div class="separator"></div>`;
+
+  // --- BUSINESS (dynamic per edition) ---
+  const bizLines = getBusinessLinesForEdition(currentEdition);
+  const edLabel = edCfg.label.replace(' Edition', '');
+  html += `<div class="L1 biz-group" data-edition-color="${edCfg.color}">`;
+  html += `<div class="L1-header" onclick="toggleL1(this)"><span class="L1-label">BUSINESS -- ${esc(edLabel.toUpperCase())}</span><span class="L1-chevron">\u25BC</span></div>`;
+  html += `<div class="L1-content">`;
+
+  let l2i = 0;
+  for (const bl of bizLines) {
+    html += renderBusinessLine(bl, l2i++);
+  }
+
+  html += `</div></div>`;
+  html += `<div class="separator"></div>`;
+
+  // --- AI & AUTOMATION ---
+  html += `<div class="L1 collapsed" data-color="${AI_AUTOMATION.color}">`;
+  html += `<div class="L1-header" onclick="toggleL1(this)"><span class="L1-label">${esc(AI_AUTOMATION.label)}</span><span class="L1-chevron">\u25BC</span></div>`;
+  html += `<div class="L1-content">`;
+  html += renderStaticSection(AI_AUTOMATION);
+  html += `</div></div>`;
+  html += `<div class="separator"></div>`;
+
+  // --- ADMINISTRATION ---
+  html += `<div class="L1 collapsed" data-color="${ADMINISTRATION.color}">`;
+  html += `<div class="L1-header" onclick="toggleL1(this)"><span class="L1-label">${esc(ADMINISTRATION.label)}</span><span class="L1-chevron">\u25BC</span></div>`;
+  html += `<div class="L1-content">`;
+  html += renderStaticSection(ADMINISTRATION);
+  html += `</div></div>`;
+
+  html += '<div style="height:30px"></div>';
+  nav.innerHTML = html;
+  updateStats();
+}
+
+// ============================================================
+// Toggle functions
+// ============================================================
+function toggleL1(h) { h.parentElement.classList.toggle('collapsed'); }
+function toggleL2(h) {
+  if (event.target.closest('.L3') || event.target.closest('.L4') || event.target.closest('.L5')) return;
+  h.parentElement.classList.toggle('collapsed');
+}
+function toggleL3(h) {
+  if (event.target.closest('.L4') || event.target.closest('.L5')) return;
+  h.closest('.L3').classList.toggle('collapsed');
+}
+function toggleL4(h) {
+  if (event.target.closest('.L5')) return;
+  h.closest('.L4').classList.toggle('collapsed');
+}
+
+// ============================================================
+// Leaf click -- show toast + update main
+// ============================================================
+function leafClick(route, label, e) {
+  e.stopPropagation();
+
+  document.querySelectorAll('.L5.active').forEach(i => i.classList.remove('active'));
+  const el = e.target.closest('.L5');
+  if (el) el.classList.add('active');
+
+  const crumbs = [];
+  let node = el;
+  while (node) {
+    const lbl = node.getAttribute('data-label');
+    if (lbl) crumbs.unshift(lbl);
+    node = node.parentElement;
+    if (node && node.classList.contains('nav-scroll')) break;
+  }
+  const bc = crumbs.join(' > ');
+  document.getElementById('breadcrumb').textContent = bc || label;
+
+  document.getElementById('detail-panel').style.display = 'block';
+  document.getElementById('detail-path').textContent = route || '(no route)';
+  document.getElementById('detail-title').textContent = label;
+  const levelNum = el ? (el.classList.contains('L5') ? 5 : 4) : 5;
+  document.getElementById('detail-meta').innerHTML =
+    `<span class="detail-meta-item">Level ${levelNum} -- Feature</span>` +
+    (route ? `<span class="detail-meta-item" style="font-family:monospace;">${esc(route)}</span>` : '') +
+    `<span class="detail-meta-item">${esc(bc)}</span>`;
+
+  showToast(label, route);
+}
+
+function showToast(label, route) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toast-label').textContent = label;
+  document.getElementById('toast-route').textContent = route || '(no route)';
+  toast.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ============================================================
+// Edition switching
+// ============================================================
+function switchEdition(edition) {
+  currentEdition = edition;
+  const cfg = EDITION_CONFIGS[edition];
+  const sel = document.getElementById('edition-selector');
+  sel.setAttribute('data-edition', edition);
+  document.getElementById('edition-active-label').textContent = cfg.label;
+
+  const descEl = document.getElementById('edition-description');
+  descEl.className = 'card edition-card ' + edition;
+  document.getElementById('edition-desc-title').textContent = cfg.label;
+  document.getElementById('edition-desc-body').textContent = cfg.desc;
+
+  document.getElementById('stat-edition').textContent = cfg.label.replace(' Edition', '');
+
+  renderMenu();
+  if (searchTerm) filterMenu(searchTerm);
+}
+
+// ============================================================
+// Search / filter
+// ============================================================
+function filterMenu(term) {
+  searchTerm = term.toLowerCase().trim();
+  const allItems = document.querySelectorAll('.L1, .L2, .L3, .L4, .L5, .separator');
+
+  if (!searchTerm) {
+    allItems.forEach(el => el.classList.remove('search-hidden'));
+    document.querySelectorAll('.L1').forEach(el => {
+      if (!el.classList.contains('biz-group')) el.classList.add('collapsed');
+    });
+    document.querySelectorAll('.L2, .L3, .L4').forEach(el => el.classList.add('collapsed'));
+    updateStats();
+    return;
+  }
+
+  const leaves = document.querySelectorAll('.L5');
+  const matchingParents = new Set();
+
+  leaves.forEach(leaf => {
+    const label = (leaf.getAttribute('data-label') || leaf.textContent).toLowerCase();
+    const id = leaf.getAttribute('data-id') || '';
+    if (label.includes(searchTerm) || id.includes(searchTerm)) {
+      leaf.classList.remove('search-hidden');
+      let p = leaf.parentElement;
+      while (p && !p.classList.contains('nav-scroll')) {
+        matchingParents.add(p);
+        p = p.parentElement;
+      }
+    } else {
+      leaf.classList.add('search-hidden');
+    }
+  });
+
+  document.querySelectorAll('.L4, .L3, .L2, .L1').forEach(el => {
+    if (matchingParents.has(el)) {
+      el.classList.remove('search-hidden');
+      el.classList.remove('collapsed');
+    } else {
+      const label = (el.getAttribute('data-label') || '').toLowerCase();
+      const id = (el.getAttribute('data-id') || '').toLowerCase();
+      if (label.includes(searchTerm) || id.includes(searchTerm)) {
+        el.classList.remove('search-hidden');
+        el.classList.remove('collapsed');
+      } else {
+        el.classList.add('search-hidden');
+      }
+    }
+  });
+
+  document.querySelectorAll('.separator').forEach(sep => {
+    const prev = sep.previousElementSibling;
+    const next = sep.nextElementSibling;
+    if ((prev && prev.classList.contains('search-hidden')) || (next && next.classList.contains('search-hidden'))) {
+      sep.classList.add('search-hidden');
+    } else {
+      sep.classList.remove('search-hidden');
+    }
+  });
+
+  updateStats();
+}
+
+function updateStats() {
+  const visible = document.querySelectorAll('.L5:not(.search-hidden)').length;
+  document.getElementById('stat-visible').textContent = visible;
+
+  // Update search placeholder with total
+  const total = getTotalItemCount();
+  document.getElementById('search-input').placeholder = `Search ${total} items...`;
+  document.getElementById('stat-total').textContent = total;
+}
+
+function getTotalItemCount() {
+  let total = 0;
+  total += countItems(PLATFORM_CORE.children);
+  total += countItems(PLATFORM_SERVICES.children);
+  const bizLines = getBusinessLinesForEdition(currentEdition);
+  for (const bl of bizLines) total += countItems(bl.children);
+  total += countItems(AI_AUTOMATION.children);
+  total += countItems(ADMINISTRATION.children);
+  // Add 5 for the L1 sections themselves
+  return total + 5;
+}
+
+// ============================================================
+// Customize modal
+// ============================================================
+function showCustomize() {
+  const modal = document.getElementById('customize-modal');
+  modal.style.display = '';
+  modal.innerHTML = `
+    <div class="modal-overlay" onclick="closeCustomize(event)">
+      <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-title">Customize Menu</div>
+        <div class="modal-body">
+          Organization-level menu customization -- Coming Soon.<br><br>
+          Planned features:<br>
+          - Reorder menu items via drag-and-drop<br>
+          - Show/hide sections per organization<br>
+          - Custom capability area grouping<br>
+          - Edition-level module visibility<br>
+          - Per-role menu filtering
+        </div>
+        <button class="modal-close" onclick="closeCustomize()">Got it</button>
+      </div>
+    </div>
+  `;
+}
+
+function closeCustomize(e) {
+  if (e && e.target !== e.currentTarget) return;
+  document.getElementById('customize-modal').style.display = 'none';
+}
+
+// ============================================================
+// Dark mode
+// ============================================================
+function toggleDark() {
+  document.body.classList.toggle('dark');
+  const btn = document.querySelector('.dark-toggle');
+  btn.textContent = document.body.classList.contains('dark') ? '\u2600\uFE0F' : '\uD83C\uDF19';
+  localStorage.setItem('zorbit-dark-definitive', document.body.classList.contains('dark') ? '1' : '0');
+}
+
+if (localStorage.getItem('zorbit-dark-definitive') === '1') {
+  document.body.classList.add('dark');
+  document.querySelector('.dark-toggle').textContent = '\u2600\uFE0F';
+}
+
+// ============================================================
+// Init
+// ============================================================
+renderMenu();
+updateStats();
+</script>
+
+</body>
+</html>

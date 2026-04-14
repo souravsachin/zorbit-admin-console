@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { Kafka, Producer } from 'kafkajs';
 import { v4 as uuidv4 } from 'uuid';
 import { createKafkaConfig } from '../config/kafka.config';
-import { AdminConsoleEventType, ZorbitEventEnvelope } from './admin-console.events';
+import { AdminConsoleEventType, ZorbitEventEnvelope } from './unified-console.events';
 
 /**
  * Publishes domain events to Kafka following the canonical Zorbit event envelope.
@@ -57,7 +57,7 @@ export class EventPublisherService implements OnModuleInit, OnModuleDestroy {
       eventId: uuidv4(),
       eventType,
       timestamp: new Date().toISOString(),
-      source: 'zorbit-admin-console-server',
+      source: 'zorbit-unified-console-server',
       namespace,
       namespaceId,
       payload,

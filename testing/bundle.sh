@@ -31,6 +31,9 @@ mkdir -p "$TMPDIR/$FOLDER"
 rsync -a \
   --exclude='node_modules' \
   --exclude='outputs' \
+  --exclude='tmp' \
+  --exclude='logs' \
+  --exclude='*.log' \
   --exclude='.git' \
   --exclude='credentials/credentials.json' \
   "$BUNDLE_SRC/" "$TMPDIR/$FOLDER/"

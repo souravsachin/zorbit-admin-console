@@ -14,7 +14,7 @@ import { CreateTaxonomyCategoryDto, UpdateTaxonomyCategoryDto } from '../models/
 import { CreateTaxonomyItemDto, UpdateTaxonomyItemDto } from '../models/dto/create-taxonomy-item.dto';
 import { HashIdService } from './hash-id.service';
 import { EventPublisherService } from '../events/event-publisher.service';
-import { TaxonomyEvents } from '../events/admin-console.events';
+import { TaxonomyEvents } from '../events/unified-console.events';
 
 @Injectable()
 export class TaxonomyService {

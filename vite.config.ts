@@ -33,6 +33,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/authorization/, ''),
       },
+      '/api/datatable': {
+        target: 'http://localhost:3013',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/datatable/, ''),
+      },
       '/api/navigation': {
         target: 'http://localhost:3097',
         changeOrigin: true,
@@ -82,10 +87,10 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/uw-workflow/, ''),
       },
-      '/api/hi-decisioning': {
+      '/api/hi-uw-decisioning': {
         target: 'http://localhost:3116',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/hi-decisioning/, ''),
+        rewrite: (path) => path.replace(/^\/api\/hi-uw-decisioning/, ''),
       },
       '/api/hi-quotation': {
         target: 'http://localhost:3117',
@@ -106,6 +111,16 @@ export default defineConfig({
         target: 'http://localhost:3114',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/form-builder/, ''),
+      },
+      '/api/white-label': {
+        target: 'http://localhost:3034',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/white-label/, ''),
+      },
+      '/api/doc-generator': {
+        target: 'http://localhost:3026',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/doc-generator/, ''),
       },
       '/api/notification': {
         target: 'http://localhost:3026',

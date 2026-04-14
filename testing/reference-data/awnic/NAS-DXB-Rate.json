@@ -1,0 +1,2962 @@
+{
+  "insurerName": "Al Wathba National Insurance (AWNIC)",
+  "productName": "NAS Dubai Individual",
+  "region": "Dubai",
+  "currency": "AED",
+  "copayDescription": "NET RATES - 0% OP Diagnostics and 0% Pharmacy Co-pay",
+  "parameters": {
+    "networks": [
+      "CN",
+      "GN",
+      "RN",
+      "SRN",
+      "WN"
+    ],
+    "genders": [
+      "Male",
+      "Female"
+    ]
+  },
+  "rates": [
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 14136.91,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 14136.91,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 12607.55,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 12607.55,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 9623.37,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 9623.37,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 7427.17,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 7427.17,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 4007.74,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4007.74,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 9795.44,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 9795.44,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 8693.35,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 8693.35,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 6683.59,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 6683.59,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 5144.42,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 5144.42,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2810.19,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 2810.19,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 9447.56,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 9447.56,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 8367.0,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 8367.0,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 6396.5,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 6396.5,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 4887.15,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 4887.15,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2598.7,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 2598.7,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 8024.68,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 9016.71,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 6875.24,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 7962.68,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 5252.05,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 6103.25,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 4018.02,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 4650.36,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2137.65,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 2476.32,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 7481.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 15971.64,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 6753.9,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 14333.62,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 5188.17,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 10998.12,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 3935.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 8239.37,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2062.85,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4382.13,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 8232.94,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 18222.07,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 7419.72,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 16429.34,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 5707.54,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 12550.16,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 4322.0,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 9447.25,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2266.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 5011.73,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 8840.86,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 17177.36,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 7950.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 15559.66,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 6126.87,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 11838.93,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 4629.38,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 8949.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2428.48,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4738.73,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 9846.33,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 14559.48,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 8871.22,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 13098.88,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 6823.99,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 10027.08,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 5165.01,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 7533.17,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2705.63,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4002.71,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 10901.73,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 14584.61,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 9823.32,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 13071.1,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 7548.76,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 10038.63,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 5718.7,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 7516.51,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2994.44,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4000.39,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 12986.37,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 16925.02,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 11777.21,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 15105.82,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 9031.23,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 11641.16,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 6855.03,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 8734.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 3583.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4627.72,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 16751.18,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 19449.11,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 15154.88,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 17345.04,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 11605.63,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 13375.4,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 8819.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 9969.41,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 4602.92,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 5313.56,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 18806.59,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 22087.62,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 17027.83,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 19735.43,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 13020.89,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 15188.89,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 9917.5,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 11345.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 5171.45,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 6039.0,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 28433.41,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 35127.09,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 25785.33,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 31372.89,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 19692.65,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 24149.36,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 14999.75,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 18027.63,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 7810.92,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 9590.02,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 42127.08,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 42127.08,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 38173.46,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 37959.0,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 29155.77,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 28991.05,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 22200.88,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 21819.8,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 11559.55,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 11559.55,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 12910.42,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 12910.42,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 11513.75,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 11513.75,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 8788.47,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 8788.47,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 6782.8,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 6782.8,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 3660.04,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 3660.04,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 8945.61,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 8945.61,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 7939.14,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 7939.14,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 6103.73,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 6103.73,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 4698.1,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 4698.1,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2566.38,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 2566.38,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 8627.91,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 8627.91,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 7641.1,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 7641.1,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 5841.55,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 5841.55,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 4463.15,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 4463.15,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2373.24,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 2373.24,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 7328.48,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 8234.44,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 6278.76,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 7271.85,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 4796.39,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 5573.74,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 3669.42,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 4246.9,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 1952.19,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 2261.48,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 6832.43,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 14585.97,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 6167.94,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 13090.07,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 4738.05,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 10043.94,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 3594.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 7524.54,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 1883.88,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4001.95,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 7518.66,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 16641.16,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 6776.0,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 15003.96,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 5212.36,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 11461.34,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 3947.03,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 8627.63,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2069.46,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4576.93,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 8073.85,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 15687.09,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 7260.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 14209.73,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 5595.32,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 10811.81,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 4227.74,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 8172.65,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2217.79,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4327.61,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 8992.08,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 13296.33,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 8101.57,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 11962.45,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 6231.96,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 9157.15,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 4716.9,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 6879.6,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2470.89,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 3655.45,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 9955.92,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 13319.28,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 8971.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 11937.08,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 6893.84,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 9167.69,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 5222.55,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 6864.39,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2734.65,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 3653.32,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 11859.7,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 15456.64,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 10755.44,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 13795.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 8247.7,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 10631.19,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 6260.3,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 7976.7,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 3272.59,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4226.22,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 15297.88,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 17761.74,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 13840.07,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 15840.22,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 10598.75,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 12214.98,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 8053.93,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 9104.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 4203.58,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4852.57,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 17174.97,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 20171.34,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 15550.53,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 18023.22,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 11891.22,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 13871.13,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 9057.08,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 10360.78,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 4722.79,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 5515.07,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 25966.59,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 32079.53,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 23548.25,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 28651.04,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 17984.15,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 22054.21,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 13698.4,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 16463.59,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 7133.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 8758.01,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 38472.22,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 38472.22,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 34861.6,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 34665.75,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 26626.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 26475.84,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 20274.78,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 19926.76,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 10556.67,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 10556.67,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 12264.9,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 12264.9,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 10938.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 10938.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 8349.05,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 8349.05,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 6443.66,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 6443.66,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 3477.04,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[00-01]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 3477.04,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 8498.33,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 8498.33,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 7542.18,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 7542.18,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 5798.54,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 5798.54,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 4463.19,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 4463.19,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2438.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[02-05]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 2438.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 8196.51,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 8196.51,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 7259.04,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 7259.04,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 5549.48,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 5549.48,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 4240.0,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 4240.0,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2254.58,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[06-15]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 2254.58,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 6962.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 7822.72,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 5964.82,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 6908.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 4556.57,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 5295.05,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 3485.95,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 4034.56,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 1854.58,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[16-20]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 2148.41,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 6490.81,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 13856.67,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 5859.55,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 12435.56,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 4501.15,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 9541.75,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 3414.35,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 7148.31,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 1789.69,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[21-25]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 3801.85,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 7142.73,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 15809.11,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 6437.2,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 14253.77,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 4951.74,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 10888.27,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 3749.68,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 8196.25,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 1965.99,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[26-30]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4348.08,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 7670.15,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 14902.74,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 6897.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 13499.25,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 5315.55,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 10271.22,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 4016.36,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 7764.02,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2106.9,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[31-35]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4111.23,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 8542.48,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 12631.51,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 7696.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 11364.33,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 5920.36,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 8699.3,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 4481.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 6535.62,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2347.35,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[36-40]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 3472.67,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 9458.12,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 12653.32,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 8522.51,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 11340.23,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 6549.15,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 8709.31,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 4961.43,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 6521.17,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 2597.92,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[41-45]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 3470.66,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 11266.72,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 14683.81,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 10217.67,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 13105.51,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 7835.31,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 10099.63,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 5947.29,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 7577.87,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 3108.96,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[46-50]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4014.91,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 14532.98,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 16873.66,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 13148.07,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 15048.21,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 10068.82,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 11604.23,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 7651.24,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 8649.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 3993.4,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[51-55]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 4609.94,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 16316.22,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 19162.78,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 14773.0,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 17122.06,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 11296.66,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 13177.57,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 8604.23,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 9842.74,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 4486.65,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[56-60]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 5239.32,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 24668.26,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 30475.56,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 22370.84,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 27218.49,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 17084.95,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 20951.5,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 13013.48,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 15640.41,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 6776.6,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[61-65]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 8320.11,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "CN",
+      "netRate": 36548.61,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "CN",
+      "netRate": 36548.61,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "GN",
+      "netRate": 33118.52,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "GN",
+      "netRate": 32932.47,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "RN",
+      "netRate": 25294.96,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "RN",
+      "netRate": 25152.05,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "SRN",
+      "netRate": 19261.04,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "SRN",
+      "netRate": 18930.42,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Male",
+      "network": "WN",
+      "netRate": 10028.84,
+      "currency": "AED"
+    },
+    {
+      "ageBand": "[66-99]",
+      "gender": "Female",
+      "network": "WN",
+      "netRate": 10028.84,
+      "currency": "AED"
+    }
+  ]
+}

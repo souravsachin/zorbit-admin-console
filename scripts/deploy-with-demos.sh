@@ -6,9 +6,9 @@
 
 set -euo pipefail
 
-LOCAL_DIR="/Users/s/workspace/zorbit/02_repos/zorbit-admin-console"
+LOCAL_DIR="/Users/s/workspace/zorbit/02_repos/zorbit-unified-console"
 REMOTE="sovpn"
-REMOTE_CONSOLE="/home/sourav/apps/zorbit-platform/admin-console"
+REMOTE_CONSOLE="/home/sourav/apps/zorbit-platform/zorbit-unified-console"
 REMOTE_DEMOS="/home/sourav/apps/zorbit-platform/demos"
 
 echo "=== Step 1: Build ==="

@@ -24,8 +24,17 @@
       "interactive_menu": "1.0",
       "cli_modes": "1.1",
       "ready_made_recipes": "1.0",
-      "best_practices": "1.0"
+      "best_practices": "1.0",
+      "json_report": "1.0"
     },
-    "last_reapply": "2026-04-05"
+    "last_reapply": "2026-04-13"
+  },
+  {
+    "skill_id": "1024",
+    "skill_name": "Module-Level E2E Test Authoring",
+    "sections": {
+      "all": "1.0"
+    },
+    "last_reapply": "2026-04-13"
   }
 ]

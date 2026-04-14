@@ -11,7 +11,7 @@ import { UpdateWidgetDto } from '../models/dto/update-widget.dto';
 import { WidgetResponseDto } from '../models/dto/widget-response.dto';
 import { HashIdService } from './hash-id.service';
 import { EventPublisherService } from '../events/event-publisher.service';
-import { DashboardEvents } from '../events/admin-console.events';
+import { DashboardEvents } from '../events/unified-console.events';
 
 @Injectable()
 export class DashboardService {
