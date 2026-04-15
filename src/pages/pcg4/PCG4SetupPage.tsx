@@ -87,7 +87,7 @@ const PCG4SetupPage: React.FC = () => {
     setLoadingTables(true);
     try {
       const data = await getSetupTables(orgId);
-      setTables(data.tables);
+      setTables(data?.tables ?? []);
     } catch {
       toast('Failed to load table inventory', 'error');
     } finally {
@@ -216,8 +216,8 @@ const PCG4SetupPage: React.FC = () => {
 
   // ---- Derived ----
 
-  const hasData = tables.some((t) => t.count > 0);
-  const selectableCount = tables.filter((t) => !t.protected).length;
+  const hasData = (tables ?? []).some((t) => t.count > 0);
+  const selectableCount = (tables ?? []).filter((t) => !t.protected).length;
 
   return (
     <div className="space-y-6">

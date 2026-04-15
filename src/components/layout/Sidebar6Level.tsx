@@ -138,7 +138,7 @@ const Sidebar6Level: React.FC<Sidebar6LevelProps> = ({
 
   // Sidebar pin from prefs (mirrors classic sidebar behavior)
   const sidebar = prefs.ui?.sidebar;
-  const pinned = sidebar?.pinned ?? true;
+  const pinned = sidebar?.pinned ?? false;
 
   const togglePin = useCallback(() => {
     updatePrefs({

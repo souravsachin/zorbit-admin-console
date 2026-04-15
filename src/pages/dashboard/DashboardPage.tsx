@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Users, Building2, UserCircle, Activity } from 'lucide-react';
 import Card from '../../components/shared/Card';
 import StatusBadge from '../../components/shared/StatusBadge';
-import { useChannel } from '../../hooks/useRealtime';
+import { useAuth } from '../../hooks/useAuth';
+import api from '../../services/api';
 
 interface DashboardMetrics {
   users: number;
@@ -27,7 +28,53 @@ function formatDate(d: unknown): string {
 }
 
 const DashboardPage: React.FC = () => {
-  const { data: metrics } = useChannel<DashboardMetrics>('dashboard:metrics');
+  const { user } = useAuth();
+  const orgId = user?.organizationId || 'O-OZPY';
+  const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
+
+  useEffect(() => {
+    // Fetch metrics from REST APIs (no WebSocket dependency)
+    const fetchMetrics = async () => {
+      try {
+        const [usersRes, orgsRes, healthRes] = await Promise.allSettled([
+          api.get(`/api/identity/api/v1/O/${orgId}/users`),
+          api.get('/api/identity/api/v1/G/organizations'),
+          api.get('/api/identity/api/v1/G/health'),
+        ]);
+
+        const usersCount = usersRes.status === 'fulfilled'
+          ? (Array.isArray(usersRes.value.data) ? usersRes.value.data.length : usersRes.value.data?.total ?? 0)
+          : 0;
+        const orgsCount = orgsRes.status === 'fulfilled'
+          ? (Array.isArray(orgsRes.value.data) ? orgsRes.value.data.length : orgsRes.value.data?.total ?? 0)
+          : 0;
+        const healthStatus = healthRes.status === 'fulfilled' ? 'Healthy' : 'Unknown';
+
+        // Try to get recent audit events
+        let recentEvents: AuditEventSummary[] = [];
+        try {
+          const auditRes = await api.get('/api/audit/api/v1/G/audit/logs?limit=5');
+          recentEvents = Array.isArray(auditRes.data)
+            ? auditRes.data.slice(0, 5)
+            : (auditRes.data?.logs ?? auditRes.data?.items ?? []).slice(0, 5);
+        } catch {
+          // Audit service might not be available
+        }
+
+        setMetrics({
+          users: usersCount,
+          orgs: orgsCount,
+          customers: 0,
+          health: healthStatus,
+          recentEvents,
+        });
+      } catch {
+        setMetrics({ users: 0, orgs: 0, customers: 0, health: 'Error', recentEvents: [] });
+      }
+    };
+
+    fetchMetrics();
+  }, [orgId]);
 
   const recentEvents = metrics?.recentEvents ?? [];
 
