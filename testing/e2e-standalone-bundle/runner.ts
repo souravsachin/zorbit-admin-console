@@ -904,6 +904,18 @@ async function executeStep(
         break;
       }
 
+      case "assertNotVisible": {
+        // Wait briefly for page to settle, then assert element is NOT visible
+        const notVisLocator = page.locator(step.selector!).first();
+        const isVis = await notVisLocator.isVisible().catch(() => false);
+        if (isVis) {
+          throw new Error(
+            `Expected "${step.selector}" to NOT be visible, but it IS visible on the page`
+          );
+        }
+        break;
+      }
+
       case "assertText": {
         const locator = page.locator(step.selector!).first();
         await locator.waitFor({ state: "visible", timeout });

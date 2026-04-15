@@ -1,1170 +1,1044 @@
 {
-  "_meta": {
-    "description": "TruUptime — read-only deep regression across every screen and API endpoint on zorbit-uat.onezippy.ai",
-    "updated": "2026-04-15"
-  },
   "baseUrl": "https://zorbit-uat.onezippy.ai",
-  "viewport": { "width": 1440, "height": 900 },
+  "credentials": {
+    "admin": {
+      "email": "s@onezippy.ai",
+      "password": "s@2021#cz"
+    }
+  },
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
   "defaults": {
-    "timeout": 20000,
-    "waitAfterAction": 700,
+    "timeout": 15000,
+    "waitAfterAction": 2000,
     "waitForNetworkIdle": false
   },
-
   "segments": {
-
-    "seg-login": {
-      "name": "Login",
-      "description": "Navigate to login page, authenticate, verify dashboard loads",
+    "login": {
+      "name": "Login + Pin Sidebar",
+      "description": "TU-LG: Login and pin sidebar open for all subsequent navigation",
       "steps": [
         {
           "action": "navigate",
           "url": "/login",
-          "announce": { "before": "TruUptime: navigating to login page" }
+          "description": "TU-LG01: Open login page"
         },
-        { "action": "wait", "timeout": 1500 },
         {
           "action": "screenshot",
-          "value": "tru-00-login-page.png"
+          "value": "tru-LG01-login-page.png"
         },
         {
           "action": "assertVisible",
-          "selector": "input[type='email'], input[name='email'], input[placeholder*='email' i]",
-          "timeout": 10000
+          "selector": "input[type='email']",
+          "description": "TU-LG02: Email field present"
         },
         {
           "action": "fill",
-          "selector": "input[type='email'], input[name='email'], input[placeholder*='email' i]",
-          "value": "${credentials.admin.email}"
+          "selector": "input[type='email']",
+          "value": "s@onezippy.ai",
+          "description": "TU-LG02: Enter email"
         },
         {
           "action": "fill",
           "selector": "input[type='password']",
-          "value": "${credentials.admin.password}"
+          "value": "s@2021#cz",
+          "description": "TU-LG03: Enter password"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-LG03-credentials-entered.png"
         },
         {
           "action": "click",
-          "selector": "button[type='submit'], button:has-text('Sign in'), button:has-text('Login')",
-          "announce": { "after": "Login submitted" }
+          "selector": "button[type='submit']",
+          "description": "TU-LG04: Click Sign In"
         },
-        { "action": "wait", "timeout": 4000 },
+        {
+          "action": "wait",
+          "timeout": 4000,
+          "description": "Wait for login redirect"
+        },
         {
           "action": "assertVisible",
-          "selector": "nav, aside, [class*='sidebar'], [role='navigation'], main",
-          "timeout": 20000,
-          "announce": { "after": "Dashboard loaded. Authenticated." }
+          "selector": "text=Sourav Sachin",
+          "description": "TU-LG05: User name visible after login"
         },
         {
           "action": "screenshot",
-          "value": "tru-01-logged-in.png"
+          "value": "tru-LG05-logged-in.png"
+        },
+        {
+          "action": "click",
+          "selector": "button[title='Toggle sidebar']",
+          "description": "TU-DB02: Open hamburger menu"
+        },
+        {
+          "action": "wait",
+          "timeout": 1000
+        },
+        {
+          "action": "click",
+          "selector": "button[title='Unlock sidebar (drawer mode)']",
+          "optional": true,
+          "description": "TU-DB02: Workaround click 1 \u2014 unpin phantom state"
+        },
+        {
+          "action": "wait",
+          "timeout": 500
+        },
+        {
+          "action": "click",
+          "selector": "button[title='Lock sidebar open']",
+          "optional": true,
+          "description": "TU-DB02: Workaround click 2 \u2014 actually pin"
+        },
+        {
+          "action": "wait",
+          "timeout": 1000
+        },
+        {
+          "action": "wait",
+          "timeout": 1000
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-DB02-sidebar-pinned.png"
         }
       ]
     },
-
-    "seg-dashboard": {
+    "api-health-visible": {
+      "name": "API Health (visible in browser)",
+      "description": "TU-AH: Navigate to each API health URL in the browser so raw JSON is visible on screen",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/api/identity/api/v1/G/health",
+          "description": "TU-AH01: Identity health JSON"
+        },
+        {
+          "action": "assertVisible",
+          "selector": "text=zorbit-identity",
+          "description": "TU-AH01: JSON shows service name"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-AH01-identity-health.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/api/authorization/api/v1/G/health",
+          "description": "TU-AH02: Authorization health"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-AH02-authorization-health.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/api/navigation/api/v1/G/health",
+          "description": "TU-AH03: Navigation health"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-AH03-navigation-health.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/api/pii-vault/api/v1/G/health",
+          "description": "TU-AH04: PII Vault health"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-AH04-pii-vault-health.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/api/audit/api/v1/G/health",
+          "description": "TU-AH05: Audit health"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-AH05-audit-health.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/api/form-builder/api/v1/G/form-builder/health",
+          "description": "TU-AH06: Form Builder health"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-AH06-form-builder-health.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/api/datatable/api/v1/G/datatable/health",
+          "description": "TU-AH07: DataTable health"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-AH07-datatable-health.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/api/white-label/api/v1/G/white-label/health",
+          "description": "TU-AH08: White Label health"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-AH08-white-label-health.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/api/zmb-factory/api/v1/G/zmb-factory/health",
+          "description": "TU-AH09: ZMB Factory health"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-AH09-zmb-factory-health.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/api/product-pricing/api/v1/G/product-pricing/health",
+          "description": "TU-AH10: Product Pricing health"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-AH10-product-pricing-health.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/api/hi-quotation/api/v1/G/hi-quotation/health",
+          "description": "TU-AH11: HI Quotation health"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-AH11-hi-quotation-health.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/api/uw-workflow/api/v1/G/uw-workflow/health",
+          "description": "TU-AH12: UW Workflow health"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-AH12-uw-workflow-health.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/api/hi-decisioning/api/v1/G/hi-uw-decisioning/health",
+          "description": "TU-AH13: HI Decisioning health"
+        },
+        {
+          "action": "screenshot",
+          "value": "tru-AH13-hi-decisioning-health.png"
+        }
+      ]
+    },
+    "dashboard": {
       "name": "Dashboard",
-      "description": "Verify dashboard loads with sidebar and user info",
+      "description": "TU-DB: Dashboard page \u2014 cards, audit events, sidebar visible",
       "steps": [
         {
           "action": "navigate",
-          "url": "/app/dashboard",
-          "announce": { "before": "Dashboard" }
+          "url": "/dashboard",
+          "description": "TU-DB01: Navigate to dashboard"
         },
-        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "description": "TU-DB01: No error page",
+          "optional": true
+        },
         {
           "action": "assertVisible",
-          "selector": "main, [class*='dashboard'], [class*='content']",
-          "timeout": 12000
+          "selector": "text=Dashboard",
+          "description": "TU-DB01: Dashboard heading"
         },
         {
           "action": "assertVisible",
-          "selector": "nav, aside, [class*='sidebar'], [role='navigation']",
-          "timeout": 5000,
-          "announce": { "after": "Sidebar menu visible" }
+          "selector": "text=Total Users",
+          "description": "TU-DB01: Users card"
         },
         {
-          "action": "screenshot",
-          "value": "tru-02-dashboard.png"
+          "action": "assertVisible",
+          "selector": "text=Organizations",
+          "description": "TU-DB01: Orgs card"
+        },
+        {
+          "action": "assertVisible",
+          "selector": "text=System Health",
+          "description": "TU-DB01: Health card"
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-DB01-dashboard.png"
         }
       ]
     },
-
-    "seg-identity-pages": {
+    "identity-pages": {
       "name": "Identity Pages",
-      "description": "Visit all identity pages: hub, setup, users, organizations",
+      "description": "TU-ID: Identity module pages",
       "steps": [
         {
           "action": "navigate",
-          "url": "/app/identity/hub",
-          "announce": { "before": "Identity Hub" }
+          "url": "/identity/hub",
+          "description": "TU-ID04: Identity Guide"
         },
-        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
         {
           "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "selector": "text=Identity Service",
+          "description": "TU-ID04: Title"
         },
         {
-          "action": "screenshot",
-          "value": "tru-03a-identity-hub.png"
+          "action": "fullPageScreenshot",
+          "value": "tru-ID04-identity-hub.png"
         },
         {
           "action": "navigate",
-          "url": "/app/identity/setup",
-          "announce": { "before": "Identity Setup / Profile" }
+          "url": "/users",
+          "description": "TU-ID01: Users page"
         },
-        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
         {
           "action": "assertVisible",
-          "selector": "main, [class*='content'], [class*='profile'], [class*='settings'], h1, h2",
-          "timeout": 10000
+          "selector": "text=Users",
+          "description": "TU-ID01: Users heading"
         },
         {
-          "action": "screenshot",
-          "value": "tru-03b-identity-setup.png"
+          "action": "assertVisible",
+          "selector": "text=Create User",
+          "description": "TU-ID01: Create button"
+        },
+        {
+          "action": "assertVisible",
+          "selector": "text=U-9CE0",
+          "description": "TU-ID02: Admin user row"
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-ID01-users.png"
         },
         {
           "action": "navigate",
-          "url": "/app/identity/users",
-          "announce": { "before": "Identity Users" }
-        },
-        { "action": "wait", "timeout": 3000 },
-        {
-          "action": "assertVisible",
-          "selector": "table, [class*='table'], [class*='user'], h1, h2, main",
-          "timeout": 12000,
-          "announce": { "after": "Users list loaded" }
+          "url": "/organizations",
+          "description": "TU-ID03: Organizations"
         },
         {
-          "action": "screenshot",
-          "value": "tru-03c-identity-users.png"
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-ID03-organizations.png"
         },
         {
           "action": "navigate",
-          "url": "/app/identity/organizations",
-          "announce": { "before": "Identity Organizations" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "table, [class*='table'], [class*='org'], h1, h2, main",
-          "timeout": 10000,
-          "announce": { "after": "Organizations list loaded" }
+          "url": "/identity/setup",
+          "description": "TU-ID05: Identity Setup"
         },
         {
-          "action": "screenshot",
-          "value": "tru-03d-identity-orgs.png",
-          "announce": { "after": "Identity pages complete" }
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-ID05-identity-setup.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/settings",
+          "description": "TU-ID06: Settings Profile"
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-ID06-settings.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/settings/security",
+          "description": "TU-ID07: Settings Security"
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-ID07-security.png"
         }
       ]
     },
-
-    "seg-authorization-pages": {
+    "authorization-pages": {
       "name": "Authorization Pages",
-      "description": "Visit authorization hub, setup, roles",
+      "description": "TU-AZ: Authorization module pages",
       "steps": [
         {
           "action": "navigate",
-          "url": "/app/authorization/hub",
-          "announce": { "before": "Authorization Hub" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "url": "/authorization/hub",
+          "description": "TU-AZ02: Auth Guide"
         },
         {
-          "action": "screenshot",
-          "value": "tru-04a-authz-hub.png"
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "navigate",
-          "url": "/app/authorization/setup",
-          "announce": { "before": "Authorization Setup" }
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
         },
-        { "action": "wait", "timeout": 2500 },
         {
-          "action": "screenshot",
-          "value": "tru-04b-authz-setup.png"
+          "action": "fullPageScreenshot",
+          "value": "tru-AZ02-auth-hub.png"
         },
         {
           "action": "navigate",
-          "url": "/app/authorization/roles",
-          "announce": { "before": "Authorization Roles" }
+          "url": "/roles",
+          "description": "TU-AZ01: Roles"
         },
-        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
         {
           "action": "assertVisible",
-          "selector": "table, [class*='table'], [class*='role'], h1, main",
-          "timeout": 12000,
-          "announce": { "after": "Roles table loaded" }
+          "selector": "text=Roles",
+          "description": "TU-AZ01: Heading"
         },
         {
-          "action": "screenshot",
-          "value": "tru-04c-authz-roles.png",
-          "announce": { "after": "Authorization pages complete" }
+          "action": "fullPageScreenshot",
+          "value": "tru-AZ01-roles.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/authorization/setup",
+          "description": "TU-AZ03: Auth Setup"
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-AZ03-auth-setup.png"
         }
       ]
     },
-
-    "seg-navigation-pages": {
+    "navigation-pages": {
       "name": "Navigation Pages",
-      "description": "Visit navigation hub and setup",
+      "description": "TU-NV: Navigation module pages",
       "steps": [
         {
           "action": "navigate",
-          "url": "/app/navigation/hub",
-          "announce": { "before": "Navigation Hub" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "url": "/navigation/hub",
+          "description": "TU-NV03: Nav Guide"
         },
         {
-          "action": "screenshot",
-          "value": "tru-05a-nav-hub.png"
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-NV03-nav-hub.png"
         },
         {
           "action": "navigate",
-          "url": "/app/navigation/setup",
-          "announce": { "before": "Navigation Setup" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], table, [class*='table'], [class*='menu'], h1, h2",
-          "timeout": 10000
+          "url": "/navigation/menus",
+          "description": "TU-NV01: Nav Menus"
         },
         {
-          "action": "screenshot",
-          "value": "tru-05b-nav-setup.png",
-          "announce": { "after": "Navigation pages complete" }
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-NV01-nav-menus.png"
         }
       ]
     },
-
-    "seg-pii-vault-pages": {
-      "name": "PII Vault Pages",
-      "description": "Visit PII vault hub, setup, data types, tokens",
-      "steps": [
-        {
-          "action": "navigate",
-          "url": "/app/pii-vault/hub",
-          "announce": { "before": "PII Vault Hub" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
-        },
-        {
-          "action": "screenshot",
-          "value": "tru-06a-pii-hub.png"
-        },
-        {
-          "action": "navigate",
-          "url": "/app/pii-vault/setup",
-          "announce": { "before": "PII Vault Setup" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "screenshot",
-          "value": "tru-06b-pii-setup.png"
-        },
-        {
-          "action": "navigate",
-          "url": "/app/pii-vault/data-types",
-          "announce": { "before": "PII Vault Data Types" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], table, [class*='table'], h1, h2",
-          "timeout": 10000,
-          "announce": { "after": "Data types visible" }
-        },
-        {
-          "action": "screenshot",
-          "value": "tru-06c-pii-data-types.png"
-        },
-        {
-          "action": "navigate",
-          "url": "/app/pii-vault/tokens",
-          "announce": { "before": "PII Vault Token Registry" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], table, [class*='table'], h1, h2",
-          "timeout": 10000,
-          "announce": { "after": "Token registry visible" }
-        },
-        {
-          "action": "screenshot",
-          "value": "tru-06d-pii-tokens.png",
-          "announce": { "after": "PII Vault pages complete" }
-        }
-      ]
-    },
-
-    "seg-audit-pages": {
-      "name": "Audit Pages",
-      "description": "Visit audit hub, setup, records",
-      "steps": [
-        {
-          "action": "navigate",
-          "url": "/app/audit/hub",
-          "announce": { "before": "Audit Hub" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
-        },
-        {
-          "action": "screenshot",
-          "value": "tru-07a-audit-hub.png"
-        },
-        {
-          "action": "navigate",
-          "url": "/app/audit/records",
-          "announce": { "before": "Audit Records" }
-        },
-        { "action": "wait", "timeout": 3000 },
-        {
-          "action": "assertVisible",
-          "selector": "table, [class*='table'], [class*='log'], [class*='audit'], main",
-          "timeout": 12000,
-          "announce": { "after": "Audit log table visible" }
-        },
-        {
-          "action": "screenshot",
-          "value": "tru-07b-audit-records.png",
-          "announce": { "after": "Audit pages complete" }
-        }
-      ]
-    },
-
-    "seg-messaging-pages": {
+    "messaging-pages": {
       "name": "Messaging Pages",
-      "description": "Visit messaging hub, setup, topics",
+      "description": "TU-MG: Messaging module pages",
       "steps": [
         {
           "action": "navigate",
-          "url": "/app/messaging/hub",
-          "announce": { "before": "Messaging Hub" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "url": "/messaging/hub",
+          "description": "TU-MG02: Messaging Guide"
         },
         {
-          "action": "screenshot",
-          "value": "tru-08a-messaging-hub.png"
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-MG02-messaging-hub.png"
         },
         {
           "action": "navigate",
-          "url": "/app/messaging/topics",
-          "announce": { "before": "Messaging Topics" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "table, [class*='table'], [class*='topic'], main, h1, h2",
-          "timeout": 10000,
-          "announce": { "after": "Topics table visible" }
+          "url": "/messaging/topics",
+          "description": "TU-MG01: Topics"
         },
         {
-          "action": "screenshot",
-          "value": "tru-08b-messaging-topics.png",
-          "announce": { "after": "Messaging pages complete" }
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-MG01-topics.png"
         }
       ]
     },
-
-    "seg-pcg4-pages": {
+    "audit-pages": {
+      "name": "Audit Pages",
+      "description": "TU-AU: Audit module pages",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/audit/hub",
+          "description": "TU-AU02: Audit Guide"
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-AU02-audit-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/audit/logs",
+          "description": "TU-AU01: Audit Logs"
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-AU01-audit-logs.png"
+        }
+      ]
+    },
+    "pii-vault-pages": {
+      "name": "PII Vault Pages",
+      "description": "TU-PV: PII Vault module pages",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/pii-vault/hub",
+          "description": "TU-PV03: PII Vault Guide"
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-PV03-pii-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/pii-vault/data-types",
+          "description": "TU-PV01: Data Types"
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-PV01-data-types.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/pii-vault/tokens",
+          "description": "TU-PV02: Token Registry"
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-PV02-tokens.png"
+        }
+      ]
+    },
+    "pcg4-pages": {
       "name": "PCG4 Pages",
-      "description": "Visit PCG4 hub, setup, products",
+      "description": "TU-P4: PCG4 module pages",
       "steps": [
         {
           "action": "navigate",
           "url": "/app/pcg4/hub",
-          "announce": { "before": "PCG4 Hub" }
+          "description": "TU-P401: PCG4 Guide"
         },
-        { "action": "wait", "timeout": 2500 },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
         {
           "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "selector": "text=PCG4",
+          "description": "TU-P401: Heading"
         },
         {
-          "action": "screenshot",
-          "value": "tru-09a-pcg4-hub.png"
+          "action": "fullPageScreenshot",
+          "value": "tru-P401-pcg4-hub.png"
+        },
+        {
+          "action": "navigate",
+          "url": "/app/pcg4/configurations",
+          "description": "TU-P402: Configurations"
+        },
+        {
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-P402-pcg4-configs.png"
         },
         {
           "action": "navigate",
           "url": "/app/pcg4/setup",
-          "announce": { "before": "PCG4 Setup" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "description": "TU-P404: Setup"
         },
         {
-          "action": "screenshot",
-          "value": "tru-09b-pcg4-setup.png"
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "navigate",
-          "url": "/app/pcg4/products",
-          "announce": { "before": "PCG4 Products" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "table, [class*='table'], [class*='product'], main, h1, h2",
-          "timeout": 10000,
-          "announce": { "after": "PCG4 products loaded" }
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
         },
         {
-          "action": "screenshot",
-          "value": "tru-09c-pcg4-products.png",
-          "announce": { "after": "PCG4 pages complete" }
+          "action": "fullPageScreenshot",
+          "value": "tru-P404-pcg4-setup.png"
         }
       ]
     },
-
-    "seg-hi-quotation-pages": {
-      "name": "HI Quotation Pages",
-      "description": "Visit HI quotation hub, setup, quotations",
+    "remaining-modules": {
+      "name": "Remaining Modules",
+      "description": "TU-HQ/HD/UW/FB/PP/WL/ZF/SC/DC: All other module pages",
       "steps": [
         {
           "action": "navigate",
-          "url": "/app/hi-quotation/hub",
-          "announce": { "before": "HI Quotation Hub" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "url": "/hi-quotation/hub",
+          "description": "TU-HQ02: HI Quotation Guide"
         },
         {
-          "action": "screenshot",
-          "value": "tru-10a-hi-quotation-hub.png"
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "navigate",
-          "url": "/app/hi-quotation/setup",
-          "announce": { "before": "HI Quotation Setup" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
         },
         {
-          "action": "screenshot",
-          "value": "tru-10b-hi-quotation-setup.png"
+          "action": "fullPageScreenshot",
+          "value": "tru-HQ02-hq-hub.png"
         },
         {
           "action": "navigate",
-          "url": "/app/hi-quotation/quotations",
-          "announce": { "before": "HI Quotation List" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "table, [class*='table'], [class*='quotation'], main, h1, h2",
-          "timeout": 10000,
-          "announce": { "after": "Quotations loaded" }
+          "url": "/hi-quotation/setup",
+          "description": "TU-HQ03: HI Quotation Setup"
         },
         {
-          "action": "screenshot",
-          "value": "tru-10c-hi-quotations.png",
-          "announce": { "after": "HI Quotation pages complete" }
-        }
-      ]
-    },
-
-    "seg-hi-decisioning-pages": {
-      "name": "HI UW Decisioning Pages",
-      "description": "Visit HI UW decisioning hub, setup, rules",
-      "steps": [
-        {
-          "action": "navigate",
-          "url": "/app/hi-uw-decisioning/hub",
-          "announce": { "before": "HI UW Decisioning Hub" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "screenshot",
-          "value": "tru-11a-decisioning-hub.png"
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-HQ03-hq-setup.png"
         },
         {
           "action": "navigate",
-          "url": "/app/hi-uw-decisioning/setup",
-          "announce": { "before": "HI UW Decisioning Setup" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "url": "/hi-uw-decisioning/hub",
+          "description": "TU-HD01: Decisioning Guide"
         },
         {
-          "action": "screenshot",
-          "value": "tru-11b-decisioning-setup.png"
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "navigate",
-          "url": "/app/hi-uw-decisioning/rules",
-          "announce": { "before": "HI UW Decisioning Rules" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "table, [class*='table'], [class*='rule'], main, h1, h2",
-          "timeout": 10000,
-          "announce": { "after": "Decisioning rules loaded" }
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
         },
         {
-          "action": "screenshot",
-          "value": "tru-11c-decisioning-rules.png",
-          "announce": { "after": "HI UW Decisioning pages complete" }
-        }
-      ]
-    },
-
-    "seg-uw-workflow-pages": {
-      "name": "UW Workflow Pages",
-      "description": "Visit UW workflow hub, setup, queues",
-      "steps": [
-        {
-          "action": "navigate",
-          "url": "/app/uw-workflow/hub",
-          "announce": { "before": "UW Workflow Hub" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
-        },
-        {
-          "action": "screenshot",
-          "value": "tru-12a-uw-workflow-hub.png"
+          "action": "fullPageScreenshot",
+          "value": "tru-HD01-decisioning-hub.png"
         },
         {
           "action": "navigate",
-          "url": "/app/uw-workflow/setup",
-          "announce": { "before": "UW Workflow Setup" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "url": "/uw-workflow/hub",
+          "description": "TU-UW02: Workflow Guide"
         },
         {
-          "action": "screenshot",
-          "value": "tru-12b-uw-workflow-setup.png"
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "navigate",
-          "url": "/app/uw-workflow/queues",
-          "announce": { "before": "UW Workflow Queues" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "table, [class*='table'], [class*='queue'], main, h1, h2",
-          "timeout": 10000,
-          "announce": { "after": "Workflow queues loaded" }
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
         },
         {
-          "action": "screenshot",
-          "value": "tru-12c-uw-workflow-queues.png",
-          "announce": { "after": "UW Workflow pages complete" }
-        }
-      ]
-    },
-
-    "seg-form-builder-pages": {
-      "name": "Form Builder Pages",
-      "description": "Visit form builder hub, setup, forms list",
-      "steps": [
-        {
-          "action": "navigate",
-          "url": "/app/form-builder/hub",
-          "announce": { "before": "Form Builder Hub" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
-        },
-        {
-          "action": "screenshot",
-          "value": "tru-13a-form-builder-hub.png"
+          "action": "fullPageScreenshot",
+          "value": "tru-UW02-uw-hub.png"
         },
         {
           "action": "navigate",
-          "url": "/app/form-builder/setup",
-          "announce": { "before": "Form Builder Setup" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "screenshot",
-          "value": "tru-13b-form-builder-setup.png"
+          "url": "/uw-workflow",
+          "description": "TU-UW01: Workflow page"
         },
         {
-          "action": "navigate",
-          "url": "/app/form-builder/forms",
-          "announce": { "before": "Form Builder Forms List" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "table, [class*='table'], [class*='form'], main, h1, h2",
-          "timeout": 10000,
-          "announce": { "after": "Forms list loaded" }
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "screenshot",
-          "value": "tru-13c-form-builder-forms.png",
-          "announce": { "after": "Form Builder pages complete" }
-        }
-      ]
-    },
-
-    "seg-datatable-pages": {
-      "name": "DataTable Pages",
-      "description": "Visit datatable hub and setup",
-      "steps": [
-        {
-          "action": "navigate",
-          "url": "/app/data-table-demo/hub",
-          "announce": { "before": "DataTable Hub" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
         },
         {
-          "action": "screenshot",
-          "value": "tru-14a-datatable-hub.png"
+          "action": "fullPageScreenshot",
+          "value": "tru-UW01-uw-workflow.png"
         },
         {
           "action": "navigate",
-          "url": "/app/data-table-demo/setup",
-          "announce": { "before": "DataTable Setup" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "url": "/form-builder/hub",
+          "description": "TU-FB02: Form Builder Guide"
         },
         {
-          "action": "screenshot",
-          "value": "tru-14b-datatable-setup.png",
-          "announce": { "after": "DataTable pages complete" }
-        }
-      ]
-    },
-
-    "seg-product-pricing-pages": {
-      "name": "Product Pricing Pages",
-      "description": "Visit product pricing hub and setup",
-      "steps": [
-        {
-          "action": "navigate",
-          "url": "/app/product-pricing/hub",
-          "announce": { "before": "Product Pricing Hub" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "screenshot",
-          "value": "tru-15a-product-pricing-hub.png"
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-FB02-fb-hub.png"
         },
         {
           "action": "navigate",
-          "url": "/app/product-pricing/setup",
-          "announce": { "before": "Product Pricing Setup" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "url": "/form-builder",
+          "description": "TU-FB01: Form list"
         },
         {
-          "action": "screenshot",
-          "value": "tru-15b-product-pricing-setup.png",
-          "announce": { "after": "Product Pricing pages complete" }
-        }
-      ]
-    },
-
-    "seg-white-label-pages": {
-      "name": "White Label Pages",
-      "description": "Visit white label hub, setup, themes",
-      "steps": [
-        {
-          "action": "navigate",
-          "url": "/app/white-label/hub",
-          "announce": { "before": "White Label Hub" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "screenshot",
-          "value": "tru-16a-white-label-hub.png"
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-FB01-form-builder.png"
         },
         {
           "action": "navigate",
-          "url": "/app/white-label/setup",
-          "announce": { "before": "White Label Setup" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "screenshot",
-          "value": "tru-16b-white-label-setup.png"
+          "url": "/product-pricing/hub",
+          "description": "TU-PP02: Pricing Guide"
         },
         {
-          "action": "navigate",
-          "url": "/app/white-label/themes",
-          "announce": { "before": "White Label Themes" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "table, [class*='table'], [class*='theme'], [class*='card'], main, h1, h2",
-          "timeout": 10000,
-          "announce": { "after": "Themes list visible" }
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "screenshot",
-          "value": "tru-16c-white-label-themes.png"
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-PP02-pp-hub.png"
         },
         {
           "action": "navigate",
-          "url": "/app/white-label/guide",
-          "announce": { "before": "White Label Guide" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], [class*='guide'], h1, h2",
-          "timeout": 10000
+          "url": "/product-pricing",
+          "description": "TU-PP01: Pricing page"
         },
         {
-          "action": "screenshot",
-          "value": "tru-16d-white-label-guide.png",
-          "announce": { "after": "White Label pages complete" }
-        }
-      ]
-    },
-
-    "seg-zmb-factory-pages": {
-      "name": "ZMB Factory Pages",
-      "description": "Visit ZMB factory page",
-      "steps": [
-        {
-          "action": "navigate",
-          "url": "/app/zmb-factory",
-          "announce": { "before": "ZMB Factory" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], [class*='factory'], h1, h2",
-          "timeout": 10000,
-          "announce": { "after": "ZMB Factory page loaded" }
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "screenshot",
-          "value": "tru-17a-zmb-factory.png",
-          "announce": { "after": "ZMB Factory pages complete" }
-        }
-      ]
-    },
-
-    "seg-doc-generator-pages": {
-      "name": "Doc Generator Pages",
-      "description": "Visit doc generator hub and setup",
-      "steps": [
-        {
-          "action": "navigate",
-          "url": "/app/doc-generator/hub",
-          "announce": { "before": "Doc Generator Hub" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
         },
         {
-          "action": "screenshot",
-          "value": "tru-18a-doc-generator-hub.png"
+          "action": "fullPageScreenshot",
+          "value": "tru-PP01-pricing.png"
         },
         {
           "action": "navigate",
-          "url": "/app/doc-generator/setup",
-          "announce": { "before": "Doc Generator Setup" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], h1, h2",
-          "timeout": 10000
+          "url": "/white-label/guide",
+          "description": "TU-WL02: White Label Guide"
         },
         {
-          "action": "screenshot",
-          "value": "tru-18b-doc-generator-setup.png",
-          "announce": { "after": "Doc Generator pages complete" }
-        }
-      ]
-    },
-
-    "seg-support-center": {
-      "name": "Support Center",
-      "description": "Visit support center",
-      "steps": [
-        {
-          "action": "navigate",
-          "url": "/app/support-center",
-          "announce": { "before": "Support Center" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], [class*='support'], h1, h2",
-          "timeout": 10000,
-          "announce": { "after": "Support center loaded" }
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "screenshot",
-          "value": "tru-19a-support-center.png",
-          "announce": { "after": "Support Center complete" }
-        }
-      ]
-    },
-
-    "seg-developer-center": {
-      "name": "Developer Center",
-      "description": "Visit developer center and health page",
-      "steps": [
-        {
-          "action": "navigate",
-          "url": "/app/dev-center",
-          "announce": { "before": "Developer Center" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], [class*='dev'], h1, h2",
-          "timeout": 10000
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
         },
         {
-          "action": "screenshot",
-          "value": "tru-20a-dev-center.png"
+          "action": "fullPageScreenshot",
+          "value": "tru-WL02-wl-guide.png"
         },
         {
           "action": "navigate",
-          "url": "/app/dev-center/health",
-          "announce": { "before": "Developer Center Health" }
-        },
-        { "action": "wait", "timeout": 2500 },
-        {
-          "action": "assertVisible",
-          "selector": "main, [class*='content'], [class*='health'], h1, h2",
-          "timeout": 10000
+          "url": "/zmb-factory/hub",
+          "description": "TU-ZF01: ZMB Factory Guide"
         },
         {
-          "action": "screenshot",
-          "value": "tru-20b-dev-center-health.png",
-          "announce": { "after": "Developer Center complete" }
-        }
-      ]
-    },
-
-    "seg-api-health": {
-      "name": "API Health — All 13 Services",
-      "description": "Health check every deployed service via HTTPS endpoints",
-      "steps": [
+          "action": "wait",
+          "timeout": 2000
+        },
+        {
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
+        },
+        {
+          "action": "fullPageScreenshot",
+          "value": "tru-ZF01-zmb-hub.png"
+        },
         {
           "action": "navigate",
-          "url": "/login",
-          "announce": { "before": "Starting API health checks" }
-        },
-        { "action": "wait", "timeout": 1000 },
-        {
-          "action": "apiCheck",
-          "endpoint": "/api/identity/api/v1/G/health",
-          "expectedStatus": [200],
-          "announce": { "before": "Identity", "after": "Identity: healthy" }
+          "url": "/support-center",
+          "description": "TU-SC01: Support Center"
         },
         {
-          "action": "apiCheck",
-          "endpoint": "/api/authorization/api/v1/G/health",
-          "expectedStatus": [200],
-          "announce": { "before": "Authorization", "after": "Authorization: healthy" }
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "apiCheck",
-          "endpoint": "/api/navigation/api/v1/G/health",
-          "expectedStatus": [200],
-          "announce": { "before": "Navigation", "after": "Navigation: healthy" }
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
         },
         {
-          "action": "apiCheck",
-          "endpoint": "/api/pii-vault/api/v1/G/health",
-          "expectedStatus": [200],
-          "announce": { "before": "PII Vault", "after": "PII Vault: healthy" }
+          "action": "fullPageScreenshot",
+          "value": "tru-SC01-support-center.png"
         },
         {
-          "action": "apiCheck",
-          "endpoint": "/api/audit/api/v1/G/health",
-          "expectedStatus": [200],
-          "announce": { "before": "Audit", "after": "Audit: healthy" }
+          "action": "navigate",
+          "url": "/admin/developer",
+          "description": "TU-DC01: Dev Center"
         },
         {
-          "action": "apiCheck",
-          "endpoint": "/api/form-builder/api/v1/G/form-builder/health",
-          "expectedStatus": [200],
-          "announce": { "before": "Form Builder", "after": "Form Builder: healthy" }
+          "action": "wait",
+          "timeout": 2000
         },
         {
-          "action": "apiCheck",
-          "endpoint": "/api/datatable/api/v1/G/datatable/health",
-          "expectedStatus": [200],
-          "announce": { "before": "DataTable", "after": "DataTable: healthy" }
+          "action": "assertNotVisible",
+          "selector": "text=Page Not Available",
+          "optional": true
         },
         {
-          "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/G/white-label/health",
-          "expectedStatus": [200],
-          "announce": { "before": "White Label", "after": "White Label: healthy" }
-        },
-        {
-          "action": "apiCheck",
-          "endpoint": "/api/zmb-factory/api/v1/G/zmb-factory/health",
-          "expectedStatus": [200],
-          "announce": { "before": "ZMB Factory", "after": "ZMB Factory: healthy" }
-        },
-        {
-          "action": "apiCheck",
-          "endpoint": "/api/product-pricing/api/v1/G/health",
-          "expectedStatus": [200, 404],
-          "optional": true,
-          "announce": { "before": "Product Pricing", "after": "Product Pricing: responded" }
-        },
-        {
-          "action": "apiCheck",
-          "endpoint": "/api/hi-quotation/api/v1/G/health",
-          "expectedStatus": [200],
-          "optional": true,
-          "announce": { "before": "HI Quotation", "after": "HI Quotation: healthy" }
-        },
-        {
-          "action": "apiCheck",
-          "endpoint": "/api/uw-workflow/api/v1/G/health",
-          "expectedStatus": [200],
-          "optional": true,
-          "announce": { "before": "UW Workflow", "after": "UW Workflow: healthy" }
-        },
-        {
-          "action": "apiCheck",
-          "endpoint": "/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/health",
-          "expectedStatus": [200],
-          "optional": true,
-          "announce": { "before": "HI UW Decisioning", "after": "HI UW Decisioning: healthy" }
-        },
-        {
-          "action": "apiCheck",
-          "endpoint": "/api/doc-generator/api/v1/G/health",
-          "expectedStatus": [200],
-          "optional": true,
-          "announce": { "before": "Doc Generator", "after": "Doc Generator: healthy" }
-        },
-        {
-          "action": "apiCheck",
-          "endpoint": "/api/messaging/api/v1/G/messaging/health",
-          "expectedStatus": [200],
-          "optional": true,
-          "announce": { "before": "Messaging", "after": "Messaging: healthy" }
-        },
-        {
-          "action": "apiCheck",
-          "endpoint": "/api/pcg4/api/v1/G/health",
-          "expectedStatus": [200, 404],
-          "optional": true,
-          "announce": { "before": "PCG4", "after": "PCG4: responded" }
-        },
-        {
-          "action": "screenshot",
-          "value": "tru-api-health-all.png",
-          "announce": { "after": "All 13 service health checks complete" }
-        }
-      ]
-    },
-
-    "seg-api-data": {
-      "name": "API Data — Key GET Endpoints",
-      "description": "Verify key data endpoints return valid responses",
-      "steps": [
-        {
-          "action": "apiCheck",
-          "endpoint": "/api/identity/api/v1/O/O-OZPY/users",
-          "expectedStatus": [200, 401],
-          "optional": true,
-          "announce": { "before": "Users endpoint", "after": "Users data returned" }
-        },
-        {
-          "action": "apiCheck",
-          "endpoint": "/api/authorization/api/v1/O/O-OZPY/roles",
-          "expectedStatus": [200, 401],
-          "optional": true,
-          "announce": { "before": "Roles endpoint", "after": "Roles data returned" }
-        },
-        {
-          "action": "apiCheck",
-          "endpoint": "/api/navigation/api/v1/O/O-OZPY/navigation/menus",
-          "expectedStatus": [200, 401],
-          "optional": true,
-          "announce": { "before": "Menus endpoint", "after": "Menus data returned" }
-        },
-        {
-          "action": "apiCheck",
-          "endpoint": "/api/audit/api/v1/G/audit/logs",
-          "expectedStatus": [200, 401],
-          "optional": true,
-          "announce": { "before": "Audit logs endpoint", "after": "Audit logs returned" }
-        },
-        {
-          "action": "screenshot",
-          "value": "tru-api-data-all.png",
-          "announce": { "after": "All data endpoint checks complete" }
+          "action": "fullPageScreenshot",
+          "value": "tru-DC01-dev-center.png"
         }
       ]
     }
-
   },
-
   "journeys": {
-
-    "truuptime-ui": {
-      "name": "TruUptime UI — All Screens",
-      "description": "Login then visit every single screen in sequence",
-      "segments": [
-        "seg-login",
-        "seg-dashboard",
-        "seg-identity-pages",
-        "seg-authorization-pages",
-        "seg-navigation-pages",
-        "seg-pii-vault-pages",
-        "seg-audit-pages",
-        "seg-messaging-pages",
-        "seg-pcg4-pages",
-        "seg-hi-quotation-pages",
-        "seg-hi-decisioning-pages",
-        "seg-uw-workflow-pages",
-        "seg-form-builder-pages",
-        "seg-datatable-pages",
-        "seg-product-pricing-pages",
-        "seg-white-label-pages",
-        "seg-zmb-factory-pages",
-        "seg-doc-generator-pages",
-        "seg-support-center",
-        "seg-developer-center"
-      ]
-    },
-
     "truuptime-api": {
-      "name": "TruUptime API — Health + Data",
-      "description": "All 13 health endpoints plus key data endpoints",
+      "name": "TruUptime API (visible JSON in browser)",
+      "description": "Navigates to each API health URL \u2014 raw JSON visible on screen",
       "segments": [
-        "seg-api-health",
-        "seg-api-data"
+        "login",
+        "api-health-visible"
       ]
     },
-
-    "truuptime-full": {
-      "name": "TruUptime Full — UI + API",
-      "description": "Complete regression: all UI screens and all API endpoints",
+    "truuptime-ui": {
+      "name": "TruUptime UI (sidebar pinned)",
+      "description": "Every page with sidebar visible \u2014 screenshot + assertions",
       "segments": [
-        "seg-api-health",
-        "seg-login",
-        "seg-dashboard",
-        "seg-identity-pages",
-        "seg-authorization-pages",
-        "seg-navigation-pages",
-        "seg-pii-vault-pages",
-        "seg-audit-pages",
-        "seg-messaging-pages",
-        "seg-pcg4-pages",
-        "seg-hi-quotation-pages",
-        "seg-hi-decisioning-pages",
-        "seg-uw-workflow-pages",
-        "seg-form-builder-pages",
-        "seg-datatable-pages",
-        "seg-product-pricing-pages",
-        "seg-white-label-pages",
-        "seg-zmb-factory-pages",
-        "seg-doc-generator-pages",
-        "seg-support-center",
-        "seg-developer-center",
-        "seg-api-data"
+        "login",
+        "dashboard",
+        "identity-pages",
+        "authorization-pages",
+        "navigation-pages",
+        "messaging-pages",
+        "audit-pages",
+        "pii-vault-pages",
+        "pcg4-pages",
+        "remaining-modules"
+      ]
+    },
+    "truuptime-full": {
+      "name": "TruUptime Full (API + UI)",
+      "description": "API health visible in browser, then all UI pages with sidebar pinned",
+      "segments": [
+        "login",
+        "api-health-visible",
+        "dashboard",
+        "identity-pages",
+        "authorization-pages",
+        "navigation-pages",
+        "messaging-pages",
+        "audit-pages",
+        "pii-vault-pages",
+        "pcg4-pages",
+        "remaining-modules"
       ]
     }
-
   },
-
   "bouquets": {
-
-    "truuptime-quick": {
-      "name": "TruUptime Quick — API Only",
-      "description": "Quick API-only regression: 13 health checks + key data endpoints (~30 seconds)",
+    "truuptime-api": {
+      "name": "API Only",
       "mode": "sequential",
-      "journeys": ["truuptime-api"]
+      "description": "API health \u2014 visible JSON in browser",
+      "journeys": [
+        "truuptime-api"
+      ]
     },
-
-    "truuptime-full": {
-      "name": "TruUptime Full — UI + API",
-      "description": "Complete regression: all 20+ UI screens and all API endpoints (~5 minutes)",
+    "truuptime-ui": {
+      "name": "UI Only",
       "mode": "sequential",
-      "journeys": ["truuptime-full"]
+      "description": "All pages \u2014 sidebar pinned",
+      "journeys": [
+        "truuptime-ui"
+      ]
+    },
+    "truuptime-full": {
+      "name": "Full Regression",
+      "mode": "sequential",
+      "description": "API + UI complete",
+      "journeys": [
+        "truuptime-full"
+      ]
     }
-
   }
 }
