@@ -7,7 +7,7 @@ export const API_CONFIG = {
   AUDIT_URL: import.meta.env.VITE_AUDIT_URL || '/api/audit',
   CUSTOMER_URL: import.meta.env.VITE_CUSTOMER_URL || '/api/customer',
   ADMIN_CONSOLE_URL: import.meta.env.VITE_ADMIN_CONSOLE_URL || '/api/unified-console',
-  PCG4_URL: import.meta.env.VITE_PCG4_URL || '/api/app/pcg4',
+  PCG4_URL: import.meta.env.VITE_PCG4_URL || '/api/pcg4',
   CHAT_URL: import.meta.env.VITE_CHAT_URL || '/api/chat',
   RTC_URL: import.meta.env.VITE_RTC_URL || '/api/rtc',
   CHAT_WS_URL: import.meta.env.VITE_CHAT_WS_URL || '',
@@ -26,4 +26,5 @@ export const API_CONFIG = {
   REALTIME_WS_URL: import.meta.env.VITE_REALTIME_WS_URL || '',
   INTEGRATION_URL: import.meta.env.VITE_INTEGRATION_URL || '/api/integration',
   SECRETS_URL: import.meta.env.VITE_SECRETS_URL || '/api/secrets',
+  MODULE_REGISTRY_URL: import.meta.env.VITE_MODULE_REGISTRY_URL || '/api/module-registry',
 };
