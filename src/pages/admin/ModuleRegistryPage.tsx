@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   RefreshCw, Trash2, Upload, X, ChevronDown, ChevronRight,
-  CheckCircle2, XCircle, AlertTriangle, Info,
+  CheckCircle2, XCircle, AlertTriangle, Info, Minus,
   type LucideIcon,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { API_CONFIG } from '../../config';
 import api from '../../services/api';
 import { useToast } from '../../components/shared/Toast';
@@ -39,6 +40,17 @@ interface ManifestData {
     edition?: { name?: string; category?: string } | null;
   };
   navigation?: { sections?: Array<{ items?: unknown[] }> };
+  guide?: {
+    intro?: { headline?: string; summary?: string };
+    slides?: { deck?: unknown[] };
+    lifecycle?: { phases?: unknown[] };
+    videos?: { entries?: unknown[] };
+    docs?: { links?: unknown[] };
+    pricing?: { tiers?: unknown[] };
+  };
+  deployments?: { health?: { beRoute?: string } };
+  db?: { operations?: Record<string, unknown> };
+  composition?: unknown;
 }
 
 const STATUS_STYLES: Record<string, { bg: string; text: string; Icon: LucideIcon }> = {
@@ -75,6 +87,8 @@ function whenAgo(iso?: string | null): string {
   return `${Math.round(ms / 86_400_000)}d ago`;
 }
 
+type Tab = 'modules' | 'compliance';
+
 const ModuleRegistryPage: React.FC = () => {
   const { toast } = useToast();
   const [modules, setModules] = useState<RegistryModule[]>([]);
@@ -86,6 +100,7 @@ const ModuleRegistryPage: React.FC = () => {
   const [confirmDeregister, setConfirmDeregister] = useState<RegistryModule | null>(null);
   const [showUpload, setShowUpload] = useState(false);
   const [refreshingId, setRefreshingId] = useState<string | null>(null);
+  const [tab, setTab] = useState<Tab>('modules');
 
   const load = async () => {
     setLoading(true);
@@ -179,6 +194,33 @@ const ModuleRegistryPage: React.FC = () => {
         </div>
       </div>
 
+      <div className="flex gap-1 border-b border-gray-200 dark:border-gray-700 -mb-px">
+        <button
+          onClick={() => setTab('modules')}
+          className={`px-4 py-2 text-sm font-medium border-b-2 ${
+            tab === 'modules'
+              ? 'border-indigo-500 text-indigo-600 dark:text-indigo-300'
+              : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
+          }`}
+        >
+          Modules
+        </button>
+        <button
+          onClick={() => setTab('compliance')}
+          className={`px-4 py-2 text-sm font-medium border-b-2 ${
+            tab === 'compliance'
+              ? 'border-indigo-500 text-indigo-600 dark:text-indigo-300'
+              : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
+          }`}
+        >
+          Compliance
+        </button>
+      </div>
+
+      {tab === 'compliance' ? (
+        <ComplianceMatrix modules={modules} loading={loading} />
+      ) : (
+      <>
       <div className="flex flex-wrap gap-2">
         <span className="px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs">Total: <strong>{counts.total}</strong></span>
         <span className="px-2.5 py-1 rounded-full bg-green-100 dark:bg-green-900/40 text-xs text-green-700 dark:text-green-300">READY: <strong>{counts.READY || 0}</strong></span>
@@ -329,6 +371,169 @@ const ModuleRegistryPage: React.FC = () => {
           </div>
         </div>
       )}
+      </>
+      )}
+    </div>
+  );
+};
+
+// ============================================================
+// Compliance matrix (US-MX-2094 Phase 4)
+// ============================================================
+
+interface ComplianceRow {
+  moduleId: string;
+  scaffold: string;
+  navigation: boolean;
+  guide: boolean;
+  deployments: boolean;
+  db: boolean;
+  composition: boolean;
+}
+
+function buildComplianceRow(m: RegistryModule): ComplianceRow {
+  const d = md(m);
+  return {
+    moduleId: m.moduleId,
+    scaffold: d?.placement?.scaffold || '',
+    navigation: (d?.navigation?.sections || []).some((s) => (s.items || []).length > 0),
+    guide: Boolean(d?.guide && d.guide.intro && (d.guide.intro.headline || d.guide.intro.summary)),
+    deployments: Boolean(d?.deployments?.health?.beRoute),
+    db: Boolean(d?.db && d.db.operations && Object.keys(d.db.operations).length > 0),
+    composition: Boolean(d?.composition),
+  };
+}
+
+const Cell: React.FC<{
+  present: boolean;
+  href?: string;
+  label: string;
+  moduleId: string;
+}> = ({ present, href, label, moduleId }) => {
+  const [showTip, setShowTip] = useState(false);
+  if (present && href) {
+    return (
+      <Link
+        to={href}
+        className="inline-flex items-center justify-center w-8 h-8 rounded-md text-green-600 hover:bg-green-50 dark:hover:bg-green-900/40"
+        title={`Open ${label}`}
+      >
+        <CheckCircle2 size={18} />
+      </Link>
+    );
+  }
+  if (present && !href) {
+    return (
+      <span className="inline-flex items-center justify-center w-8 h-8 rounded-md text-green-600">
+        <CheckCircle2 size={18} />
+      </span>
+    );
+  }
+  // missing: show X with popover
+  return (
+    <button
+      onMouseEnter={() => setShowTip(true)}
+      onMouseLeave={() => setShowTip(false)}
+      onClick={() => setShowTip((v) => !v)}
+      className="relative inline-flex items-center justify-center w-8 h-8 rounded-md text-red-500 hover:bg-red-50 dark:hover:bg-red-900/40"
+    >
+      <XCircle size={18} />
+      {showTip && (
+        <div className="absolute z-20 top-9 left-1/2 -translate-x-1/2 whitespace-nowrap bg-gray-900 text-white text-[10px] px-2 py-1.5 rounded shadow-lg">
+          Not supplied — declared as US-MF-2089 follow-up for <code className="font-mono">{moduleId}</code>
+        </div>
+      )}
+    </button>
+  );
+};
+
+const DashCell: React.FC = () => (
+  <span className="inline-flex items-center justify-center w-8 h-8 rounded-md text-gray-300 dark:text-gray-600">
+    <Minus size={18} />
+  </span>
+);
+
+const ComplianceMatrix: React.FC<{ modules: RegistryModule[]; loading: boolean }> = ({ modules, loading }) => {
+  const rows = useMemo(() => modules.map(buildComplianceRow), [modules]);
+
+  const totals = useMemo(() => {
+    const t = { navigation: 0, guide: 0, deployments: 0, db: 0, composition: 0 };
+    for (const r of rows) {
+      if (r.navigation) t.navigation++;
+      if (r.guide) t.guide++;
+      if (r.deployments) t.deployments++;
+      if (r.db) t.db++;
+      if (r.composition) t.composition++;
+    }
+    return t;
+  }, [rows]);
+
+  const slug = (moduleId: string) => moduleId.replace(/^zorbit-(app|cor|pfs|tpm|sdk|ext)-/, '');
+
+  return (
+    <div className="space-y-4">
+      <div className="text-sm text-gray-600 dark:text-gray-400">
+        Green = section supplied and renderable; red = missing; dash = not applicable to this module type.
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        <span className="px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs">Modules: <strong>{rows.length}</strong></span>
+        <span className="px-2.5 py-1 rounded-full bg-green-100 dark:bg-green-900/40 text-xs text-green-700 dark:text-green-300">Navigation: <strong>{totals.navigation}</strong> / {rows.length}</span>
+        <span className="px-2.5 py-1 rounded-full bg-green-100 dark:bg-green-900/40 text-xs text-green-700 dark:text-green-300">Guide: <strong>{totals.guide}</strong> / {rows.length}</span>
+        <span className="px-2.5 py-1 rounded-full bg-green-100 dark:bg-green-900/40 text-xs text-green-700 dark:text-green-300">Deployments: <strong>{totals.deployments}</strong> / {rows.length}</span>
+        <span className="px-2.5 py-1 rounded-full bg-green-100 dark:bg-green-900/40 text-xs text-green-700 dark:text-green-300">DB: <strong>{totals.db}</strong> / {rows.length}</span>
+        <span className="px-2.5 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/40 text-xs text-indigo-700 dark:text-indigo-300">Composition: <strong>{totals.composition}</strong> / {rows.length}</span>
+      </div>
+
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-sm">
+            <thead className="bg-gray-50 dark:bg-gray-700/50 text-xs uppercase text-gray-500 dark:text-gray-400">
+              <tr>
+                <th className="px-3 py-2 text-left">Module</th>
+                <th className="px-3 py-2 text-left">Scaffold</th>
+                <th className="px-3 py-2 text-center">Navigation</th>
+                <th className="px-3 py-2 text-center">Guide</th>
+                <th className="px-3 py-2 text-center">Deployments</th>
+                <th className="px-3 py-2 text-center">DB</th>
+                <th className="px-3 py-2 text-center">Composition</th>
+              </tr>
+            </thead>
+            <tbody>
+              {loading && <tr><td colSpan={7} className="px-3 py-6 text-center text-gray-400">Loading…</td></tr>}
+              {!loading && rows.length === 0 && <tr><td colSpan={7} className="px-3 py-6 text-center text-gray-400">No modules</td></tr>}
+              {!loading && rows.map((r) => {
+                const s = slug(r.moduleId);
+                return (
+                  <tr key={r.moduleId} className="border-t border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                    <td className="px-3 py-2 align-middle">
+                      <div className="font-mono text-[12px]">{r.moduleId}</div>
+                    </td>
+                    <td className="px-3 py-2 align-middle text-[12px] text-gray-600 dark:text-gray-400">{r.scaffold || '—'}</td>
+                    <td className="px-3 py-2 align-middle text-center">
+                      <Cell present={r.navigation} moduleId={r.moduleId} label="navigation" href={`/m/${s}/`} />
+                    </td>
+                    <td className="px-3 py-2 align-middle text-center">
+                      <Cell present={r.guide} moduleId={r.moduleId} label="guide" href={r.guide ? `/m/${s}/guide/intro` : undefined} />
+                    </td>
+                    <td className="px-3 py-2 align-middle text-center">
+                      <Cell present={r.deployments} moduleId={r.moduleId} label="deployments" href={r.deployments ? `/m/${s}/deployments` : undefined} />
+                    </td>
+                    <td className="px-3 py-2 align-middle text-center">
+                      <Cell present={r.db} moduleId={r.moduleId} label="db" href={r.db ? `/m/${s}/db` : undefined} />
+                    </td>
+                    <td className="px-3 py-2 align-middle text-center">
+                      {r.composition
+                        ? <Cell present moduleId={r.moduleId} label="composition" href={`/m/${s}/`} />
+                        : <DashCell />}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

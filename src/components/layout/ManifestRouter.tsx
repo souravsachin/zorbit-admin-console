@@ -1,10 +1,14 @@
-import React, { Suspense, useEffect, useMemo, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { API_CONFIG } from '../../config';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/useAuth';
 import { componentByName } from '../shared/componentRegistry';
 import { ExternalLink, Info } from 'lucide-react';
+import {
+  ModuleContextProvider,
+  type ManifestData,
+} from '../../contexts/ModuleContext';
 
 interface NavItem {
   label: string;
@@ -115,27 +119,64 @@ const StubNoComponent: React.FC<{ item: NavItem; section: NavSection }> = ({ ite
   );
 };
 
+/**
+ * Module-scoped manifest cache. We dedupe fetches by moduleId so
+ * navigating among /m/{slug}/guide/intro, /m/{slug}/guide/videos, etc.
+ * doesn't re-fetch the same manifest.
+ */
+const manifestCache = new Map<string, Promise<ManifestData>>();
+
+async function fetchManifest(moduleId: string): Promise<ManifestData> {
+  if (manifestCache.has(moduleId)) return manifestCache.get(moduleId)!;
+  const p = api
+    .get<ManifestData>(`${API_CONFIG.MODULE_REGISTRY_URL}/api/v1/G/modules/${moduleId}/manifest`)
+    .then((res) => res.data || {})
+    .catch(() => ({} as ManifestData));
+  manifestCache.set(moduleId, p);
+  return p;
+}
+
 const ManifestRouter: React.FC = () => {
   const params = useParams();
   const location = useLocation();
   const { user } = useAuth();
   const [sections, setSections] = useState<NavSection[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingMenu, setLoadingMenu] = useState(true);
+  const [manifest, setManifest] = useState<ManifestData | null>(null);
+  const [loadingManifest, setLoadingManifest] = useState(false);
+  const [manifestError, setManifestError] = useState<string | null>(null);
+  const lastModuleIdRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (!user?.id) return;
-    setLoading(true);
+    setLoadingMenu(true);
     api.get<MenuResponse>(`${API_CONFIG.NAVIGATION_URL}/api/v1/U/${user.id}/navigation/menu`)
       .then((res) => setSections(res.data?.sections || []))
       .catch(() => setSections([]))
-      .finally(() => setLoading(false));
+      .finally(() => setLoadingMenu(false));
   }, [user?.id]);
 
   const path = location.pathname;
   const slug = params.slug || '';
   const match = useMemo(() => findMatchingItem(sections, path), [sections, path]);
 
-  if (loading) return <div className="p-6 text-gray-500 text-sm">Loading module manifest…</div>;
+  // Derive moduleId from the matching section (same as what sidebar declared)
+  const moduleId = match?.section.moduleId || null;
+
+  // Fetch manifest for current moduleId and re-fetch only when moduleId changes.
+  useEffect(() => {
+    if (!moduleId) return;
+    if (lastModuleIdRef.current === moduleId) return;
+    lastModuleIdRef.current = moduleId;
+    setLoadingManifest(true);
+    setManifestError(null);
+    fetchManifest(moduleId)
+      .then((m) => setManifest(m))
+      .catch((e) => setManifestError((e as Error).message))
+      .finally(() => setLoadingManifest(false));
+  }, [moduleId]);
+
+  if (loadingMenu) return <div className="p-6 text-gray-500 text-sm">Loading module manifest…</div>;
   if (!match) return <StubNoMatch path={path} slug={slug} />;
 
   const { item, section } = match;
@@ -143,9 +184,20 @@ const ManifestRouter: React.FC = () => {
   if (!Component) return <StubNoComponent item={item} section={section} />;
 
   return (
-    <Suspense fallback={<div className="p-6 text-gray-500 text-sm">Loading module…</div>}>
-      <Component />
-    </Suspense>
+    <ModuleContextProvider
+      value={{
+        slug,
+        moduleId,
+        manifest,
+        feRoute: item.feRoute,
+        loading: loadingManifest,
+        error: manifestError,
+      }}
+    >
+      <Suspense fallback={<div className="p-6 text-gray-500 text-sm">Loading module…</div>}>
+        <Component />
+      </Suspense>
+    </ModuleContextProvider>
   );
 };
 

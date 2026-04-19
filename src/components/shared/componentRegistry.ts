@@ -58,6 +58,20 @@ const PageComponents: Record<string, React.ComponentType<any>> = {
 
   // Dashboard / catch-all
   DashboardPage:             React.lazy(() => import('../../pages/dashboard/DashboardPage')),
+
+  // Manifest-v2 guide auto-pages (US-MX-2094) — rendered from manifest.guide.*
+  GuideIntroView:            React.lazy(() => import('../module-guide/IntroView')),
+  GuideSlideDeck:            React.lazy(() => import('../module-guide/SlideDeckPlayer')),
+  GuideLifecycle:            React.lazy(() => import('../module-guide/LifecycleView')),
+  GuideVideos:               React.lazy(() => import('../module-guide/VideoList')),
+  GuideDocs:                 React.lazy(() => import('../module-guide/DocsLinkList')),
+  GuidePricing:              React.lazy(() => import('../module-guide/PricingTable')),
+
+  // Manifest-v2 deployments auto-page — rendered from manifest.deployments
+  DeploymentsView:           React.lazy(() => import('../module-deployments/DeploymentsView')),
+
+  // Manifest-v2 DB auto-page — rendered from manifest.db
+  DbOperationsPanel:         React.lazy(() => import('../module-db/DbOperationsPanel')),
 };
 
 export function componentByName(name?: string | null): React.ComponentType<any> | null {
