@@ -220,6 +220,144 @@ function filterByBusinessLine(
     : filterByBusinessLineStatic(nodes, line);
 }
 
+// ─── DB scaffold builder ──────────────────────────────────────────────
+// Wraps API sections in the same 5-scaffold L1 shape as the static tree
+// (PLATFORM CORE / PLATFORM FEATURE SERVICES / BUSINESS — INSURER /
+// AI & AUTOMATION / ADMINISTRATION). Grouping comes from the manifest's
+// placement.businessLine — no per-moduleId hardcoding.
+
+interface ApiSection {
+  moduleId: string;
+  moduleName?: string;
+  placement?: MenuNodePlacement;
+  items?: Array<{ label: string; feRoute: string; icon: string; privilege: string }>;
+}
+
+// Maps placement.businessLine -> L1 scaffold id/label. The 5 L1 scaffolds
+// match the static tree exactly. Any unmapped businessLine becomes its own
+// top-level "OTHER" bucket rather than being silently dropped.
+const L1_SCAFFOLDS: Array<{
+  id: string;
+  label: string;
+  placement: MenuNodePlacement;
+  businessLines: string[];
+}> = [
+  {
+    id: 'platform-core',
+    label: 'PLATFORM CORE',
+    placement: { businessLine: 'core' },
+    businessLines: ['core'],
+  },
+  {
+    id: 'platform-feature-services',
+    label: 'PLATFORM FEATURE SERVICES',
+    placement: { businessLine: 'feature-services' },
+    businessLines: ['feature-services'],
+  },
+  {
+    id: 'business-insurer',
+    label: 'BUSINESS — INSURER',
+    placement: { businessLine: 'distribution' },
+    businessLines: ['distribution', 'underwriting', 'claims', 'servicing'],
+  },
+  {
+    id: 'ai-automation',
+    label: 'AI & AUTOMATION',
+    placement: { businessLine: 'ai' },
+    businessLines: ['ai', 'automation'],
+  },
+  {
+    id: 'administration',
+    label: 'ADMINISTRATION',
+    placement: { businessLine: 'administration' },
+    businessLines: ['administration'],
+  },
+];
+
+function prettyModuleName(moduleId: string): string {
+  // Convention-driven: strip zorbit-{prefix}- and title-case the remainder.
+  // zorbit-cor-identity -> "Identity"; zorbit-app-hi_quotation -> "Hi Quotation".
+  return moduleId
+    .replace(/^zorbit-(cor|pfs|app|ext)-/, '')
+    .replace(/[_-]/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function buildDbScaffold(sections: ApiSection[]): MenuNodeData[] {
+  const visible = sections.filter((sec) => (sec.items || []).length > 0);
+  const result: MenuNodeData[] = [];
+
+  for (const scaffold of L1_SCAFFOLDS) {
+    const members = visible.filter((sec) =>
+      scaffold.businessLines.includes(sec.placement?.businessLine || ''),
+    );
+    if (members.length === 0) continue;
+
+    members.sort(
+      (a, b) => (a.placement?.sortOrder ?? 999) - (b.placement?.sortOrder ?? 999),
+    );
+
+    const moduleNodes: MenuNodeData[] = members.map((sec) => ({
+      id: sec.moduleId,
+      label: sec.moduleName || prettyModuleName(sec.moduleId),
+      icon: '',
+      route: null,
+      privilegeCode: null,
+      level: 2,
+      children: (sec.items || []).map((item, idx) => ({
+        id: `${sec.moduleId}-${idx}`,
+        label: item.label,
+        icon: item.icon || 'circle',
+        route: item.feRoute || null,
+        privilegeCode: item.privilege || null,
+        level: 3,
+        children: [],
+      })),
+    }));
+
+    result.push({
+      id: scaffold.id,
+      label: scaffold.label,
+      icon: '',
+      route: null,
+      privilegeCode: null,
+      level: 1,
+      placement: scaffold.placement,
+      children: moduleNodes,
+    });
+  }
+
+  // Any sections whose businessLine didn't map to a scaffold — surface them
+  // rather than drop silently. Each becomes its own L1 entry so the gap is
+  // visible in the UI and actionable.
+  const mappedBusinessLines = new Set(L1_SCAFFOLDS.flatMap((s) => s.businessLines));
+  const unmapped = visible.filter(
+    (sec) => !mappedBusinessLines.has(sec.placement?.businessLine || ''),
+  );
+  for (const sec of unmapped) {
+    result.push({
+      id: sec.moduleId,
+      label: `${prettyModuleName(sec.moduleId)} (unplaced)`,
+      icon: '',
+      route: null,
+      privilegeCode: null,
+      level: 1,
+      placement: sec.placement,
+      children: (sec.items || []).map((item, idx) => ({
+        id: `${sec.moduleId}-${idx}`,
+        label: item.label,
+        icon: item.icon || 'circle',
+        route: item.feRoute || null,
+        privilegeCode: item.privilege || null,
+        level: 2,
+        children: [],
+      })),
+    });
+  }
+
+  return result;
+}
+
 // Expand/collapse state tracker
 function getAllNodeIds(nodes: MenuNodeData[]): string[] {
   const ids: string[] = [];
@@ -289,30 +427,13 @@ const Sidebar6Level: React.FC<Sidebar6LevelProps> = ({
         const isStale = data?.stale !== false;
         const sections = data?.sections || [];
 
-        // Build hierarchical nodes: each section becomes a level-1 module node;
-        // its items become level-2 leaves. Placement metadata is attached to
-        // the top-level node so filterByBusinessLineDatabase can decide
-        // visibility from the payload (no ID-prefix hacks).
-        const dbNodes: MenuNodeData[] = sections
-          .filter((sec) => (sec.items || []).length > 0)
-          .map((sec) => ({
-            id: sec.moduleId,
-            label: sec.moduleName || sec.moduleId,
-            icon: '',
-            route: null,
-            privilegeCode: null,
-            level: 1,
-            placement: sec.placement || {},
-            children: (sec.items || []).map((item, idx) => ({
-              id: `${sec.moduleId}-${idx}`,
-              label: item.label,
-              icon: item.icon || 'circle',
-              route: item.feRoute || null,
-              privilegeCode: item.privilege || null,
-              level: 2,
-              children: [],
-            })),
-          }));
+        // Build a 6-level scaffold wrapping API sections so DB mode matches
+        // the static tree shape: PLATFORM CORE / PLATFORM FEATURE SERVICES /
+        // BUSINESS — INSURER / AI & AUTOMATION / ADMINISTRATION at L1, each
+        // module at L2, items at L3. Each L1 scaffold carries placement.
+        // metadata so filterByBusinessLineDatabase can honor the edition
+        // selection without prefix hacks.
+        const dbNodes: MenuNodeData[] = buildDbScaffold(sections);
 
         if (!isStale && dbNodes.length > 0) {
           // Full pipeline confirmed: Module→Kafka→registry→platform.module.ready→navigation→here
