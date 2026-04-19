@@ -7,6 +7,8 @@ import {
 import { API_CONFIG } from '../../config';
 import api from '../../services/api';
 import { useToast } from '../../components/shared/Toast';
+import Select from '../../components/shared/Select';
+import JsonViewer from '../../components/shared/JsonViewer';
 
 interface RegistryModule {
   moduleId: string;
@@ -78,7 +80,7 @@ const ModuleRegistryPage: React.FC = () => {
   const [modules, setModules] = useState<RegistryModule[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('');
-  const [scaffoldFilter, setScaffoldFilter] = useState('');
+  const [sectionFilter, setSectionFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
   const [confirmDeregister, setConfirmDeregister] = useState<RegistryModule | null>(null);
@@ -103,14 +105,14 @@ const ModuleRegistryPage: React.FC = () => {
   const filtered = useMemo(() => modules.filter((m) => {
     if (statusFilter && m.status !== statusFilter) return false;
     const sc = md(m)?.placement?.scaffold || '';
-    if (scaffoldFilter && sc !== scaffoldFilter) return false;
+    if (sectionFilter && sc !== sectionFilter) return false;
     if (filter) {
       const f = filter.toLowerCase();
       const hay = `${m.moduleId} ${m.moduleName||''} ${md(m)?.placement?.capabilityArea||''} ${md(m)?.placement?.edition?.name||''}`.toLowerCase();
       if (!hay.includes(f)) return false;
     }
     return true;
-  }), [modules, filter, scaffoldFilter, statusFilter]);
+  }), [modules, filter, sectionFilter, statusFilter]);
 
   const scaffolds = useMemo(() => {
     const s = new Set<string>();
@@ -191,14 +193,18 @@ const ModuleRegistryPage: React.FC = () => {
 
       <div className="flex flex-wrap gap-2 items-center">
         <input type="text" placeholder="Search moduleId / name / capability / edition…" value={filter} onChange={(e) => setFilter(e.target.value)} className="flex-1 min-w-[260px] px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded" />
-        <select value={scaffoldFilter} onChange={(e) => setScaffoldFilter(e.target.value)} className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded">
-          <option value="">All scaffolds</option>
-          {scaffolds.map((s) => <option key={s} value={s}>{s}</option>)}
-        </select>
-        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded">
-          <option value="">All statuses</option>
-          {statuses.map((s) => <option key={s} value={s}>{s}</option>)}
-        </select>
+        <Select
+          value={sectionFilter}
+          onChange={setSectionFilter}
+          options={[{ value: '', label: 'All sections' }, ...scaffolds.map((s) => ({ value: s, label: s }))]}
+          minWidth={200}
+        />
+        <Select
+          value={statusFilter}
+          onChange={setStatusFilter}
+          options={[{ value: '', label: 'All statuses' }, ...statuses.map((s) => ({ value: s, label: s }))]}
+          minWidth={160}
+        />
       </div>
 
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
@@ -209,7 +215,7 @@ const ModuleRegistryPage: React.FC = () => {
                 <th className="px-2 py-2 w-6"></th>
                 <th className="px-3 py-2 text-left">Module ID</th>
                 <th className="px-3 py-2 text-left">Status</th>
-                <th className="px-3 py-2 text-left">Scaffold</th>
+                <th className="px-3 py-2 text-left">Section</th>
                 <th className="px-3 py-2 text-left">Business Line</th>
                 <th className="px-3 py-2 text-left">Capability</th>
                 <th className="px-3 py-2 text-left">Edition</th>
@@ -268,9 +274,10 @@ const ModuleRegistryPage: React.FC = () => {
                             </div>
                             <div>
                               <div className="text-[10px] uppercase font-semibold text-gray-500 mb-1">Manifest (placement + navigation)</div>
-                              <pre className="bg-gray-100 dark:bg-gray-800 p-2 rounded text-[10.5px] overflow-x-auto max-h-72 overflow-y-auto">
-{JSON.stringify({ placement: md(m)?.placement, navigation: md(m)?.navigation }, null, 2)}
-                              </pre>
+                              <JsonViewer
+                                value={{ placement: md(m)?.placement, navigation: md(m)?.navigation }}
+                                maxHeightClass="max-h-96"
+                              />
                             </div>
                           </div>
                         </td>
