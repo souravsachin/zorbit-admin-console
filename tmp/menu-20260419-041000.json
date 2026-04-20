@@ -1,0 +1,491 @@
+{
+    "userId": "U-9CE0",
+    "generatedAt": "2026-04-18T21:05:25.814Z",
+    "stale": true,
+    "sections": [
+        {
+            "moduleId": "seed-fallback",
+            "placement": {
+                "sortOrder": 0
+            },
+            "items": [
+                {
+                    "label": "Dashboard",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "dashboard",
+                    "privilege": ""
+                },
+                {
+                    "label": "Form Templates",
+                    "feRoute": "/form-builder/templates",
+                    "beRoute": "",
+                    "icon": "layout",
+                    "privilege": ""
+                },
+                {
+                    "label": "Guide",
+                    "feRoute": "/form-builder/guide",
+                    "beRoute": "",
+                    "icon": "info",
+                    "privilege": ""
+                },
+                {
+                    "label": "Introduction",
+                    "feRoute": "/hi-quotation/guide/introduction",
+                    "beRoute": "",
+                    "icon": "info",
+                    "privilege": ""
+                },
+                {
+                    "label": "Introduction",
+                    "feRoute": "/hi-decisioning/guide/introduction",
+                    "beRoute": "",
+                    "icon": "info",
+                    "privilege": ""
+                },
+                {
+                    "label": "Introduction",
+                    "feRoute": "/uw-workflow/guide/introduction",
+                    "beRoute": "",
+                    "icon": "info",
+                    "privilege": ""
+                },
+                {
+                    "label": "Identity",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "person",
+                    "privilege": ""
+                },
+                {
+                    "label": "Presentation",
+                    "feRoute": "/uw-workflow/guide/presentation",
+                    "beRoute": "",
+                    "icon": "play",
+                    "privilege": ""
+                },
+                {
+                    "label": "Presentation",
+                    "feRoute": "/hi-decisioning/guide/presentation",
+                    "beRoute": "",
+                    "icon": "play",
+                    "privilege": ""
+                },
+                {
+                    "label": "Presentation",
+                    "feRoute": "/hi-quotation/guide/presentation",
+                    "beRoute": "",
+                    "icon": "play",
+                    "privilege": ""
+                },
+                {
+                    "label": "Forms",
+                    "feRoute": "/form-builder",
+                    "beRoute": "",
+                    "icon": "form_input",
+                    "privilege": ""
+                },
+                {
+                    "label": "New Quotation",
+                    "feRoute": "/app/hi-quotation/new",
+                    "beRoute": "",
+                    "icon": "add_circle",
+                    "privilege": ""
+                },
+                {
+                    "label": "Dashboard",
+                    "feRoute": "/app/uw-workflow",
+                    "beRoute": "",
+                    "icon": "speed",
+                    "privilege": ""
+                },
+                {
+                    "label": "Dashboard",
+                    "feRoute": "/app/hi-decisioning",
+                    "beRoute": "",
+                    "icon": "speed",
+                    "privilege": ""
+                },
+                {
+                    "label": "Authorization",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "security",
+                    "privilege": ""
+                },
+                {
+                    "label": "Lifecycle",
+                    "feRoute": "/uw-workflow/guide/lifecycle",
+                    "beRoute": "",
+                    "icon": "layers",
+                    "privilege": ""
+                },
+                {
+                    "label": "Lifecycle",
+                    "feRoute": "/hi-decisioning/guide/lifecycle",
+                    "beRoute": "",
+                    "icon": "layers",
+                    "privilege": ""
+                },
+                {
+                    "label": "Lifecycle",
+                    "feRoute": "/hi-quotation/guide/lifecycle",
+                    "beRoute": "",
+                    "icon": "layers",
+                    "privilege": ""
+                },
+                {
+                    "label": "Templates",
+                    "feRoute": "/form-builder/templates",
+                    "beRoute": "",
+                    "icon": "form_templates",
+                    "privilege": ""
+                },
+                {
+                    "label": "Pending Cases",
+                    "feRoute": "/app/uw-workflow/pending",
+                    "beRoute": "",
+                    "icon": "pending",
+                    "privilege": ""
+                },
+                {
+                    "label": "Coverage Mapper",
+                    "feRoute": "/app/hi-decisioning/coverage",
+                    "beRoute": "",
+                    "icon": "data_object",
+                    "privilege": ""
+                },
+                {
+                    "label": "Navigation",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "menu",
+                    "privilege": ""
+                },
+                {
+                    "label": "Submissions",
+                    "feRoute": "/form-builder/submissions",
+                    "beRoute": "",
+                    "icon": "form_submissions",
+                    "privilege": ""
+                },
+                {
+                    "label": "Video Tutorials",
+                    "feRoute": "/hi-quotation/guide/videos",
+                    "beRoute": "",
+                    "icon": "video",
+                    "privilege": ""
+                },
+                {
+                    "label": "Video Tutorials",
+                    "feRoute": "/uw-workflow/guide/videos",
+                    "beRoute": "",
+                    "icon": "video",
+                    "privilege": ""
+                },
+                {
+                    "label": "Video Tutorials",
+                    "feRoute": "/hi-decisioning/guide/videos",
+                    "beRoute": "",
+                    "icon": "video",
+                    "privilege": ""
+                },
+                {
+                    "label": "Decision Rules",
+                    "feRoute": "/app/hi-decisioning/rules",
+                    "beRoute": "",
+                    "icon": "rule",
+                    "privilege": ""
+                },
+                {
+                    "label": "Messaging",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "email",
+                    "privilege": ""
+                },
+                {
+                    "label": "Create Form",
+                    "feRoute": "/form-builder/create",
+                    "beRoute": "",
+                    "icon": "form_create",
+                    "privilege": ""
+                },
+                {
+                    "label": "Resources & Docs",
+                    "feRoute": "/uw-workflow/guide/resources",
+                    "beRoute": "",
+                    "icon": "book-open",
+                    "privilege": ""
+                },
+                {
+                    "label": "Resources & Docs",
+                    "feRoute": "/hi-quotation/guide/resources",
+                    "beRoute": "",
+                    "icon": "book-open",
+                    "privilege": ""
+                },
+                {
+                    "label": "Resources & Docs",
+                    "feRoute": "/hi-decisioning/guide/resources",
+                    "beRoute": "",
+                    "icon": "book-open",
+                    "privilege": ""
+                },
+                {
+                    "label": "MAF Config",
+                    "feRoute": "/app/hi-decisioning/maf",
+                    "beRoute": "",
+                    "icon": "assignment",
+                    "privilege": ""
+                },
+                {
+                    "label": "Audit",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "fact_check",
+                    "privilege": ""
+                },
+                {
+                    "label": "Pricing",
+                    "feRoute": "/hi-decisioning/guide/pricing",
+                    "beRoute": "",
+                    "icon": "credit-card",
+                    "privilege": ""
+                },
+                {
+                    "label": "Pricing",
+                    "feRoute": "/hi-quotation/guide/pricing",
+                    "beRoute": "",
+                    "icon": "credit-card",
+                    "privilege": ""
+                },
+                {
+                    "label": "Pricing",
+                    "feRoute": "/uw-workflow/guide/pricing",
+                    "beRoute": "",
+                    "icon": "credit-card",
+                    "privilege": ""
+                },
+                {
+                    "label": "Rules Engine",
+                    "feRoute": "/app/uw-workflow/rules",
+                    "beRoute": "",
+                    "icon": "rule",
+                    "privilege": ""
+                },
+                {
+                    "label": "Encounter Types",
+                    "feRoute": "/app/hi-decisioning/encounters",
+                    "beRoute": "",
+                    "icon": "category",
+                    "privilege": ""
+                },
+                {
+                    "label": "PII Vault",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "enhanced_encryption",
+                    "privilege": ""
+                },
+                {
+                    "label": "SLA Monitor",
+                    "feRoute": "/app/uw-workflow/sla",
+                    "beRoute": "",
+                    "icon": "timer",
+                    "privilege": ""
+                },
+                {
+                    "label": "Settings",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "settings",
+                    "privilege": ""
+                },
+                {
+                    "label": "Queue Config",
+                    "feRoute": "/app/uw-workflow/queues",
+                    "beRoute": "",
+                    "icon": "list_alt",
+                    "privilege": ""
+                },
+                {
+                    "label": "Admin",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "admin_panel_settings",
+                    "privilege": ""
+                },
+                {
+                    "label": "AI Assist",
+                    "feRoute": "/app/uw-workflow/ai",
+                    "beRoute": "",
+                    "icon": "sparkles",
+                    "privilege": ""
+                },
+                {
+                    "label": "Products",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "inventory_2",
+                    "privilege": ""
+                },
+                {
+                    "label": "Questionnaire",
+                    "feRoute": "/app/uw-workflow/questionnaire",
+                    "beRoute": "",
+                    "icon": "quiz",
+                    "privilege": ""
+                },
+                {
+                    "label": "Product Pricing",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "payments",
+                    "privilege": ""
+                },
+                {
+                    "label": "Policy Checklist",
+                    "feRoute": "/app/uw-workflow/checklist",
+                    "beRoute": "",
+                    "icon": "check_circle",
+                    "privilege": ""
+                },
+                {
+                    "label": "Medical Q&A",
+                    "feRoute": "/app/uw-workflow/medical",
+                    "beRoute": "",
+                    "icon": "question_answer",
+                    "privilege": ""
+                },
+                {
+                    "label": "Financial Q&A",
+                    "feRoute": "/app/uw-workflow/financial",
+                    "beRoute": "",
+                    "icon": "payments",
+                    "privilege": ""
+                },
+                {
+                    "label": "Lifestyle Q&A",
+                    "feRoute": "/app/uw-workflow/lifestyle",
+                    "beRoute": "",
+                    "icon": "list_alt",
+                    "privilege": ""
+                },
+                {
+                    "label": "Support Center",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "help",
+                    "privilege": ""
+                },
+                {
+                    "label": "Voice Engine",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "radio",
+                    "privilege": ""
+                },
+                {
+                    "label": "Jayna AI",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "sparkles",
+                    "privilege": ""
+                },
+                {
+                    "label": "Workflow Engine",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "hub",
+                    "privilege": ""
+                },
+                {
+                    "label": "Secrets Vault",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "lock_keyhole",
+                    "privilege": ""
+                },
+                {
+                    "label": "MI Quotation",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "motor_insurance",
+                    "privilege": ""
+                },
+                {
+                    "label": "Claims",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "assignment_ind",
+                    "privilege": ""
+                },
+                {
+                    "label": "Fee Management",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "payments",
+                    "privilege": ""
+                },
+                {
+                    "label": "PII Showcase",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "eye_off",
+                    "privilege": ""
+                },
+                {
+                    "label": "Directory",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "users_round",
+                    "privilege": ""
+                },
+                {
+                    "label": "Setup",
+                    "feRoute": "/form-builder/setup",
+                    "beRoute": "",
+                    "icon": "settings",
+                    "privilege": ""
+                },
+                {
+                    "label": "Setup",
+                    "feRoute": "/app/hi-quotation/setup",
+                    "beRoute": "",
+                    "icon": "tune",
+                    "privilege": ""
+                },
+                {
+                    "label": "Setup",
+                    "feRoute": "/app/uw-workflow/setup",
+                    "beRoute": "",
+                    "icon": "tune",
+                    "privilege": ""
+                },
+                {
+                    "label": "Setup",
+                    "feRoute": "/app/hi-decisioning/setup",
+                    "beRoute": "",
+                    "icon": "tune",
+                    "privilege": ""
+                },
+                {
+                    "label": "Deployments",
+                    "feRoute": "/form-builder/deployments",
+                    "beRoute": "",
+                    "icon": "rocket_launch",
+                    "privilege": ""
+                },
+                {
+                    "label": "Dev Center",
+                    "feRoute": "",
+                    "beRoute": "",
+                    "icon": "admin_panel_settings",
+                    "privilege": ""
+                }
+            ]
+        }
+    ]
+}

@@ -4,6 +4,11 @@ import { io, Socket } from 'socket.io-client';
 const REALTIME_URL =
   import.meta.env.VITE_REALTIME_WS_URL || '';
 
+// When no explicit WS URL is configured the RTC service may not be
+// deployed. Disable the socket entirely to prevent an infinite
+// reconnection storm against a 502 gateway.
+const REALTIME_ENABLED = REALTIME_URL !== '';
+
 // ── Singleton connection ─────────────────────────────────────────────
 
 let socket: Socket | null = null;
@@ -22,9 +27,9 @@ function getOrCreateSocket(token: string): Socket {
     auth: { token },
     transports: ['websocket', 'polling'],
     reconnection: true,
-    reconnectionAttempts: Infinity,
-    reconnectionDelay: 1000,
-    reconnectionDelayMax: 10000,
+    reconnectionAttempts: 10,
+    reconnectionDelay: 2000,
+    reconnectionDelayMax: 30000,
   });
 
   socket.on('connect', () => {
@@ -70,6 +75,9 @@ export function useRealtime(): UseRealtimeReturn {
   const socketRef = useRef<Socket | null>(null);
 
   useEffect(() => {
+    // RTC service not configured — skip connection entirely.
+    if (!REALTIME_ENABLED) return;
+
     const token = localStorage.getItem('zorbit_token');
     if (!token) return;
 

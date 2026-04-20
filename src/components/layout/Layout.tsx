@@ -48,7 +48,7 @@ const Layout: React.FC = () => {
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gray-50 dark:bg-gray-900">
       <ImpersonationBanner />
-      <div className="flex flex-1 min-h-0">
+      <div className="flex flex-1 min-h-0 overflow-hidden">
         {menuStyle === '6level' ? (
           <Sidebar6Level
             open={sidebarVisible}

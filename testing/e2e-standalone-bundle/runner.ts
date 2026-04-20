@@ -1197,6 +1197,13 @@ async function executeStep(
         break;
       }
 
+      case "voice": {
+        if (step.value || (step as any).text) {
+          await speak((step.value || (step as any).text) as string);
+        }
+        break;
+      }
+
       default:
         console.log(
           `${COLORS.yellow}  Unknown action: ${step.action}${COLORS.reset}`

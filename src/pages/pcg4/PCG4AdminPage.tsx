@@ -59,7 +59,7 @@ const PCG4AdminPage: React.FC = () => {
       {/* Header */}
       <div className="flex items-center space-x-4">
         <button
-          onClick={() => navigate('/app/pcg4/configurations')}
+          onClick={() => navigate('/m/pcg4/configs')}
           className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
         >
           <ArrowLeft size={20} />

@@ -12,7 +12,10 @@
     "engine": "edge-tts",
     "voice": "en-US-AriaNeural",
     "rate": "+15%",
-    "fallback": ["piper", "say"]
+    "fallback": [
+      "piper",
+      "say"
+    ]
   },
   "titleSlide": {
     "minDuration": 4,
@@ -72,7 +75,9 @@
     },
     {
       "id": "prospect-flow",
-      "aliases": ["Complete_Prospect_Quote_Flow"],
+      "aliases": [
+        "Complete_Prospect_Quote_Flow"
+      ],
       "title": "Prospect Portal",
       "subtitle": "Get a health insurance quote online",
       "narration": "The Prospect Portal. A customer visits the landing page, verifies their identity via phone OTP, fills out an application with proposer details, selects a plan, and receives an instant premium quote.",
@@ -80,11 +85,37 @@
     },
     {
       "id": "customer-flow",
-      "aliases": ["Complete_Customer_Portal_Flow"],
+      "aliases": [
+        "Complete_Customer_Portal_Flow"
+      ],
       "title": "Customer Portal",
       "subtitle": "Policy holder self-service dashboard",
       "narration": "The Customer Portal. A policyholder logs in via phone OTP, selects a family profile, views the dashboard with policy details and quick actions, checks policy coverage, and switches between family member profiles.",
       "titleDurationOverride": null
+    },
+    {
+      "id": "gate-checks",
+      "title": "TruUptime \u2014 Gate Checks L0-L3",
+      "subtitle": "Infrastructure \u00b7 Login \u00b7 Authorization \u00b7 Navigation",
+      "narration": "Running TruUptime gate checks. Layers zero through three. We verify the infrastructure is up, login works, authorization service is healthy, and the navigation system is serving menus correctly."
+    },
+    {
+      "id": "module-structure",
+      "title": "TruUptime \u2014 Module Structure (L3B)",
+      "subtitle": "Guide \u00b7 Setup \u00b7 Deployments across 20 modules",
+      "narration": "Layer three-B gate sweep. Every module must expose three standard pages: Guide with six tabs, Setup with four sections, and Deployments. We check all twenty modules in sequence."
+    },
+    {
+      "id": "user-onboarding",
+      "title": "TruUptime \u2014 User Onboarding Journey J3",
+      "subtitle": "Create user \u00b7 Assign role \u00b7 Verify access \u00b7 Audit trail",
+      "narration": "Journey J3: New User Onboarding. An admin creates a new user account, assigns a role, and the new user logs in to verify they see the correct privilege-filtered sidebar. We finish by confirming the audit trail captured all events."
+    },
+    {
+      "id": "j1-audit-only",
+      "title": "TruUptime \u2014 Audit Trail Check (J1 standalone)",
+      "subtitle": "Verifying audit log structure and event attribution",
+      "narration": "The HI Policy Issuance journey is currently blocked pending route registration. This standalone check verifies the audit log is functional, events include actor IDs, timestamps, and resource references."
     }
   ]
 }

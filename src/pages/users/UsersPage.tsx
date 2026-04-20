@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Plus, Trash2, Shield, KeyRound, AlertTriangle, Eye } from 'lucide-react';
-import DataTable, { Column } from '../../components/shared/DataTable';
-import StatusBadge from '../../components/shared/StatusBadge';
+import React, { useEffect, useState, useMemo } from 'react';
+import { AlertTriangle } from 'lucide-react';
+import { ZorbitDataTable } from '../../components/ZorbitDataTable';
+import type { DataTableConfig, ActionButton } from '../../types/dataTable';
 import Modal from '../../components/shared/Modal';
 import { useAuth } from '../../hooks/useAuth';
 import { useToast } from '../../components/shared/Toast';
@@ -20,9 +20,7 @@ const UsersPage: React.FC = () => {
   const { orgId, user: currentUser } = useAuth();
   const isSuperAdmin = (currentUser as any)?.role === 'superadmin' || (currentUser as any)?.role === 'admin';
   const { toast } = useToast();
-  const [users, setUsers] = useState<User[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
-  const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
   const [showAssignRole, setShowAssignRole] = useState<User | null>(null);
   const [showResetPassword, setShowResetPassword] = useState<User | null>(null);
@@ -43,36 +41,77 @@ const UsersPage: React.FC = () => {
   const [resetting, setResetting] = useState(false);
   const [impersonating, setImpersonating] = useState<string | null>(null);
 
-  const [userRolesMap, setUserRolesMap] = useState<Record<string, string>>({});
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  const loadUsers = async () => {
-    setLoading(true);
-    try {
-      const res = await identityService.getUsers(orgId, { tree: 'true' });
-      const userList = Array.isArray(res.data) ? res.data : [];
-      setUsers(userList);
+  const tableConfig = useMemo<DataTableConfig>(() => ({
+    columns: [
+      { name: 'hashId', label: 'Hash ID', type: 'string', width: '120px', sortable: false },
+      { name: 'displayName', label: 'Display Name', type: 'string', sortable: true, searchable: true },
+      { name: 'email', label: 'Email', type: 'string', sortable: true, searchable: true, pii_sensitive: true },
+      { name: 'organizationHashId', label: 'Org', type: 'string', sortable: true, filterable: true, width: '100px' },
+      { name: 'role', label: 'Role', type: 'badge', sortable: true, filterable: true },
+      {
+        name: 'status', label: 'Status', type: 'badge', sortable: true, filterable: true,
+        enum_values: [
+          { value: 'active', label: 'Active', color: '#4CAF50' },
+          { value: 'inactive', label: 'Inactive', color: '#9E9E9E' },
+          { value: 'suspended', label: 'Suspended', color: '#F44336' },
+        ],
+      },
+      { name: 'createdAt', label: 'Created', type: 'date', sortable: true },
+    ],
+    filters: [
+      {
+        column: 'status', type: 'multiselect', label: 'Status',
+        options: [
+          { value: 'active', label: 'Active' },
+          { value: 'inactive', label: 'Inactive' },
+          { value: 'suspended', label: 'Suspended' },
+        ],
+      },
+    ],
+    data_source: {
+      endpoint_template: `${API_CONFIG.IDENTITY_URL}/api/v1/O/${orgId}/users`,
+      query_params: { tree: 'true' },
+    },
+    searchable: true,
+    default_sort_column: 'createdAt',
+    default_sort_direction: 'desc',
+    default_page_size: 25,
+    view_modes: ['list'],
+    export_formats: ['csv'],
+  }), [orgId]);
 
-      // Fetch authorization roles for each user (in parallel, batched)
-      const roleMap: Record<string, string> = {};
-      const batch = userList.slice(0, 50); // limit to first 50 to avoid overload
-      await Promise.allSettled(
-        batch.map(async (u: User) => {
-          try {
-            const r = await api.get(`${API_CONFIG.AUTHORIZATION_URL}/api/v1/U/${u.hashId}/roles`);
-            const assigned = Array.isArray(r.data) ? r.data : [];
-            if (assigned.length > 0) {
-              roleMap[u.hashId] = assigned.map((a: any) => a.name || a.roleName || a.hashId).join(', ');
-            }
-          } catch { /* skip */ }
-        })
-      );
-      setUserRolesMap(roleMap);
-    } catch {
-      toast('Failed to load users', 'error');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const tableActions = useMemo<ActionButton[]>(() => [
+    {
+      key: 'impersonate',
+      label: 'View As',
+      icon: 'Eye',
+      variant: 'secondary',
+      onClick: (row) => handleImpersonate(row as unknown as User),
+    },
+    {
+      key: 'assignRole',
+      label: 'Assign Role',
+      icon: 'Shield',
+      variant: 'primary',
+      onClick: (row) => setShowAssignRole(row as unknown as User),
+    },
+    {
+      key: 'resetPassword',
+      label: 'Reset Password',
+      icon: 'KeyRound',
+      variant: 'secondary',
+      onClick: (row) => setShowResetPassword(row as unknown as User),
+    },
+    {
+      key: 'delete',
+      label: 'Delete',
+      icon: 'Trash2',
+      variant: 'danger',
+      onClick: (row) => handleDelete(row as unknown as User),
+    },
+  ], []);
 
   const loadRoles = async () => {
     try {
@@ -90,7 +129,7 @@ const UsersPage: React.FC = () => {
     } catch {}
   };
 
-  useEffect(() => { loadUsers(); loadRoles(); loadOrganizations(); }, [orgId]);
+  useEffect(() => { loadRoles(); loadOrganizations(); }, [orgId]);
 
   // Cascading org dropdown: top-level orgs only
   const topLevelOrgs = organizations.filter((o: any) => o.orgType !== 'department');
@@ -205,7 +244,7 @@ const UsersPage: React.FC = () => {
       setSelectedSubDept('');
       setHierarchy(null);
       setShowNonAdminWarning(false);
-      loadUsers();
+      setRefreshKey((k) => k + 1);
     } catch (err: any) {
       toast(err.response?.data?.message || 'Failed to create user', 'error');
     } finally {
@@ -225,7 +264,7 @@ const UsersPage: React.FC = () => {
       toast(`Role assigned to ${showAssignRole.displayName}`, 'success');
       setShowAssignRole(null);
       setSelectedRole('');
-      loadUsers();
+      setRefreshKey((k) => k + 1);
     } catch (err: any) {
       toast(err.response?.data?.message || 'Failed to assign role', 'error');
     } finally {
@@ -292,74 +331,22 @@ const UsersPage: React.FC = () => {
     try {
       await identityService.deleteUser(orgId, userId);
       toast('User deleted', 'success');
-      loadUsers();
+      setRefreshKey((k) => k + 1);
     } catch {
       toast('Failed to delete user', 'error');
     }
   };
 
-  const columns: Column<User>[] = [
-    { key: 'hashId', header: 'Hash ID', render: (u) => <code className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">{u.hashId || u.id}</code> },
-    { key: 'displayName', header: 'Display Name' },
-    { key: 'email', header: 'Email', render: (u) => <span className="text-sm text-gray-600 dark:text-gray-400">{u.email || u.emailToken || '-'}</span> },
-    { key: 'organizationHashId', header: 'Org', render: (u) => <code className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">{u.organizationHashId || u.organizationId || '-'}</code> },
-    { key: 'role', header: 'Role', render: (u) => {
-      const authRole = userRolesMap[u.hashId];
-      const displayRole = authRole || u.role;
-      return displayRole ? <StatusBadge label={displayRole} /> : <span className="text-xs text-gray-400">No role</span>;
-    }},
-    { key: 'status', header: 'Status', render: (u) => <StatusBadge label={u.status || 'active'} /> },
-    { key: 'createdAt', header: 'Created', render: (u) => new Date(u.createdAt).toLocaleDateString() },
-    {
-      key: 'actions' as keyof User,
-      header: 'Actions',
-      render: (u) => (
-        <div className="flex gap-1">
-          <button
-            onClick={(e) => { e.stopPropagation(); handleImpersonate(u); }}
-            className="p-1 hover:bg-purple-100 dark:hover:bg-purple-900/30 rounded disabled:opacity-50"
-            title="View as this user"
-            disabled={impersonating === (u.hashId || u.id) || (u.hashId || u.id) === currentUser?.id}
-          >
-            <Eye size={14} className="text-purple-500" />
-          </button>
-          <button
-            onClick={(e) => { e.stopPropagation(); setShowAssignRole(u); }}
-            className="p-1 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded"
-            title="Assign role"
-          >
-            <Shield size={14} className="text-blue-500" />
-          </button>
-          <button
-            onClick={(e) => { e.stopPropagation(); setShowResetPassword(u); }}
-            className="p-1 hover:bg-amber-100 dark:hover:bg-amber-900/30 rounded"
-            title="Reset password"
-          >
-            <KeyRound size={14} className="text-amber-500" />
-          </button>
-          <button
-            onClick={(e) => { e.stopPropagation(); handleDelete(u); }}
-            className="p-1 hover:bg-red-100 dark:hover:bg-red-900/30 rounded"
-            title="Delete user"
-          >
-            <Trash2 size={14} className="text-red-500" />
-          </button>
-        </div>
-      ),
-    },
-  ];
-
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Users</h1>
-        <button data-testid="user-create-btn" onClick={() => setShowCreate(true)} className="btn-primary flex items-center space-x-2">
-          <Plus size={18} />
-          <span>Create User</span>
-        </button>
-      </div>
-
-      <DataTable columns={columns} data={users} loading={loading} emptyMessage="No users found" />
+      <ZorbitDataTable
+        key={refreshKey}
+        config={tableConfig}
+        orgId={orgId}
+        title="Users"
+        createButton={{ label: 'Create User', onClick: () => setShowCreate(true) }}
+        actions={tableActions}
+      />
 
       {/* Create User Modal */}
       <Modal isOpen={showCreate} onClose={() => { setShowCreate(false); setShowNonAdminWarning(false); setSelectedOrg(''); setSelectedDept(''); setSelectedSubDept(''); setHierarchy(null); }} title="Create User">

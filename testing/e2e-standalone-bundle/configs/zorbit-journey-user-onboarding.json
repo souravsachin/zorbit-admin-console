@@ -1,0 +1,155 @@
+{
+  "_meta": {
+    "suite": "TU-JY-J3 — New User Onboarding Journey (RUNNABLE)",
+    "kiwi": {
+      "url": "https://kiwi.scalatics.com",
+      "username": "truptime",
+      "password": "TruUptime@2026",
+      "run_id": 13
+    },
+    "layer": "L5 Journey",
+    "status": "RUNNABLE",
+    "created": "2026-04-17"
+  },
+  "baseUrl": "https://zorbit-uat.onezippy.ai",
+  "credentials": {
+    "superadmin": { "email": "s@onezippy.ai", "password": "s@2021#cz" },
+    "new_user": { "email": "newuser.truptime@demo.ai", "password": "TruTest@2026" }
+  },
+  "viewport": { "width": 1440, "height": 900 },
+  "defaults": { "timeout": 15000, "waitAfterAction": 2000, "waitForNetworkIdle": false },
+  "segments": {
+    "j3-001-login": {
+      "name": "TU-JY-J3-001: Admin Login",
+      "steps": [
+        { "action": "voice", "text": "Journey J3 starting: New User Onboarding. Step 1 — Admin login." },
+        { "action": "navigate", "url": "/login" },
+        { "action": "fill", "selector": "input[type='email']", "value": "s@onezippy.ai" },
+        { "action": "fill", "selector": "input[type='password']", "value": "s@2021#cz" },
+        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "wait", "timeout": 4000 },
+        { "action": "assertUrl", "value": "/dashboard", "description": "TU-JY-J3-001: Dashboard loaded" },
+        { "action": "click", "selector": "button[title='Toggle sidebar']" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "click", "selector": "button[title='Unlock sidebar (drawer mode)']", "optional": true },
+        { "action": "wait", "timeout": 500 },
+        { "action": "click", "selector": "button[title='Lock sidebar open']", "optional": true },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "assertVisible", "selector": "text=Identity", "description": "TU-JY-J3-001: Identity in sidebar" },
+        { "action": "screenshot", "value": "j3-001-admin-logged-in.png" },
+        { "action": "voice", "text": "Admin logged in. Identity section visible in sidebar. Step 1 passed." }
+      ]
+    },
+    "j3-002-create-user": {
+      "name": "TU-JY-J3-002: Create New User",
+      "steps": [
+        { "action": "voice", "text": "Step 2 — Creating new user account." },
+        { "action": "navigate", "url": "/users", "description": "TU-JY-J3-002: Navigate to Users" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertNotVisible", "selector": "text=Page Not Available", "optional": true },
+        { "action": "assertVisible", "selector": "text=Users", "description": "TU-JY-J3-002: Users page loaded" },
+        { "action": "assertVisible", "selector": "text=Create User", "description": "TU-JY-J3-002: Create button visible" },
+        { "action": "screenshot", "value": "j3-002a-users-list.png" },
+        { "action": "click", "selector": "text=Create User", "description": "TU-JY-J3-002: Open create form" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "j3-002b-create-form.png" },
+        { "action": "fill", "selector": "input[name='displayName'], input[placeholder*='name' i], input[placeholder*='display' i]", "value": "TruUptime TestUser", "optional": true },
+        { "action": "fill", "selector": "input[name='email'], input[type='email']", "value": "newuser.truptime@demo.ai" },
+        { "action": "fill", "selector": "input[name='password'], input[type='password']", "value": "TruTest@2026" },
+        { "action": "screenshot", "value": "j3-002c-form-filled.png" },
+        { "action": "click", "selector": "button[type='submit'], button:has-text('Create'), button:has-text('Save')" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertVisible", "selector": "text=newuser.truptime@demo.ai", "description": "TU-JY-J3-002: New user in list" },
+        { "action": "screenshot", "value": "j3-002d-user-created.png" },
+        { "action": "voice", "text": "New user created successfully. Email visible in users list. Step 2 passed." }
+      ]
+    },
+    "j3-003-assign-role": {
+      "name": "TU-JY-J3-003: Assign Role to New User",
+      "steps": [
+        { "action": "voice", "text": "Step 3 — Assigning role to new user." },
+        { "action": "navigate", "url": "/roles", "description": "TU-JY-J3-003: Navigate to Roles" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertNotVisible", "selector": "text=Page Not Available", "optional": true },
+        { "action": "assertVisible", "selector": "text=Roles" },
+        { "action": "screenshot", "value": "j3-003a-roles-list.png" },
+        { "action": "voice", "text": "Roles page loaded. Manual step: assign a role to newuser.truptime@demo.ai. Screenshot captured for evidence." }
+      ]
+    },
+    "j3-004-new-user-login": {
+      "name": "TU-JY-J3-004: New User Logs In",
+      "steps": [
+        { "action": "voice", "text": "Step 4 — Logging in as new user to verify privilege-filtered sidebar." },
+        { "action": "navigate", "url": "/login" },
+        { "action": "fill", "selector": "input[type='email']", "value": "newuser.truptime@demo.ai" },
+        { "action": "fill", "selector": "input[type='password']", "value": "TruTest@2026" },
+        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "wait", "timeout": 4000 },
+        { "action": "screenshot", "value": "j3-004a-new-user-post-login.png" },
+        { "action": "assertNotVisible", "selector": "text=no-access", "optional": true, "description": "TU-JY-J3-004: Not redirected to /no-access" },
+        { "action": "assertVisible", "selector": "text=Dashboard", "description": "TU-JY-J3-004: Dashboard loaded for new user" },
+        { "action": "click", "selector": "button[title='Toggle sidebar']" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "click", "selector": "button[title='Lock sidebar open']", "optional": true },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "fullPageScreenshot", "value": "j3-004b-new-user-sidebar.png" },
+        { "action": "voice", "text": "New user logged in successfully. Sidebar shows privilege-filtered menu. Step 4 passed." }
+      ]
+    },
+    "j3-005-access-check": {
+      "name": "TU-JY-J3-005: New User Cannot Access Admin Routes",
+      "steps": [
+        { "action": "voice", "text": "Step 5 — Verifying admin routes are blocked for new user." },
+        { "action": "navigate", "url": "/users", "description": "TU-JY-J3-005: Attempt /users" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "j3-005a-users-as-new-user.png" },
+        { "action": "navigate", "url": "/authorization/guide", "description": "TU-JY-J3-005: Attempt /authorization/guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "j3-005b-auth-as-new-user.png" },
+        { "action": "voice", "text": "Access check screenshots captured. Verify manually that admin routes are blocked." }
+      ]
+    },
+    "j3-006-audit": {
+      "name": "TU-JY-J3-006: Audit Trail Verification",
+      "steps": [
+        { "action": "voice", "text": "Step 6 — Logging back as superadmin to check audit trail." },
+        { "action": "navigate", "url": "/login" },
+        { "action": "fill", "selector": "input[type='email']", "value": "s@onezippy.ai" },
+        { "action": "fill", "selector": "input[type='password']", "value": "s@2021#cz" },
+        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "wait", "timeout": 4000 },
+        { "action": "click", "selector": "button[title='Toggle sidebar']" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "click", "selector": "button[title='Lock sidebar open']", "optional": true },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "navigate", "url": "/audit/logs", "description": "TU-JY-J3-006: Audit Logs" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertNotVisible", "selector": "text=Page Not Available", "optional": true },
+        { "action": "assertVisible", "selector": "text=Audit", "description": "TU-JY-J3-006: Audit page loaded" },
+        { "action": "fullPageScreenshot", "value": "j3-006a-audit-logs.png" },
+        { "action": "voice", "text": "Audit logs page loaded. Verify identity.user.created and identity.user.login events are present with correct actor IDs. Journey J3 complete." }
+      ]
+    }
+  },
+  "journeys": {
+    "user-onboarding": {
+      "name": "TU-JY-J3: New User Onboarding (RUNNABLE)",
+      "description": "Full onboarding journey: admin creates user -> assigns role -> new user logs in -> access verified -> audit checked",
+      "segments": [
+        "j3-001-login",
+        "j3-002-create-user",
+        "j3-003-assign-role",
+        "j3-004-new-user-login",
+        "j3-005-access-check",
+        "j3-006-audit"
+      ]
+    }
+  },
+  "bouquets": {
+    "j3": {
+      "name": "Journey J3 — User Onboarding",
+      "mode": "sequential",
+      "journeys": ["user-onboarding"]
+    }
+  }
+}

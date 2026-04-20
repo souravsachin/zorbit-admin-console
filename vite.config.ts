@@ -147,6 +147,12 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/workflow-engine/, ''),
       },
+      '/api/module-registry': {
+        target: 'http://localhost:3032',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/module-registry/, ''),
+        ws: true,
+      },
       '/socket.io/realtime': {
         target: 'http://localhost:3029',
         changeOrigin: true,

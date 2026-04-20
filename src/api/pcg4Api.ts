@@ -32,16 +32,16 @@ export interface PCG4Stats {
 // ---------------------------------------------------------------------------
 
 export async function getConfigurations(orgId: string): Promise<PCG4Configuration[]> {
-  const res = await api.get(`/api/app/pcg4/v1/O/${orgId}/configurations`);
+  const res = await api.get(`/api/pcg4/api/v1/O/${orgId}/configurations`);
   return res.data?.data || res.data || [];
 }
 
 export async function deleteConfiguration(orgId: string, configId: string): Promise<void> {
-  await api.delete(`/api/app/pcg4/v1/O/${orgId}/configurations/${configId}`);
+  await api.delete(`/api/pcg4/api/v1/O/${orgId}/configurations/${configId}`);
 }
 
 export async function getTemplates(orgId: string): Promise<PCG4Configuration[]> {
-  const res = await api.get(`/api/app/pcg4/v1/O/${orgId}/configurations/templates`);
+  const res = await api.get(`/api/pcg4/api/v1/O/${orgId}/configurations/templates`);
   return res.data?.data || res.data || [];
 }
 
@@ -49,7 +49,7 @@ export async function cloneConfiguration(
   orgId: string,
   sourceId: string,
 ): Promise<{ id: string }> {
-  const res = await api.post(`/api/app/pcg4/v1/O/${orgId}/configurations/${sourceId}/clone`);
+  const res = await api.post(`/api/pcg4/api/v1/O/${orgId}/configurations/${sourceId}/clone`);
   return res.data;
 }
 
@@ -67,17 +67,17 @@ export function computeStats(configs: PCG4Configuration[]): PCG4Stats {
 // ---------------------------------------------------------------------------
 
 export async function seedDemoData(orgId: string): Promise<{ configurations: number; plans: number; encounterTypes: number; benefits: number }> {
-  const res = await api.post(`/api/app/pcg4/v1/O/${orgId}/setup/seed`);
+  const res = await api.post(`/api/pcg4/api/v1/O/${orgId}/setup/seed`);
   return res.data;
 }
 
 export async function flushDemoData(orgId: string): Promise<{ configurations: number; plans: number; benefits: number; encounterTypes: number }> {
-  const res = await api.post(`/api/app/pcg4/v1/O/${orgId}/setup/flush`);
+  const res = await api.post(`/api/pcg4/api/v1/O/${orgId}/setup/flush`);
   return res.data;
 }
 
 export async function getSetupStats(orgId: string) {
-  const res = await api.get(`/api/app/pcg4/v1/O/${orgId}/setup/stats`);
+  const res = await api.get(`/api/pcg4/api/v1/O/${orgId}/setup/stats`);
   return res.data;
 }
 
@@ -99,7 +99,7 @@ export interface SetupLogEvent {
 }
 
 export async function getSetupTables(orgId: string): Promise<{ tables: SetupTableInfo[] }> {
-  const res = await api.get(`/api/app/pcg4/v1/O/${orgId}/setup/tables`);
+  const res = await api.get(`/api/pcg4/api/v1/O/${orgId}/setup/tables`);
   return res.data;
 }
 
@@ -118,7 +118,7 @@ export function startSetupSSE(
   const controller = new AbortController();
   const token = localStorage.getItem('zorbit_token');
   const qs = tables && tables.length > 0 ? `?tables=${tables.join(',')}` : '';
-  const url = `/api/app/pcg4/v1/O/${orgId}/setup/${operation}${qs}`;
+  const url = `/api/pcg4/api/v1/O/${orgId}/setup/${operation}${qs}`;
 
   fetch(url, {
     method: 'POST',
@@ -209,7 +209,7 @@ import type {
 } from '../types/pcg4';
 
 function orgBase(orgId: string) {
-  return `/api/app/pcg4/v1/O/${orgId}`;
+  return `/api/pcg4/api/v1/O/${orgId}`;
 }
 
 // ---------------------------------------------------------------------------
@@ -451,7 +451,7 @@ export const pcg4ConfiguratorApi = {
   // ---- Taxonomies ----
 
   getTaxonomies: (orgId: string): Promise<EncounterCategory[]> =>
-    api.get(`/api/app/pcg4/v1/O/${orgId}/encounter-types`).then((r) => {
+    api.get(`/api/pcg4/api/v1/O/${orgId}/encounter-types`).then((r) => {
       const data = r.data?.data || r.data || [];
       // If the response is flat encounter types, group by category
       if (Array.isArray(data) && data.length > 0 && data[0].hashId) {

@@ -1,0 +1,257 @@
+{
+  "_meta": {
+    "suite": "TU-MS — Module Structure (Guide/Setup/Deployments) L3B Gate",
+    "kiwi": {
+      "url": "https://kiwi.scalatics.com",
+      "username": "truptime",
+      "password": "TruUptime@2026",
+      "run_id": 12
+    },
+    "layer": "L3B Gate",
+    "created": "2026-04-17"
+  },
+  "baseUrl": "https://zorbit-uat.onezippy.ai",
+  "credentials": {
+    "superadmin": { "email": "s@onezippy.ai", "password": "s@2021#cz" }
+  },
+  "viewport": { "width": 1440, "height": 900 },
+  "defaults": { "timeout": 15000, "waitAfterAction": 1500, "waitForNetworkIdle": false },
+  "segments": {
+    "login-pin": {
+      "name": "Login + Pin Sidebar",
+      "steps": [
+        { "action": "voice", "text": "Module Structure sweep starting. Checking Guide, Setup, and Deployments for all 20 modules." },
+        { "action": "navigate", "url": "/login" },
+        { "action": "fill", "selector": "input[type='email']", "value": "s@onezippy.ai" },
+        { "action": "fill", "selector": "input[type='password']", "value": "s@2021#cz" },
+        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "wait", "timeout": 4000 },
+        { "action": "click", "selector": "button[title='Toggle sidebar']" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "click", "selector": "button[title='Unlock sidebar (drawer mode)']", "optional": true },
+        { "action": "wait", "timeout": 500 },
+        { "action": "click", "selector": "button[title='Lock sidebar open']", "optional": true },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "screenshot", "value": "ms-sidebar-pinned.png" }
+      ]
+    },
+    "core-modules": {
+      "name": "Core Platform Modules",
+      "description": "TU-MS-001 to TU-MS-030: Identity, Auth, Navigation, Messaging, Audit, PII Vault, Settings, PCG4, Form Builder, DataTable",
+      "steps": [
+        { "action": "voice", "text": "Checking core platform modules." },
+        { "action": "navigate", "url": "/identity/guide", "description": "TU-MS-004: Identity guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertNotVisible", "selector": "text=Page Not Available", "optional": true },
+        { "action": "screenshot", "value": "ms-identity-guide.png" },
+        { "action": "navigate", "url": "/identity/setup", "description": "TU-MS-005: Identity setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-identity-setup.png" },
+        { "action": "navigate", "url": "/identity/deployments", "description": "TU-MS-006: Identity deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-identity-deployments.png" },
+
+        { "action": "navigate", "url": "/authorization/guide", "description": "TU-MS-007: Auth guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-auth-guide.png" },
+        { "action": "navigate", "url": "/authorization/setup", "description": "TU-MS-008" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-auth-setup.png" },
+        { "action": "navigate", "url": "/authorization/deployments", "description": "TU-MS-009" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-auth-deployments.png" },
+
+        { "action": "navigate", "url": "/navigation/guide", "description": "TU-MS-010: Navigation guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-navigation-guide.png" },
+        { "action": "navigate", "url": "/navigation/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-navigation-setup.png" },
+        { "action": "navigate", "url": "/navigation/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-navigation-deployments.png" },
+
+        { "action": "navigate", "url": "/messaging/guide", "description": "TU-MS-013" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-messaging-guide.png" },
+        { "action": "navigate", "url": "/messaging/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-messaging-setup.png" },
+        { "action": "navigate", "url": "/messaging/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-messaging-deployments.png" },
+
+        { "action": "navigate", "url": "/audit/guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-audit-guide.png" },
+        { "action": "navigate", "url": "/audit/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-audit-setup.png" },
+        { "action": "navigate", "url": "/audit/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-audit-deployments.png" },
+
+        { "action": "navigate", "url": "/pii-vault/guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-pii-vault-guide.png" },
+        { "action": "navigate", "url": "/pii-vault/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-pii-vault-setup.png" },
+        { "action": "navigate", "url": "/pii-vault/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-pii-vault-deployments.png" },
+
+        { "action": "voice", "text": "Core modules done. Checking PFS modules." }
+      ]
+    },
+    "pfs-modules": {
+      "name": "PFS Modules",
+      "description": "TU-MS-031 to TU-MS-054: PCG4, Form Builder, DataTable, Product Pricing, White Label, ZMB Factory, Doc Generator, Support Center, Dev Center",
+      "steps": [
+        { "action": "navigate", "url": "/app/pcg4/guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-pcg4-guide.png" },
+        { "action": "navigate", "url": "/app/pcg4/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-pcg4-setup.png" },
+        { "action": "navigate", "url": "/app/pcg4/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-pcg4-deployments.png" },
+
+        { "action": "navigate", "url": "/form-builder/guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-form-builder-guide.png" },
+        { "action": "navigate", "url": "/form-builder/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-form-builder-setup.png" },
+        { "action": "navigate", "url": "/form-builder/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-form-builder-deployments.png" },
+
+        { "action": "navigate", "url": "/datatable/guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-datatable-guide.png" },
+        { "action": "navigate", "url": "/datatable/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-datatable-setup.png" },
+        { "action": "navigate", "url": "/datatable/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-datatable-deployments.png" },
+
+        { "action": "navigate", "url": "/product-pricing/guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-product-pricing-guide.png" },
+        { "action": "navigate", "url": "/product-pricing/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-product-pricing-setup.png" },
+        { "action": "navigate", "url": "/product-pricing/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-product-pricing-deployments.png" },
+
+        { "action": "navigate", "url": "/white-label/guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-white-label-guide.png" },
+        { "action": "navigate", "url": "/white-label/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-white-label-setup.png" },
+        { "action": "navigate", "url": "/white-label/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-white-label-deployments.png" },
+
+        { "action": "navigate", "url": "/zmb-factory/guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-zmb-factory-guide.png" },
+        { "action": "navigate", "url": "/zmb-factory/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-zmb-factory-setup.png" },
+        { "action": "navigate", "url": "/zmb-factory/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-zmb-factory-deployments.png" },
+
+        { "action": "navigate", "url": "/doc-generator/guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-doc-generator-guide.png" },
+        { "action": "navigate", "url": "/doc-generator/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-doc-generator-setup.png" },
+        { "action": "navigate", "url": "/doc-generator/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-doc-generator-deployments.png" },
+
+        { "action": "navigate", "url": "/support-center/guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-support-center-guide.png" },
+        { "action": "navigate", "url": "/support-center/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-support-center-setup.png" },
+        { "action": "navigate", "url": "/support-center/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-support-center-deployments.png" },
+
+        { "action": "navigate", "url": "/dev-center/guide" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-dev-center-guide.png" },
+        { "action": "navigate", "url": "/dev-center/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-dev-center-setup.png" },
+        { "action": "navigate", "url": "/dev-center/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-dev-center-deployments.png" },
+
+        { "action": "voice", "text": "PFS module structure checks complete." }
+      ]
+    },
+    "blocked-app-modules": {
+      "name": "App Modules (BLOCKED)",
+      "description": "TU-MS-034 to TU-MS-060: HQ, HD, UW — BLOCKED pending route registration",
+      "steps": [
+        { "action": "voice", "text": "Checking blocked app modules. Expecting Page Not Available for HQ, HD, and UW." },
+        { "action": "navigate", "url": "/app/hi-quotation/guide", "description": "TU-MS-034: HQ guide — BLOCKED" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-hi-quotation-guide.png" },
+        { "action": "navigate", "url": "/app/hi-quotation/setup", "description": "TU-MS-035: HQ setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-hi-quotation-setup.png" },
+        { "action": "navigate", "url": "/app/hi-quotation/deployments", "description": "TU-MS-036: HQ deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-hi-quotation-deployments.png" },
+
+        { "action": "navigate", "url": "/app/hi-decisioning/guide", "description": "TU-MS-037: HD guide — BLOCKED" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-hi-decisioning-guide.png" },
+        { "action": "navigate", "url": "/app/hi-decisioning/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-hi-decisioning-setup.png" },
+        { "action": "navigate", "url": "/app/hi-decisioning/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-hi-decisioning-deployments.png" },
+
+        { "action": "navigate", "url": "/app/uw-workflow/guide", "description": "TU-MS-040: UW guide — BLOCKED" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-uw-workflow-guide.png" },
+        { "action": "navigate", "url": "/app/uw-workflow/setup" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-uw-workflow-setup.png" },
+        { "action": "navigate", "url": "/app/uw-workflow/deployments" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "ms-uw-workflow-deployments.png" },
+
+        { "action": "voice", "text": "Module structure sweep complete. 60 tests covered across 20 modules." }
+      ]
+    }
+  },
+  "journeys": {
+    "module-structure": {
+      "name": "TU-MS Module Structure Sweep (L3B)",
+      "description": "Guide/Setup/Deployments check for all 20 modules. HQ/HD/UW expected to fail (BLOCKED).",
+      "segments": ["login-pin", "core-modules", "pfs-modules", "blocked-app-modules"]
+    }
+  },
+  "bouquets": {
+    "ms": {
+      "name": "Module Structure (L3B Gate)",
+      "mode": "sequential",
+      "journeys": ["module-structure"]
+    }
+  }
+}

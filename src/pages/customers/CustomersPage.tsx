@@ -1,43 +1,62 @@
-import React, { useEffect, useState } from 'react';
-import { Plus } from 'lucide-react';
-import DataTable, { Column } from '../../components/shared/DataTable';
-import StatusBadge from '../../components/shared/StatusBadge';
+import React, { useState, useMemo } from 'react';
+import { ZorbitDataTable } from '../../components/ZorbitDataTable';
+import type { DataTableConfig } from '../../types/dataTable';
 import Modal from '../../components/shared/Modal';
 import { useAuth } from '../../hooks/useAuth';
 import { useToast } from '../../components/shared/Toast';
-import { customerService, Customer } from '../../services/customer';
-
-const columns: Column<Customer>[] = [
-  { key: 'id', header: 'Hash ID', render: (c) => <code className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">{c.id}</code> },
-  { key: 'displayName', header: 'Display Name' },
-  { key: 'emailToken', header: 'Email (PII Token)', render: (c) => <span className="text-xs font-mono text-amber-600">{c.emailToken || 'N/A'}</span> },
-  { key: 'phoneToken', header: 'Phone (PII Token)', render: (c) => <span className="text-xs font-mono text-amber-600">{c.phoneToken || 'N/A'}</span> },
-  { key: 'status', header: 'Status', render: (c) => <StatusBadge label={c.status || 'active'} /> },
-  { key: 'createdAt', header: 'Created', render: (c) => new Date(c.createdAt).toLocaleDateString() },
-];
+import { customerService } from '../../services/customer';
+import { API_CONFIG } from '../../config';
 
 const CustomersPage: React.FC = () => {
   const { orgId } = useAuth();
   const { toast } = useToast();
-  const [customers, setCustomers] = useState<Customer[]>([]);
-  const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
   const [form, setForm] = useState({ displayName: '', email: '', phone: '' });
   const [creating, setCreating] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  const loadCustomers = async () => {
-    setLoading(true);
-    try {
-      const res = await customerService.getCustomers(orgId);
-      setCustomers(Array.isArray(res.data) ? res.data : []);
-    } catch {
-      toast('Failed to load customers', 'error');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => { loadCustomers(); }, [orgId]);
+  const tableConfig = useMemo<DataTableConfig>(() => ({
+    columns: [
+      { name: 'id', label: 'Hash ID', type: 'string', width: '120px', sortable: false },
+      { name: 'displayName', label: 'Display Name', type: 'string', sortable: true, searchable: true },
+      { name: 'emailToken', label: 'Email (PII)', type: 'string', sortable: false, pii_sensitive: true },
+      { name: 'phoneToken', label: 'Phone (PII)', type: 'string', sortable: false, pii_sensitive: true },
+      {
+        name: 'status', label: 'Status', type: 'badge', sortable: true, filterable: true,
+        enum_values: [
+          { value: 'active', label: 'Active', color: '#4CAF50' },
+          { value: 'inactive', label: 'Inactive', color: '#9E9E9E' },
+        ],
+      },
+      { name: 'createdAt', label: 'Created', type: 'date', sortable: true },
+    ],
+    filters: [
+      {
+        column: 'status', type: 'multiselect', label: 'Status',
+        options: [
+          { value: 'active', label: 'Active' },
+          { value: 'inactive', label: 'Inactive' },
+        ],
+      },
+    ],
+    data_source: {
+      endpoint_template: `${API_CONFIG.CUSTOMER_URL}/api/v1/O/${orgId}/customers`,
+      response_data_path: 'data',
+      response_total_path: 'total',
+    },
+    searchable: true,
+    default_sort_column: 'createdAt',
+    default_sort_direction: 'desc',
+    default_page_size: 25,
+    view_modes: ['list'],
+    export_formats: ['csv'],
+    time_filter_column: 'createdAt',
+    time_range_presets: [
+      { label: '7 Days', value: '7d', duration_hours: 168 },
+      { label: '30 Days', value: '30d', duration_hours: 720 },
+      { label: 'All', value: 'all', duration_hours: null },
+    ],
+  }), [orgId]);
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,7 +66,7 @@ const CustomersPage: React.FC = () => {
       toast('Customer created', 'success');
       setShowCreate(false);
       setForm({ displayName: '', email: '', phone: '' });
-      loadCustomers();
+      setRefreshKey((k) => k + 1);
     } catch {
       toast('Failed to create customer', 'error');
     } finally {
@@ -57,15 +76,13 @@ const CustomersPage: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Customers</h1>
-        <button onClick={() => setShowCreate(true)} className="btn-primary flex items-center space-x-2">
-          <Plus size={18} />
-          <span>Create Customer</span>
-        </button>
-      </div>
-
-      <DataTable columns={columns} data={customers} loading={loading} emptyMessage="No customers found" />
+      <ZorbitDataTable
+        key={refreshKey}
+        config={tableConfig}
+        orgId={orgId}
+        title="Customers"
+        createButton={{ label: 'Create Customer', onClick: () => setShowCreate(true) }}
+      />
 
       <Modal isOpen={showCreate} onClose={() => setShowCreate(false)} title="Create Customer">
         <form onSubmit={handleCreate} className="space-y-4">

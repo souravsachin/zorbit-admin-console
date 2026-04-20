@@ -1,159 +1,80 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { Search } from 'lucide-react';
-import DataTable, { Column } from '../../components/shared/DataTable';
-import StatusBadge from '../../components/shared/StatusBadge';
+import React, { useState, useMemo } from 'react';
+import { ZorbitDataTable } from '../../components/ZorbitDataTable';
+import type { DataTableConfig } from '../../types/dataTable';
 import Modal from '../../components/shared/Modal';
 import { useAuth } from '../../hooks/useAuth';
-import { useToast } from '../../components/shared/Toast';
-import { auditService, AuditEvent } from '../../services/audit';
-
-const PAGE_SIZE = 20;
-
-/** Safely format a date value — handles ISO strings, epoch numbers, and invalid values. */
-function formatDate(d: unknown): string {
-  if (!d) return 'N/A';
-  const date = new Date(typeof d === 'number' ? d : String(d));
-  return isNaN(date.getTime()) ? 'N/A' : date.toLocaleString();
-}
+import { API_CONFIG } from '../../config';
 
 const AuditPage: React.FC = () => {
   const { orgId } = useAuth();
-  const { toast } = useToast();
-  const [events, setEvents] = useState<AuditEvent[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
-  const [selectedEvent, setSelectedEvent] = useState<AuditEvent | null>(null);
-  const [filters, setFilters] = useState({ eventType: '', actor: '', resource: '', startDate: '', endDate: '' });
-  const [appliedFilters, setAppliedFilters] = useState({ eventType: '', actor: '', resource: '', startDate: '', endDate: '' });
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<Record<string, unknown> | null>(null);
 
-  const loadEvents = useCallback(async (currentFilters: typeof filters, currentPage: number) => {
-    setLoading(true);
-    try {
-      const query = {
-        page: currentPage,
-        limit: PAGE_SIZE,
-        ...(currentFilters.eventType && { eventType: currentFilters.eventType }),
-        ...(currentFilters.actor && { actor: currentFilters.actor }),
-        ...(currentFilters.resource && { resource: currentFilters.resource }),
-        ...(currentFilters.startDate && { startDate: currentFilters.startDate }),
-        ...(currentFilters.endDate && { endDate: currentFilters.endDate }),
-      };
-      const res = await auditService.getEvents(orgId, query);
-      const d = res.data;
-      if (Array.isArray(d)) {
-        setEvents(d);
-        setTotal(d.length);
-      } else {
-        setEvents(d.data || []);
-        setTotal(d.total || 0);
-      }
-    } catch {
-      toast('Failed to load audit events', 'error');
-    } finally {
-      setLoading(false);
-    }
-  }, [orgId, toast]);
-
-  useEffect(() => { loadEvents(appliedFilters, page); }, [orgId, page, appliedFilters, loadEvents]);
-
-  const handleSearch = () => {
-    setPage(1);
-    setAppliedFilters({ ...filters });
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') handleSearch();
-  };
-
-  const handleDateChange = (field: 'startDate' | 'endDate', value: string) => {
-    const newFilters = { ...filters, [field]: value };
-    setFilters(newFilters);
-    // Date changes apply after a short debounce
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      setPage(1);
-      setAppliedFilters({ ...newFilters });
-    }, 500);
-  };
-
-  const columns: Column<AuditEvent>[] = [
-    { key: 'eventTimestamp', header: 'Timestamp', render: (e) => formatDate(e.eventTimestamp) },
-    { key: 'eventType', header: 'Event Type', render: (e) => <StatusBadge label={e.eventType} variant="info" /> },
-    { key: 'actor', header: 'Actor', render: (e) => {
-      const a = e.actor;
-      if (!a || typeof a !== 'object') return 'N/A';
-      return (a.displayName as string) || (a.hashId as string) || 'system';
-    }},
-    { key: 'resourceType', header: 'Resource', render: (e) => {
-      const parts = [e.resourceType, e.resourceId].filter(Boolean);
-      return parts.length > 0 ? parts.join(' ') : 'N/A';
-    }},
-    { key: 'action', header: 'Action' },
-    { key: 'source', header: 'Source' },
-  ];
-
-  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  const tableConfig = useMemo<DataTableConfig>(() => ({
+    columns: [
+      { name: 'eventTimestamp', label: 'Timestamp', type: 'datetime', sortable: true, width: '180px' },
+      {
+        name: 'eventType', label: 'Event Type', type: 'badge', sortable: true, filterable: true,
+        enum_values: [
+          { value: 'identity.user.created', label: 'User Created', color: '#4CAF50' },
+          { value: 'identity.user.updated', label: 'User Updated', color: '#2196F3' },
+          { value: 'identity.user.deleted', label: 'User Deleted', color: '#F44336' },
+          { value: 'identity.user.login', label: 'User Login', color: '#009688' },
+          { value: 'authorization.role.created', label: 'Role Created', color: '#9C27B0' },
+          { value: 'customer.created', label: 'Customer Created', color: '#FF9800' },
+          { value: 'customer.updated', label: 'Customer Updated', color: '#FFC107' },
+        ],
+      },
+      { name: 'actor', label: 'Actor', type: 'string', sortable: true, searchable: true },
+      { name: 'action', label: 'Action', type: 'string', sortable: true, searchable: true },
+      { name: 'resourceType', label: 'Resource', type: 'string', sortable: true, filterable: true },
+      { name: 'source', label: 'Source', type: 'string', sortable: false },
+    ],
+    filters: [
+      {
+        column: 'eventType', type: 'multiselect', label: 'Event Type',
+        options: [
+          { value: 'identity.user.created', label: 'User Created' },
+          { value: 'identity.user.login', label: 'User Login' },
+          { value: 'authorization.role.created', label: 'Role Created' },
+          { value: 'customer.created', label: 'Customer Created' },
+        ],
+      },
+      { column: 'resourceType', type: 'multiselect', label: 'Resource Type', options: [] },
+      { column: 'eventTimestamp', type: 'daterange', label: 'Date Range' },
+    ],
+    data_source: {
+      endpoint_template: `${API_CONFIG.AUDIT_URL}/api/v1/O/${orgId}/events`,
+      response_data_path: 'data',
+      response_total_path: 'total',
+    },
+    searchable: true,
+    default_sort_column: 'eventTimestamp',
+    default_sort_direction: 'desc',
+    default_page_size: 25,
+    view_modes: ['list'],
+    export_formats: ['csv', 'excel'],
+    time_filter_column: 'eventTimestamp',
+    time_range_presets: [
+      { label: '1 Day', value: '1d', duration_hours: 24 },
+      { label: '7 Days', value: '7d', duration_hours: 168 },
+      { label: '30 Days', value: '30d', duration_hours: 720 },
+      { label: '90 Days', value: '90d', duration_hours: 2160 },
+      { label: 'All', value: 'all', duration_hours: null },
+    ],
+    summary_stats: [
+      { key: 'total', label: 'Total Events', color: 'primary' },
+      { key: 'page_count', label: 'Showing', color: 'info' },
+      { key: 'active_filters', label: 'Active Filters', color: 'warning' },
+    ],
+  }), [orgId]);
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold">Audit Logs</h1>
-
-      <div className="card p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
-          <input
-            placeholder="Event type"
-            value={filters.eventType}
-            onChange={(e) => setFilters({ ...filters, eventType: e.target.value })}
-            onKeyDown={handleKeyDown}
-            className="input-field"
-          />
-          <input
-            placeholder="Actor"
-            value={filters.actor}
-            onChange={(e) => setFilters({ ...filters, actor: e.target.value })}
-            onKeyDown={handleKeyDown}
-            className="input-field"
-          />
-          <input
-            placeholder="Resource"
-            value={filters.resource}
-            onChange={(e) => setFilters({ ...filters, resource: e.target.value })}
-            onKeyDown={handleKeyDown}
-            className="input-field"
-          />
-          <input
-            type="date"
-            value={filters.startDate}
-            onChange={(e) => handleDateChange('startDate', e.target.value)}
-            className="input-field"
-          />
-          <input
-            type="date"
-            value={filters.endDate}
-            onChange={(e) => handleDateChange('endDate', e.target.value)}
-            className="input-field"
-          />
-          <button
-            onClick={handleSearch}
-            className="btn-primary flex items-center justify-center space-x-2"
-          >
-            <Search size={16} />
-            <span>Search</span>
-          </button>
-        </div>
-      </div>
-
-      <DataTable
-        columns={columns}
-        data={events}
-        loading={loading}
-        emptyMessage="No audit events found"
-        onRowClick={(item) => setSelectedEvent(item)}
-        page={page}
-        totalPages={totalPages}
-        onPageChange={setPage}
+      <ZorbitDataTable
+        config={tableConfig}
+        orgId={orgId}
+        title="Audit Logs"
+        onRowClick={(row) => setSelectedEvent(row)}
       />
 
       <Modal isOpen={!!selectedEvent} onClose={() => setSelectedEvent(null)} title="Audit Event Detail">

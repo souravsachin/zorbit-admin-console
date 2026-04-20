@@ -9,7 +9,7 @@ function readStorage(): MenuStyle {
     const v = localStorage.getItem(STORAGE_KEY);
     if (v === 'classic' || v === '6level') return v;
   } catch { /* ignore */ }
-  return 'classic';
+  return '6level';
 }
 
 export function useMenuPreference() {

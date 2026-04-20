@@ -62,7 +62,7 @@ const PCG4_SLIDES: Slide[] = [
         </div>
         <div className="bg-white/10 backdrop-blur rounded-lg p-3">
           <p className="font-semibold text-blue-300">REST API Grammar</p>
-          <p className="text-white/60 text-xs mt-1">/api/app/pcg4/v1/O/:orgId/configurations</p>
+          <p className="text-white/60 text-xs mt-1">/api/pcg4/api/v1/O/:orgId/configurations</p>
         </div>
         <div className="bg-white/10 backdrop-blur rounded-lg p-3">
           <p className="font-semibold text-amber-300">Event-Driven</p>
@@ -358,7 +358,7 @@ const PCG4HubPage: React.FC = () => {
         },
       ]}
       videosBaseUrl="/demos/pcg4/"
-      swaggerUrl="/api/app/pcg4/api-docs"
+      swaggerUrl="/api/pcg4/api-docs"
       faqs={[
         { question: 'What is an encounter type?', answer: 'An encounter type represents a category of healthcare service (e.g., preventive care visit, emergency room visit, specialist consultation). PCG4 supports 43 encounter types across 10 clinical categories.' },
         { question: 'How does the Maker-Checker-Publisher workflow work?', answer: 'A Maker creates/edits the configuration. A Checker (reviewer) validates it. Once approved, a Publisher deploys it to the target environment. Each role is a separate person for segregation of duties.' },
@@ -366,10 +366,10 @@ const PCG4HubPage: React.FC = () => {
         { question: 'What happens when a configuration is deployed?', answer: 'The configuration is published to the target environment (staging or production). Downstream systems (quotation, underwriting) use it for premium calculation and coverage validation.' },
       ]}
       resources={[
-        { label: 'PCG4 API (Swagger)', url: '/api/app/pcg4/api-docs', icon: FileText },
-        { label: 'Reference Library', url: '/app/pcg4/reference-library', icon: BookOpen },
-        { label: 'Coverage Mapper', url: '/app/pcg4/coverage-mapper', icon: Code },
-        { label: 'Encounter Taxonomy', url: '/app/pcg4/encounters', icon: Layers },
+        { label: 'PCG4 API (Swagger)', url: '/api/pcg4/api-docs', icon: FileText },
+        { label: 'Reference Library', url: '/m/pcg4/refs', icon: BookOpen },
+        { label: 'Coverage Mapper', url: '/m/pcg4/coverage-mapper', icon: Code },
+        { label: 'Encounter Taxonomy', url: '/m/pcg4/encounters', icon: Layers },
       ]}
     />
   );

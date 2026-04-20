@@ -16,7 +16,7 @@ const services: ServiceDoc[] = [
   { name: 'PII Vault', description: 'Tokenization of sensitive PII data', proxyPath: '/api/pii-vault', swaggerPath: '/api-docs' },
   { name: 'Audit Service', description: 'Event audit logging and compliance', proxyPath: '/api/audit', swaggerPath: '/api-docs' },
   { name: 'Customer Service', description: 'Sample business service for customer management', proxyPath: '/api/customer', swaggerPath: '/api-docs' },
-  { name: 'PCG4 - Product Configurator', description: 'Product definition, variants, encounter types', proxyPath: '/api/app/pcg4', swaggerPath: '/api-docs' },
+  { name: 'PCG4 - Product Configurator', description: 'Product definition, variants, encounter types', proxyPath: '/api/pcg4', swaggerPath: '/api-docs' },
 ];
 
 function getSwaggerUrl(svc: ServiceDoc): string {

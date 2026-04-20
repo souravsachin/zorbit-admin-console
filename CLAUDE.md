@@ -2,6 +2,94 @@
 
 ## Project ID: CP-003
 
+---
+
+## ⚡ SESSION START — READ THIS FIRST (survives compaction)
+
+Every time a new session starts OR context compacts, Claude MUST do ALL of the following before any other work:
+
+### 1. Message Echo Protocol (Skill 1028) — MANDATORY, NO EXCEPTIONS
+Every user message must be echoed at the top of the response in this exact format:
+```
+MSG-NNN (post-compaction) | [YYYY-MM-DD HH:MM TZ]
+
+> **You said:**
+> P1. {first paragraph verbatim}
+> P2. {second paragraph verbatim}
+
+---
+{response here}
+```
+- Counter resets to MSG-001 after compaction — note `(post-compaction)` on first echo
+- Counter increments ONLY on user-typed messages — NOT on system-reminder tags, tool confirmations, or background task notifications
+- NEVER skip the echo. Even "yes" or "ok" gets echoed as P1.
+
+### 2. Platform Conventions — MANDATORY
+- All FE routes: `/m/{module-slug}/{feature}` — NO org scope in URL ever
+- All BE routes: `/api/{module-slug}/api/v1/{scope}/{scope-id}/{resource}` — see uri-conventions.md
+- Approved shortcuts ONLY: `configs` (not configurations), `orgs`, `apps`, `refs`
+- NEVER use `configurations`, `deploys`, `deps`, `notifs` in any URI
+- Source of truth: `zorbit-core/platform-spec/uri-conventions.md`
+
+### 3. Sync Locations — update after EVERY completed task
+- **User Stories**: Notion → Zorbit Platform → User Stories database
+  - URL: https://www.notion.so/6ff5d0e1e20b43178ddf27ee07a6fe53
+  - collection://103bb3d2-13e9-4d60-a0c8-8ce37234065c
+- **Test Plans**: Kiwi TCMS at kiwi.scalatics.com (27 test plans, TU-* prefix)
+- Link: Notion stories have a "Kiwi Test URL" field pointing to their Kiwi test plan
+
+### 4. Active Platform Plan
+5 epics in execution order — see `zorbit-core/platform-spec/epics-module-registry-revamp.md`:
+- EPIC 1: `zorbit-cor-module_registry` (new repo, port 3015/3115)
+- EPIC 2: Manifest v2 + PCG4 as reference implementation
+- EPIC 3: Navigation service decoupling (subscribes to Kafka, no more seed files)
+- EPIC 4: FE route migration to `/m/...` pattern
+- EPIC 5: Micro-frontend lazy loading
+
+### 5. menuSource = 'static' — NO SHORTCUT
+The sidebar footer source indicator MUST stay `'static'` until the FULL pipeline works:
+`Module → Kafka (platform.module.announcements) → module-registry → platform.module.ready → navigation service → /menu endpoint`
+Do NOT set menuSource to 'database' just because the navigation service returns data.
+
+### 6. Module Registry Pipeline — THE LAW (no exceptions, no shortcuts)
+```
+Module starts up
+  → publishes HMAC-signed announcement to Kafka (platform-module-announcements)
+  → zorbit-cor-module_registry consumes it
+  → validates HMAC-SHA256(canonical_json(payload), PLATFORM_MODULE_SECRET)
+  → fetches manifest from manifestUrl
+  → stores module as PENDING → READY
+  → publishes platform.module.ready to Kafka
+  → pushes WebSocket to eligible users
+
+Navigation, sidebar, everything else:
+  → reads from module registry
+  → NEVER registers modules itself
+  → NEVER owns menu content
+```
+
+Each module needs:
+1. `zorbit-module-manifest.json` (v2: placement, registration, /m/... feRoutes)
+2. `GET /api/v1/G/manifest` endpoint
+3. Startup Kafka publisher — HMAC-signed, manifestUrl = `https://zorbit-uat.onezippy.ai/api/{slug}/api/v1/G/manifest`
+
+Renaming: CREATE FRESH REPOS with correct names. Old repos stay alive in parallel until stable, then delete. No tech debt before first demo. Decision: 2026-04-19.
+New repos to create:
+- zorbit-identity → zorbit-cor-identity
+- zorbit-authorization → zorbit-cor-authorization
+- zorbit-navigation → zorbit-cor-navigation
+- zorbit-event_bus → zorbit-cor-event_bus
+- zorbit-pii-vault → zorbit-cor-pii_vault
+- zorbit-audit → zorbit-cor-audit
+
+Transition tracker: `/Users/s/.claude/projects/-Users-s-workspace-zorbit/memory/project_module_transition_tracker.md`
+Full spec: `zorbit-core/platform-spec/epics-module-registry-revamp.md`
+
+### 7. Memory files
+Read `/Users/s/.claude/projects/-Users-s-workspace-zorbit/memory/MEMORY.md` for full context on this project (environments, decisions, backlog, feedback rules).
+
+---
+
 ## Session Communication (Skill 1021)
 
 When you need to communicate with the user asynchronously, use the session communicator at gmeet.scalatics.com:

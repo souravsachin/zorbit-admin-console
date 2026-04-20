@@ -1,0 +1,132 @@
+{
+  "_meta": {
+    "suite": "TU-JY-J1 — HI Policy Issuance Journey (BLOCKED)",
+    "kiwi": {
+      "url": "https://kiwi.scalatics.com",
+      "username": "truptime",
+      "password": "TruUptime@2026",
+      "run_id": 14
+    },
+    "layer": "L5 Journey",
+    "status": "BLOCKED — pending FE-2078 (HQ routes), HD routes, UW routes",
+    "unblock_order": "FE-2078 (HQ) → HD routes → UW routes → FE-2081 (Doc Generator) → run full journey",
+    "created": "2026-04-17"
+  },
+  "baseUrl": "https://zorbit-uat.onezippy.ai",
+  "credentials": {
+    "superadmin": { "email": "s@onezippy.ai", "password": "s@2021#cz" },
+    "broker": { "email": "broker@partner.ai", "password": "Broker@2026" },
+    "uw_l1": { "email": "uw.l1@demo.ai", "password": "UwL1@2026" }
+  },
+  "viewport": { "width": 1440, "height": 900 },
+  "defaults": { "timeout": 15000, "waitAfterAction": 2000, "waitForNetworkIdle": false },
+  "segments": {
+    "preconditions": {
+      "name": "Pre-condition Checks",
+      "description": "Verify PCG4 has published config, pricing active, form builder has template",
+      "steps": [
+        { "action": "voice", "text": "Journey J1 — HI Policy Issuance. Checking pre-conditions first." },
+        { "action": "navigate", "url": "/login" },
+        { "action": "fill", "selector": "input[type='email']", "value": "s@onezippy.ai" },
+        { "action": "fill", "selector": "input[type='password']", "value": "s@2021#cz" },
+        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "wait", "timeout": 4000 },
+        { "action": "click", "selector": "button[title='Toggle sidebar']" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "click", "selector": "button[title='Lock sidebar open']", "optional": true },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "navigate", "url": "/app/pcg4/configurations", "description": "Pre-check: PCG4 published config" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "j1-pre-pcg4-configs.png" },
+        { "action": "navigate", "url": "/product-pricing", "description": "Pre-check: active rate table" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "j1-pre-product-pricing.png" },
+        { "action": "navigate", "url": "/form-builder", "description": "Pre-check: HI form template" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "j1-pre-form-builder.png" },
+        { "action": "voice", "text": "Pre-condition screenshots captured. Verify PCG4 has Published config, pricing has active rate table, form builder has HI template." }
+      ]
+    },
+    "j1-001-broker-login": {
+      "name": "TU-JY-J1-001: Broker Login (BLOCKED)",
+      "steps": [
+        { "action": "voice", "text": "Step 1 — Broker login. Note: HQ routes blocked. Expecting Page Not Available." },
+        { "action": "navigate", "url": "/login" },
+        { "action": "fill", "selector": "input[type='email']", "value": "broker@partner.ai" },
+        { "action": "fill", "selector": "input[type='password']", "value": "Broker@2026" },
+        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "wait", "timeout": 4000 },
+        { "action": "screenshot", "value": "j1-001a-broker-logged-in.png" },
+        { "action": "click", "selector": "button[title='Toggle sidebar']", "optional": true },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "click", "selector": "button[title='Lock sidebar open']", "optional": true },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "fullPageScreenshot", "value": "j1-001b-broker-sidebar.png" }
+      ]
+    },
+    "j1-002-create-quotation": {
+      "name": "TU-JY-J1-002: Create New Quotation (BLOCKED — FE-2078)",
+      "steps": [
+        { "action": "voice", "text": "Step 2 — Navigate to quotation creation. Blocked until FE-2078 resolved." },
+        { "action": "navigate", "url": "/app/hi-quotation/new", "description": "TU-JY-J1-002: New Quotation form" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "screenshot", "value": "j1-002a-new-quotation.png" }
+      ]
+    },
+    "j1-008-audit-standalone": {
+      "name": "TU-JY-J1-008: Audit Trail (RUNNABLE STANDALONE)",
+      "description": "This test runs independently — check existing audit events, not journey-specific",
+      "steps": [
+        { "action": "voice", "text": "Running audit trail check — this is runnable independently of the blocked journey." },
+        { "action": "navigate", "url": "/login" },
+        { "action": "fill", "selector": "input[type='email']", "value": "s@onezippy.ai" },
+        { "action": "fill", "selector": "input[type='password']", "value": "s@2021#cz" },
+        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "wait", "timeout": 4000 },
+        { "action": "click", "selector": "button[title='Toggle sidebar']" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "click", "selector": "button[title='Lock sidebar open']", "optional": true },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "navigate", "url": "/audit/logs", "description": "TU-JY-J1-008: Audit Logs" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertNotVisible", "selector": "text=Page Not Available", "optional": true },
+        { "action": "assertVisible", "selector": "text=Audit" },
+        { "action": "fullPageScreenshot", "value": "j1-008-audit-logs.png" },
+        { "action": "voice", "text": "Audit logs loaded. Verify events have actor IDs, event types, resource IDs, and timestamps. TU-JY-J1-008 is the only runnable test in this journey." }
+      ]
+    }
+  },
+  "journeys": {
+    "j1-preconditions": {
+      "name": "TU-JY-J1: Pre-condition Check Only",
+      "description": "Verify all pre-conditions are met before attempting the full journey",
+      "segments": ["preconditions"]
+    },
+    "j1-audit-only": {
+      "name": "TU-JY-J1-008: Audit Trail (RUNNABLE)",
+      "description": "Only runnable test in J1 journey — checks audit log structure",
+      "segments": ["j1-008-audit-standalone"]
+    },
+    "j1-full-blocked": {
+      "name": "TU-JY-J1: Full Policy Issuance Journey (BLOCKED)",
+      "description": "BLOCKED — run only after FE-2078, HD, UW route registration complete",
+      "segments": [
+        "preconditions",
+        "j1-001-broker-login",
+        "j1-002-create-quotation"
+      ]
+    }
+  },
+  "bouquets": {
+    "j1-audit-only": {
+      "name": "J1 Audit Check (RUNNABLE NOW)",
+      "mode": "sequential",
+      "journeys": ["j1-audit-only"]
+    },
+    "j1-full": {
+      "name": "J1 Full Journey (BLOCKED)",
+      "mode": "sequential",
+      "journeys": ["j1-full-blocked"]
+    }
+  }
+}

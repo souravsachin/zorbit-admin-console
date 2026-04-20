@@ -13,11 +13,11 @@ export default function PCG4SetupPageNew() {
       moduleId="pcg4"
       moduleName="PCG4 (Products)"
       icon={Package}
-      seedEndpoint="/api/app/pcg4/api/v1/G/pcg4/seed"
-      demoSeedEndpoint="/api/app/pcg4/api/v1/G/pcg4/seed/demo"
-      demoFlushEndpoint="/api/app/pcg4/api/v1/G/pcg4/seed/demo"
-      flushEndpoint="/api/app/pcg4/api/v1/G/pcg4/seed/all"
-      healthEndpoint="/api/app/pcg4/api/v1/G/pcg4/health"
+      seedEndpoint="/api/pcg4/api/v1/G/pcg4/seed"
+      demoSeedEndpoint="/api/pcg4/api/v1/G/pcg4/seed/demo"
+      demoFlushEndpoint="/api/pcg4/api/v1/G/pcg4/seed/demo"
+      flushEndpoint="/api/pcg4/api/v1/G/pcg4/seed/all"
+      healthEndpoint="/api/pcg4/api/v1/G/pcg4/health"
     />
   );
 }

@@ -120,7 +120,7 @@ const PCG4ConfiguratorPage: React.FC = () => {
           const result = await pcg4ConfiguratorApi.createConfig(orgId, updated);
           const configId = result?.hashId || result?.id;
           if (configId) {
-            navigate(`/O/${orgId}/app/pcg4/configurations/${configId}`, { replace: true });
+            navigate(`/m/pcg4/configs/${configId}`, { replace: true });
           }
           setConfiguration({ ...updated, id: configId });
         }
@@ -219,7 +219,7 @@ const PCG4ConfiguratorPage: React.FC = () => {
           <p className="text-sm text-red-500 mb-4">{error}</p>
           <button
             type="button"
-            onClick={() => navigate(`/O/${orgId}/app/pcg4/configurations`)}
+            onClick={() => navigate(`/m/pcg4/configs`)}
             className="px-4 py-2 text-sm font-medium bg-orange-500 text-white rounded-md hover:bg-orange-600"
           >
             Back to Dashboard
@@ -247,7 +247,7 @@ const PCG4ConfiguratorPage: React.FC = () => {
         </div>
         <button
           type="button"
-          onClick={() => navigate(`/O/${orgId}/app/pcg4/configurations`)}
+          onClick={() => navigate(`/m/pcg4/configs`)}
           className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
         >
           Back to Dashboard

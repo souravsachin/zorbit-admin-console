@@ -36,5 +36,17 @@
       "all": "1.0"
     },
     "last_reapply": "2026-04-13"
+  },
+  {
+    "skill_id": "1028",
+    "skill_name": "Message Echo Protocol",
+    "sections": {
+      "Protocol": "1.1",
+      "Format": "1.1",
+      "Counter Rules": "1.1",
+      "Examples": "1.1"
+    },
+    "last_reapply": "2026-04-19",
+    "note": "Reapplied post-compaction 2026-04-19. Counter resets to MSG-001 post-compaction."
   }
 ]

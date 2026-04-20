@@ -141,7 +141,7 @@ const PCG4DashboardPage: React.FC = () => {
 
   const handleCloned = (newId: string) => {
     setTemplatePickerOpen(false);
-    navigate(`/O/${orgId}/app/pcg4/configurations/${newId}`);
+    navigate(`/m/pcg4/configs/${newId}`);
   };
 
   // ---------- Render ----------
@@ -157,7 +157,7 @@ const PCG4DashboardPage: React.FC = () => {
           </p>
         </div>
         <button
-          onClick={() => navigate(`/O/${orgId}/app/pcg4/configurations/new`)}
+          onClick={() => navigate(`/m/pcg4/configs/new`)}
           data-testid="pcg4-new-config"
           className="inline-flex items-center px-5 py-2.5 rounded-lg bg-primary-600 text-white font-medium text-sm hover:bg-primary-700 transition-colors shadow-sm"
         >
@@ -228,7 +228,7 @@ const PCG4DashboardPage: React.FC = () => {
                 Create your first product configuration to get started.
               </p>
               <button
-                onClick={() => navigate(`/O/${orgId}/app/pcg4/configurations/new`)}
+                onClick={() => navigate(`/m/pcg4/configs/new`)}
                 className="inline-flex items-center px-4 py-2 rounded-lg bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 transition-colors"
               >
                 <Plus size={16} className="mr-2" />
@@ -272,7 +272,7 @@ const PCG4DashboardPage: React.FC = () => {
                         <div className="flex items-center justify-end space-x-1">
                           <button
                             title="Edit"
-                            onClick={() => navigate(`/O/${orgId}/app/pcg4/configurations/${cfg.hashId}`)}
+                            onClick={() => navigate(`/m/pcg4/configs/${cfg.hashId}`)}
                             className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-500 hover:text-primary-600"
                           >
                             <Edit3 size={16} />
@@ -281,7 +281,7 @@ const PCG4DashboardPage: React.FC = () => {
                             title="Clone"
                             onClick={() => {
                               // Quick clone without template picker
-                              navigate(`/O/${orgId}/app/pcg4/configurations/${cfg.hashId}?clone=true`);
+                              navigate(`/m/pcg4/configs/${cfg.hashId}?clone=true`);
                             }}
                             className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-500 hover:text-blue-600"
                           >
@@ -338,7 +338,7 @@ const PCG4DashboardPage: React.FC = () => {
               </button>
 
               <button
-                onClick={() => navigate(`/O/${orgId}/app/pcg4/encounters`)}
+                onClick={() => navigate(`/m/pcg4/encounters`)}
                 className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors border border-gray-200 dark:border-gray-700"
               >
                 <BookOpen size={18} className="text-emerald-600 flex-shrink-0" />

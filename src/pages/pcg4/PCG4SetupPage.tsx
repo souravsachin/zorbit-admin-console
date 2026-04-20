@@ -225,7 +225,7 @@ const PCG4SetupPage: React.FC = () => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
-            onClick={() => navigate('/app/pcg4/configurations')}
+            onClick={() => navigate('/m/pcg4/configs')}
             className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             title="Back to Product Catalog"
           >

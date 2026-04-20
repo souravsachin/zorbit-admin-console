@@ -1,0 +1,161 @@
+{
+  "_meta": {
+    "suite": "Zorbit Platform Gate Checks — L7 Browser UI (L0-L6 via shell script)",
+    "layer": "L7 — Browser UI Gate",
+    "description": "Run L0-L6 first via: testing/e2e-standalone-bundle/scripts/zorbit-gate-checks-L0-L6.sh (on ARM server). L7 = browser-level UI verification via Playwright.",
+    "gate_map": {
+      "L0": "Docker containers, networks, port bindings — zorbit-gate-checks-L0-L6.sh",
+      "L1": "Service health (all /health → 200) — zorbit-gate-checks-L0-L6.sh",
+      "L2": "Auth & JWT structure (login, privileges array non-empty) — zorbit-gate-checks-L0-L6.sh",
+      "L3": "Kafka topics exist, consumer groups assigned with hyphened topic names — zorbit-gate-checks-L0-L6.sh",
+      "L4": "Module registry: 19 modules READY, manifests have navigation.sections — zorbit-gate-checks-L0-L6.sh",
+      "L5": "Kafka event flow E2E: publish → nav logs 'Cached nav for module' within 30s — zorbit-gate-checks-L0-L6.sh",
+      "L6": "Navigation /menu: stale=false, sections>0, expected sections present — zorbit-gate-checks-L0-L6.sh",
+      "L7": "Browser UI: sidebar shows database menu, sections visible, menuSource='database' — this file"
+    },
+    "kiwi": {
+      "url": "https://kiwi.scalatics.com",
+      "username": "truptime",
+      "password": "TruUptime@2026",
+      "run_id": 11
+    },
+    "created": "2026-04-17",
+    "updated": "2026-04-19"
+  },
+  "baseUrl": "https://zorbit-uat.onezippy.ai",
+  "credentials": {
+    "superadmin": {
+      "email": "s@onezippy.ai",
+      "password": "s@2021#cz"
+    }
+  },
+  "viewport": { "width": 1440, "height": 900 },
+  "defaults": {
+    "timeout": 15000,
+    "waitAfterAction": 2000,
+    "waitForNetworkIdle": false
+  },
+  "segments": {
+    "login-pin": {
+      "name": "Login + Pin Sidebar",
+      "steps": [
+        { "action": "voice", "text": "Gate L7 Browser UI checks starting. Prerequisite: L0 through L6 shell gates must have passed." },
+        { "action": "navigate", "url": "/login", "description": "TU-LG-001: Open login page" },
+        { "action": "screenshot", "value": "gate-LG001-login-page.png" },
+        { "action": "assertVisible", "selector": "input[type='email']", "description": "TU-LG-001: Email field present" },
+        { "action": "fill", "selector": "input[type='email']", "value": "s@onezippy.ai" },
+        { "action": "fill", "selector": "input[type='password']", "value": "s@2021#cz" },
+        { "action": "click", "selector": "button[type='submit']", "description": "TU-LG-001: Sign in" },
+        { "action": "wait", "timeout": 4000 },
+        { "action": "assertUrl", "value": "/dashboard", "description": "TU-LG-001: Redirected to dashboard" },
+        { "action": "screenshot", "value": "gate-LG001-logged-in.png" },
+        { "action": "click", "selector": "button[title='Toggle sidebar']", "description": "Open sidebar" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "click", "selector": "button[title='Unlock sidebar (drawer mode)']", "optional": true },
+        { "action": "wait", "timeout": 500 },
+        { "action": "click", "selector": "button[title='Lock sidebar open']", "optional": true },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "screenshot", "value": "gate-L7-sidebar-pinned.png" },
+        { "action": "voice", "text": "Login successful. Sidebar pinned. Starting L7 browser UI gate checks." }
+      ]
+    },
+    "l7-sidebar-source": {
+      "name": "L7.1 — Sidebar menuSource = database",
+      "description": "Verify the sidebar footer shows 'database' source, meaning the full Kafka pipeline has delivered menu data.",
+      "steps": [
+        { "action": "voice", "text": "L7.1: Verifying menuSource indicator shows database, not static or fallback." },
+        { "action": "navigate", "url": "/dashboard", "description": "L7.1: Dashboard" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertVisible", "selector": "text=Dashboard", "description": "L7.1: Dashboard heading" },
+        { "action": "assertNotVisible", "selector": "text=static", "description": "L7.1: menuSource must NOT be static", "optional": true },
+        { "action": "assertNotVisible", "selector": "text=fallback", "description": "L7.1: menuSource must NOT be fallback", "optional": true },
+        { "action": "assertVisible", "selector": "text=database", "description": "L7.1: menuSource = database (pipeline working)" },
+        { "action": "fullPageScreenshot", "value": "gate-L7.1-menu-source-database.png" },
+        { "action": "voice", "text": "L7.1 passed. menuSource is database — Kafka pipeline is delivering menu data." }
+      ]
+    },
+    "l7-sidebar-sections": {
+      "name": "L7.2 — Sidebar Sections Visible",
+      "description": "All expected module sections must be visible in the sidebar: Identity, Navigation, Event Bus, Audit.",
+      "steps": [
+        { "action": "voice", "text": "L7.2: Checking all expected module sections visible in sidebar." },
+        { "action": "assertVisible", "selector": "text=Identity", "description": "L7.2: Identity section in sidebar" },
+        { "action": "assertVisible", "selector": "text=Navigation", "description": "L7.2: Navigation section in sidebar" },
+        { "action": "assertVisible", "selector": "text=Audit", "description": "L7.2: Audit section in sidebar" },
+        { "action": "screenshot", "value": "gate-L7.2-sidebar-sections.png" },
+        { "action": "voice", "text": "L7.2: Core module sections confirmed in sidebar." }
+      ]
+    },
+    "l7-sidebar-items": {
+      "name": "L7.3 — Sidebar Menu Items Clickable",
+      "description": "Click each core module section and verify the page loads without error.",
+      "steps": [
+        { "action": "voice", "text": "L7.3: Verifying core sidebar items are clickable and pages load." },
+        { "action": "click", "selector": "text=Identity", "description": "L7.3: Click Identity section" },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "screenshot", "value": "gate-L7.3-identity-expanded.png" },
+        { "action": "click", "selector": "text=Users", "description": "L7.3: Click Users under Identity", "optional": true },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertNotVisible", "selector": "text=Page Not Available", "description": "L7.3: Users page loads", "optional": true },
+        { "action": "screenshot", "value": "gate-L7.3-users-page.png" },
+        { "action": "voice", "text": "L7.3: Identity Users page accessible." },
+        { "action": "navigate", "url": "/dashboard", "description": "L7.3: Back to dashboard" },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "click", "selector": "text=Audit", "description": "L7.3: Click Audit section", "optional": true },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertNotVisible", "selector": "text=Page Not Available", "description": "L7.3: Audit section loads", "optional": true },
+        { "action": "screenshot", "value": "gate-L7.3-audit-page.png" },
+        { "action": "voice", "text": "L7.3: Sidebar item navigation verified." }
+      ]
+    },
+    "l7-nav-api-browser": {
+      "name": "L7.4 — Navigation Module Registry Admin Page",
+      "description": "The /navigation/modules page should show all 19 registered modules pulled from the registry.",
+      "steps": [
+        { "action": "voice", "text": "L7.4: Checking navigation admin page shows all registered modules." },
+        { "action": "navigate", "url": "/navigation/modules", "description": "L7.4: Module registry view" },
+        { "action": "wait", "timeout": 3000 },
+        { "action": "assertNotVisible", "selector": "text=Page Not Available", "optional": true },
+        { "action": "fullPageScreenshot", "value": "gate-L7.4-navigation-modules.png" },
+        { "action": "navigate", "url": "/navigation/menu", "description": "L7.4: Nav menu admin page" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "fullPageScreenshot", "value": "gate-L7.4-navigation-menu.png" },
+        { "action": "voice", "text": "L7.4: Navigation admin pages verified." }
+      ]
+    },
+    "l7-auth-pages": {
+      "name": "L7.5 — Authorization Pages Load",
+      "description": "Roles and privileges pages must load without error.",
+      "steps": [
+        { "action": "voice", "text": "L7.5: Authorization pages." },
+        { "action": "navigate", "url": "/roles", "description": "L7.5: Roles page" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "assertNotVisible", "selector": "text=Page Not Available", "optional": true },
+        { "action": "assertVisible", "selector": "text=Roles", "description": "L7.5: Roles heading" },
+        { "action": "fullPageScreenshot", "value": "gate-L7.5-roles.png" },
+        { "action": "voice", "text": "Gate L7 complete. All browser UI checks done." }
+      ]
+    }
+  },
+  "journeys": {
+    "gate-checks-l7": {
+      "name": "L7 Browser UI Gate",
+      "description": "Browser-level verification: sidebar source=database, sections visible, items clickable, nav admin pages load. Run AFTER L0-L6 shell gates pass.",
+      "segments": [
+        "login-pin",
+        "l7-sidebar-source",
+        "l7-sidebar-sections",
+        "l7-sidebar-items",
+        "l7-nav-api-browser",
+        "l7-auth-pages"
+      ]
+    }
+  },
+  "bouquets": {
+    "gate": {
+      "name": "L7 Browser Gate",
+      "mode": "sequential",
+      "journeys": ["gate-checks-l7"]
+    }
+  }
+}

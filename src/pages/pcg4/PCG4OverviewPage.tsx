@@ -317,7 +317,7 @@ const PCG4_SLIDES: Slide[] = [
         </div>
         <div className="bg-white/10 backdrop-blur rounded-lg p-3">
           <p className="font-semibold text-blue-300">REST API Grammar</p>
-          <p className="text-white/60 text-xs mt-1">/api/app/pcg4/v1/O/:orgId/configurations</p>
+          <p className="text-white/60 text-xs mt-1">/api/pcg4/api/v1/O/:orgId/configurations</p>
         </div>
         <div className="bg-white/10 backdrop-blur rounded-lg p-3">
           <p className="font-semibold text-amber-300">Event-Driven</p>
@@ -520,7 +520,7 @@ function LifecycleTab({ navigate }: { navigate: ReturnType<typeof useNavigate> }
                 )}
                 <button
                   onClick={() =>
-                    navigate(`/app/pcg4/configurations?status=${stage.status}`)
+                    navigate(`/m/pcg4/configs?status=${stage.status}`)
                   }
                   className={`flex-1 rounded-lg border-2 ${stage.borderColor} ${stage.bgColor} p-4 text-left hover:shadow-md transition-shadow group`}
                 >

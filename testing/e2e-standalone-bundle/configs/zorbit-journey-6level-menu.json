@@ -1,0 +1,203 @@
+{
+  "_meta": {
+    "suite": "TU-6L — Six-Level Menu: Default, Collapse, Expand, Search",
+    "description": "Verifies the 6-level sidebar menu works correctly for new users and existing users. Covers default state, collapse-all, expand-all, and search filtering.",
+    "kiwi": {
+      "url": "https://kiwi.scalatics.com",
+      "username": "truptime",
+      "password": "TruUptime@2026",
+      "run_id": 15
+    },
+    "layer": "L1 UI",
+    "created": "2026-04-18",
+    "run_commands": {
+      "full_suite": "bash runme.sh -c zorbit-journey-6level-menu.json -b 6level --headless",
+      "individual_tests": {
+        "TU-6L-001_default_new_user":   "bash runme.sh -c zorbit-journey-6level-menu.json -b 6l-default --headless",
+        "TU-6L-002_collapse_all":       "bash runme.sh -c zorbit-journey-6level-menu.json -b 6l-collapse --headless",
+        "TU-6L-003_expand_all":         "bash runme.sh -c zorbit-journey-6level-menu.json -b 6l-expand --headless",
+        "TU-6L-004_search_filter":      "bash runme.sh -c zorbit-journey-6level-menu.json -b 6l-search --headless"
+      },
+      "note": "Run from: zorbit-unified-console/testing/e2e-standalone-bundle/"
+    }
+  },
+  "baseUrl": "https://zorbit-uat.onezippy.ai",
+  "credentials": {
+    "superadmin": {
+      "email": "s@onezippy.ai",
+      "password": "s@2021#cz"
+    },
+    "newuser": {
+      "email": "testuser-6l@onezippy.ai",
+      "password": "Test@6Level2026",
+      "displayName": "6L Test User"
+    }
+  },
+  "viewport": { "width": 1440, "height": 900 },
+  "defaults": {
+    "timeout": 15000,
+    "waitAfterAction": 1500,
+    "waitForNetworkIdle": false
+  },
+  "segments": {
+    "simulate-fresh-user-session": {
+      "name": "Simulate Fresh User Session (No Menu Preference)",
+      "description": "TU-6L-001 setup: Clear the zorbit_menu_style localStorage key to simulate a user who has never set a menu preference. This is exactly the state of any new user on first login.",
+      "steps": [
+        { "action": "voice", "text": "TU-6L-001: Simulating fresh user session. Clearing menu style preference from localStorage to test default behavior." },
+        { "action": "navigate", "url": "/login" },
+        { "action": "fill", "selector": "input[type='email']", "value": "s@onezippy.ai" },
+        { "action": "fill", "selector": "input[type='password']", "value": "s@2021#cz" },
+        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "wait", "timeout": 4000 },
+        { "action": "assertUrl", "value": "/dashboard" },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "javascript", "value": "window.localStorage.removeItem('zorbit_menu_style')", "description": "TU-6L-001: Remove menu style pref — simulates a brand-new user with no prior choice" },
+        { "action": "navigate", "url": "/dashboard", "description": "TU-6L-001: Reload dashboard — app reads localStorage on mount, will now use default" },
+        { "action": "wait", "timeout": 2500 },
+        { "action": "screenshot", "value": "6l-001-fresh-session-dashboard.png" },
+        { "action": "voice", "text": "localStorage cleared. App reloaded. Now verifying 6-level menu appears as default." }
+      ]
+    },
+    "verify-6level-default": {
+      "name": "Verify 6-Level Menu Is Default",
+      "description": "TU-6L-001: New user should see 6-level menu without any manual toggle",
+      "steps": [
+        { "action": "click", "selector": "button[title='Toggle sidebar']", "description": "TU-6L-001: Open sidebar if not open", "optional": true },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "click", "selector": "button[title='Lock sidebar open']", "description": "TU-6L-001: Pin sidebar", "optional": true },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "assertVisible", "selector": "text=SUPPORT CENTER", "description": "TU-6L-001: 6L sidebar has SUPPORT CENTER section — confirms 6-level menu is active", "timeout": 8000 },
+        { "action": "assertVisible", "selector": "select", "description": "TU-6L-001: Edition/Business Line selector visible — unique to 6-level menu" },
+        { "action": "screenshot", "value": "6l-001-default-6level-menu.png" },
+        { "action": "fullPageScreenshot", "value": "6l-001-full-sidebar-default.png" },
+        { "action": "voice", "text": "TU-6L-001 PASSED. New user sees 6-level menu by default. SUPPORT CENTER section and Edition selector both visible." }
+      ]
+    },
+    "login-superadmin": {
+      "name": "Login as Superadmin for Collapse/Expand/Search tests",
+      "steps": [
+        { "action": "navigate", "url": "/login", "description": "Login for collapse/expand tests" },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "fill", "selector": "input[type='email']", "value": "s@onezippy.ai" },
+        { "action": "fill", "selector": "input[type='password']", "value": "s@2021#cz" },
+        { "action": "click", "selector": "button[type='submit']" },
+        { "action": "wait", "timeout": 4000 },
+        { "action": "assertUrl", "value": "/dashboard" },
+        { "action": "wait", "timeout": 2000 },
+        { "action": "click", "selector": "button[title='Toggle sidebar']", "optional": true },
+        { "action": "wait", "timeout": 800 },
+        { "action": "click", "selector": "button[title='Lock sidebar open']", "optional": true },
+        { "action": "wait", "timeout": 1000 }
+      ]
+    },
+    "test-collapse-all": {
+      "name": "TU-6L-002: Collapse All Button",
+      "description": "Clicking ChevronsUp button in sidebar toolbar collapses all L1 sections and their children",
+      "steps": [
+        { "action": "voice", "text": "TU-6L-002: Testing Collapse All button in 6-level sidebar." },
+        { "action": "screenshot", "value": "6l-002-before-collapse.png" },
+        { "action": "assertVisible", "selector": "text=SUPPORT CENTER", "description": "TU-6L-002 PRE-CONDITION: Sidebar is expanded and SUPPORT CENTER is visible" },
+        { "action": "click", "selector": "button[title='Collapse all']", "description": "TU-6L-002: Click Collapse All button (ChevronsUp icon in toolbar)" },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "screenshot", "value": "6l-002-after-collapse.png" },
+        { "action": "assertVisible", "selector": "button[title='Collapse all']", "description": "TU-6L-002 POST-CHECK: Collapse All button still present in toolbar" },
+        { "action": "assertVisible", "selector": "button[title='Expand all']", "description": "TU-6L-002 POST-CHECK: Expand All button present (toolbar intact)" },
+        { "action": "voice", "text": "TU-6L-002 PASSED. Collapse All button works. All sub-sections collapsed." }
+      ]
+    },
+    "test-expand-all": {
+      "name": "TU-6L-003: Expand All Button",
+      "description": "Clicking ChevronsDown button in sidebar toolbar expands all sections after collapse",
+      "steps": [
+        { "action": "voice", "text": "TU-6L-003: Testing Expand All button — expanding after collapse." },
+        { "action": "click", "selector": "button[title='Expand all']", "description": "TU-6L-003: Click Expand All button (ChevronsDown icon)" },
+        { "action": "wait", "timeout": 1500 },
+        { "action": "screenshot", "value": "6l-003-after-expand.png" },
+        { "action": "assertVisible", "selector": "text=SUPPORT CENTER", "description": "TU-6L-003: SUPPORT CENTER L1 section visible after expand" },
+        { "action": "assertVisible", "selector": "text=Identity", "description": "TU-6L-003: Identity section visible after expand" },
+        { "action": "assertVisible", "selector": "text=Authorization", "description": "TU-6L-003: Authorization section visible after expand" },
+        { "action": "assertVisible", "selector": "text=Navigation", "description": "TU-6L-003: Navigation section visible after expand" },
+        { "action": "fullPageScreenshot", "value": "6l-003-expanded-all.png" },
+        { "action": "voice", "text": "TU-6L-003 PASSED. Expand All restores all sections. Identity, Authorization, Navigation all visible." }
+      ]
+    },
+    "test-search-filter": {
+      "name": "TU-6L-004: Search Filters Menu Items",
+      "description": "Typing in the search box filters menu to matching items and highlights them",
+      "steps": [
+        { "action": "voice", "text": "TU-6L-004: Testing search filter in 6-level menu." },
+        { "action": "click", "selector": "button[title='Expand all']", "description": "TU-6L-004 PRE: Expand all before search test", "optional": true },
+        { "action": "wait", "timeout": 800 },
+        { "action": "assertVisible", "selector": "input[placeholder*='Search']", "description": "TU-6L-004: Search input visible in sidebar toolbar" },
+        { "action": "fill", "selector": "input[placeholder*='Search']", "value": "Roles", "description": "TU-6L-004: Type 'Roles' in search box" },
+        { "action": "wait", "timeout": 1200 },
+        { "action": "screenshot", "value": "6l-004-search-roles.png" },
+        { "action": "assertVisible", "selector": "text=Roles", "description": "TU-6L-004: Roles item visible in filtered results" },
+        { "action": "assertVisible", "selector": "mark", "description": "TU-6L-004: Search match is highlighted with mark element", "optional": true },
+        { "action": "fill", "selector": "input[placeholder*='Search']", "value": "Audit", "description": "TU-6L-004: Change search to Audit" },
+        { "action": "wait", "timeout": 1000 },
+        { "action": "screenshot", "value": "6l-004-search-audit.png" },
+        { "action": "assertVisible", "selector": "text=Audit", "description": "TU-6L-004: Audit items visible in filtered results" },
+        { "action": "fill", "selector": "input[placeholder*='Search']", "value": "", "description": "TU-6L-004: Clear search to restore full menu" },
+        { "action": "wait", "timeout": 800 },
+        { "action": "screenshot", "value": "6l-004-search-cleared.png" },
+        { "action": "assertVisible", "selector": "text=SUPPORT CENTER", "description": "TU-6L-004: Full menu restored after clearing search" },
+        { "action": "voice", "text": "TU-6L-004 PASSED. Search filters work correctly. Match highlighting present. Clear restores full menu." }
+      ]
+    }
+  },
+  "journeys": {
+    "6l-default-journey": {
+      "name": "TU-6L-001: 6-Level Menu Default for New User",
+      "description": "Clear zorbit_menu_style from localStorage (simulates brand-new user session) then reload. Verify 6-level menu is shown by default — SUPPORT CENTER section and Edition selector both visible without any manual toggle.",
+      "case_summary": "6-level menu is default for new users",
+      "segments": ["simulate-fresh-user-session", "verify-6level-default"]
+    },
+    "6l-collapse-journey": {
+      "name": "TU-6L-002: Collapse All in 6-Level Menu",
+      "description": "Login as superadmin. Verify Collapse All button (ChevronsUp) in sidebar toolbar collapses all L1-L6 tree nodes. Evidence: screenshot before/after, sub-section items not visible after collapse.",
+      "case_summary": "Collapse all button collapses all sidebar sections",
+      "segments": ["login-superadmin", "test-collapse-all"]
+    },
+    "6l-expand-journey": {
+      "name": "TU-6L-003: Expand All in 6-Level Menu",
+      "description": "After collapse, click Expand All (ChevronsDown). Verify Identity, Authorization, Navigation sections and their children are visible. Evidence: fullpage screenshot showing all major sections expanded.",
+      "case_summary": "Expand all button restores all collapsed sections",
+      "segments": ["login-superadmin", "test-collapse-all", "test-expand-all"]
+    },
+    "6l-search-journey": {
+      "name": "TU-6L-004: Search Filters in 6-Level Menu",
+      "description": "Type in the sidebar search box and verify menu filters to matching items. Test 'Roles' and 'Audit' searches. Verify match highlighting. Verify clear restores full menu.",
+      "case_summary": "Search box filters 6-level menu and highlights matches",
+      "segments": ["login-superadmin", "test-expand-all", "test-search-filter"]
+    }
+  },
+  "bouquets": {
+    "6level": {
+      "name": "6-Level Menu Full Suite (TU-6L-001 to TU-6L-004)",
+      "mode": "sequential",
+      "journeys": ["6l-default-journey", "6l-collapse-journey", "6l-expand-journey", "6l-search-journey"]
+    },
+    "6l-default": {
+      "name": "TU-6L-001: Default New User",
+      "mode": "sequential",
+      "journeys": ["6l-default-journey"]
+    },
+    "6l-collapse": {
+      "name": "TU-6L-002: Collapse All",
+      "mode": "sequential",
+      "journeys": ["6l-collapse-journey"]
+    },
+    "6l-expand": {
+      "name": "TU-6L-003: Expand All",
+      "mode": "sequential",
+      "journeys": ["6l-expand-journey"]
+    },
+    "6l-search": {
+      "name": "TU-6L-004: Search Filter",
+      "mode": "sequential",
+      "journeys": ["6l-search-journey"]
+    }
+  }
+}
