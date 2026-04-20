@@ -27,4 +27,5 @@ export const API_CONFIG = {
   INTEGRATION_URL: import.meta.env.VITE_INTEGRATION_URL || '/api/integration',
   SECRETS_URL: import.meta.env.VITE_SECRETS_URL || '/api/secrets',
   MODULE_REGISTRY_URL: import.meta.env.VITE_MODULE_REGISTRY_URL || '/api/module-registry',
+  DEPLOYMENT_REGISTRY_URL: import.meta.env.VITE_DEPLOYMENT_REGISTRY_URL || '/api/deployment-registry',
 };

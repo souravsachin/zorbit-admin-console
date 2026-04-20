@@ -39,6 +39,9 @@ const PageComponents: Record<string, React.ComponentType<any>> = {
 
   // Module registry / admin
   ModuleRegistryPage:        React.lazy(() => import('../../pages/admin/ModuleRegistryPage')),
+
+  // Deployment Registry (US-DR-2200 — Phase 2)
+  DeploymentEnvironmentsPage: React.lazy(() => import('../../pages/deployment-registry/DeploymentEnvironmentsPage')),
   LicensingPage:             React.lazy(() => import('../../pages/admin/LicensingPage')),
   SitemapPage:               React.lazy(() => import('../../pages/admin/SitemapPage')),
   DeveloperPage:             React.lazy(() => import('../../pages/admin/DeveloperPage')),
@@ -72,6 +75,11 @@ const PageComponents: Record<string, React.ComponentType<any>> = {
 
   // Manifest-v2 DB auto-page — rendered from manifest.db
   DbOperationsPanel:         React.lazy(() => import('../module-db/DbOperationsPanel')),
+
+  // Platform-supplied "no dedicated screen yet" fallback.
+  // Use when a nav item should appear in the sidebar but the UI isn't built.
+  // Shows a friendly explanation + "report missing page" action.
+  PlaceholderPage:           React.lazy(() => import('./PlaceholderPage')),
 
   // Manifest-v2 composition auto-page (US-MX-2095) — orchestrates form_builder + datatable + doc_generator
   // for any `/m/{slug}/{resource}/{new|list|:id}` route declared in `composition.resources`.
