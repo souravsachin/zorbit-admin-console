@@ -144,7 +144,17 @@ const FORM_BUILDER_COMPONENTS: ComponentMap = {
 };
 
 // ---- zorbit-pfs-datatable --------------------------------------------------
+//
+// Cross-module exports (SPEC-cross-module-feComponent.md v1.0 §"Component
+// registration contract"). Consumers reference these as
+// `zorbit-pfs-datatable:<ComponentName>` from their manifest.
+//
+// `DataTable` is the headline export — config-driven list/detail surface
+// per SPEC-datatable-parameters.md v1.0. The source lives inside the
+// unified-console bundle for now (Phase C bundling decision); the
+// resolver contract is identical regardless of where the source sits.
 const DATATABLE_COMPONENTS: ComponentMap = {
+  DataTable:                 React.lazy(() => import('./ConfigurableDataTable')),
   DataTableDemoPage:         React.lazy(() => import('../../pages/data-table-demo/DataTableDemoPage')),
 };
 

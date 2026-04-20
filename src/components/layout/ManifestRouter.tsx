@@ -17,6 +17,11 @@ interface NavItem {
   icon?: string;
   privilege?: string;
   feComponent?: string | null;
+  // SPEC-cross-module-feComponent.md v1.0 — config block passed to the
+  // mounted component so modules can parameterise cross-module components
+  // (e.g. DataTable columns, FormRenderer templateId) purely by manifest.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  feProps?: Record<string, any>;
   sortOrder?: number;
 }
 interface NavSection {
@@ -242,7 +247,22 @@ const ManifestRouter: React.FC = () => {
     return <StubNoMatch path={path} slug={slug} />;
   }
 
-  const { item, section } = match;
+  const { item: menuItem, section } = match;
+  // The navigation service's /menu response doesn't yet forward `feComponent`
+  // / `feProps` for every module, so we enrich the matched item from the
+  // authoritative manifest (fetched in parallel). Manifest-sourced fields win;
+  // menu-sourced fields are the fallback. This path will simplify once the
+  // navigation assembler is updated to carry those fields end-to-end.
+  let item: NavItem = menuItem;
+  if (manifest && manifest.navigation?.sections) {
+    for (const mSec of manifest.navigation.sections) {
+      const hit = (mSec.items || []).find((i) => i.feRoute === menuItem.feRoute);
+      if (hit) {
+        item = { ...menuItem, ...hit } as NavItem;
+        break;
+      }
+    }
+  }
   // Pass currentModuleId so unqualified `feComponent` strings can resolve
   // against the owning module's registry (per SPEC-cross-module-feComponent
   // §"Runtime behaviour"). Qualified `<moduleId>:X` / `@platform:X` strings
@@ -262,7 +282,14 @@ const ManifestRouter: React.FC = () => {
       }}
     >
       <Suspense fallback={<div className="p-6 text-gray-500 text-sm">Loading module…</div>}>
-        <Component />
+        {/*
+          Forward `feProps` to the component per SPEC-cross-module-feComponent
+          §"Runtime behaviour" — cross-module components (DataTable,
+          FormRenderer, …) rely on manifest-supplied config. Spread both as a
+          nested `feProps` object (preferred) AND flat fields so legacy
+          component signatures keep working.
+        */}
+        <Component feProps={item.feProps} {...(item.feProps || {})} />
       </Suspense>
     </ModuleContextProvider>
   );

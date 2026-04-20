@@ -30,6 +30,12 @@ export interface ManifestData {
         feRoute: string;
         beRoute?: string;
         feComponent?: string | null;
+        // SPEC-cross-module-feComponent.md v1.0 — config passed to a
+        // cross-module component (e.g. DataTable columns, FormRenderer
+        // templateId). Opaque to the router; shape is owned by the target
+        // component's SPEC.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        feProps?: Record<string, any>;
         icon?: string;
         privilege?: string;
       }>;
