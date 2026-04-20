@@ -138,6 +138,9 @@ export interface MenuNodeData {
   // In database mode, each top-level node carries placement metadata from the
   // module's manifest. Static mode nodes omit this.
   placement?: MenuNodePlacement;
+  // feComponent from the manifest — needed by Guide-grouping logic in
+  // Sidebar6Level (US-GU-2101). Not used for rendering directly.
+  feComponent?: string | null;
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────

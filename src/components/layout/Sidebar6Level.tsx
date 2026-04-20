@@ -224,7 +224,89 @@ interface ApiSection {
     edition?: EditionMeta | null;
     capabilityArea?: string;
   };
-  items?: Array<{ label: string; feRoute: string; icon: string; privilege: string }>;
+  items?: Array<{ label: string; feRoute: string; icon: string; privilege: string; feComponent?: string | null }>;
+}
+
+// ─── Guide grouping (US-GU-2101) ───────────────────────────────────────
+//
+// Every module that declares a `guide` block (per SPEC-module-manifest §5)
+// ships six nav items with these feComponent names. The sidebar collects
+// them under a single "Guide" parent node so the flat 6-siblings layout
+// (Intro / Presentation / Lifecycle / Videos / Resources / Pricing) does
+// not drown out the module's actual working pages.
+//
+// Detection is by feComponent — explicit, avoids false positives from any
+// page that happens to be labelled "Pricing" or "Videos".
+const GUIDE_FE_COMPONENTS = new Set([
+  'GuideIntroView',
+  'GuideSlideDeck',
+  'GuideLifecycle',
+  'GuideVideos',
+  'GuideDocs',
+  'GuidePricing',
+]);
+
+// Canonical display order inside the Guide parent.
+const GUIDE_COMPONENT_ORDER: Record<string, number> = {
+  GuideIntroView:  1,
+  GuideSlideDeck:  2,
+  GuideLifecycle:  3,
+  GuideVideos:     4,
+  GuideDocs:       5,
+  GuidePricing:    6,
+};
+
+/**
+ * Walk a module's leaf items. If two or more are "guide" items (identified
+ * by feComponent), pull them out of the flat list and insert a single
+ * collapsible Guide parent in the position of the FIRST guide item. The
+ * six children appear under it in the canonical order above.
+ *
+ * Non-guide items keep their relative order. When fewer than 2 guide items
+ * are present, the input is returned unchanged (no wrapping for 0/1 items —
+ * a single-child "Guide" parent would be visual noise).
+ */
+function groupGuideItems(
+  items: MenuNodeData[],
+  parentLevel: number,
+  wrapperIdPrefix: string,
+): MenuNodeData[] {
+  const guideChildren: MenuNodeData[] = [];
+  const result: MenuNodeData[] = [];
+  let insertIdx = -1;
+
+  for (const item of items) {
+    const fc = item.feComponent || '';
+    if (GUIDE_FE_COMPONENTS.has(fc)) {
+      if (insertIdx === -1) insertIdx = result.length;
+      guideChildren.push({ ...item, level: parentLevel + 1 });
+    } else {
+      result.push(item);
+    }
+  }
+
+  if (guideChildren.length < 2) return items; // don't wrap 0/1 items
+
+  guideChildren.sort(
+    (a, b) =>
+      (GUIDE_COMPONENT_ORDER[a.feComponent || ''] ?? 99) -
+      (GUIDE_COMPONENT_ORDER[b.feComponent || ''] ?? 99),
+  );
+
+  const wrapper: MenuNodeData = {
+    id: `${wrapperIdPrefix}-guide`,
+    label: 'Guide',
+    icon: 'BookOpen',
+    route: null,
+    privilegeCode: null,
+    level: parentLevel,
+    children: guideChildren,
+  };
+
+  // Insert wrapper at the position of the first removed guide item so the
+  // Guide block appears where the author placed the first guide entry.
+  result.splice(insertIdx, 0, wrapper);
+  return result;
 }
 
 function prettyModuleName(moduleId: string): string {
@@ -371,14 +453,8 @@ function buildDbScaffold(sections: ApiSection[], selectedEdition: BusinessLine):
                 level: 3,
                 children: l3.sections
                   .sort((a, b) => (a.placement?.sortOrder ?? 999) - (b.placement?.sortOrder ?? 999))
-                  .map((sec): MenuNodeData => ({
-                    id: sec.moduleId,
-                    label: sec.moduleName || prettyModuleName(sec.moduleId),
-                    icon: '',
-                    route: null,
-                    privilegeCode: null,
-                    level: 4,
-                    children: (sec.items || []).map((item, idx) => ({
+                  .map((sec): MenuNodeData => {
+                    const flat: MenuNodeData[] = (sec.items || []).map((item, idx) => ({
                       id: `${sec.moduleId}-${idx}`,
                       label: item.label,
                       icon: item.icon || 'circle',
@@ -386,8 +462,18 @@ function buildDbScaffold(sections: ApiSection[], selectedEdition: BusinessLine):
                       privilegeCode: item.privilege || null,
                       level: 5,
                       children: [],
-                    })),
-                  })),
+                      feComponent: item.feComponent ?? null,
+                    }));
+                    return {
+                      id: sec.moduleId,
+                      label: sec.moduleName || prettyModuleName(sec.moduleId),
+                      icon: '',
+                      route: null,
+                      privilegeCode: null,
+                      level: 4,
+                      children: groupGuideItems(flat, 5, sec.moduleId),
+                    };
+                  }),
               })),
           };
         }
@@ -395,6 +481,19 @@ function buildDbScaffold(sections: ApiSection[], selectedEdition: BusinessLine):
         // children directly (each section a module L2, items become L3).
         const sectionsFlat: ApiSection[] = Array.from(l2.l3Buckets.values()).flatMap((b) => b.sections);
         sectionsFlat.sort((a, b) => (a.placement?.sortOrder ?? 999) - (b.placement?.sortOrder ?? 999));
+        const l2Id = l2.id;
+        const flatChildren: MenuNodeData[] = sectionsFlat.flatMap((sec) =>
+          (sec.items || []).map((item, idx) => ({
+            id: `${sec.moduleId}-${idx}`,
+            label: item.label,
+            icon: item.icon || 'circle',
+            route: item.feRoute || null,
+            privilegeCode: item.privilege || null,
+            level: 3,
+            children: [] as MenuNodeData[],
+            feComponent: item.feComponent ?? null,
+          })),
+        );
         return {
           id: l2.id,
           label: l2.label,
@@ -402,17 +501,7 @@ function buildDbScaffold(sections: ApiSection[], selectedEdition: BusinessLine):
           route: null,
           privilegeCode: null,
           level: 2,
-          children: sectionsFlat.flatMap((sec) =>
-            (sec.items || []).map((item, idx) => ({
-              id: `${sec.moduleId}-${idx}`,
-              label: item.label,
-              icon: item.icon || 'circle',
-              route: item.feRoute || null,
-              privilegeCode: item.privilege || null,
-              level: 3,
-              children: [],
-            })),
-          ),
+          children: groupGuideItems(flatChildren, 3, l2Id),
         };
       }),
   }));
