@@ -159,6 +159,22 @@ export interface DataTableFeProps {
   tableActions?: ActionSpec[];
   rowActions?: ActionSpec[];
   roleVariants?: Record<string, RoleVariant | SrcRef>;
+  /**
+   * Parameter-driven primary key field on each row. Used for React keys
+   * and action callbacks. Defaults to 'id'. Modules whose rows use a
+   * domain-specific id (e.g. quotationId, claimId, policyNumber) should
+   * set this in the manifest feProps.
+   */
+  primaryKeyField?: string;
+  /**
+   * Parameter-driven envelope field in the list-response JSON that holds
+   * the array of rows. Defaults to 'records'. Common module-specific
+   * values: 'items', 'users', 'quotations', 'claims', 'rows', 'data'.
+   * The component also inspects a known allow-list of generic envelope
+   * names as a last-resort fallback so modules that don't set this still
+   * render — but new modules should pass this explicitly.
+   */
+  dataField?: string;
 }
 
 export interface Row {

@@ -12,7 +12,7 @@ export function getByPath(row: any, path: string): any {
   return path.split('.').reduce((acc, k) => (acc == null ? acc : acc[k]), row);
 }
 
-/** Template `"/m/uw/quotations/{quotationId}"` with row fields. */
+/** Template `"/m/{moduleSlug}/records/{recordId}"` with row fields. */
 export function fillTemplate(tpl: string, row: any, extra?: Record<string, unknown>): string {
   return tpl.replace(/\{([^}]+)\}/g, (_m, key) => {
     if (extra && key in extra) return String(extra[key] ?? '');

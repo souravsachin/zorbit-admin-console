@@ -47,7 +47,7 @@ export interface FileViewerPii {
 }
 
 export interface FileViewerAudit {
-  /** Caller-declared audit eventType, e.g. "hi_retail_quotation.policy.viewed".
+  /** Caller-declared audit eventType, e.g. "{moduleSlug}.{entityType}.viewed".
    *  When present, the component POSTs a view-event to the file_viewer BE on
    *  successful render. The canonical `platform.file.viewed` event is
    *  always emitted — this adds the caller's eventType on top of that. */

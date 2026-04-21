@@ -104,6 +104,8 @@ interface DataTableProps {
   tableActions?: DataTableFeProps['tableActions'];
   rowActions?: DataTableFeProps['rowActions'];
   roleVariants?: DataTableFeProps['roleVariants'];
+  primaryKeyField?: DataTableFeProps['primaryKeyField'];
+  dataField?: DataTableFeProps['dataField'];
 }
 
 /* -------------------------------------------------------------------------- */
@@ -162,6 +164,8 @@ const ConfigurableDataTable: React.FC<DataTableProps> = (props) => {
       tableActions: props.tableActions,
       rowActions: props.rowActions,
       roleVariants: props.roleVariants,
+      primaryKeyField: props.primaryKeyField,
+      dataField: props.dataField,
     };
   }, [props]);
 
@@ -296,11 +300,14 @@ const ConfigurableDataTable: React.FC<DataTableProps> = (props) => {
       .get(url, { params })
       .then((res) => {
         if (cancelled) return;
+        // Parameter-driven envelope field (effective.dataField) wins;
+        // otherwise fall back to 'records' and a small generic allow-list
+        // to keep legacy callers working until their manifests declare it.
+        const envelopeKey = effective.dataField || 'records';
         const items: any[] = Array.isArray(res.data)
           ? res.data
-          : res.data?.items ||
-            res.data?.users ||
-            res.data?.quotations ||
+          : res.data?.[envelopeKey] ||
+            res.data?.items ||
             res.data?.rows ||
             res.data?.data ||
             [];
@@ -578,10 +585,12 @@ const ConfigurableDataTable: React.FC<DataTableProps> = (props) => {
   }, [actionMenu]);
 
   function rowIdOf(row: Row): string | number {
+    // Parameter-driven primary key wins; generic fallbacks only as last resort.
+    const pkField = effective.primaryKeyField || 'id';
     return (
+      (row as any)[pkField] ||
       (row as any).id ||
       (row as any).hashId ||
-      (row as any).quotationId ||
       (row as any)._id ||
       ''
     );
@@ -996,12 +1005,14 @@ const ConfigurableDataTable: React.FC<DataTableProps> = (props) => {
                 </tr>
               )}
               {visibleRows.map((row, idx) => {
+                // Parameter-driven primary key wins; then a minimal generic
+                // fallback set (id → hashId → _id) and finally the array idx.
+                const pkField = effective.primaryKeyField || 'id';
                 const rowKey =
+                  (row as any)[pkField] ||
                   (row as any).id ||
-                  (row as any).quotationId ||
                   (row as any).hashId ||
                   (row as any)._id ||
-                  (row as any).quotation_number ||
                   idx;
                 return (
                   <tr

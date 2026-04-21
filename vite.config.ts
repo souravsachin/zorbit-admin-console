@@ -122,6 +122,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/doc-generator/, ''),
       },
+      '/api/file-viewer': {
+        target: 'http://localhost:3030',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/file-viewer/, ''),
+      },
       '/api/notification': {
         target: 'http://localhost:3026',
         changeOrigin: true,

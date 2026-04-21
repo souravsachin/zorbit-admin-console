@@ -8,8 +8,8 @@
  *   {
  *     "feComponent": "zorbit-pfs-file_viewer:FileViewer",
  *     "feProps": {
- *       "source": { "beRoute": "/api/.../policy.pdf" },
- *       "audit": { "eventType": "hi_retail_quotation.policy.viewed" },
+ *       "source": { "beRoute": "/api/.../{entityType}/{entityId}/document.pdf" },
+ *       "audit": { "eventType": "{moduleSlug}.{entityType}.viewed" },
  *       "pii": { "applyRedactionRules": ["customer.phone"] }
  *     }
  *   }
