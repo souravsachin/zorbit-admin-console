@@ -274,7 +274,7 @@ echo "  Analytics: $(echo "$ANALYTICS_RESULT" | python3 -c "import sys,json; d=j
 # Step 13: DocGenerator PFS Health
 echo ""
 echo "--- Step 13: DocGenerator PFS ---"
-DOCGEN_HEALTH=$(curl -s "http://$HOST:3136/api/v1/G/doc-generator/health" 2>/dev/null)
+DOCGEN_HEALTH=$(curl -s "http://$HOST:3032/api/v1/G/doc-generator/health" 2>/dev/null)
 DOCGEN_STATUS=$(echo "$DOCGEN_HEALTH" | python3 -c "import sys,json; print(json.load(sys.stdin).get('status',''))" 2>/dev/null)
 if [ "$DOCGEN_STATUS" = "ok" ]; then
   echo "  DOCGEN CHECK: PASS (healthy, puppeteer running)"

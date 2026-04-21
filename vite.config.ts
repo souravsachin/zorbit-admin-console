@@ -118,7 +118,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api\/white-label/, ''),
       },
       '/api/doc-generator': {
-        target: 'http://localhost:3026',
+        target: 'http://localhost:3032',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/doc-generator/, ''),
       },

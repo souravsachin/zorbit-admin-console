@@ -15,7 +15,7 @@ The AWNIC health insurance demo flow is **operational end-to-end**. All critical
 
 | Soldier | Deliverable | Repo | Status |
 |---------|-------------|------|--------|
-| 1 | **DocGenerator PFS** | zorbit-pfs-doc_generator | DEPLOYED (port 3136). Puppeteer + Handlebars. 3 templates seeded: policy-certificate, quotation-summary, premium-breakdown |
+| 1 | **DocGenerator PFS** | zorbit-pfs-doc_generator | DEPLOYED (port 3032, moved from 3026 on 2026-04-22). Puppeteer + Handlebars. 3 templates seeded: policy-certificate, quotation-summary, premium-breakdown |
 | 2 | **UW Workflow Improvements** | zorbit-app-uw_workflow | DEPLOYED. Queue routing by premium/members/region. 7 action types (approve, approve_with_loading, add_exclusion, add_waiting_period, refer, decline, request_info). Status flow enforced |
 | 3 | **Channel + Broker + Analytics** | zorbit-app-hi_quotation | DEPLOYED. channel/source/brokerHashId fields. Aggregator lead API (POST /leads). Analytics endpoints (channels, sources, brokers) |
 | 4 | **Policy PDF Template** | zorbit-app-uw_workflow | DEPLOYED. Replaced PDFKit with Puppeteer HTML-to-PDF. Professional 2-page certificate with navy header, tables, member schedule, regulatory footer |
@@ -75,7 +75,7 @@ The AWNIC health insurance demo flow is **operational end-to-end**. All critical
 | zorbit-audit | 3106 | PostgreSQL | Running |
 | zorbit-pfs-product_pricing | 3125 | MongoDB 27018 | Running |
 | zorbit-pfs-form_builder | 3114 | MongoDB 27018 | Running |
-| zorbit-pfs-doc_generator | 3136 | MongoDB 27018 | Running (NEW) |
+| zorbit-pfs-doc_generator | 3032 | MongoDB 27018 | Running (moved from 3026 on 2026-04-22) |
 | zorbit-app-pcg4 | 3111 | MongoDB 27018 | Running |
 | zorbit-app-hi_quotation | 3117 | MongoDB 27018 | Running |
 | zorbit-app-uw_workflow | 3115 | MongoDB 27018 | Running |

@@ -39,7 +39,7 @@ SERVICES=(
   "zorbit-audit:3006:postgresql"
   "zorbit-pfs-product_pricing:3025:mongodb"
   "zorbit-pfs-form_builder:3014:mongodb"
-  "zorbit-pfs-doc_generator:3026:mongodb"
+  "zorbit-pfs-doc_generator:3032:mongodb"
   "zorbit-app-pcg4:3011:mongodb"
   "zorbit-app-hi_quotation:3017:mongodb"
   "zorbit-app-uw_workflow:3015:mongodb"

@@ -16,7 +16,7 @@ Deliver a complete, demonstrable AWNIC insurance flow covering:
 ### Wave 1: Core PFS Services (4 soldiers)
 
 **Soldier 1: Document Generator PFS (zorbit-pfs-doc_generator)**
-- NestJS service on port 3026/3126
+- NestJS service on port 3032 (moved from 3026/3126 on 2026-04-22 — seniority rule)
 - POST /api/v1/O/:orgId/doc-generator/render — accepts JSON + template → returns PDF
 - POST /api/v1/O/:orgId/doc-generator/render-html — accepts HTML → returns PDF
 - Templates: policy-certificate, quotation-summary, premium-breakdown
