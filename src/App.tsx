@@ -268,6 +268,12 @@ const WorkflowQueuesPage = lazyWithRetry(() => import('./pages/workflow-engine/W
 const WorkflowPipelinesPage = lazyWithRetry(() => import('./pages/workflow-engine/WorkflowPipelinesPage'));
 const WorkflowSetupPage = lazyWithRetry(() => import('./pages/workflow-engine/WorkflowSetupPage'));
 const WorkflowDeploymentsPage = lazyWithRetry(() => import('./pages/workflow-engine/WorkflowDeploymentsPage'));
+// EPIC 16 Phase 2 — bpmn-js designer inside workflow_engine module. This is
+// the FQP authoring surface rewritten as BPMN 2.0 native. Registered as
+// `@platform:WorkflowDesigner` so other modules can embed it too, but the
+// direct /m/workflow-engine/designer route below gives the nav entry a
+// predictable home while the manifest pipeline finishes landing.
+const WorkflowDesignerPage = lazyWithRetry(() => import('./components/shared/WorkflowDesigner'));
 
 // Secrets Vault — Hub, List, Create, Audit, Setup, Deployments
 const SecretsHubPage = lazyWithRetry(() => import('./pages/secrets/SecretsHubPage'));
@@ -641,6 +647,8 @@ function PageRoutes() {
       <Route path="m/workflow-engine" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
       <Route path="m/workflow-engine/guide/*" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
       <Route path="m/workflow-engine/hub" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
+      <Route path="m/workflow-engine/designer" element={<SafeLazy><WorkflowDesignerPage /></SafeLazy>} />
+      <Route path="m/workflow-engine/designer/:processHashId" element={<SafeLazy><WorkflowDesignerPage /></SafeLazy>} />
       <Route path="m/workflow-engine/filters" element={<SafeLazy><WorkflowFiltersPage /></SafeLazy>} />
       <Route path="m/workflow-engine/queues" element={<SafeLazy><WorkflowQueuesPage /></SafeLazy>} />
       <Route path="m/workflow-engine/pipelines" element={<SafeLazy><WorkflowPipelinesPage /></SafeLazy>} />
