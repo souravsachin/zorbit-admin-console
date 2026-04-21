@@ -1,6 +1,6 @@
 import { ModuleSetupPage } from '../../components/shared/ModuleSetupPage';
 import { DemoDataGenerator } from '../../components/shared/DemoDataGenerator';
-import { generateUWWorkflowPreview } from '../../components/shared/DemoDataGenerator/generators';
+import { generateUWWorkflowPreview } from './DemoDataGenerator/generators';
 import { GitBranch } from 'lucide-react';
 import type { DemoColumnDef, CohortOption } from '../../components/shared/DemoDataGenerator';
 

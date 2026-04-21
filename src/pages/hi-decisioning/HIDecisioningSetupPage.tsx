@@ -1,6 +1,6 @@
 import { ModuleSetupPage } from '../../components/shared/ModuleSetupPage';
 import { DemoDataGenerator } from '../../components/shared/DemoDataGenerator';
-import { generateHIDecisioningPreview } from '../../components/shared/DemoDataGenerator/generators';
+import { generateHIDecisioningPreview } from './DemoDataGenerator/generators';
 import { Brain } from 'lucide-react';
 import type { DemoColumnDef, CohortOption } from '../../components/shared/DemoDataGenerator';
 

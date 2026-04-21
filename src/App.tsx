@@ -150,36 +150,8 @@ const MIQuotationSetupPage = lazyWithRetry(() => import('./pages/mi-quotation/MI
 const MIQuotationDeploymentsPage = lazyWithRetry(() => import('./pages/mi-quotation/MIQuotationDeploymentsPage'));
 const FeeManagementSetupPage = lazyWithRetry(() => import('./pages/fee-management/FeeManagementSetupPage'));
 const FeeManagementDeploymentsPage = lazyWithRetry(() => import('./pages/fee-management/FeeManagementDeploymentsPage'));
-const ClaimsSetupPage = lazyWithRetry(() => import('./pages/claims/ClaimsSetupPage'));
-const ClaimsDeploymentsPage = lazyWithRetry(() => import('./pages/claims/ClaimsDeploymentsPage'));
 const AdminSetupPage = lazyWithRetry(() => import('./pages/admin/AdminSetupPage'));
 const AdminDeploymentsPage = lazyWithRetry(() => import('./pages/admin/AdminDeploymentsPage'));
-
-// MUW-52 Ported Modules — Setup & Deployments
-const EndorsementsSetupPage = lazyWithRetry(() => import('./pages/endorsements/EndorsementsSetupPage'));
-const EndorsementsDeploymentsPage = lazyWithRetry(() => import('./pages/endorsements/EndorsementsDeploymentsPage'));
-const RenewalsSetupPage = lazyWithRetry(() => import('./pages/renewals/RenewalsSetupPage'));
-const RenewalsDeploymentsPage = lazyWithRetry(() => import('./pages/renewals/RenewalsDeploymentsPage'));
-const SMECorporateSetupPage = lazyWithRetry(() => import('./pages/sme-corporate/SMECorporateSetupPage'));
-const SMECorporateDeploymentsPage = lazyWithRetry(() => import('./pages/sme-corporate/SMECorporateDeploymentsPage'));
-const ReinsuranceSetupPage = lazyWithRetry(() => import('./pages/reinsurance/ReinsuranceSetupPage'));
-const ReinsuranceDeploymentsPage = lazyWithRetry(() => import('./pages/reinsurance/ReinsuranceDeploymentsPage'));
-const ClaimsTPASetupPage = lazyWithRetry(() => import('./pages/claims-tpa/ClaimsTPASetupPage'));
-const ClaimsTPADeploymentsPage = lazyWithRetry(() => import('./pages/claims-tpa/ClaimsTPADeploymentsPage'));
-const MedicalCodingSetupPage = lazyWithRetry(() => import('./pages/medical-coding/MedicalCodingSetupPage'));
-const MedicalCodingDeploymentsPage = lazyWithRetry(() => import('./pages/medical-coding/MedicalCodingDeploymentsPage'));
-const MAFEngineSetupPage = lazyWithRetry(() => import('./pages/maf-engine/MAFEngineSetupPage'));
-const MAFEngineDeploymentsPage = lazyWithRetry(() => import('./pages/maf-engine/MAFEngineDeploymentsPage'));
-const RPAIntegrationSetupPage = lazyWithRetry(() => import('./pages/rpa-integration/RPAIntegrationSetupPage'));
-const RPAIntegrationDeploymentsPage = lazyWithRetry(() => import('./pages/rpa-integration/RPAIntegrationDeploymentsPage'));
-const APIIntegrationSetupPage = lazyWithRetry(() => import('./pages/api-integration/APIIntegrationSetupPage'));
-const APIIntegrationDeploymentsPage = lazyWithRetry(() => import('./pages/api-integration/APIIntegrationDeploymentsPage'));
-const ReportingSetupPage = lazyWithRetry(() => import('./pages/reporting/ReportingSetupPage'));
-const ReportingDeploymentsPage = lazyWithRetry(() => import('./pages/reporting/ReportingDeploymentsPage'));
-const PolicyIssuanceSetupPage = lazyWithRetry(() => import('./pages/policy-issuance/PolicyIssuanceSetupPage'));
-const PolicyIssuanceDeploymentsPage = lazyWithRetry(() => import('./pages/policy-issuance/PolicyIssuanceDeploymentsPage'));
-const DocumentManagementSetupPage = lazyWithRetry(() => import('./pages/document-management/DocumentManagementSetupPage'));
-const DocumentManagementDeploymentsPage = lazyWithRetry(() => import('./pages/document-management/DocumentManagementDeploymentsPage'));
 
 // PFS Module Setup Pages
 const WhiteLabelSetupPage = lazyWithRetry(() => import('./pages/white-label/WhiteLabelSetupPage'));
@@ -201,7 +173,6 @@ const MIQuotationHubPage = lazyWithRetry(() => import('./pages/mi-quotation/MIQu
 const UWWorkflowHubPage = lazyWithRetry(() => import('./pages/uw-workflow/UWWorkflowHubPage'));
 const HIDecisioningHubPage = lazyWithRetry(() => import('./pages/hi-decisioning/HIDecisioningHubPage'));
 const FeeManagementHubPage = lazyWithRetry(() => import('./pages/fee-management/FeeManagementHubPage'));
-const ClaimsHubPage = lazyWithRetry(() => import('./pages/claims/ClaimsHubPage'));
 const ProductPricingHubPage = lazyWithRetry(() => import('./pages/product-pricing/ProductPricingHubPage'));
 const RateTablesPage = lazyWithRetry(() => import('./pages/product-pricing/RateTablesPage'));
 const RateCardImportPage = lazyWithRetry(() => import('./pages/product-pricing/RateCardImportPage'));
@@ -211,20 +182,6 @@ const FormBuilderHubPage = lazyWithRetry(() => import('./pages/form-builder/Form
 const FormBuilderPage = lazyWithRetry(() => import('./pages/form-builder/FormBuilderPage'));
 const FormBuilderDetailPage = lazyWithRetry(() => import('./pages/form-builder/FormBuilderDetailPage'));
 const FormBuilderTokensPage = lazyWithRetry(() => import('./pages/form-builder/FormBuilderTokensPage'));
-
-// MUW-52 Ported Module Hub Pages
-const EndorsementsHubPage = lazyWithRetry(() => import('./pages/endorsements/EndorsementsHubPage'));
-const RenewalsHubPage = lazyWithRetry(() => import('./pages/renewals/RenewalsHubPage'));
-const SMECorporateHubPage = lazyWithRetry(() => import('./pages/sme-corporate/SMECorporateHubPage'));
-const ReinsuranceHubPage = lazyWithRetry(() => import('./pages/reinsurance/ReinsuranceHubPage'));
-const ClaimsTPAHubPage = lazyWithRetry(() => import('./pages/claims-tpa/ClaimsTPAHubPage'));
-const MedicalCodingHubPage = lazyWithRetry(() => import('./pages/medical-coding/MedicalCodingHubPage'));
-const MAFEngineHubPage = lazyWithRetry(() => import('./pages/maf-engine/MAFEngineHubPage'));
-const RPAIntegrationHubPage = lazyWithRetry(() => import('./pages/rpa-integration/RPAIntegrationHubPage'));
-const APIIntegrationHubPage = lazyWithRetry(() => import('./pages/api-integration/APIIntegrationHubPage'));
-const ReportingHubPage = lazyWithRetry(() => import('./pages/reporting/ReportingHubPage'));
-const PolicyIssuanceHubPage = lazyWithRetry(() => import('./pages/policy-issuance/PolicyIssuanceHubPage'));
-const DocumentManagementHubPage = lazyWithRetry(() => import('./pages/document-management/DocumentManagementHubPage'));
 
 // PII Showcase — Hub, Setup, Deployments
 const PIIShowcaseHubPage = lazyWithRetry(() => import('./pages/pii-showcase/PIIShowcaseHubPage'));
@@ -818,8 +775,6 @@ function PageRoutes() {
       <Route path="mi-quotation/deployments" element={<SafeLazy><MIQuotationDeploymentsPage /></SafeLazy>} />
       <Route path="fee-management/setup" element={<SafeLazy><FeeManagementSetupPage /></SafeLazy>} />
       <Route path="fee-management/deployments" element={<SafeLazy><FeeManagementDeploymentsPage /></SafeLazy>} />
-      <Route path="claims/setup" element={<SafeLazy><ClaimsSetupPage /></SafeLazy>} />
-      <Route path="claims/deployments" element={<SafeLazy><ClaimsDeploymentsPage /></SafeLazy>} />
 
       {/* Admin — Setup & Deployments */}
       <Route path="admin/setup" element={<SafeLazy><AdminSetupPage /></SafeLazy>} />
@@ -869,99 +824,6 @@ function PageRoutes() {
       <Route path="fee-management" element={<SafeLazy><FeeManagementHubPage /></SafeLazy>} />
       <Route path="fee-management/hub" element={<SafeLazy><FeeManagementHubPage /></SafeLazy>} />
       <Route path="fee-management/guide/*" element={<SafeLazy><FeeManagementHubPage /></SafeLazy>} />
-
-      {/* Business Modules — Claims (own section + microservice) */}
-      <Route path="claims" element={<SafeLazy><ClaimsHubPage /></SafeLazy>} />
-      <Route path="claims/hub" element={<SafeLazy><ClaimsHubPage /></SafeLazy>} />
-      <Route path="claims/guide/*" element={<SafeLazy><ClaimsHubPage /></SafeLazy>} />
-
-      {/* ============================================================ */}
-      {/* MUW-52 Ported Modules — Hub, Setup & Deployments             */}
-      {/* ============================================================ */}
-
-      {/* Endorsements */}
-      <Route path="endorsements" element={<SafeLazy><EndorsementsHubPage /></SafeLazy>} />
-      <Route path="endorsements/guide/*" element={<SafeLazy><EndorsementsHubPage /></SafeLazy>} />
-      <Route path="endorsements/hub" element={<SafeLazy><EndorsementsHubPage /></SafeLazy>} />
-      <Route path="endorsements/setup" element={<SafeLazy><EndorsementsSetupPage /></SafeLazy>} />
-      <Route path="endorsements/deployments" element={<SafeLazy><EndorsementsDeploymentsPage /></SafeLazy>} />
-
-      {/* Renewals */}
-      <Route path="renewals" element={<SafeLazy><RenewalsHubPage /></SafeLazy>} />
-      <Route path="renewals/guide/*" element={<SafeLazy><RenewalsHubPage /></SafeLazy>} />
-      <Route path="renewals/hub" element={<SafeLazy><RenewalsHubPage /></SafeLazy>} />
-      <Route path="renewals/setup" element={<SafeLazy><RenewalsSetupPage /></SafeLazy>} />
-      <Route path="renewals/deployments" element={<SafeLazy><RenewalsDeploymentsPage /></SafeLazy>} />
-
-      {/* SME & Corporate Insurance */}
-      <Route path="sme-corporate" element={<SafeLazy><SMECorporateHubPage /></SafeLazy>} />
-      <Route path="sme-corporate/guide/*" element={<SafeLazy><SMECorporateHubPage /></SafeLazy>} />
-      <Route path="sme-corporate/hub" element={<SafeLazy><SMECorporateHubPage /></SafeLazy>} />
-      <Route path="sme-corporate/setup" element={<SafeLazy><SMECorporateSetupPage /></SafeLazy>} />
-      <Route path="sme-corporate/deployments" element={<SafeLazy><SMECorporateDeploymentsPage /></SafeLazy>} />
-
-      {/* Reinsurance */}
-      <Route path="reinsurance" element={<SafeLazy><ReinsuranceHubPage /></SafeLazy>} />
-      <Route path="reinsurance/guide/*" element={<SafeLazy><ReinsuranceHubPage /></SafeLazy>} />
-      <Route path="reinsurance/hub" element={<SafeLazy><ReinsuranceHubPage /></SafeLazy>} />
-      <Route path="reinsurance/setup" element={<SafeLazy><ReinsuranceSetupPage /></SafeLazy>} />
-      <Route path="reinsurance/deployments" element={<SafeLazy><ReinsuranceDeploymentsPage /></SafeLazy>} />
-
-      {/* Claims TPA */}
-      <Route path="claims-tpa" element={<SafeLazy><ClaimsTPAHubPage /></SafeLazy>} />
-      <Route path="claims-tpa/guide/*" element={<SafeLazy><ClaimsTPAHubPage /></SafeLazy>} />
-      <Route path="claims-tpa/hub" element={<SafeLazy><ClaimsTPAHubPage /></SafeLazy>} />
-      <Route path="claims-tpa/setup" element={<SafeLazy><ClaimsTPASetupPage /></SafeLazy>} />
-      <Route path="claims-tpa/deployments" element={<SafeLazy><ClaimsTPADeploymentsPage /></SafeLazy>} />
-
-      {/* Medical Coding */}
-      <Route path="medical-coding" element={<SafeLazy><MedicalCodingHubPage /></SafeLazy>} />
-      <Route path="medical-coding/guide/*" element={<SafeLazy><MedicalCodingHubPage /></SafeLazy>} />
-      <Route path="medical-coding/hub" element={<SafeLazy><MedicalCodingHubPage /></SafeLazy>} />
-      <Route path="medical-coding/setup" element={<SafeLazy><MedicalCodingSetupPage /></SafeLazy>} />
-      <Route path="medical-coding/deployments" element={<SafeLazy><MedicalCodingDeploymentsPage /></SafeLazy>} />
-
-      {/* MAF Engine */}
-      <Route path="maf-engine" element={<SafeLazy><MAFEngineHubPage /></SafeLazy>} />
-      <Route path="maf-engine/guide/*" element={<SafeLazy><MAFEngineHubPage /></SafeLazy>} />
-      <Route path="maf-engine/hub" element={<SafeLazy><MAFEngineHubPage /></SafeLazy>} />
-      <Route path="maf-engine/setup" element={<SafeLazy><MAFEngineSetupPage /></SafeLazy>} />
-      <Route path="maf-engine/deployments" element={<SafeLazy><MAFEngineDeploymentsPage /></SafeLazy>} />
-
-      {/* RPA Integration */}
-      <Route path="rpa-integration" element={<SafeLazy><RPAIntegrationHubPage /></SafeLazy>} />
-      <Route path="rpa-integration/guide/*" element={<SafeLazy><RPAIntegrationHubPage /></SafeLazy>} />
-      <Route path="rpa-integration/hub" element={<SafeLazy><RPAIntegrationHubPage /></SafeLazy>} />
-      <Route path="rpa-integration/setup" element={<SafeLazy><RPAIntegrationSetupPage /></SafeLazy>} />
-      <Route path="rpa-integration/deployments" element={<SafeLazy><RPAIntegrationDeploymentsPage /></SafeLazy>} />
-
-      {/* API Integration */}
-      <Route path="api-integration" element={<SafeLazy><APIIntegrationHubPage /></SafeLazy>} />
-      <Route path="api-integration/guide/*" element={<SafeLazy><APIIntegrationHubPage /></SafeLazy>} />
-      <Route path="api-integration/hub" element={<SafeLazy><APIIntegrationHubPage /></SafeLazy>} />
-      <Route path="api-integration/setup" element={<SafeLazy><APIIntegrationSetupPage /></SafeLazy>} />
-      <Route path="api-integration/deployments" element={<SafeLazy><APIIntegrationDeploymentsPage /></SafeLazy>} />
-
-      {/* Reporting & Analytics */}
-      <Route path="reporting" element={<SafeLazy><ReportingHubPage /></SafeLazy>} />
-      <Route path="reporting/guide/*" element={<SafeLazy><ReportingHubPage /></SafeLazy>} />
-      <Route path="reporting/hub" element={<SafeLazy><ReportingHubPage /></SafeLazy>} />
-      <Route path="reporting/setup" element={<SafeLazy><ReportingSetupPage /></SafeLazy>} />
-      <Route path="reporting/deployments" element={<SafeLazy><ReportingDeploymentsPage /></SafeLazy>} />
-
-      {/* Policy Issuance */}
-      <Route path="policy-issuance" element={<SafeLazy><PolicyIssuanceHubPage /></SafeLazy>} />
-      <Route path="policy-issuance/guide/*" element={<SafeLazy><PolicyIssuanceHubPage /></SafeLazy>} />
-      <Route path="policy-issuance/hub" element={<SafeLazy><PolicyIssuanceHubPage /></SafeLazy>} />
-      <Route path="policy-issuance/setup" element={<SafeLazy><PolicyIssuanceSetupPage /></SafeLazy>} />
-      <Route path="policy-issuance/deployments" element={<SafeLazy><PolicyIssuanceDeploymentsPage /></SafeLazy>} />
-
-      {/* Document Management */}
-      <Route path="document-management" element={<SafeLazy><DocumentManagementHubPage /></SafeLazy>} />
-      <Route path="document-management/guide/*" element={<SafeLazy><DocumentManagementHubPage /></SafeLazy>} />
-      <Route path="document-management/hub" element={<SafeLazy><DocumentManagementHubPage /></SafeLazy>} />
-      <Route path="document-management/setup" element={<SafeLazy><DocumentManagementSetupPage /></SafeLazy>} />
-      <Route path="document-management/deployments" element={<SafeLazy><DocumentManagementDeploymentsPage /></SafeLazy>} />
 
       {/* PFS Module Setup */}
       <Route path="white-label/setup" element={<SafeLazy><WhiteLabelSetupPage /></SafeLazy>} />

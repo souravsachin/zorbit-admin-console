@@ -1,6 +1,6 @@
 import { ModuleSetupPage } from '../../components/shared/ModuleSetupPage';
 import { DemoDataGenerator } from '../../components/shared/DemoDataGenerator';
-import { generateHIQuotationPreview } from '../../components/shared/DemoDataGenerator/generators';
+import { generateHIQuotationPreview } from './DemoDataGenerator/generators';
 import { FileText } from 'lucide-react';
 import type { DemoColumnDef, CohortOption } from '../../components/shared/DemoDataGenerator';
 
