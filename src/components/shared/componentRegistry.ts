@@ -58,6 +58,17 @@ const PLATFORM_COMPONENTS: ComponentMap = {
 
   // Dashboard / catch-all landing.
   DashboardPage:             React.lazy(() => import('../../pages/dashboard/DashboardPage')),
+
+  // Platform-supplied Kafka topic drill-down (EPIC 8 §live-view). Rendered
+  // from the event_bus manifest via `@platform:TopicDetailView` — the view
+  // is module-agnostic and works for any topic.
+  TopicDetailView:           React.lazy(() => import('../module-event_bus/TopicDetailView')),
+
+  // BPMN 2.0 designer (EPIC 16 Phase 2). Embeds bpmn-js Modeler inside
+  // zorbit-pfs-workflow_engine. Lazy import so the ~1.5 MB bpmn-js bundle
+  // only downloads when the user actually opens the designer route — the
+  // FQP-era authoring surface, now BPMN 2.0 native.
+  WorkflowDesigner:          React.lazy(() => import('./WorkflowDesigner')),
 };
 
 // -----------------------------------------------------------------------------
@@ -136,6 +147,15 @@ const DEPLOYMENT_REGISTRY_COMPONENTS: ComponentMap = {
   DeploymentRequestsPage:     React.lazy(() => import('../../pages/deployment-registry/DeploymentRequestsPage')),
 };
 
+// ---- zorbit-cor-seeder -----------------------------------------------------
+//
+// SSE-powered kernel-style terminal UI + trigger buttons for
+// system-min/demo/delete-demo runs. Lives here (Phase-1 decision):
+// the component is small and the seeder repo is BE-only.
+const SEEDER_COMPONENTS: ComponentMap = {
+  SeederConsole:             React.lazy(() => import('../../pages/seeder/SeederConsole')),
+};
+
 // ---- zorbit-pfs-form_builder -----------------------------------------------
 //
 // FormRenderer is the cross-module exported component — any module can
@@ -164,6 +184,18 @@ const DATATABLE_COMPONENTS: ComponentMap = {
   DataTableDemoPage:         React.lazy(() => import('../../pages/data-table-demo/DataTableDemoPage')),
 };
 
+// ---- zorbit-pfs-file_viewer ------------------------------------------------
+//
+// Universal multi-format read-only viewer — the cross-module exported
+// component any module can reference as `zorbit-pfs-file_viewer:FileViewer`
+// from its manifest. Dispatcher routes by format (detected from
+// Content-Type + file extension) to format-specific renderers:
+// Markdown, PDF, CSV, JSON, Code, Image, Audio, Video, DOCX, SQLite.
+// See BACKLOG-pfs-file_viewer.md + zorbit-pfs-file_viewer/CLAUDE.md.
+const FILE_VIEWER_COMPONENTS: ComponentMap = {
+  FileViewer:                React.lazy(() => import('./FileViewer')),
+};
+
 // ---- zorbit-app-pcg4 -------------------------------------------------------
 const PCG4_COMPONENTS: ComponentMap = {
   PCG4ConfiguratorPage:      React.lazy(() => import('../../pages/pcg4/PCG4ConfiguratorPage')),
@@ -179,8 +211,8 @@ const HI_QUOTATION_COMPONENTS: ComponentMap = {
   HIQuotationPage:           React.lazy(() => import('../../pages/hi-quotation/HIQuotationPage')),
 };
 
-// ---- zorbit-app-hi_decisioning ---------------------------------------------
-const HI_DECISIONING_COMPONENTS: ComponentMap = {
+// ---- zorbit-app-hi_uw_decisioning (renamed 2026-04-21 from hi_decisioning) --
+const HI_UW_DECISIONING_COMPONENTS: ComponentMap = {
   HIDecisioningPage:         React.lazy(() => import('../../pages/hi-decisioning/HIDecisioningPage')),
 };
 
@@ -206,6 +238,7 @@ const MODULE_COMPONENT_REGISTRIES: Record<string, ComponentMap> = {
   'zorbit-cor-pii_vault':           PII_VAULT_COMPONENTS,
   'zorbit-pii-vault':               PII_VAULT_COMPONENTS,
   'zorbit-cor-module_registry':     MODULE_REGISTRY_COMPONENTS,
+  'zorbit-cor-seeder':              SEEDER_COMPONENTS,
   'zorbit-cor-deployment_registry': DEPLOYMENT_REGISTRY_COMPONENTS,
 
   // Settings / platform admin ambient
@@ -215,6 +248,7 @@ const MODULE_COMPONENT_REGISTRIES: Record<string, ComponentMap> = {
   // PFS
   'zorbit-pfs-form_builder':        FORM_BUILDER_COMPONENTS,
   'zorbit-pfs-datatable':           DATATABLE_COMPONENTS,
+  'zorbit-pfs-file_viewer':         FILE_VIEWER_COMPONENTS,
 
   // Sample business app
   'sample-customer-service':        SAMPLE_CUSTOMER_COMPONENTS,
@@ -223,7 +257,9 @@ const MODULE_COMPONENT_REGISTRIES: Record<string, ComponentMap> = {
   'zorbit-app-pcg4':                PCG4_COMPONENTS,
   'zorbit-app-uw_workflow':         UW_WORKFLOW_COMPONENTS,
   'zorbit-app-hi_quotation':        HI_QUOTATION_COMPONENTS,
-  'zorbit-app-hi_decisioning':      HI_DECISIONING_COMPONENTS,
+  'zorbit-app-hi_uw_decisioning':   HI_UW_DECISIONING_COMPONENTS,
+  // Legacy alias (keep until all manifests have been re-announced)
+  'zorbit-app-hi_decisioning':      HI_UW_DECISIONING_COMPONENTS,
 };
 
 // -----------------------------------------------------------------------------
