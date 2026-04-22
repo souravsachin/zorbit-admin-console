@@ -147,11 +147,12 @@ const DEPLOYMENT_REGISTRY_COMPONENTS: ComponentMap = {
   DeploymentRequestsPage:     React.lazy(() => import('../../pages/deployment-registry/DeploymentRequestsPage')),
 };
 
-// ---- zorbit-cor-seeder -----------------------------------------------------
+// ---- zorbit-pfs-seeder -----------------------------------------------------
 //
 // SSE-powered kernel-style terminal UI + trigger buttons for
 // system-min/demo/delete-demo runs. Lives here (Phase-1 decision):
 // the component is small and the seeder repo is BE-only.
+// Renamed 2026-04-22 from zorbit-cor-seeder (seeder is invoked = pfs).
 const SEEDER_COMPONENTS: ComponentMap = {
   SeederConsole:             React.lazy(() => import('../../pages/seeder/SeederConsole')),
 };
@@ -238,7 +239,7 @@ const MODULE_COMPONENT_REGISTRIES: Record<string, ComponentMap> = {
   'zorbit-cor-pii_vault':           PII_VAULT_COMPONENTS,
   'zorbit-pii-vault':               PII_VAULT_COMPONENTS,
   'zorbit-cor-module_registry':     MODULE_REGISTRY_COMPONENTS,
-  'zorbit-cor-seeder':              SEEDER_COMPONENTS,
+  'zorbit-pfs-seeder':              SEEDER_COMPONENTS,
   'zorbit-cor-deployment_registry': DEPLOYMENT_REGISTRY_COMPONENTS,
 
   // Settings / platform admin ambient

@@ -1,8 +1,8 @@
 /**
  * zorbit-unified-console — Seeder Generator (seed-bundles) service client.
  *
- * Wraps the noun-based HTTP surface of zorbit-cor-seeder's
- * /api/v1/G/seed-bundles/* and /api/v1/G/factor-catalog and
+ * Wraps the noun-based HTTP surface of zorbit-pfs-seeder's
+ * /api/v1/G/seed_bundles/* and /api/v1/G/factor-catalog and
  * /api/v1/G/modules/:moduleId/introspection endpoints.
  *
  * Added 2026-04-23 by Soldier AV.
@@ -137,7 +137,7 @@ export const seederBundlesService = {
 
   getBundle: async (bundleId: string): Promise<BundleDetail> => {
     const { data } = await api.get(
-      `${BASE}/api/v1/G/seed-bundles/${encodeURIComponent(bundleId)}`,
+      `${BASE}/api/v1/G/seed_bundles/${encodeURIComponent(bundleId)}`,
     );
     return data;
   },
@@ -153,7 +153,7 @@ export const seederBundlesService = {
     },
   ): Promise<{ bundleId: string; status: string; count: number }> => {
     const { data } = await api.patch(
-      `${BASE}/api/v1/G/seed-bundles/${encodeURIComponent(bundleId)}`,
+      `${BASE}/api/v1/G/seed_bundles/${encodeURIComponent(bundleId)}`,
       body,
     );
     return data;
@@ -161,7 +161,7 @@ export const seederBundlesService = {
 
   deleteBundle: async (bundleId: string): Promise<{ ok: boolean }> => {
     const { data } = await api.delete(
-      `${BASE}/api/v1/G/seed-bundles/${encodeURIComponent(bundleId)}`,
+      `${BASE}/api/v1/G/seed_bundles/${encodeURIComponent(bundleId)}`,
     );
     return data;
   },
@@ -169,7 +169,7 @@ export const seederBundlesService = {
   // ---- Sub-resources ----
   createPreview: async (bundleId: string): Promise<Record<string, unknown[]>> => {
     const { data } = await api.post(
-      `${BASE}/api/v1/G/seed-bundles/${encodeURIComponent(bundleId)}/previews`,
+      `${BASE}/api/v1/G/seed_bundles/${encodeURIComponent(bundleId)}/previews`,
     );
     return data;
   },
@@ -179,17 +179,17 @@ export const seederBundlesService = {
     entity?: string,
   ): Promise<Record<string, unknown[]>> => {
     const { data } = await api.get(
-      `${BASE}/api/v1/G/seed-bundles/${encodeURIComponent(bundleId)}/records`,
+      `${BASE}/api/v1/G/seed_bundles/${encodeURIComponent(bundleId)}/records`,
       { params: entity ? { entity } : undefined },
     );
     return data;
   },
 
   sqlUrl: (bundleId: string): string =>
-    `${BASE}/api/v1/G/seed-bundles/${encodeURIComponent(bundleId)}/sql`,
+    `${BASE}/api/v1/G/seed_bundles/${encodeURIComponent(bundleId)}/sql`,
 
   postmanUrl: (bundleId: string): string =>
-    `${BASE}/api/v1/G/seed-bundles/${encodeURIComponent(bundleId)}/postman-collection`,
+    `${BASE}/api/v1/G/seed_bundles/${encodeURIComponent(bundleId)}/postman-collection`,
 
   // ---- Runs ----
   startRun: async (bundleId: string): Promise<{
@@ -200,21 +200,21 @@ export const seederBundlesService = {
     streamUrl: string;
   }> => {
     const { data } = await api.post(
-      `${BASE}/api/v1/G/seed-bundles/${encodeURIComponent(bundleId)}/runs`,
+      `${BASE}/api/v1/G/seed_bundles/${encodeURIComponent(bundleId)}/runs`,
     );
     return data;
   },
 
   listRuns: async (bundleId: string): Promise<{ data: BundleRun[]; total: number }> => {
     const { data } = await api.get(
-      `${BASE}/api/v1/G/seed-bundles/${encodeURIComponent(bundleId)}/runs`,
+      `${BASE}/api/v1/G/seed_bundles/${encodeURIComponent(bundleId)}/runs`,
     );
     return data;
   },
 
   getRun: async (bundleId: string, runId: string): Promise<BundleRun> => {
     const { data } = await api.get(
-      `${BASE}/api/v1/G/seed-bundles/${encodeURIComponent(bundleId)}/runs/${encodeURIComponent(runId)}`,
+      `${BASE}/api/v1/G/seed_bundles/${encodeURIComponent(bundleId)}/runs/${encodeURIComponent(runId)}`,
     );
     return data;
   },
@@ -225,7 +225,7 @@ export const seederBundlesService = {
     args: { target: 'module' | 'central'; dryRun?: boolean },
   ): Promise<{ delivered: boolean; target: string; modulePath?: string; dryRun: boolean; sqlBytes: number }> => {
     const { data } = await api.post(
-      `${BASE}/api/v1/G/seed-bundles/${encodeURIComponent(bundleId)}/deliveries`,
+      `${BASE}/api/v1/G/seed_bundles/${encodeURIComponent(bundleId)}/deliveries`,
       args,
     );
     return data;

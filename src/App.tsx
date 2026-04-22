@@ -187,6 +187,30 @@ const FormBuilderPage = lazyWithRetry(() => import('./pages/form-builder/FormBui
 const FormBuilderDetailPage = lazyWithRetry(() => import('./pages/form-builder/FormBuilderDetailPage'));
 const FormBuilderTokensPage = lazyWithRetry(() => import('./pages/form-builder/FormBuilderTokensPage'));
 
+// RPA Integration — adapter list + run launcher + SSE console + history
+// (Soldier BB 2026-04-22, zorbit-pfs-rpa_integration). Underscore slug
+// per strict nomenclature. Do NOT change to hyphen.
+const RpaIntegrationPage = lazyWithRetry(() => import('./pages/rpa_integration/RpaIntegrationPage'));
+const RpaRunConsolePage = lazyWithRetry(() => import('./pages/rpa_integration/RpaRunConsolePage'));
+const RpaRunHistoryPage = lazyWithRetry(() => import('./pages/rpa_integration/RpaRunHistoryPage'));
+
+// API Integration — sibling of RPA but for REST/SOAP/GraphQL adapters
+// (Soldier BB 2026-04-22, zorbit-pfs-api_integration).
+const ApiIntegrationPage = lazyWithRetry(() => import('./pages/api_integration/ApiIntegrationPage'));
+const ApiRunConsolePage = lazyWithRetry(() => import('./pages/api_integration/ApiRunConsolePage'));
+const ApiRunHistoryPage = lazyWithRetry(() => import('./pages/api_integration/ApiRunHistoryPage'));
+
+// Payment Gateway — region-tabbed catalog + sandbox form
+// (Soldier BB 2026-04-22, zorbit-pfs-payment_gateway). NON-DISMISSIBLE
+// sandbox banner inside PaymentFormModal — do not remove.
+const PaymentGatewayCatalogPage = lazyWithRetry(() => import('./pages/payment_gateway/PaymentGatewayPage'));
+const PaymentAttemptsPage = lazyWithRetry(() => import('./pages/payment_gateway/PaymentAttemptsPage'));
+
+// Medical Coding — code-set picker, search, drawer, correlation matrix
+// (Soldier BB 2026-04-22, zorbit-pfs-medical_coding).
+const MedicalCodingCatalogPage = lazyWithRetry(() => import('./pages/medical_coding/MedicalCodingPage'));
+const MedicalCodingCorrelationsPage = lazyWithRetry(() => import('./pages/medical_coding/CorrelationMatrixPage'));
+
 // PII Showcase — Hub, Setup, Deployments
 const PIIShowcaseHubPage = lazyWithRetry(() => import('./pages/pii-showcase/PIIShowcaseHubPage'));
 const PIIShowcaseSetupPage = lazyWithRetry(() => import('./pages/pii-showcase/PIIShowcaseSetupPage'));
@@ -230,7 +254,7 @@ const WorkflowDeploymentsPage = lazyWithRetry(() => import('./pages/workflow-eng
 // EPIC 16 Phase 2 — bpmn-js designer inside workflow_engine module. This is
 // the FQP authoring surface rewritten as BPMN 2.0 native. Registered as
 // `@platform:WorkflowDesigner` so other modules can embed it too, but the
-// direct /m/workflow-engine/designer route below gives the nav entry a
+// direct /m/workflow_engine/designer route below gives the nav entry a
 // predictable home while the manifest pipeline finishes landing.
 const WorkflowDesignerPage = lazyWithRetry(() => import('./components/shared/WorkflowDesigner'));
 
@@ -419,13 +443,13 @@ function ModuleIndexRedirect() {
   const slug = match ? match[1] : '';
   const MODULE_DEFAULTS: Record<string, string> = {
     'pcg4':           '/m/pcg4/configs',
-    'hi-quotation':   '/m/hi-quotation/quotes',
-    'mi-quotation':   '/m/mi-quotation/quotes',
-    'uw-workflow':    '/m/uw-workflow/queues',
-    'hi-decisioning': '/m/hi-decisioning/rules',
-    'form-builder':   '/m/form-builder/forms',
+    'hi_quotation':   '/m/hi_quotation/quotes',
+    'mi_quotation':   '/m/mi_quotation/quotes',
+    'uw_workflow':    '/m/uw_workflow/queues',
+    'hi_decisioning': '/m/hi_decisioning/rules',
+    'form_builder':   '/m/form_builder/forms',
     'datatable':      '/m/datatable/tables',
-    'payment-gateway':'/m/payment-gateway/sandbox',
+    'payment_gateway':'/m/payment_gateway/sandbox',
   };
   const target = MODULE_DEFAULTS[slug] || '/';
   return <Navigate to={target} replace />;
@@ -475,7 +499,7 @@ function PageRoutes() {
       <Route path="navigation/menus" element={<NavigationAdminPage />} />
       <Route path="navigation/routes" element={<RoutesPage />} />
       <Route path="navigation" element={<NavigationAdminPage />} />
-      <Route path="pii-vault" element={<PiiVaultPage />} />
+      <Route path="pii_vault" element={<PiiVaultPage />} />
       <Route path="pii-vault/tokens" element={<SafeLazy><PiiTokenRegistryPage /></SafeLazy>} />
       <Route path="pii-vault/data-types" element={<SafeLazy><PiiDataTypesPage /></SafeLazy>} />
       <Route path="api-docs" element={<ApiDocsPage />} />
@@ -542,15 +566,37 @@ function PageRoutes() {
       <Route path="m/pcg4/pricing" element={<SafeLazy><PCG4PricingPage /></SafeLazy>} />
       <Route path="m/pcg4/help" element={<Navigate to="/m/pcg4/hub" replace />} />
 
-      {/* ZMB Factory — /m/zmb-factory/* (noun-based RESTful, 2026-04-23) */}
-      <Route path="m/zmb-factory/modules/new" element={<SafeLazy><ZmbModuleDraftsPage /></SafeLazy>} />
-      <Route path="m/zmb-factory/modules/:draftId" element={<SafeLazy><ZmbModuleDraftsPage /></SafeLazy>} />
+      {/* ZMB Factory — /m/zmb_factory/* (noun-based RESTful, 2026-04-23) */}
+      <Route path="m/zmb_factory/modules/new" element={<SafeLazy><ZmbModuleDraftsPage /></SafeLazy>} />
+      <Route path="m/zmb_factory/modules/:draftId" element={<SafeLazy><ZmbModuleDraftsPage /></SafeLazy>} />
 
-      {/* Payment Gateway Sandbox — /m/payment-gateway/* (AX1 2026-04-22, zorbit-pfs-payment_gateway) */}
-      <Route path="m/payment-gateway" element={<ModuleIndexRedirect />} />
-      <Route path="m/payment-gateway/sandbox" element={<SafeLazy><PaymentGatewaySandboxPage /></SafeLazy>} />
-      <Route path="m/payment-gateway/gateways" element={<SafeLazy><PaymentGatewaySandboxPage /></SafeLazy>} />
-      <Route path="m/payment-gateway/attempts" element={<SafeLazy><PaymentGatewaySandboxPage /></SafeLazy>} />
+      {/* Payment Gateway Sandbox — /m/payment_gateway/* (AX1 2026-04-22, zorbit-pfs-payment_gateway) */}
+      <Route path="m/payment_gateway" element={<ModuleIndexRedirect />} />
+      <Route path="m/payment_gateway/sandbox" element={<SafeLazy><PaymentGatewaySandboxPage /></SafeLazy>} />
+      <Route path="m/payment_gateway/gateways" element={<SafeLazy><PaymentGatewaySandboxPage /></SafeLazy>} />
+      <Route path="m/payment_gateway/attempts" element={<SafeLazy><PaymentGatewaySandboxPage /></SafeLazy>} />
+
+      {/* RPA Integration — /m/rpa_integration/* (Soldier BB 2026-04-22).
+          Underscore slug per strict nomenclature — DO NOT hyphenate. */}
+      <Route path="m/rpa_integration" element={<SafeLazy><RpaIntegrationPage /></SafeLazy>} />
+      <Route path="m/rpa_integration/adapters/:code/runs" element={<SafeLazy><RpaRunHistoryPage /></SafeLazy>} />
+      <Route path="m/rpa_integration/adapters/:code/runs/:runId" element={<SafeLazy><RpaRunConsolePage /></SafeLazy>} />
+
+      {/* API Integration — /m/api_integration/* (Soldier BB 2026-04-22) */}
+      <Route path="m/api_integration" element={<SafeLazy><ApiIntegrationPage /></SafeLazy>} />
+      <Route path="m/api_integration/adapters/:code/runs" element={<SafeLazy><ApiRunHistoryPage /></SafeLazy>} />
+      <Route path="m/api_integration/adapters/:code/runs/:runId" element={<SafeLazy><ApiRunConsolePage /></SafeLazy>} />
+
+      {/* Payment Gateway — /m/payment_gateway/* underscore alias
+          (Soldier BB 2026-04-22, zorbit-pfs-payment_gateway). Renders new
+          region-tabbed catalog + sandbox modal with NON-DISMISSIBLE banner. */}
+      <Route path="m/payment_gateway" element={<SafeLazy><PaymentGatewayCatalogPage /></SafeLazy>} />
+      <Route path="m/payment_gateway/payment_attempts" element={<SafeLazy><PaymentAttemptsPage /></SafeLazy>} />
+
+      {/* Medical Coding — /m/medical_coding/* (Soldier BB 2026-04-22,
+          zorbit-pfs-medical_coding). */}
+      <Route path="m/medical_coding" element={<SafeLazy><MedicalCodingCatalogPage /></SafeLazy>} />
+      <Route path="m/medical_coding/correlations" element={<SafeLazy><MedicalCodingCorrelationsPage /></SafeLazy>} />
 
       {/* Seeder Generator — /m/seeder/seed-bundles/* (added 2026-04-23) */}
       <Route path="m/seeder/seed-bundles" element={<SafeLazy><SeedBundlesListPage /></SafeLazy>} />
@@ -559,51 +605,51 @@ function PageRoutes() {
       <Route path="m/seeder/seed-bundles/:bundleId/runs" element={<SafeLazy><SeedBundleDetailPage /></SafeLazy>} />
       <Route path="m/seeder/seed-bundles/:bundleId/runs/:runId" element={<SafeLazy><SeedBundleRunDetailPage /></SafeLazy>} />
 
-      {/* HI Quotation — /m/hi-quotation/* */}
-      <Route path="m/hi-quotation" element={<ModuleIndexRedirect />} />
-      <Route path="m/hi-quotation/guide/*" element={<SafeLazy><HIQuotationHubPage /></SafeLazy>} />
-      <Route path="m/hi-quotation/hub" element={<SafeLazy><HIQuotationHubPage /></SafeLazy>} />
-      <Route path="m/hi-quotation/quotes" element={<SafeLazy><HIQuotationPage /></SafeLazy>} />
-      <Route path="m/hi-quotation/quotes/new" element={<SafeLazy><RegionSelectorPage /></SafeLazy>} />
-      <Route path="m/hi-quotation/quotes/new/india" element={<SafeLazy><NewApplicationIndiaPage /></SafeLazy>} />
-      <Route path="m/hi-quotation/quotes/new/uae" element={<SafeLazy><NewApplicationUAEPage /></SafeLazy>} />
-      <Route path="m/hi-quotation/quotes/new/us" element={<SafeLazy><NewApplicationUSPage /></SafeLazy>} />
-      <Route path="m/hi-quotation/quotes/new/:countrySlug" element={<SafeLazy><GenericApplicationPage /></SafeLazy>} />
-      <Route path="m/hi-quotation/setup" element={<SafeLazy><HIQuotationSetupPage /></SafeLazy>} />
-      <Route path="m/hi-quotation/deployments" element={<SafeLazy><HIQuotationDeploymentsPage /></SafeLazy>} />
-      <Route path="m/hi-quotation/help" element={<SafeLazy><HIQuotationHelpPage /></SafeLazy>} />
+      {/* HI Quotation — /m/hi_quotation/* */}
+      <Route path="m/hi_quotation" element={<ModuleIndexRedirect />} />
+      <Route path="m/hi_quotation/guide/*" element={<SafeLazy><HIQuotationHubPage /></SafeLazy>} />
+      <Route path="m/hi_quotation/hub" element={<SafeLazy><HIQuotationHubPage /></SafeLazy>} />
+      <Route path="m/hi_quotation/quotes" element={<SafeLazy><HIQuotationPage /></SafeLazy>} />
+      <Route path="m/hi_quotation/quotes/new" element={<SafeLazy><RegionSelectorPage /></SafeLazy>} />
+      <Route path="m/hi_quotation/quotes/new/india" element={<SafeLazy><NewApplicationIndiaPage /></SafeLazy>} />
+      <Route path="m/hi_quotation/quotes/new/uae" element={<SafeLazy><NewApplicationUAEPage /></SafeLazy>} />
+      <Route path="m/hi_quotation/quotes/new/us" element={<SafeLazy><NewApplicationUSPage /></SafeLazy>} />
+      <Route path="m/hi_quotation/quotes/new/:countrySlug" element={<SafeLazy><GenericApplicationPage /></SafeLazy>} />
+      <Route path="m/hi_quotation/setup" element={<SafeLazy><HIQuotationSetupPage /></SafeLazy>} />
+      <Route path="m/hi_quotation/deployments" element={<SafeLazy><HIQuotationDeploymentsPage /></SafeLazy>} />
+      <Route path="m/hi_quotation/help" element={<SafeLazy><HIQuotationHelpPage /></SafeLazy>} />
 
-      {/* UW Workflow — /m/uw-workflow/* */}
-      <Route path="m/uw-workflow" element={<ModuleIndexRedirect />} />
-      <Route path="m/uw-workflow/guide/*" element={<SafeLazy><UWWorkflowHubPage /></SafeLazy>} />
-      <Route path="m/uw-workflow/hub" element={<SafeLazy><UWWorkflowHubPage /></SafeLazy>} />
-      <Route path="m/uw-workflow/queues" element={<SafeLazy><UWWorkflowPage /></SafeLazy>} />
-      <Route path="m/uw-workflow/queues/:queueId" element={<SafeLazy><UWWorkflowPage /></SafeLazy>} />
-      <Route path="m/uw-workflow/setup" element={<SafeLazy><UWWorkflowSetupPage /></SafeLazy>} />
-      <Route path="m/uw-workflow/deployments" element={<SafeLazy><UWWorkflowDeploymentsPage /></SafeLazy>} />
-      <Route path="m/uw-workflow/help" element={<SafeLazy><UWWorkflowHelpPage /></SafeLazy>} />
+      {/* UW Workflow — /m/uw_workflow/* */}
+      <Route path="m/uw_workflow" element={<ModuleIndexRedirect />} />
+      <Route path="m/uw_workflow/guide/*" element={<SafeLazy><UWWorkflowHubPage /></SafeLazy>} />
+      <Route path="m/uw_workflow/hub" element={<SafeLazy><UWWorkflowHubPage /></SafeLazy>} />
+      <Route path="m/uw_workflow/queues" element={<SafeLazy><UWWorkflowPage /></SafeLazy>} />
+      <Route path="m/uw_workflow/queues/:queueId" element={<SafeLazy><UWWorkflowPage /></SafeLazy>} />
+      <Route path="m/uw_workflow/setup" element={<SafeLazy><UWWorkflowSetupPage /></SafeLazy>} />
+      <Route path="m/uw_workflow/deployments" element={<SafeLazy><UWWorkflowDeploymentsPage /></SafeLazy>} />
+      <Route path="m/uw_workflow/help" element={<SafeLazy><UWWorkflowHelpPage /></SafeLazy>} />
 
-      {/* HI Decisioning — /m/hi-decisioning/* */}
-      <Route path="m/hi-decisioning" element={<ModuleIndexRedirect />} />
-      <Route path="m/hi-decisioning/guide/*" element={<SafeLazy><HIDecisioningHubPage /></SafeLazy>} />
-      <Route path="m/hi-decisioning/hub" element={<SafeLazy><HIDecisioningHubPage /></SafeLazy>} />
-      <Route path="m/hi-decisioning/rules" element={<SafeLazy><HIDecisioningPage /></SafeLazy>} />
-      <Route path="m/hi-decisioning/rules/:ruleId" element={<SafeLazy><HIDecisioningPage /></SafeLazy>} />
-      <Route path="m/hi-decisioning/setup" element={<SafeLazy><HIDecisioningSetupPage /></SafeLazy>} />
-      <Route path="m/hi-decisioning/deployments" element={<SafeLazy><HIDecisioningDeploymentsPage /></SafeLazy>} />
-      <Route path="m/hi-decisioning/help" element={<SafeLazy><HIDecisioningHelpPage /></SafeLazy>} />
+      {/* HI Decisioning — /m/hi_decisioning/* */}
+      <Route path="m/hi_decisioning" element={<ModuleIndexRedirect />} />
+      <Route path="m/hi_decisioning/guide/*" element={<SafeLazy><HIDecisioningHubPage /></SafeLazy>} />
+      <Route path="m/hi_decisioning/hub" element={<SafeLazy><HIDecisioningHubPage /></SafeLazy>} />
+      <Route path="m/hi_decisioning/rules" element={<SafeLazy><HIDecisioningPage /></SafeLazy>} />
+      <Route path="m/hi_decisioning/rules/:ruleId" element={<SafeLazy><HIDecisioningPage /></SafeLazy>} />
+      <Route path="m/hi_decisioning/setup" element={<SafeLazy><HIDecisioningSetupPage /></SafeLazy>} />
+      <Route path="m/hi_decisioning/deployments" element={<SafeLazy><HIDecisioningDeploymentsPage /></SafeLazy>} />
+      <Route path="m/hi_decisioning/help" element={<SafeLazy><HIDecisioningHelpPage /></SafeLazy>} />
 
-      {/* Form Builder — /m/form-builder/* */}
-      <Route path="m/form-builder" element={<ModuleIndexRedirect />} />
-      <Route path="m/form-builder/guide/*" element={<SafeLazy><FormBuilderOverviewPage /></SafeLazy>} />
-      <Route path="m/form-builder/hub" element={<SafeLazy><FormBuilderHubPage /></SafeLazy>} />
-      <Route path="m/form-builder/forms" element={<SafeLazy><FormBuilderPage /></SafeLazy>} />
-      <Route path="m/form-builder/forms/:formId" element={<SafeLazy><FormBuilderDetailPage /></SafeLazy>} />
-      <Route path="m/form-builder/templates" element={<SafeLazy><FormTemplatesPage /></SafeLazy>} />
-      <Route path="m/form-builder/tokens" element={<SafeLazy><FormBuilderTokensPage /></SafeLazy>} />
-      <Route path="m/form-builder/setup" element={<SafeLazy><FormBuilderSetupPage /></SafeLazy>} />
-      <Route path="m/form-builder/deployments" element={<SafeLazy><FormBuilderDeploymentsPage /></SafeLazy>} />
-      <Route path="m/form-builder/help" element={<SafeLazy><FormBuilderHelpPage /></SafeLazy>} />
+      {/* Form Builder — /m/form_builder/* */}
+      <Route path="m/form_builder" element={<ModuleIndexRedirect />} />
+      <Route path="m/form_builder/guide/*" element={<SafeLazy><FormBuilderOverviewPage /></SafeLazy>} />
+      <Route path="m/form_builder/hub" element={<SafeLazy><FormBuilderHubPage /></SafeLazy>} />
+      <Route path="m/form_builder/forms" element={<SafeLazy><FormBuilderPage /></SafeLazy>} />
+      <Route path="m/form_builder/forms/:formId" element={<SafeLazy><FormBuilderDetailPage /></SafeLazy>} />
+      <Route path="m/form_builder/templates" element={<SafeLazy><FormTemplatesPage /></SafeLazy>} />
+      <Route path="m/form_builder/tokens" element={<SafeLazy><FormBuilderTokensPage /></SafeLazy>} />
+      <Route path="m/form_builder/setup" element={<SafeLazy><FormBuilderSetupPage /></SafeLazy>} />
+      <Route path="m/form_builder/deployments" element={<SafeLazy><FormBuilderDeploymentsPage /></SafeLazy>} />
+      <Route path="m/form_builder/help" element={<SafeLazy><FormBuilderHelpPage /></SafeLazy>} />
 
       {/* DataTable — /m/datatable/* */}
       <Route path="m/datatable" element={<Navigate to="/m/datatable/tables" replace />} />
@@ -611,17 +657,17 @@ function PageRoutes() {
       <Route path="m/datatable/tables/:tableId" element={<DataTableDemoPage />} />
       <Route path="m/datatable/setup" element={<SafeLazy><DataTableSetupPage /></SafeLazy>} />
 
-      {/* Workflow Engine — /m/workflow-engine/* */}
-      <Route path="m/workflow-engine" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
-      <Route path="m/workflow-engine/guide/*" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
-      <Route path="m/workflow-engine/hub" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
-      <Route path="m/workflow-engine/designer" element={<SafeLazy><WorkflowDesignerPage /></SafeLazy>} />
-      <Route path="m/workflow-engine/designer/:processHashId" element={<SafeLazy><WorkflowDesignerPage /></SafeLazy>} />
-      <Route path="m/workflow-engine/filters" element={<SafeLazy><WorkflowFiltersPage /></SafeLazy>} />
-      <Route path="m/workflow-engine/queues" element={<SafeLazy><WorkflowQueuesPage /></SafeLazy>} />
-      <Route path="m/workflow-engine/pipelines" element={<SafeLazy><WorkflowPipelinesPage /></SafeLazy>} />
-      <Route path="m/workflow-engine/setup" element={<SafeLazy><WorkflowSetupPage /></SafeLazy>} />
-      <Route path="m/workflow-engine/deployments" element={<SafeLazy><WorkflowDeploymentsPage /></SafeLazy>} />
+      {/* Workflow Engine — /m/workflow_engine/* */}
+      <Route path="m/workflow_engine" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
+      <Route path="m/workflow_engine/guide/*" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
+      <Route path="m/workflow_engine/hub" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
+      <Route path="m/workflow_engine/designer" element={<SafeLazy><WorkflowDesignerPage /></SafeLazy>} />
+      <Route path="m/workflow_engine/designer/:processHashId" element={<SafeLazy><WorkflowDesignerPage /></SafeLazy>} />
+      <Route path="m/workflow_engine/filters" element={<SafeLazy><WorkflowFiltersPage /></SafeLazy>} />
+      <Route path="m/workflow_engine/queues" element={<SafeLazy><WorkflowQueuesPage /></SafeLazy>} />
+      <Route path="m/workflow_engine/pipelines" element={<SafeLazy><WorkflowPipelinesPage /></SafeLazy>} />
+      <Route path="m/workflow_engine/setup" element={<SafeLazy><WorkflowSetupPage /></SafeLazy>} />
+      <Route path="m/workflow_engine/deployments" element={<SafeLazy><WorkflowDeploymentsPage /></SafeLazy>} />
 
       {/* Jayna — /m/jayna/* */}
       <Route path="m/jayna" element={<SafeLazy><JaynaHubPage /></SafeLazy>} />
@@ -656,10 +702,10 @@ function PageRoutes() {
             /app/pcg4/pricing                      -> /m/pcg4/pricing
             /app/pcg4/configurations-fb            -> /m/pcg4/configs
             /app/pcg4/help                         -> /m/pcg4/hub
-            /app/hi-quotation/(splat)              -> /m/hi-quotation/quotes
-            /app/uw-workflow/(splat)               -> /m/uw-workflow/queues
-            /app/hi-decisioning/(splat)            -> /m/hi-decisioning/rules
-            /app/form-builder/(splat)              -> /m/form-builder/forms
+            /app/hi-quotation/(splat)              -> /m/hi_quotation/quotes
+            /app/uw-workflow/(splat)               -> /m/uw_workflow/queues
+            /app/hi-decisioning/(splat)            -> /m/hi_decisioning/rules
+            /app/form-builder/(splat)              -> /m/form_builder/forms
       */}
 
       {/* Organization Directory (own section) */}
@@ -670,11 +716,11 @@ function PageRoutes() {
       <Route path="directory/deployments" element={<SafeLazy><DirectoryDeploymentsPage /></SafeLazy>} />
 
       {/* support-center/* routes removed 2026-04-23 (Soldier AX J62/J63).
-          Canonical help/support UI is provided by zorbit-adm-help_support registered module at /m/help-support/*.
+          Canonical help/support UI is provided by zorbit-adm-help_support registered module at /m/help_support/*.
           Video manifests preserved in src/data/video-manifests/platform-tour.ts. */}
 
       {/* Voice Engine */}
-      <Route path="voice-engine" element={<SafeLazy><VoiceEngineHubPage /></SafeLazy>} />
+      <Route path="voice_engine" element={<SafeLazy><VoiceEngineHubPage /></SafeLazy>} />
       <Route path="voice-engine/guide/*" element={<SafeLazy><VoiceEngineHubPage /></SafeLazy>} />
       <Route path="voice-engine/hub" element={<SafeLazy><VoiceEngineHubPage /></SafeLazy>} />
       <Route path="voice-engine/setup" element={<SafeLazy><VoiceEngineSetupPage /></SafeLazy>} />
@@ -698,7 +744,7 @@ function PageRoutes() {
       <Route path="jayna/deployments" element={<SafeLazy><JaynaDeploymentsPage /></SafeLazy>} />
 
       {/* Form Builder */}
-      <Route path="form-builder" element={<SafeLazy><FormBuilderPage /></SafeLazy>} />
+      <Route path="form_builder" element={<SafeLazy><FormBuilderPage /></SafeLazy>} />
       <Route path="form-builder/templates" element={<SafeLazy><FormTemplatesPage /></SafeLazy>} />
       <Route path="form-builder/create" element={<SafeLazy><FormCreatePage /></SafeLazy>} />
       <Route path="form-builder/submissions" element={<SafeLazy><FormSubmissionsPage /></SafeLazy>} />
@@ -712,7 +758,7 @@ function PageRoutes() {
       <Route path="form-builder/:slug" element={<SafeLazy><FormBuilderDetailPage /></SafeLazy>} />
 
       {/* Workflow Engine (FQP) */}
-      <Route path="workflow-engine" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
+      <Route path="workflow_engine" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
       <Route path="workflow-engine/guide/*" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
       <Route path="workflow-engine/hub" element={<SafeLazy><WorkflowEngineHubPage /></SafeLazy>} />
       <Route path="workflow-engine/filters" element={<SafeLazy><WorkflowFiltersPage /></SafeLazy>} />
@@ -722,9 +768,9 @@ function PageRoutes() {
       <Route path="workflow-engine/deployments" element={<SafeLazy><WorkflowDeploymentsPage /></SafeLazy>} />
 
       {/* Admin */}
-      {/* Canonical route is /m/module-registry/modules (Zorbit URI convention). */}
+      {/* Canonical route is /m/module_registry/modules (Zorbit URI convention). */}
       {/* /admin/modules kept as a redirect-quality alias for bookmarks during migration. */}
-      <Route path="m/module-registry/modules" element={<SafeLazy><ModuleRegistryPage /></SafeLazy>} />
+      <Route path="m/module_registry/modules" element={<SafeLazy><ModuleRegistryPage /></SafeLazy>} />
       <Route path="admin/modules" element={<SafeLazy><ModuleRegistryPage /></SafeLazy>} />
 
       {/* Manifest-driven catch-all: /m/:slug/* routes resolve to the
@@ -787,17 +833,17 @@ function PageRoutes() {
       <Route path="admin/deployments" element={<SafeLazy><AdminDeploymentsPage /></SafeLazy>} />
 
       {/* Business Modules — Retail Insurance */}
-      <Route path="uw-workflow" element={<SafeLazy><UWWorkflowPage /></SafeLazy>} />
+      <Route path="uw_workflow" element={<SafeLazy><UWWorkflowPage /></SafeLazy>} />
       <Route path="uw-workflow/guide/*" element={<SafeLazy><UWWorkflowHubPage /></SafeLazy>} />
       <Route path="uw-workflow/hub" element={<SafeLazy><UWWorkflowHubPage /></SafeLazy>} />
       <Route path="uw-workflow/help" element={<SafeLazy><UWWorkflowHelpPage /></SafeLazy>} />
       <Route path="uw-workflow/*" element={<SafeLazy><UWWorkflowPage /></SafeLazy>} />
-      <Route path="hi-uw-decisioning" element={<SafeLazy><HIDecisioningPage /></SafeLazy>} />
+      <Route path="hi_uw_decisioning" element={<SafeLazy><HIDecisioningPage /></SafeLazy>} />
       <Route path="hi-uw-decisioning/guide/*" element={<SafeLazy><HIDecisioningHubPage /></SafeLazy>} />
       <Route path="hi-uw-decisioning/hub" element={<SafeLazy><HIDecisioningHubPage /></SafeLazy>} />
       <Route path="hi-uw-decisioning/help" element={<SafeLazy><HIDecisioningHelpPage /></SafeLazy>} />
       <Route path="hi-uw-decisioning/*" element={<SafeLazy><HIDecisioningPage /></SafeLazy>} />
-      <Route path="hi-quotation" element={<SafeLazy><HIQuotationPage /></SafeLazy>} />
+      <Route path="hi_quotation" element={<SafeLazy><HIQuotationPage /></SafeLazy>} />
       <Route path="hi-quotation/guide/*" element={<SafeLazy><HIQuotationHubPage /></SafeLazy>} />
       <Route path="hi-quotation/hub" element={<SafeLazy><HIQuotationHubPage /></SafeLazy>} />
       <Route path="hi-quotation/help" element={<SafeLazy><HIQuotationHelpPage /></SafeLazy>} />
@@ -810,7 +856,7 @@ function PageRoutes() {
       <Route path="hi-quotation/*" element={<SafeLazy><HIQuotationPage /></SafeLazy>} />
 
       {/* Business Modules — Product Pricing (own section + microservice) */}
-      <Route path="product-pricing" element={<SafeLazy><ProductPricingHubPage /></SafeLazy>} />
+      <Route path="product_pricing" element={<SafeLazy><ProductPricingHubPage /></SafeLazy>} />
       <Route path="product-pricing/guide/*" element={<SafeLazy><ProductPricingHubPage /></SafeLazy>} />
       <Route path="product-pricing/hub" element={<SafeLazy><ProductPricingHubPage /></SafeLazy>} />
       <Route path="product-pricing/rate-tables" element={<SafeLazy><RateTablesPage /></SafeLazy>} />
