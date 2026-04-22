@@ -108,14 +108,33 @@ function rotate<T>(arr: T[], idx: number): T {
 }
 
 // ─── Default expand/collapse state ───────────────────────────────────
-// L1 sections that start collapsed (all others start open)
+// These sets match L1/L2/L3 IDs produced by `buildDbScaffold` in the live
+// data pipeline (slugified scaffold / business-line / capability names).
+// They are UI presentation defaults only — the IDs themselves come from
+// whatever the live registry declares, so the tree still renders correctly
+// if a manifest introduces a new scaffold; the defaults just won't fire.
+//
+// L1 sections that start collapsed (all others start open). Slugified from
+// manifest `placement.scaffold`.
 const DEFAULT_COLLAPSED_L1 = new Set([
-  'platform-core', 'platform-feature-services', 'ai-automation', 'administration',
+  'platform-core', 'pfs', 'platform-feature-services', 'ai-and-voice',
+  'ai-automation', 'administration',
 ]);
-// L2 nodes that start open (all others start collapsed)
-const DEFAULT_OPEN_L2 = new Set(['biz-distribution']);
-// L3 nodes that start open (all others start collapsed)
-const DEFAULT_OPEN_L3 = new Set(['biz-dist-product-mgmt', 'biz-dist-policy-admin']);
+// L2 nodes that start open. Under the Business scaffold these are slugified
+// from `placement.businessLine` (e.g. "Distribution" → `business-distribution`).
+const DEFAULT_OPEN_L2 = new Set([
+  'business-distribution',
+  // legacy static-tree ID, kept as a harmless no-op for transition envs
+  'biz-distribution',
+]);
+// L3 nodes that start open. Under Business/Distribution these slugify from
+// `placement.capabilityArea` (e.g. "Product Mgmt" → `business-distribution-product-mgmt`).
+const DEFAULT_OPEN_L3 = new Set([
+  'business-distribution-product-mgmt',
+  'business-distribution-policy-admin',
+  'biz-dist-product-mgmt',
+  'biz-dist-policy-admin',
+]);
 
 // ─── Node type ────────────────────────────────────────────────────────
 export interface MenuNodePlacement {

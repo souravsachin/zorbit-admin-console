@@ -1,7 +1,20 @@
 // =============================================================================
-// PII Visibility Hook
+// PII Visibility Hook — UI-ONLY RENDERING HINT
 // =============================================================================
-// Returns the PII visibility level for the current user based on their role.
+// IMPORTANT: this hook is a UI-layer convenience that chooses HOW to render
+// PII values the client already holds. It is NOT an enforcement mechanism
+// and MUST NOT be relied on to keep PII out of a user's hands.
+//
+// Real PII enforcement is server-side in the Zorbit PII Vault:
+//   - Operational databases store only tokens (PII-XXXX).
+//   - Detokenisation is an authenticated + privileged call to the vault.
+//   - The vault evaluates role / org / IP / audit policy before releasing
+//     any real PII.
+//
+// This hook therefore decides only which already-received presentation to
+// show (full / nickname / masked / hidden). If the server never sent the
+// real value, no setting here can reveal it. Owner-approved split, see
+// judgement call J12 (2026-04-11).
 //
 // Visibility levels:
 //   'full'     - Real PII values shown (quotation officers, brokers who own the case)

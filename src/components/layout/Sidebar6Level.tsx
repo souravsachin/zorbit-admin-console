@@ -20,7 +20,6 @@ import SidebarSearch from './SidebarSearch';
 import BusinessLineSelector, { BusinessLine, EditionMeta, BUSINESS_LINE_LABELS, SHORT_LABELS } from './BusinessLineSelector';
 import SidebarSwitcher from './SidebarSwitcher';
 import { L1Node, MenuNodeData, MenuNodePlacement, ForceExpandContext, ForceExpandSignal } from './MenuNode';
-import staticMenuData from '../../data/menu-6level.json';
 import { navigationService, MenuItem } from '../../services/navigation';
 import { moduleRegistryService } from '../../services/moduleRegistry';
 import type { MenuStyle } from '../../hooks/useMenuPreference';
@@ -102,103 +101,17 @@ function filterByPrivileges(
 
 // ─── Business-line filter ─────────────────────────────────────────────
 //
-// Two modes coexist:
-//
-//  A. Static mode — node IDs follow a 6-level tree convention (hi-, biz-hi,
-//     biz-dist-pm-pcg4, etc). The ID itself encodes which business line it
-//     belongs to. We filter by ID prefix against BIZ_LINE_PREFIXES.
-//
-//  B. Database mode — nodes come from the nav service `/menu` API. The API
-//     returns per-module sections carrying `placement.businessLine` and an
-//     optional `placement.specificTo` array. We filter using that payload.
-//     We DO NOT hardcode "zorbit-cor-X belongs to business line Y" mappings.
-//
-// Both filters honor the same set of selectable editions (insurance lines +
-// TPA/Broker/Provider/Regulator). There is deliberately no "Platform View"
-// dropdown entry; core and feature-services modules simply always pass the
-// filter regardless of selected edition.
-//
-// See US-NV-2083 (2026-04-19) for the rewrite rationale. The prior hard-coded
-// BIZ_LINE_PREFIXES / PLATFORM_SECTION_IDS approach failed because API-emitted
-// IDs (`zorbit-app-hi_quotation-0`) never matched the static tree's ID shape.
-
-// Static-tree structural IDs — kept only for static mode.
-const BIZ_STRUCTURAL_IDS = new Set([
-  'business-insurer', 'biz-distribution', 'biz-servicing', 'biz-finance',
-  'biz-dist-product-mgmt', 'biz-dist-policy-admin', 'biz-dist-reporting',
-  'biz-serv-network', 'biz-serv-claims', 'biz-serv-customer',
-  'biz-serv-fwa', 'biz-serv-reporting',
-  'biz-fin-premium', 'biz-fin-reporting',
-]);
-const STATIC_PLATFORM_IDS = new Set([
-  'platform-core', 'platform-feature-services', 'ai-automation', 'administration',
-]);
-// Note: 'platform' remains in the BusinessLine type because older internal
-// checks in this file reference it (e.g. label override around the
-// business-insurer node). The dropdown (BusinessLineSelector.tsx GROUPS) does
-// NOT expose 'platform' as a selectable option — that was removed by the user
-// in an earlier session. Empty prefixes = show all.
-const STATIC_LINE_PREFIXES: Record<BusinessLine, string[]> = {
-  platform:    [],
-  health:      ['hi-', 'health', 'biz-health', 'biz-hi', 'biz-dist-pm-', 'biz-dist-pas-', 'biz-dist-pm-pcg4'],
-  motor:       ['mi-', 'motor', 'biz-motor', 'biz-dist-pm-motor', 'biz-dist-pm-', 'biz-dist-pas-'],
-  marine:      ['marine', 'biz-marine', 'biz-dist-pm-', 'biz-dist-pas-'],
-  property:    ['property', 'biz-property', 'biz-dist-pm-', 'biz-dist-pas-'],
-  life:        ['life', 'biz-life', 'biz-dist-pm-', 'biz-dist-pas-'],
-  uhc:         ['uhc', 'biz-uhc', 'biz-hi', 'biz-dist-pm-', 'biz-dist-pas-'],
-  'tpa-motor': ['tpa-motor', 'biz-tpa-motor', 'biz-motor', 'biz-dist-pm-', 'biz-dist-pas-'],
-  tpa:         ['tpa', 'biz-tpa', 'biz-hi', 'biz-dist-pm-', 'biz-dist-pas-'],
-  broker:      ['broker', 'biz-broker', 'biz-dist-pm-', 'biz-dist-pas-'],
-  provider:    ['provider', 'biz-provider', 'biz-dist-pm-', 'biz-dist-pas-'],
-  regulator:   ['regulator', 'biz-regulator', 'biz-dist-pm-', 'biz-dist-pas-'],
-};
-
-// Business lines whose sections are NOT tied to a specific insurance product —
-// they cut across all insurance editions. Core and feature-services are
-// always visible; distribution/underwriting/claims/servicing are visible for
-// any selected insurance edition unless the section also declares `specificTo`.
-const EDITION_AGNOSTIC_BUSINESS_LINES = new Set([
-  'core', 'feature-services', 'distribution', 'underwriting', 'claims', 'servicing',
-]);
-const ALWAYS_VISIBLE_BUSINESS_LINES = new Set(['core', 'feature-services']);
-
-function filterByBusinessLineStatic(nodes: MenuNodeData[], line: BusinessLine): MenuNodeData[] {
-  const prefixes = STATIC_LINE_PREFIXES[line];
-  if (!prefixes || prefixes.length === 0) return nodes;
-  function filterNode(node: MenuNodeData): MenuNodeData | null {
-    if (BIZ_STRUCTURAL_IDS.has(node.id)) {
-      const kids = node.children.map(filterNode).filter(Boolean) as MenuNodeData[];
-      return { ...node, children: kids };
-    }
-    const idLower = node.id.toLowerCase();
-    const selfMatches = prefixes.some((p) => idLower.startsWith(p) || idLower.includes(p));
-    const kids = node.children.map(filterNode).filter(Boolean) as MenuNodeData[];
-    if (selfMatches || kids.length > 0) return { ...node, children: kids };
-    return null;
-  }
-  return nodes.map((node) => {
-    if (STATIC_PLATFORM_IDS.has(node.id)) return node;
-    return filterNode(node);
-  }).filter(Boolean) as MenuNodeData[];
-}
-
-function filterByBusinessLineDatabase(
+// Live-only. The previous static-tree ID-prefix filter was removed on
+// 2026-04-23 (owner directive — Path B, kill static scaffold). Data comes
+// from the cascade resolver which already returns per-module sections
+// carrying `placement.businessLine` + `placement.edition`. `buildDbScaffold`
+// handles edition gating during tree assembly, so this function is now a
+// pass-through kept for API symmetry with the earlier code.
+function filterByBusinessLine(
   nodes: MenuNodeData[],
   _line: BusinessLine,
 ): MenuNodeData[] {
-  // In DB mode buildDbScaffold has already filtered Business modules by the
-  // selected edition and assembled the L1 scaffolds. Nothing more to do here.
   return nodes;
-}
-
-function filterByBusinessLine(
-  nodes: MenuNodeData[],
-  line: BusinessLine,
-  mode: 'static' | 'database',
-): MenuNodeData[] {
-  return mode === 'database'
-    ? filterByBusinessLineDatabase(nodes, line)
-    : filterByBusinessLineStatic(nodes, line);
 }
 
 // ─── DB scaffold builder (auto-discovery) ─────────────────────────────
@@ -509,24 +422,6 @@ function buildDbScaffold(sections: ApiSection[], selectedEdition: BusinessLine):
   }));
 }
 
-// Static-mode-only fallback editions list. Mirrors the dropdown that
-// shipped with static mode so visual parity is preserved when no manifest
-// data is yet available. DB mode uses collectEditionsFromSections instead.
-// Will retire when static mode is removed.
-const STATIC_EDITIONS: EditionMeta[] = [
-  { name: 'Health Insurance',  category: 'Insurer',  categorySortOrder: 10, sortOrder: 10, icon: 'Heart',      iconBg: '#dcfce7', iconColor: '#15803d', iconRing: '#86efac' },
-  { name: 'Motor Insurance',   category: 'Insurer',  categorySortOrder: 10, sortOrder: 20, icon: 'Car',        iconBg: '#dbeafe', iconColor: '#1d4ed8', iconRing: '#93c5fd' },
-  { name: 'Marine Insurance',  category: 'Insurer',  categorySortOrder: 10, sortOrder: 30, icon: 'Anchor',     iconBg: '#ccfbf1', iconColor: '#0f766e', iconRing: '#5eead4' },
-  { name: 'Property Insurance',category: 'Insurer',  categorySortOrder: 10, sortOrder: 40, icon: 'Home',       iconBg: '#fef3c7', iconColor: '#b45309', iconRing: '#fcd34d' },
-  { name: 'Life Insurance',    category: 'Insurer',  categorySortOrder: 10, sortOrder: 50, icon: 'Activity',   iconBg: '#f3e8ff', iconColor: '#7c3aed', iconRing: '#c4b5fd' },
-  { name: 'UHC — Health',      category: 'UHC',      categorySortOrder: 20, sortOrder: 10, icon: 'Landmark',   iconBg: '#e0f2fe', iconColor: '#0284c7', iconRing: '#7dd3fc' },
-  { name: 'TPA — Health',      category: 'TPA',      categorySortOrder: 30, sortOrder: 10, icon: 'Stethoscope',iconBg: '#ffedd5', iconColor: '#c2410c', iconRing: '#fdba74' },
-  { name: 'TPA — Motor',       category: 'TPA',      categorySortOrder: 30, sortOrder: 20, icon: 'Truck',      iconBg: '#fff7ed', iconColor: '#9a3412', iconRing: '#fb923c' },
-  { name: 'Broker — All Lines',category: 'Broker',   categorySortOrder: 40, sortOrder: 10, icon: 'Briefcase',  iconBg: '#ede9fe', iconColor: '#7c3aed', iconRing: '#a78bfa' },
-  { name: 'Provider — Hospital',category:'Provider', categorySortOrder: 50, sortOrder: 10, icon: 'Plus',       iconBg: '#d1fae5', iconColor: '#059669', iconRing: '#6ee7b7' },
-  { name: 'Regulator — All Lines',category:'Regulator',categorySortOrder:60,sortOrder: 10, icon: 'Scale',      iconBg: '#fee2e2', iconColor: '#dc2626', iconRing: '#fca5a5' },
-];
-
 // Collect unique editions from API sections. First-seen wins on conflicting
 // metadata for the same edition name (logged once).
 function collectEditionsFromSections(sections: ApiSection[]): EditionMeta[] {
@@ -573,12 +468,18 @@ const Sidebar6Level: React.FC<Sidebar6LevelProps> = ({
 }) => {
   const { user, orgId, logout } = useAuth();
 
-  // Static fallback — always the ground truth until full pipeline is wired
-  const [staticData] = useState<MenuNodeData[]>(staticMenuData as MenuNodeData[]);
-  // API sections cached as-received from the nav service. We re-bucket on
-  // edition change rather than re-fetching.
+  // Live-only data pipeline (owner directive 2026-04-23 — Path B).
+  // The sidebar renders EXCLUSIVELY from the cascade resolver. When the
+  // resolver is unreachable or returns 0 modules, the footer flips to
+  // 🔴 OFFLINE and the tree shows an explicit error state.
+  //
+  // Source states:
+  //   'loading' — initial mount, first fetch in flight
+  //   'live'    — resolver returned modules (happy path)
+  //   'error'   — resolver threw or returned 0 modules (visible banner)
   const [apiSections, setApiSections] = useState<ApiSection[]>([]);
-  const [autoMenuSource, setAutoMenuSource] = useState<'static' | 'database'>('static');
+  const [sourceState, setSourceState] = useState<'loading' | 'live' | 'error'>('loading');
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const fetchedRef = useRef(false);
 
   // Parse JWT privileges for client-side filtering
@@ -608,20 +509,38 @@ const Sidebar6Level: React.FC<Sidebar6LevelProps> = ({
             items?: Array<{ label: string; feRoute: string; icon: string; privilege: string }>;
           }>;
         };
-        // The new endpoint returns source='live' when the cascade resolver
-        // served real data from registered_modules. The old endpoint still
-        // used stale!==false — accept either signal.
-        const isLive = data?.source === 'live' || data?.stale === false;
         const sections = (data?.sections || []) as ApiSection[];
-        if (isLive && sections.length > 0) {
-          setApiSections(sections);
-          setAutoMenuSource('database');
-        } else if (sections.length > 0) {
-          setApiSections(sections);
-          // autoMenuSource stays 'static' — pipeline not fully wired yet
+        // The cascade resolver is authoritative — it ALWAYS returns
+        // source='live'. Anything else is a protocol violation and we
+        // treat it as an error rather than silently flipping to a
+        // placeholder tree.
+        if (data?.source !== 'live') {
+          setApiSections([]);
+          setSourceState('error');
+          setErrorMessage(
+            `Nav service returned unexpected source="${data?.source ?? 'unknown'}". ` +
+              'Expected "live". Check zorbit-cor-navigation cascade resolver.',
+          );
+          return;
         }
-      } catch {
-        // Nav service unreachable — navServiceData stays empty
+        if (sections.length === 0) {
+          setApiSections([]);
+          setSourceState('error');
+          setErrorMessage(
+            'Live navigation returned 0 modules. The module registry is ' +
+              'empty or the cascade resolver could not match any live rows.',
+          );
+          return;
+        }
+        setApiSections(sections);
+        setSourceState('live');
+        setErrorMessage('');
+      } catch (err) {
+        setApiSections([]);
+        setSourceState('error');
+        setErrorMessage(
+          err instanceof Error ? err.message : 'Navigation service unreachable',
+        );
       } finally {
         if (refresh) setIsRefreshing(false);
       }
@@ -715,30 +634,15 @@ const Sidebar6Level: React.FC<Sidebar6LevelProps> = ({
     setBusinessLine(dbEditions[0].name);
   }, [dbEditions, businessLine]);
 
-  // menuSource: auto-promoted to 'database' when the full pipeline delivers data.
-  // Pipeline: Module → Kafka → module-registry → platform.module.ready → nav service → here.
-  const menuSource: 'static' | 'database' = autoMenuSource;
-
-  // forceSource: manual debug toggle (null = follow menuSource)
-  // Cycles: null → 'static' → 'database' → null
-  const [forceSource, setForceSource] = useState<null | 'static' | 'database'>(null);
-  const cycleForceSource = useCallback(() => {
-    setForceSource((prev) => {
-      if (prev === null) return 'static';
-      if (prev === 'static') return 'database';
-      return null;
-    });
-  }, []);
-
-  // Effective data: when 'database' is the active source, build the tree
-  // afresh from API sections + currently selected edition. Cheap (in the
-  // tens of milliseconds) and correct on every edition switch.
-  const effectiveSource = forceSource ?? menuSource;
+  // Live-only: tree is rebuilt from cascade resolver sections on every
+  // edition change. No static fallback, no dev force-source toggle. When
+  // sourceState !== 'live', menuData is empty and the FE renders an error
+  // banner in place of the tree.
   const navServiceData: MenuNodeData[] = useMemo(
     () => buildDbScaffold(apiSections, businessLine),
     [apiSections, businessLine],
   );
-  const menuData = effectiveSource === 'database' ? navServiceData : staticData;
+  const menuData: MenuNodeData[] = sourceState === 'live' ? navServiceData : [];
 
   // Height resize state — null = fill full screen height
   const [sidebarHeight, setSidebarHeight] = useState<number | null>(null);
@@ -841,12 +745,12 @@ const Sidebar6Level: React.FC<Sidebar6LevelProps> = ({
     document.addEventListener('mouseup', onUp);
   }, []);
 
-  // Filter menu data: business line first, then privilege filtering.
-  // `effectiveSource` picks the correct filter strategy (static tree vs DB).
+  // Filter menu data: business line (pass-through, live tree is already
+  // edition-filtered in buildDbScaffold) then privilege filtering.
   const filteredData = useMemo(() => {
-    const byLine = filterByBusinessLine(menuData, businessLine, effectiveSource);
+    const byLine = filterByBusinessLine(menuData, businessLine);
     return filterByPrivileges(byLine, jwtPrivileges, isSuperAdmin);
-  }, [menuData, businessLine, jwtPrivileges, isSuperAdmin, effectiveSource]);
+  }, [menuData, businessLine, jwtPrivileges, isSuperAdmin]);
 
   // Initials helper
   const getInitials = (name: string) =>
@@ -1043,50 +947,92 @@ const Sidebar6Level: React.FC<Sidebar6LevelProps> = ({
             placeholder={`Search ${totalItems} items...`}
           />
 
-          {/* Business line selector — auto-derived in DB mode, fixed list in static mode */}
+          {/* Business line selector — editions sourced exclusively from the
+              live module-registry union endpoint + live cascade sections.
+              No static fallback: if dbEditions is empty the dropdown simply
+              renders empty (BusinessLineSelector tolerates 0 entries). */}
           <BusinessLineSelector
             value={businessLine}
-            editions={effectiveSource === 'database' ? dbEditions : STATIC_EDITIONS}
+            editions={dbEditions}
             onChange={setBusinessLine}
           />
 
-          {/* Nav tree */}
+          {/* Nav tree — or loud error state if the live pipeline fails.
+              Owner directive 2026-04-23: NEVER silently render a fake tree.
+              `sourceState` drives what the user sees here. */}
           <nav className="flex-1 overflow-y-auto overflow-x-hidden py-1 scrollbar-thin scrollbar-thumb-gray-200 dark:scrollbar-thumb-gray-700">
-            <ForceExpandContext.Provider value={forceExpand}>
-            {filteredData.map((node, idx) => {
-              // Dynamic label for the BUSINESS section based on selected edition
-              const renderNode =
-                node.id === 'business-insurer' && businessLine !== 'platform'
-                  ? { ...node, label: `BUSINESS — ${SHORT_LABELS[businessLine]}` }
-                  : node;
-              return (
-                <L1Node
-                  key={node.id}
-                  node={renderNode as MenuNodeData}
-                  nodeIndex={idx}
-                  filter={filter}
-                  onNavigate={handleNavigate}
-                />
-              );
-            })}
-            </ForceExpandContext.Provider>
-
-            {filteredData.length === 0 && !filter && (
-              <div className="px-4 py-8 text-center text-[11px] text-gray-400">
-                No items for selected business line
+            {sourceState === 'loading' && (
+              <div className="flex items-center justify-center py-8">
+                <div className="flex items-center gap-2 text-[11px] text-gray-400">
+                  <RefreshCw size={12} className="animate-spin" />
+                  <span>Loading live navigation…</span>
+                </div>
               </div>
             )}
 
-            {filter && filteredData.every((n) => {
-              function anyMatch(node: MenuNodeData): boolean {
-                if (node.label.toLowerCase().includes(filter.toLowerCase())) return true;
-                return node.children.some(anyMatch);
-              }
-              return !anyMatch(n as MenuNodeData);
-            }) && (
-              <div className="px-4 py-8 text-center text-[11px] text-gray-400">
-                No results for &ldquo;{filter}&rdquo;
+            {sourceState === 'error' && (
+              <div className="mx-3 my-3 rounded-lg border border-red-300 bg-red-50 dark:border-red-900/60 dark:bg-red-900/20 p-3">
+                <div className="flex items-start gap-2">
+                  <div className="mt-0.5 w-2 h-2 rounded-full bg-red-500 shrink-0" />
+                  <div className="min-w-0">
+                    <div className="text-[12px] font-semibold text-red-800 dark:text-red-300">
+                      Sidebar unreachable — nav service failure
+                    </div>
+                    <div className="mt-1 text-[10px] leading-tight text-red-700/90 dark:text-red-300/80 break-words">
+                      {errorMessage || 'Live navigation unavailable.'}
+                    </div>
+                    <button
+                      onClick={() => void handleRefreshMenu()}
+                      disabled={isRefreshing}
+                      className="mt-2 inline-flex items-center gap-1 rounded border border-red-400/60 bg-white px-2 py-1 text-[10px] font-medium text-red-700 hover:bg-red-100 dark:bg-red-950/40 dark:text-red-200 dark:hover:bg-red-900/40 disabled:opacity-50"
+                    >
+                      <RefreshCw size={11} className={isRefreshing ? 'animate-spin' : ''} />
+                      Retry
+                    </button>
+                  </div>
+                </div>
               </div>
+            )}
+
+            {sourceState === 'live' && (
+              <>
+                <ForceExpandContext.Provider value={forceExpand}>
+                {filteredData.map((node, idx) => {
+                  // Dynamic label for the BUSINESS section based on selected edition
+                  const renderNode =
+                    node.id === 'business-insurer' && businessLine !== 'platform'
+                      ? { ...node, label: `BUSINESS — ${SHORT_LABELS[businessLine]}` }
+                      : node;
+                  return (
+                    <L1Node
+                      key={node.id}
+                      node={renderNode as MenuNodeData}
+                      nodeIndex={idx}
+                      filter={filter}
+                      onNavigate={handleNavigate}
+                    />
+                  );
+                })}
+                </ForceExpandContext.Provider>
+
+                {filteredData.length === 0 && !filter && (
+                  <div className="px-4 py-8 text-center text-[11px] text-gray-400">
+                    No items for selected business line
+                  </div>
+                )}
+
+                {filter && filteredData.every((n) => {
+                  function anyMatch(node: MenuNodeData): boolean {
+                    if (node.label.toLowerCase().includes(filter.toLowerCase())) return true;
+                    return node.children.some(anyMatch);
+                  }
+                  return !anyMatch(n as MenuNodeData);
+                }) && (
+                  <div className="px-4 py-8 text-center text-[11px] text-gray-400">
+                    No results for &ldquo;{filter}&rdquo;
+                  </div>
+                )}
+              </>
             )}
           </nav>
 
@@ -1101,34 +1047,38 @@ const Sidebar6Level: React.FC<Sidebar6LevelProps> = ({
                 <LogOut size={14} strokeWidth={1.75} />
               </button>
               <div className="min-w-0 flex-1">
-                {/* Clickable source indicator — cycles null→static→database→null */}
-                <button
-                  onClick={cycleForceSource}
+                {/* Read-only source chip — LIVE when cascade served real
+                    modules, OFFLINE when the resolver failed or was empty.
+                    Clicking opens a tooltip detail only; there is NO way to
+                    flip this back into a static mode. Owner directive
+                    2026-04-23. */}
+                <div
                   title={
-                    forceSource === null
-                      ? `Auto: ${menuSource} — click to force static`
-                      : forceSource === 'static'
-                      ? `Forced: static — click to compare database`
-                      : `Forced: database (${navServiceData.length} items from nav service) — click to clear`
+                    sourceState === 'live'
+                      ? `Live navigation — ${navServiceData.length} scaffold group(s) from cascade resolver`
+                      : sourceState === 'loading'
+                      ? 'Loading live navigation from cascade resolver…'
+                      : `Offline — ${errorMessage || 'nav service unreachable'}`
                   }
-                  className={`flex items-center gap-1 text-[10px] rounded px-0.5 -ml-0.5 transition-colors cursor-pointer
-                    ${forceSource === null
-                      ? 'text-gray-300 dark:text-gray-600 hover:text-gray-400 dark:hover:text-gray-500'
-                      : forceSource === 'static'
-                      ? 'text-amber-500 dark:text-amber-400 hover:text-amber-600'
-                      : 'text-emerald-500 dark:text-emerald-400 hover:text-emerald-600'}
+                  className={`inline-flex items-center gap-1 text-[10px] rounded px-0.5 -ml-0.5
+                    ${sourceState === 'live'
+                      ? 'text-emerald-600 dark:text-emerald-400'
+                      : sourceState === 'loading'
+                      ? 'text-gray-400 dark:text-gray-500'
+                      : 'text-red-500 dark:text-red-400'}
                   `}
                 >
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
-                    <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/>
-                  </svg>
-                  <span className="font-medium whitespace-nowrap">
-                    {forceSource !== null ? `⚡ ${effectiveSource}` : effectiveSource}
+                  <span className="leading-none">
+                    {sourceState === 'live' ? '🟢' : sourceState === 'loading' ? '⚪' : '🔴'}
                   </span>
-                  {forceSource === 'database' && navServiceData.length === 0 && (
-                    <span className="text-red-400 text-[9px]">(empty)</span>
-                  )}
-                </button>
+                  <span className="font-semibold tracking-wide whitespace-nowrap">
+                    {sourceState === 'live'
+                      ? 'LIVE'
+                      : sourceState === 'loading'
+                      ? 'LOADING'
+                      : 'OFFLINE'}
+                  </span>
+                </div>
                 <div className="text-[10px] font-mono text-gray-300 dark:text-gray-600 tracking-tight mt-0.5 whitespace-nowrap">
                   {__APP_VERSION__} &middot; {__BUILD_DATE__} &middot; {__GIT_SHA__}
                 </div>

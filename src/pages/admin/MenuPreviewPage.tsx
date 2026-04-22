@@ -1,6 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import menuData from '../../data/menu-6level.json';
+import { RefreshCw } from 'lucide-react';
+import { useAuth } from '../../hooks/useAuth';
+import { navigationService } from '../../services/navigation';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -179,13 +181,105 @@ function collectStats(items: MenuItem[]): { total: number; byLevel: Record<numbe
 /*  Page                                                               */
 /* ------------------------------------------------------------------ */
 
+// Transform cascade-resolver sections[] shape into the MenuItem tree shape
+// the preview page renders. One L1 per scaffold (moduleType), one L2 per
+// module, one L3 per nav item. This mirrors the sidebar's own scaffold
+// build with fewer levels because the preview page is a flat inspector,
+// not the full 6-level tree.
+function transformSectionsToTree(
+  sections: Array<{
+    moduleId: string;
+    moduleName?: string;
+    placement?: { scaffold?: string; businessLine?: string; capabilityArea?: string };
+    items?: Array<{ label: string; feRoute: string; icon: string; privilege?: string }>;
+  }>,
+): MenuItem[] {
+  const byScaffold = new Map<string, MenuItem>();
+  for (const sec of sections) {
+    const scaffoldName = sec.placement?.scaffold || 'Other';
+    const scaffoldId = scaffoldName.toLowerCase().replace(/\s+/g, '-');
+    if (!byScaffold.has(scaffoldId)) {
+      byScaffold.set(scaffoldId, {
+        id: scaffoldId,
+        label: scaffoldName,
+        icon: 'folder',
+        route: null,
+        level: 1,
+        children: [],
+      });
+    }
+    const scaffoldNode = byScaffold.get(scaffoldId)!;
+    const moduleNode: MenuItem = {
+      id: sec.moduleId,
+      label: sec.moduleName || sec.moduleId,
+      icon: 'package',
+      route: null,
+      level: 2,
+      children: (sec.items || []).map((it, idx) => ({
+        id: `${sec.moduleId}-${idx}`,
+        label: it.label,
+        icon: it.icon || 'circle',
+        route: it.feRoute || null,
+        level: 3,
+        children: [],
+      })),
+    };
+    scaffoldNode.children.push(moduleNode);
+  }
+  return Array.from(byScaffold.values());
+}
+
 const MenuPreviewPage: React.FC = () => {
-  const items = menuData as MenuItem[];
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(() => {
-    // Start with L1 expanded
-    return new Set(items.map((i) => i.id));
-  });
+  const { user } = useAuth();
+  const [items, setItems] = useState<MenuItem[]>([]);
+  const [fetchState, setFetchState] = useState<'loading' | 'live' | 'error'>('loading');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const fetchLiveMenu = async (refresh = false) => {
+    const userId = user?.id;
+    if (!userId) return;
+    if (refresh) setIsRefreshing(true);
+    else setFetchState('loading');
+    try {
+      const res = await navigationService.getMenu(userId, { refresh });
+      const data = res.data as {
+        source?: string;
+        sections?: Parameters<typeof transformSectionsToTree>[0];
+      };
+      if (data?.source !== 'live') {
+        setFetchState('error');
+        setErrorMessage(
+          `Nav service returned source="${data?.source ?? 'unknown'}" — expected "live".`,
+        );
+        setItems([]);
+        return;
+      }
+      const tree = transformSectionsToTree(data?.sections || []);
+      setItems(tree);
+      setFetchState('live');
+      setErrorMessage('');
+    } catch (err) {
+      setFetchState('error');
+      setErrorMessage(err instanceof Error ? err.message : 'Navigation service unreachable');
+      setItems([]);
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user?.id) void fetchLiveMenu(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
+
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
   const [searchTerm, setSearchTerm] = useState('');
+
+  // When items change (after fetch) re-seed expanded set with L1 nodes.
+  useEffect(() => {
+    setExpandedIds(new Set(items.map((i) => i.id)));
+  }, [items]);
 
   const stats = useMemo(() => collectStats(items), [items]);
 
@@ -230,10 +324,36 @@ const MenuPreviewPage: React.FC = () => {
     <div className="min-h-screen bg-gray-950 text-white p-6">
       {/* Header */}
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-2xl font-bold mb-1">6-Level Navigation Menu Preview</h1>
+        <div className="flex items-center gap-3 mb-1">
+          <h1 className="text-2xl font-bold">Navigation Menu Preview</h1>
+          <span
+            className={
+              fetchState === 'live'
+                ? 'inline-flex items-center gap-1 rounded-full border border-emerald-600/50 bg-emerald-950/40 px-2 py-0.5 text-[10px] font-semibold text-emerald-300'
+                : fetchState === 'loading'
+                ? 'inline-flex items-center gap-1 rounded-full border border-gray-600/50 bg-gray-800 px-2 py-0.5 text-[10px] font-semibold text-gray-300'
+                : 'inline-flex items-center gap-1 rounded-full border border-red-600/50 bg-red-950/40 px-2 py-0.5 text-[10px] font-semibold text-red-300'
+            }
+          >
+            {fetchState === 'live' ? '🟢 LIVE' : fetchState === 'loading' ? '⚪ LOADING' : '🔴 OFFLINE'}
+          </span>
+          <button
+            onClick={() => void fetchLiveMenu(true)}
+            disabled={isRefreshing}
+            className="inline-flex items-center gap-1 rounded border border-gray-700 bg-gray-900 px-2 py-1 text-xs text-gray-300 hover:bg-gray-800 disabled:opacity-50"
+          >
+            <RefreshCw size={12} className={isRefreshing ? 'animate-spin' : ''} /> Refresh
+          </button>
+        </div>
         <p className="text-gray-400 text-sm mb-6">
-          Complete menu hierarchy for the Zorbit Unified Console. Click rows to expand/collapse or navigate.
+          Live cascade-resolver view. Click rows to expand/collapse or navigate.
         </p>
+
+        {fetchState === 'error' && (
+          <div className="mb-4 rounded-lg border border-red-700/60 bg-red-950/40 p-4 text-sm text-red-200">
+            <strong>Live navigation unavailable.</strong> {errorMessage}
+          </div>
+        )}
 
         {/* Stats */}
         <div className="flex flex-wrap gap-3 mb-4">
@@ -322,7 +442,8 @@ const MenuPreviewPage: React.FC = () => {
 
         {/* Footer */}
         <p className="text-gray-600 text-xs mt-4 text-center">
-          Source: src/data/menu-6level.json | Generated for Zorbit Unified Console
+          Source: zorbit-cor-navigation cascade resolver
+          (<code>/api/v1/U/&lt;userId&gt;/menu</code>) | Live module registry
         </p>
       </div>
     </div>

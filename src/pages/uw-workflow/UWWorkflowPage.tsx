@@ -2122,7 +2122,7 @@ const PiiRoleSwitcher: React.FC<{
       <button
         onClick={() => setOpen(!open)}
         className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border transition-colors ${visColors[visibility]}`}
-        title="PII visibility role (demo)"
+        title="PII visibility is a UI rendering hint only — real enforcement is server-side via the PII Vault"
       >
         <Eye className="h-3 w-3" />
         <span>{currentLabel}</span>
@@ -2132,9 +2132,14 @@ const PiiRoleSwitcher: React.FC<{
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-full mt-1 z-50 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-1 min-w-[220px]">
+          <div className="absolute right-0 top-full mt-1 z-50 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-1 min-w-[260px]">
             <div className="px-3 py-1.5 text-[10px] uppercase tracking-wider text-gray-400 font-semibold">
               PII Visibility Role
+            </div>
+            <div className="px-3 py-1.5 text-[10px] text-gray-500 dark:text-gray-400 leading-snug border-b border-gray-100 dark:border-gray-700 mb-1">
+              UI rendering hint only. Real PII enforcement happens
+              server-side in the PII Vault (tokens + policy). Switching
+              roles here changes presentation, not access.
             </div>
             {PII_ROLE_OPTIONS.map((opt) => (
               <button
