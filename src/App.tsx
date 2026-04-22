@@ -92,7 +92,9 @@ const PIIDashboardPage = lazyWithRetry(() => import('./pages/pii-showcase/PIIDas
 const PIIUploadPage = lazyWithRetry(() => import('./pages/pii-showcase/PIIUploadPage'));
 const PIIConfigPage = lazyWithRetry(() => import('./pages/pii-showcase/PIIConfigPage'));
 const DirectoryPage = lazyWithRetry(() => import('./pages/directory/DirectoryPage'));
-const SupportCenterPage = lazyWithRetry(() => import('./pages/support-center/SupportCenterPage'));
+// SupportCenterPage removed 2026-04-23 (Soldier AX J62/J63, decision #7).
+// Canonical Support Center UI lives in zorbit-adm-help_support registered module.
+// Video manifests preserved in src/data/video-manifests/platform-tour.ts for cross-module reuse.
 const FormTemplatesPage = lazyWithRetry(() => import('./pages/form-builder/FormTemplatesPage'));
 const FormCreatePage = lazyWithRetry(() => import('./pages/form-builder/FormCreatePage'));
 const FormSubmissionsPage = lazyWithRetry(() => import('./pages/form-builder/FormSubmissionsPage'));
@@ -109,7 +111,6 @@ const MenuPreviewPage = lazyWithRetry(() => import('./pages/admin/MenuPreviewPag
 const UWWorkflowPage = lazyWithRetry(() => import('./pages/uw-workflow/UWWorkflowPage'));
 const HIDecisioningPage = lazyWithRetry(() => import('./pages/hi-decisioning/HIDecisioningPage'));
 const HIQuotationPage = lazyWithRetry(() => import('./pages/hi-quotation/HIQuotationPage'));
-const MIQuotationPage = lazyWithRetry(() => import('./pages/mi-quotation/MIQuotationPage'));
 const NewHIApplicationPage = lazyWithRetry(() => import('./pages/hi-quotation/NewApplicationPage'));
 const RegionSelectorPage = lazyWithRetry(() => import('./pages/hi-quotation/RegionSelectorPage'));
 const NewApplicationIndiaPage = lazyWithRetry(() => import('./pages/hi-quotation/NewApplicationIndiaPage'));
@@ -119,7 +120,6 @@ const GenericApplicationPage = lazyWithRetry(() => import('./pages/hi-quotation/
 const HIQuotationHelpPage = lazyWithRetry(() => import('./pages/hi-quotation/HIQuotationHelpPage'));
 const UWWorkflowHelpPage = lazyWithRetry(() => import('./pages/uw-workflow/UWWorkflowHelpPage'));
 const HIDecisioningHelpPage = lazyWithRetry(() => import('./pages/hi-decisioning/HIDecisioningHelpPage'));
-const MIQuotationHelpPage = lazyWithRetry(() => import('./pages/mi-quotation/MIQuotationHelpPage'));
 const VerificationHelpPage = lazyWithRetry(() => import('./pages/verification/VerificationHelpPage'));
 const PaymentGatewayPage = lazyWithRetry(() => import('./pages/payments/PaymentGatewayPage'));
 
@@ -146,8 +146,6 @@ const UWWorkflowSetupPage = lazyWithRetry(() => import('./pages/uw-workflow/UWWo
 const UWWorkflowDeploymentsPage = lazyWithRetry(() => import('./pages/uw-workflow/UWWorkflowDeploymentsPage'));
 const HIDecisioningSetupPage = lazyWithRetry(() => import('./pages/hi-decisioning/HIDecisioningSetupPage'));
 const HIDecisioningDeploymentsPage = lazyWithRetry(() => import('./pages/hi-decisioning/HIDecisioningDeploymentsPage'));
-const MIQuotationSetupPage = lazyWithRetry(() => import('./pages/mi-quotation/MIQuotationSetupPage'));
-const MIQuotationDeploymentsPage = lazyWithRetry(() => import('./pages/mi-quotation/MIQuotationDeploymentsPage'));
 const FeeManagementSetupPage = lazyWithRetry(() => import('./pages/fee-management/FeeManagementSetupPage'));
 const FeeManagementDeploymentsPage = lazyWithRetry(() => import('./pages/fee-management/FeeManagementDeploymentsPage'));
 const AdminSetupPage = lazyWithRetry(() => import('./pages/admin/AdminSetupPage'));
@@ -169,7 +167,6 @@ const DashboardHubPage = lazyWithRetry(() => import('./pages/dashboard/Dashboard
 // Module Hub Pages — Business & Feature Services
 const PCG4HubPage = lazyWithRetry(() => import('./pages/pcg4/PCG4HubPage'));
 const HIQuotationHubPage = lazyWithRetry(() => import('./pages/hi-quotation/HIQuotationHubPage'));
-const MIQuotationHubPage = lazyWithRetry(() => import('./pages/mi-quotation/MIQuotationHubPage'));
 const UWWorkflowHubPage = lazyWithRetry(() => import('./pages/uw-workflow/UWWorkflowHubPage'));
 const HIDecisioningHubPage = lazyWithRetry(() => import('./pages/hi-decisioning/HIDecisioningHubPage'));
 const FeeManagementHubPage = lazyWithRetry(() => import('./pages/fee-management/FeeManagementHubPage'));
@@ -199,10 +196,8 @@ const DirectoryHubPage = lazyWithRetry(() => import('./pages/directory/Directory
 const DirectorySetupPage = lazyWithRetry(() => import('./pages/directory/DirectorySetupPage'));
 const DirectoryDeploymentsPage = lazyWithRetry(() => import('./pages/directory/DirectoryDeploymentsPage'));
 
-// Support Center — Hub, Setup, Deployments
-const SupportCenterHubPage = lazyWithRetry(() => import('./pages/support-center/SupportCenterHubPage'));
-const SupportCenterSetupPage = lazyWithRetry(() => import('./pages/support-center/SupportCenterSetupPage'));
-const SupportCenterDeploymentsPage = lazyWithRetry(() => import('./pages/support-center/SupportCenterDeploymentsPage'));
+// Support Center hub/setup/deployments removed 2026-04-23 (Soldier AX J62/J63).
+// zorbit-adm-help_support registered module is canonical.
 
 // Voice Engine — Hub, Setup, Deployments, Demo
 const VoiceEngineHubPage = lazyWithRetry(() => import('./pages/voice-engine/VoiceEngineHubPage'));
@@ -246,8 +241,8 @@ const SecretsAuditPage = lazyWithRetry(() => import('./pages/secrets/SecretsAudi
 const SecretsSetupPage = lazyWithRetry(() => import('./pages/secrets/SecretsSetupPage'));
 const SecretsDeploymentsPage = lazyWithRetry(() => import('./pages/secrets/SecretsDeploymentsPage'));
 
-// Broker Dashboard & Channel Analytics
-const BrokerDashboardPage = lazyWithRetry(() => import('./pages/broker/BrokerDashboardPage'));
+// Channel Analytics
+// BrokerDashboardPage removed 2026-04-23 (Soldier AX J62/J63). Canonical broker UI is zorbit-app-broker registered module at /m/broker/*.
 const ChannelAnalyticsPage = lazyWithRetry(() => import('./pages/analytics/ChannelAnalyticsPage'));
 
 // ── Module update banner ──────────────────────────────────────────────────────
@@ -570,15 +565,6 @@ function PageRoutes() {
       <Route path="m/hi-quotation/deployments" element={<SafeLazy><HIQuotationDeploymentsPage /></SafeLazy>} />
       <Route path="m/hi-quotation/help" element={<SafeLazy><HIQuotationHelpPage /></SafeLazy>} />
 
-      {/* MI Quotation — /m/mi-quotation/* */}
-      <Route path="m/mi-quotation" element={<ModuleIndexRedirect />} />
-      <Route path="m/mi-quotation/guide/*" element={<SafeLazy><MIQuotationHubPage /></SafeLazy>} />
-      <Route path="m/mi-quotation/hub" element={<SafeLazy><MIQuotationHubPage /></SafeLazy>} />
-      <Route path="m/mi-quotation/quotes" element={<SafeLazy><MIQuotationPage /></SafeLazy>} />
-      <Route path="m/mi-quotation/setup" element={<SafeLazy><MIQuotationSetupPage /></SafeLazy>} />
-      <Route path="m/mi-quotation/deployments" element={<SafeLazy><MIQuotationDeploymentsPage /></SafeLazy>} />
-      <Route path="m/mi-quotation/help" element={<SafeLazy><MIQuotationHelpPage /></SafeLazy>} />
-
       {/* UW Workflow — /m/uw-workflow/* */}
       <Route path="m/uw-workflow" element={<ModuleIndexRedirect />} />
       <Route path="m/uw-workflow/guide/*" element={<SafeLazy><UWWorkflowHubPage /></SafeLazy>} />
@@ -675,12 +661,9 @@ function PageRoutes() {
       <Route path="directory/setup" element={<SafeLazy><DirectorySetupPage /></SafeLazy>} />
       <Route path="directory/deployments" element={<SafeLazy><DirectoryDeploymentsPage /></SafeLazy>} />
 
-      {/* Platform Support Center (own section + microservice via chat) */}
-      <Route path="support-center" element={<SafeLazy><SupportCenterPage /></SafeLazy>} />
-      <Route path="support-center/guide/*" element={<SafeLazy><SupportCenterHubPage /></SafeLazy>} />
-      <Route path="support-center/hub" element={<SafeLazy><SupportCenterHubPage /></SafeLazy>} />
-      <Route path="support-center/setup" element={<SafeLazy><SupportCenterSetupPage /></SafeLazy>} />
-      <Route path="support-center/deployments" element={<SafeLazy><SupportCenterDeploymentsPage /></SafeLazy>} />
+      {/* support-center/* routes removed 2026-04-23 (Soldier AX J62/J63).
+          Canonical help/support UI is provided by zorbit-adm-help_support registered module at /m/help-support/*.
+          Video manifests preserved in src/data/video-manifests/platform-tour.ts. */}
 
       {/* Voice Engine */}
       <Route path="voice-engine" element={<SafeLazy><VoiceEngineHubPage /></SafeLazy>} />
@@ -788,8 +771,6 @@ function PageRoutes() {
       <Route path="uw-workflow/deployments" element={<SafeLazy><UWWorkflowDeploymentsPage /></SafeLazy>} />
       <Route path="hi-uw-decisioning/setup" element={<SafeLazy><HIDecisioningSetupPage /></SafeLazy>} />
       <Route path="hi-uw-decisioning/deployments" element={<SafeLazy><HIDecisioningDeploymentsPage /></SafeLazy>} />
-      <Route path="mi-quotation/setup" element={<SafeLazy><MIQuotationSetupPage /></SafeLazy>} />
-      <Route path="mi-quotation/deployments" element={<SafeLazy><MIQuotationDeploymentsPage /></SafeLazy>} />
       <Route path="fee-management/setup" element={<SafeLazy><FeeManagementSetupPage /></SafeLazy>} />
       <Route path="fee-management/deployments" element={<SafeLazy><FeeManagementDeploymentsPage /></SafeLazy>} />
 
@@ -820,13 +801,6 @@ function PageRoutes() {
       <Route path="hi-quotation/new/:countrySlug" element={<SafeLazy><GenericApplicationPage /></SafeLazy>} />
       <Route path="hi-quotation/*" element={<SafeLazy><HIQuotationPage /></SafeLazy>} />
 
-      {/* Business Modules — Motor Insurance */}
-      <Route path="mi-quotation" element={<SafeLazy><MIQuotationPage /></SafeLazy>} />
-      <Route path="mi-quotation/guide/*" element={<SafeLazy><MIQuotationHubPage /></SafeLazy>} />
-      <Route path="mi-quotation/hub" element={<SafeLazy><MIQuotationHubPage /></SafeLazy>} />
-      <Route path="mi-quotation/help" element={<SafeLazy><MIQuotationHelpPage /></SafeLazy>} />
-      <Route path="mi-quotation/*" element={<SafeLazy><MIQuotationPage /></SafeLazy>} />
-
       {/* Business Modules — Product Pricing (own section + microservice) */}
       <Route path="product-pricing" element={<SafeLazy><ProductPricingHubPage /></SafeLazy>} />
       <Route path="product-pricing/guide/*" element={<SafeLazy><ProductPricingHubPage /></SafeLazy>} />
@@ -846,8 +820,7 @@ function PageRoutes() {
       <Route path="white-label/setup" element={<SafeLazy><WhiteLabelSetupPage /></SafeLazy>} />
       <Route path="doc-generator/setup" element={<SafeLazy><DocGeneratorSetupPage /></SafeLazy>} />
 
-      {/* Broker Dashboard */}
-      <Route path="broker/dashboard" element={<SafeLazy><BrokerDashboardPage /></SafeLazy>} />
+      {/* Broker Dashboard removed 2026-04-23 (Soldier AX J62/J63) — canonical is /m/broker/* via zorbit-app-broker registered module */}
 
       {/* Channel Analytics */}
       <Route path="analytics/channels" element={<SafeLazy><ChannelAnalyticsPage /></SafeLazy>} />

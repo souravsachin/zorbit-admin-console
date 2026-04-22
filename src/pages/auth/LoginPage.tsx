@@ -403,7 +403,7 @@ const LoginPage: React.FC = () => {
   const returnToParam = new URLSearchParams(window.location.search).get('returnTo') || '';
   const contextMap: Record<string, { title: string; subtitle: string }> = {
     'hi-quotation': { title: 'Health Insurance', subtitle: 'Sign in to access the quotation system' },
-    'mi-quotation': { title: 'Motor Insurance', subtitle: 'Sign in to access motor quotations' },
+    'mi-quotation': { title: 'Marine Insurance', subtitle: 'Sign in to access marine quotations' },
     'uw-workflow': { title: 'Underwriting Workflow', subtitle: 'Sign in to access underwriting queues' },
     'hi-decisioning': { title: 'UW Decisioning', subtitle: 'Sign in to access underwriting rules' },
     'form-builder': { title: 'Form Builder', subtitle: 'Sign in to manage forms' },
