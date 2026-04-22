@@ -179,6 +179,7 @@ const RateCardImportPage = lazyWithRetry(() => import('./pages/product-pricing/R
 const ProductPricingSetupPage = lazyWithRetry(() => import('./pages/product-pricing/ProductPricingSetupPage'));
 const ProductPricingDeploymentsPage = lazyWithRetry(() => import('./pages/product-pricing/ProductPricingDeploymentsPage'));
 const FormBuilderHubPage = lazyWithRetry(() => import('./pages/form-builder/FormBuilderHubPage'));
+const ZmbComposePage = lazyWithRetry(() => import('./pages/zmb-factory/compose/ComposePage'));
 const FormBuilderPage = lazyWithRetry(() => import('./pages/form-builder/FormBuilderPage'));
 const FormBuilderDetailPage = lazyWithRetry(() => import('./pages/form-builder/FormBuilderDetailPage'));
 const FormBuilderTokensPage = lazyWithRetry(() => import('./pages/form-builder/FormBuilderTokensPage'));
@@ -538,6 +539,10 @@ function PageRoutes() {
       <Route path="m/pcg4/setup" element={<SafeLazy><PCG4SetupPage /></SafeLazy>} />
       <Route path="m/pcg4/pricing" element={<SafeLazy><PCG4PricingPage /></SafeLazy>} />
       <Route path="m/pcg4/help" element={<Navigate to="/m/pcg4/hub" replace />} />
+
+      {/* ZMB Factory — /m/zmb-factory/* */}
+      <Route path="m/zmb-factory/compose" element={<SafeLazy><ZmbComposePage /></SafeLazy>} />
+      <Route path="m/zmb_factory/compose" element={<Navigate to="/m/zmb-factory/compose" replace />} />
 
       {/* HI Quotation — /m/hi-quotation/* */}
       <Route path="m/hi-quotation" element={<ModuleIndexRedirect />} />

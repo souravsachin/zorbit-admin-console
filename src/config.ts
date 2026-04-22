@@ -28,4 +28,5 @@ export const API_CONFIG = {
   SECRETS_URL: import.meta.env.VITE_SECRETS_URL || '/api/secrets',
   MODULE_REGISTRY_URL: import.meta.env.VITE_MODULE_REGISTRY_URL || '/api/module-registry',
   DEPLOYMENT_REGISTRY_URL: import.meta.env.VITE_DEPLOYMENT_REGISTRY_URL || '/api/deployment-registry',
+  ZMB_FACTORY_URL: import.meta.env.VITE_ZMB_FACTORY_URL || '/api/zmb-factory',
 };
