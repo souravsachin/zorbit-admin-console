@@ -106,7 +106,7 @@ const ChannelAnalyticsPage: React.FC = () => {
     setLoading(true);
     setError('');
     try {
-      const base = `${API_CONFIG.HI_QUOTATION_URL}/api/v1/O/${orgId}/hi-quotation/analytics`;
+      const base = `${API_CONFIG.HI_QUOTATION_URL}/api/v1/O/${orgId}/hi_quotation/analytics`;
       const [chRes, srcRes, brkRes] = await Promise.allSettled([
         api.get(`${base}/channels`),
         api.get(`${base}/sources`),

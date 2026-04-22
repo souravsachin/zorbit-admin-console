@@ -45,7 +45,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/pii-vault/api/v1/G/health",
+          "endpoint": "/api/pii_vault/api/v1/G/health",
           "expectedStatus": [200],
           "announce": { "before": "Checking PII Vault", "after": "PII Vault: healthy" }
         },
@@ -151,7 +151,7 @@
         { "action": "wait", "timeout": 300 },
         {
           "action": "apiCheck",
-          "endpoint": "/api/form-builder/api/v1/G/form-builder/public/forms",
+          "endpoint": "/api/form_builder/api/v1/G/form_builder/public/forms",
           "expectedStatus": [200, 401],
           "announce": { "before": "Checking Form Builder", "after": "Form Builder: responding" }
         },
@@ -182,7 +182,7 @@
         { "action": "wait", "timeout": 300 },
         {
           "action": "apiCheck",
-          "endpoint": "/api/product-pricing/api/v1/G/health",
+          "endpoint": "/api/product_pricing/api/v1/G/health",
           "expectedStatus": [200, 401, 404],
           "_note": "Accepts 404 — nginx reachability check only",
           "announce": { "before": "Checking Product Pricing (nginx reachability)" }

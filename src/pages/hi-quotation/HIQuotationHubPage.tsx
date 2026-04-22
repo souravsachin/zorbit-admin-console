@@ -309,7 +309,7 @@ function SeedDemoData() {
     for (let i = 0; i < SEED_QUOTATIONS.length; i++) {
       const q = SEED_QUOTATIONS[i];
       try {
-        await api.post(`${base}/api/v1/O/${orgId}/hi-quotation/quotations`, {
+        await api.post(`${base}/api/v1/O/${orgId}/hi_quotation/quotations`, {
           region: q.region,
           sumInsured: q.sumInsured,
           currency: q.currency,
@@ -442,7 +442,7 @@ function SeedDemoData() {
 const HIQuotationHubPage: React.FC = () => {
   return (
     <ModuleHubPage
-      moduleId="hi-quotation"
+      moduleId="hi_quotation"
       moduleName="HI Quotation"
       moduleDescription="Health Insurance Quotation &amp; Application Management"
       moduleIntro="HI Quotation is the health insurance application intake module. It provides region-aware smart application forms that capture applicant details, medical history, and coverage preferences while protecting personally identifiable information through PII tokenization. The module supports multiple regions (India, UAE, US) with region-specific regulatory requirements and medical assessment framework (MAF) questions."
@@ -510,7 +510,7 @@ const HIQuotationHubPage: React.FC = () => {
         },
       ]}
       videosBaseUrl="/demos/hi-quotation/"
-      swaggerUrl="/api/hi-quotation/api-docs"
+      swaggerUrl="/api/hi_quotation/api-docs"
       faqs={[
         { question: 'Which regions are supported?', answer: 'Currently India, UAE, and US. Each region has dedicated application forms with region-specific fields and compliance rules.' },
         { question: 'How is PII protected?', answer: 'All personally identifiable information (name, email, phone, address) is tokenized through the Zorbit PII Vault. Only PII tokens are stored in the quotation database.' },

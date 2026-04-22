@@ -36,7 +36,7 @@ function NarrationField({
   placeholder?: string;
 }) {
   const [status, setStatus] = useState<'idle' | 'playing' | 'synth'>('idle');
-  const [mode, setMode] = useState<'voice-engine' | 'browser-fallback' | null>(null);
+  const [mode, setMode] = useState<'voice_engine' | 'browser-fallback' | null>(null);
 
   const play = useCallback(async () => {
     if (!value || !value.trim()) return;
@@ -72,7 +72,7 @@ function NarrationField({
             browser fallback
           </span>
         )}
-        {mode === 'voice-engine' && (
+        {mode === 'voice_engine' && (
           <span className="text-[10px] ml-2 px-1 py-0.5 rounded bg-emerald-100 text-emerald-800">
             voice-engine
           </span>
@@ -179,7 +179,7 @@ function SlidesEditor({ manifest, apply }: { manifest: ModuleDraftManifest; appl
     set(next);
     // eslint-disable-next-line no-alert
     alert(
-      rsp.synthesiser === 'voice-engine'
+      rsp.synthesiser === 'voice_engine'
         ? `Synthesised ${rsp.items.filter((i) => i.ok).length} slide narrations via voice_engine. Audio bundled into manifest.`
         : 'voice_engine unreachable — use the Play button on each slide to audition via the browser.',
     );

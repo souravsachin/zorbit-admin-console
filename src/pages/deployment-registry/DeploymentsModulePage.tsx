@@ -56,7 +56,7 @@ interface DeploymentRequestPublic {
 
 // --- helpers --------------------------------------------------------
 
-const DR_API = '/api/deployment-registry/api/v1/G';
+const DR_API = '/api/deployment_registry/api/v1/G';
 
 function whenAgo(iso?: string | null): string {
   if (!iso) return '—';
@@ -244,7 +244,7 @@ const DeploymentsModulePage: React.FC = () => {
                   No environments declare <code>{moduleId}</code> as a capability.
                   Register envs via the{' '}
                   <Link
-                    to="/m/deployment-registry/environments"
+                    to="/m/deployment_registry/environments"
                     className="text-indigo-600 hover:underline"
                   >
                     Environments
@@ -297,7 +297,7 @@ const DeploymentsModulePage: React.FC = () => {
             <GitBranch size={14} /> Recent deployments
           </span>
           <Link
-            to="/m/deployment-registry/requests"
+            to="/m/deployment_registry/requests"
             className="text-[11px] text-indigo-600 hover:underline normal-case"
           >
             View all →

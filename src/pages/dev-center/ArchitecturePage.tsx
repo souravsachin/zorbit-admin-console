@@ -198,7 +198,7 @@ import { ZorbitDataTable } from '@zorbit/sdk-react/ZorbitDataTable';
 import { useZorbitAuth } from '@zorbit/sdk-react/hooks';
 
 // Form input — powered by Form Builder schema
-<FormRenderer formSlug="claims-intake" orgId={orgId} />
+<FormRenderer formSlug="claims_intake" orgId={orgId} />
 
 // Queue display — powered by DataTable engine
 <ZorbitDataTable

@@ -122,7 +122,7 @@ const VOICE_ENGINE_SLIDES: Slide[] = [
 const VoiceEngineHubPage: React.FC = () => {
   return (
     <ModuleHubPage
-      moduleId="voice-engine"
+      moduleId="voice_engine"
       moduleName="Voice Engine"
       moduleDescription="Unified Text-to-Speech & Speech-to-Text Platform Service"
       moduleIntro="Voice Engine is a shared platform service that provides Text-to-Speech (TTS) and Speech-to-Text (STT) capabilities through a unified API. Developers choose an engine (Edge TTS, Piper, ElevenLabs, Sarvam, OpenAI, Whisper, GCP) and the service handles routing, format conversion, caching, and streaming. It integrates with the AI Gateway for bundled LLM+TTS+STT workflows."
@@ -172,7 +172,7 @@ const VoiceEngineHubPage: React.FC = () => {
         { label: 'Process', description: 'Engine generates audio (TTS) or transcribes text (STT).', color: '#8b5cf6' },
         { label: 'Deliver', description: 'Result returned as binary audio, JSON text, or streaming chunks.', color: '#10b981' },
       ]}
-      swaggerUrl="/api/voice-engine/api-docs"
+      swaggerUrl="/api/voice_engine/api-docs"
       faqs={[
         { question: 'Which TTS engine should I use?', answer: 'Edge TTS is the default and recommended for most use cases — it is free, high quality, and supports 300+ voices. Use ElevenLabs for ultra-realistic voices, Piper for fully on-premise deployments, and Sarvam for Indian languages.' },
         { question: 'How does streaming work?', answer: 'Set format to "streaming" in the TTS request. The response uses chunked transfer encoding, delivering audio segments as they are generated. This reduces time-to-first-byte to under 500ms.' },

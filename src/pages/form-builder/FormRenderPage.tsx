@@ -11,7 +11,7 @@ import { ArrowLeft, CheckCircle, AlertCircle, FileText, Loader2 } from 'lucide-r
 import { Formio } from '@formio/js';
 import '@formio/js/dist/formio.form.min.css';
 
-const API_BASE = '/api/form-builder';
+const API_BASE = '/api/form_builder';
 
 interface FormDefinition {
   _id: string;
@@ -52,7 +52,7 @@ const FormRenderPage: React.FC = () => {
     const headers: Record<string, string> = {};
     if (token) headers.Authorization = `Bearer ${token}`;
 
-    fetch(`${API_BASE}/api/v1/O/O-OZPY/form-builder/forms`, { headers })
+    fetch(`${API_BASE}/api/v1/O/O-OZPY/form_builder/forms`, { headers })
       .then((r) => {
         if (!r.ok) throw new Error(`API error: ${r.status}`);
         return r.json();

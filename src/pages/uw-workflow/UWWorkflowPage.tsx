@@ -429,7 +429,7 @@ const DashboardView: React.FC<{
             Actions
           </button>
           <a
-            href="https://zorbit.scalatics.com/api/uw-workflow/api-docs"
+            href="https://zorbit.scalatics.com/api/uw_workflow/api-docs"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors"
@@ -671,7 +671,7 @@ const QueueView: React.FC<{
         params.set('assignedTo', userId);
       }
 
-      const res = await api.get(`${base}/api/v1/O/${orgId}/uw-workflow/queues/${queueName}/items?${params}`);
+      const res = await api.get(`${base}/api/v1/O/${orgId}/uw_workflow/queues/${queueName}/items?${params}`);
       const d = res.data;
 
       let fetchedItems: QuotationItem[] = d.items || [];
@@ -1046,7 +1046,7 @@ const DetailPanel: React.FC<{
   useEffect(() => {
     const fetchDetail = async () => {
       try {
-        const res = await api.get(`${base}/api/v1/O/${orgId}/uw-workflow/retail-quotes/${item.hashId || item.id}`);
+        const res = await api.get(`${base}/api/v1/O/${orgId}/uw_workflow/retail-quotes/${item.hashId || item.id}`);
         if (res.data) {
           setDetailedItem({ ...item, ...res.data });
         }
@@ -1077,8 +1077,8 @@ const DetailPanel: React.FC<{
       setLoadingHistory(true);
       try {
         const [actionsRes, historyRes] = await Promise.allSettled([
-          api.get(`${base}/api/v1/O/${orgId}/uw-workflow/actions/available/${item.id}`),
-          api.get(`${base}/api/v1/O/${orgId}/uw-workflow/history/${item.id}`),
+          api.get(`${base}/api/v1/O/${orgId}/uw_workflow/actions/available/${item.id}`),
+          api.get(`${base}/api/v1/O/${orgId}/uw_workflow/history/${item.id}`),
         ]);
 
         if (actionsRes.status === 'fulfilled') {
@@ -1100,7 +1100,7 @@ const DetailPanel: React.FC<{
       if (['approved', 'approved_with_loading', 'approved_with_conditions', 'payment_pending', 'payment_received', 'policy_issued'].includes(item.status)) {
         try {
           const payRes = await api.get(
-            `${base}/api/v1/O/${orgId}/uw-workflow/payments/quotation/${item.id}`,
+            `${base}/api/v1/O/${orgId}/uw_workflow/payments/quotation/${item.id}`,
           );
           const payments = Array.isArray(payRes.data) ? payRes.data : [];
           if (payments.length > 0) {
@@ -1120,7 +1120,7 @@ const DetailPanel: React.FC<{
       if (['payment_received', 'policy_issued'].includes(item.status)) {
         try {
           const polRes = await api.get(
-            `${base}/api/v1/O/${orgId}/uw-workflow/policies/quotation/${item.id}`,
+            `${base}/api/v1/O/${orgId}/uw_workflow/policies/quotation/${item.id}`,
           );
           if (polRes.data) {
             setPolicyData(polRes.data);
@@ -1139,7 +1139,7 @@ const DetailPanel: React.FC<{
     setActionSuccess(null);
     try {
       const res = await api.post(
-        `${base}/api/v1/O/${orgId}/uw-workflow/execute/${item.id}/${action.code}`,
+        `${base}/api/v1/O/${orgId}/uw_workflow/execute/${item.id}/${action.code}`,
         { comment: actionComment || '', metadata: {} },
       );
       setActionSuccess(res.data?.message || `Action "${action.label}" executed successfully`);
@@ -1149,8 +1149,8 @@ const DetailPanel: React.FC<{
 
       // Refresh available actions and history
       const [actionsRes, historyRes] = await Promise.allSettled([
-        api.get(`${base}/api/v1/O/${orgId}/uw-workflow/actions/available/${item.id}`),
-        api.get(`${base}/api/v1/O/${orgId}/uw-workflow/history/${item.id}`),
+        api.get(`${base}/api/v1/O/${orgId}/uw_workflow/actions/available/${item.id}`),
+        api.get(`${base}/api/v1/O/${orgId}/uw_workflow/history/${item.id}`),
       ]);
       if (actionsRes.status === 'fulfilled') {
         setAvailableActions(actionsRes.value.data.availableActions || []);
@@ -1172,7 +1172,7 @@ const DetailPanel: React.FC<{
     setExecuting(true);
     setActionError(null);
     try {
-      await api.post(`${base}/api/v1/O/${orgId}/uw-workflow/assign`, {
+      await api.post(`${base}/api/v1/O/${orgId}/uw_workflow/assign`, {
         quotationHashId: item.id,
         assignedTo: assignTo,
         queue: assignQueue,
@@ -1450,15 +1450,15 @@ const DetailPanel: React.FC<{
                       setActionError(null);
                       setActionSuccess(null);
                       api.post(
-                        `${base}/api/v1/O/${orgId}/uw-workflow/execute/${item.id}/${loadingAction.code}`,
+                        `${base}/api/v1/O/${orgId}/uw_workflow/execute/${item.id}/${loadingAction.code}`,
                         { comment: loadingComment || '', metadata: { loadingAmount: Number(loadingAmount) } },
                       ).then((res) => {
                         setActionSuccess(res.data?.message || 'Approved with loading successfully');
                         setShowLoadingForm(false);
                         onActionExecuted();
                         return Promise.allSettled([
-                          api.get(`${base}/api/v1/O/${orgId}/uw-workflow/actions/available/${item.id}`),
-                          api.get(`${base}/api/v1/O/${orgId}/uw-workflow/history/${item.id}`),
+                          api.get(`${base}/api/v1/O/${orgId}/uw_workflow/actions/available/${item.id}`),
+                          api.get(`${base}/api/v1/O/${orgId}/uw_workflow/history/${item.id}`),
                         ]);
                       }).then((results) => {
                         if (results) {
@@ -1625,7 +1625,7 @@ const DetailPanel: React.FC<{
                     setActionError(null);
                     try {
                       const res = await api.post(
-                        `${base}/api/v1/O/${orgId}/uw-workflow/payments/generate-link`,
+                        `${base}/api/v1/O/${orgId}/uw_workflow/payments/generate-link`,
                         {
                           quotationHashId: item.id,
                           amount: item.totalPremium || 0,
@@ -1681,7 +1681,7 @@ const DetailPanel: React.FC<{
                     setActionSuccess(null);
                     try {
                       const res = await api.post(
-                        `${base}/api/v1/O/${orgId}/uw-workflow/policies/issue`,
+                        `${base}/api/v1/O/${orgId}/uw_workflow/policies/issue`,
                         {
                           quotationHashId: item.id,
                           paymentId: latestPaymentId || '',
@@ -1782,7 +1782,7 @@ const DetailPanel: React.FC<{
                 <div className="flex items-center gap-2 pt-1">
                   <a
                     data-testid="uw-download-pdf"
-                    href={`${base}/api/v1/G/uw-workflow/policies/${policyData.policyHashId || policyData.hashId}/pdf`}
+                    href={`${base}/api/v1/G/uw_workflow/policies/${policyData.policyHashId || policyData.hashId}/pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white transition-colors"
@@ -1791,7 +1791,7 @@ const DetailPanel: React.FC<{
                     Download Policy PDF
                   </a>
                   <a
-                    href={`${base}/api/v1/G/uw-workflow/policies/${policyData.policyHashId || policyData.hashId}/pdf`}
+                    href={`${base}/api/v1/G/uw_workflow/policies/${policyData.policyHashId || policyData.hashId}/pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg border border-emerald-200 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors"
@@ -1950,7 +1950,7 @@ const WorkflowActionsView: React.FC<{
     const fetchActions = async () => {
       setLoading(true);
       try {
-        const res = await api.get(`${base}/api/v1/O/${orgId}/uw-workflow/actions`);
+        const res = await api.get(`${base}/api/v1/O/${orgId}/uw_workflow/actions`);
         const d = res.data;
         setActions(Array.isArray(d) ? d : d?.data || []);
       } catch {
@@ -2202,11 +2202,11 @@ const UWWorkflowPage: React.FC = () => {
     setError(null);
     try {
       const [healthRes, queuesRes, summaryRes, actionsRes, historyRes] = await Promise.allSettled([
-        api.get(`${base}/api/v1/G/uw-workflow/health`),
-        api.get(`${base}/api/v1/O/${orgId}/uw-workflow/queues/stats`),
-        api.get(`${base}/api/v1/O/${orgId}/uw-workflow/queues/summary`),
-        api.get(`${base}/api/v1/O/${orgId}/uw-workflow/actions`),
-        api.get(`${base}/api/v1/O/${orgId}/uw-workflow/history`),
+        api.get(`${base}/api/v1/G/uw_workflow/health`),
+        api.get(`${base}/api/v1/O/${orgId}/uw_workflow/queues/stats`),
+        api.get(`${base}/api/v1/O/${orgId}/uw_workflow/queues/summary`),
+        api.get(`${base}/api/v1/O/${orgId}/uw_workflow/actions`),
+        api.get(`${base}/api/v1/O/${orgId}/uw_workflow/history`),
       ]);
 
       if (healthRes.status === 'fulfilled') setHealth(healthRes.value.data);
@@ -2236,7 +2236,7 @@ const UWWorkflowPage: React.FC = () => {
   // Fetch queue stats for tab counts even in sub-views
   const fetchQueueStats = useCallback(async () => {
     try {
-      const res = await api.get(`${base}/api/v1/O/${orgId}/uw-workflow/queues/stats`);
+      const res = await api.get(`${base}/api/v1/O/${orgId}/uw_workflow/queues/stats`);
       const d = res.data;
       setQueues(d?.queues || (Array.isArray(d) ? d : d?.data || []));
     } catch {

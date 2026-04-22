@@ -4,7 +4,7 @@ import { ModuleHubPage } from '../../components/shared/ModuleHubPage';
 
 const ProductPricingHubPage: React.FC = () => (
   <ModuleHubPage
-    moduleId="product-pricing"
+    moduleId="product_pricing"
     moduleName="Product Pricing"
     moduleDescription="Insurance premium rating engine — rate tables, age-band lookups, and batch premium calculation"
     icon={Calculator}
@@ -70,7 +70,7 @@ const ProductPricingHubPage: React.FC = () => (
       },
     ]}
     videosBaseUrl="/demos/product-pricing/"
-    swaggerUrl="/api/product-pricing/api-docs"
+    swaggerUrl="/api/product_pricing/api-docs"
     faqs={[
       {
         question: 'How do I import a rate table from Excel?',

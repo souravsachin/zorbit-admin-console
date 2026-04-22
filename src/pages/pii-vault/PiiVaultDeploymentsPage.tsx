@@ -4,7 +4,7 @@ import { Lock } from 'lucide-react';
 export default function PiiVaultDeploymentsPage() {
   return (
     <ModuleDeploymentsPage
-      moduleId="pii-vault"
+      moduleId="pii_vault"
       moduleName="PII Vault"
       icon={Lock}
     />

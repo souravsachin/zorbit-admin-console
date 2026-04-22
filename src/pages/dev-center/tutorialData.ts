@@ -32,7 +32,7 @@ export const TUTORIALS: Tutorial[] = [
       { title: 'Inside Generated Code', startTime: 55 },
       { title: 'Power of Configuration', startTime: 62 },
     ],
-    tags: ['zmb', 'claims', 'form-builder', 'module'],
+    tags: ['zmb', 'claims', 'form_builder', 'module'],
   },
   {
     id: 'zmb-prospect-portal',

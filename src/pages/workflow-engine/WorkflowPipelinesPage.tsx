@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GitBranch, ChevronRight, Bot, UserCheck, Eye, Zap, ArrowRight } from 'lucide-react';
 
-const API_BASE = '/api/workflow-engine';
+const API_BASE = '/api/workflow_engine';
 
 interface PipelineStage {
   stageIndex: number;

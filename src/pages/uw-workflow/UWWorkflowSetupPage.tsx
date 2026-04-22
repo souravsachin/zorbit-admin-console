@@ -26,20 +26,20 @@ const UW_COHORTS: CohortOption[] = [
 export default function UWWorkflowSetupPage() {
   return (
     <ModuleSetupPage
-      moduleId="uw-workflow"
+      moduleId="uw_workflow"
       moduleName="UW Workflow"
       icon={GitBranch}
-      seedEndpoint="/api/uw-workflow/api/v1/G/uw-workflow/seed"
-      demoSeedEndpoint="/api/uw-workflow/api/v1/G/uw-workflow/seed/demo"
-      demoFlushEndpoint="/api/uw-workflow/api/v1/G/uw-workflow/seed/demo"
-      flushEndpoint="/api/uw-workflow/api/v1/G/uw-workflow/seed/all"
-      healthEndpoint="/api/uw-workflow/api/v1/G/uw-workflow/health"
+      seedEndpoint="/api/uw_workflow/api/v1/G/uw_workflow/seed"
+      demoSeedEndpoint="/api/uw_workflow/api/v1/G/uw_workflow/seed/demo"
+      demoFlushEndpoint="/api/uw_workflow/api/v1/G/uw_workflow/seed/demo"
+      flushEndpoint="/api/uw_workflow/api/v1/G/uw_workflow/seed/all"
+      healthEndpoint="/api/uw_workflow/api/v1/G/uw_workflow/health"
       demoGenerator={
         <DemoDataGenerator
-          moduleId="uw-workflow"
+          moduleId="uw_workflow"
           moduleName="UW Workflow"
-          seedEndpoint="/api/uw-workflow/api/v1/G/uw-workflow/seed/demo"
-          flushEndpoint="/api/uw-workflow/api/v1/G/uw-workflow/seed/demo"
+          seedEndpoint="/api/uw_workflow/api/v1/G/uw_workflow/seed/demo"
+          flushEndpoint="/api/uw_workflow/api/v1/G/uw_workflow/seed/demo"
           columns={UW_COLUMNS}
           cohortOptions={UW_COHORTS}
           generatePreview={generateUWWorkflowPreview}

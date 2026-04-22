@@ -4,14 +4,14 @@ import { FileInput } from 'lucide-react';
 export default function FormBuilderSetupPage() {
   return (
     <ModuleSetupPage
-      moduleId="form-builder"
+      moduleId="form_builder"
       moduleName="Form Builder"
       icon={FileInput}
-      seedEndpoint="/api/form-builder/api/v1/G/form-builder/seed/system"
-      demoSeedEndpoint="/api/form-builder/api/v1/G/form-builder/seed/demo"
-      demoFlushEndpoint="/api/form-builder/api/v1/G/form-builder/seed/demo"
-      flushEndpoint="/api/form-builder/api/v1/G/form-builder/seed/all"
-      healthEndpoint="/api/form-builder/api/v1/G/form-builder/health"
+      seedEndpoint="/api/form_builder/api/v1/G/form_builder/seed/system"
+      demoSeedEndpoint="/api/form_builder/api/v1/G/form_builder/seed/demo"
+      demoFlushEndpoint="/api/form_builder/api/v1/G/form_builder/seed/demo"
+      flushEndpoint="/api/form_builder/api/v1/G/form_builder/seed/all"
+      healthEndpoint="/api/form_builder/api/v1/G/form_builder/health"
     />
   );
 }

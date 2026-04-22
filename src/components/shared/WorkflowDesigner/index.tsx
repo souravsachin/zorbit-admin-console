@@ -5,10 +5,10 @@
  * Modeler inside the unified console. It is wired to the
  * `zorbit-pfs-workflow_engine` REST surface:
  *
- *    GET    /api/workflow-engine/api/v1/O/{orgId}/workflow/bpmn-processes
- *    GET    /api/workflow-engine/api/v1/O/{orgId}/workflow/bpmn-processes/:id
- *    POST   /api/workflow-engine/api/v1/O/{orgId}/workflow/bpmn-processes
- *    PUT    /api/workflow-engine/api/v1/O/{orgId}/workflow/bpmn-processes/:id
+ *    GET    /api/workflow_engine/api/v1/O/{orgId}/workflow/bpmn-processes
+ *    GET    /api/workflow_engine/api/v1/O/{orgId}/workflow/bpmn-processes/:id
+ *    POST   /api/workflow_engine/api/v1/O/{orgId}/workflow/bpmn-processes
+ *    PUT    /api/workflow_engine/api/v1/O/{orgId}/workflow/bpmn-processes/:id
  *
  * Consumed via a manifest nav item in zorbit-pfs-workflow_engine as
  * `"feComponent": "@platform:WorkflowDesigner"`. The nav item may pass
@@ -82,7 +82,7 @@ interface WorkflowDesignerProps {
 // API helpers.
 // ---------------------------------------------------------------------------
 
-const BASE = '/api/workflow-engine/api/v1';
+const BASE = '/api/workflow_engine/api/v1';
 
 async function listProcesses(orgId: string): Promise<BpmnProcessRow[]> {
   const res = await api.get(`${BASE}/O/${orgId}/workflow/bpmn-processes`);
@@ -128,7 +128,7 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
   processHashId: initialHashIdProp,
 }) => {
   const { orgId } = useAuth();
-  // Second source of the hashId — the `/m/workflow-engine/designer/:processHashId`
+  // Second source of the hashId — the `/m/workflow_engine/designer/:processHashId`
   // route. Manifest-provided `feProps.processHashId` takes precedence, then
   // the URL param, then null (empty canvas).
   const routeParams = useParams<{ processHashId?: string }>();

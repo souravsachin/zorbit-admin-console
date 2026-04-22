@@ -4,7 +4,7 @@ import { FileText } from 'lucide-react';
 export default function HIQuotationDeploymentsPage() {
   return (
     <ModuleDeploymentsPage
-      moduleId="hi-quotation"
+      moduleId="hi_quotation"
       moduleName="HI Quotation"
       icon={FileText}
     />

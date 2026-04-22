@@ -4,7 +4,7 @@ import { GitBranch } from 'lucide-react';
 export default function UWWorkflowDeploymentsPage() {
   return (
     <ModuleDeploymentsPage
-      moduleId="uw-workflow"
+      moduleId="uw_workflow"
       moduleName="UW Workflow"
       icon={GitBranch}
     />

@@ -17,7 +17,7 @@ import {
   CheckCircle,
 } from 'lucide-react';
 
-const API_BASE = '/api/form-builder';
+const API_BASE = '/api/form_builder';
 
 interface FormComponent {
   type: string;
@@ -96,7 +96,7 @@ const FormEditorPage: React.FC = () => {
     const token = localStorage.getItem('zorbit_token');
     const headers = { Authorization: `Bearer ${token}` };
 
-    fetch(`${API_BASE}/api/v1/O/O-OZPY/form-builder/forms`, { headers })
+    fetch(`${API_BASE}/api/v1/O/O-OZPY/form_builder/forms`, { headers })
       .then(r => r.ok ? r.json() : { forms: [] })
       .then(data => {
         const forms = data.forms || (Array.isArray(data) ? data : []);
@@ -174,7 +174,7 @@ const FormEditorPage: React.FC = () => {
     setSaveStatus('idle');
     try {
       const token = localStorage.getItem('zorbit_token');
-      const res = await fetch(`${API_BASE}/api/v1/O/O-OZPY/form-builder/forms/${form.slug}`, {
+      const res = await fetch(`${API_BASE}/api/v1/O/O-OZPY/form_builder/forms/${form.slug}`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,

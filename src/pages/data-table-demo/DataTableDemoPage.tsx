@@ -139,7 +139,7 @@ const liveConfig: DataTableConfig = {
   empty_state_message: 'No quotations found matching your criteria.',
   data_source: {
     // The UW Workflow queue endpoint returns { success, items, total, page, limit }
-    endpoint_template: `${API_CONFIG.UW_WORKFLOW_URL}/api/v1/O/O-OZPY/uw-workflow/queues/all-quotations/items`,
+    endpoint_template: `${API_CONFIG.UW_WORKFLOW_URL}/api/v1/O/O-OZPY/uw_workflow/queues/all-quotations/items`,
     method: 'GET',
     response_data_path: 'items',
     response_total_path: 'total',
@@ -192,7 +192,7 @@ const DataTableDemoPage: React.FC = () => {
 
   // Build the config for the active queue
   const currentConfig: DataTableConfig = useMemo(() => {
-    const endpoint = `${API_CONFIG.UW_WORKFLOW_URL}/api/v1/O/O-OZPY/uw-workflow/queues/${activeQueue.endpoint}/items`;
+    const endpoint = `${API_CONFIG.UW_WORKFLOW_URL}/api/v1/O/O-OZPY/uw_workflow/queues/${activeQueue.endpoint}/items`;
     return {
       ...liveConfig,
       data_source: {

@@ -57,7 +57,7 @@ const HIDecisioningStpCriteriaPage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await api.get(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/stp-criteria`);
+      const res = await api.get(`${base}/api/v1/O/${orgId}/hi_uw_decisioning/stp-criteria`);
       const d = res.data;
       setCriteria(d?.criteria || (Array.isArray(d) ? d : d?.data || []));
     } catch (err: unknown) {
@@ -72,7 +72,7 @@ const HIDecisioningStpCriteriaPage: React.FC = () => {
   const seedDefaults = async () => {
     setSeeding(true);
     try {
-      await api.post(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/stp-criteria/seed-defaults`, {});
+      await api.post(`${base}/api/v1/O/${orgId}/hi_uw_decisioning/stp-criteria/seed-defaults`, {});
       await fetchCriteria();
     } catch {
       // ignore
@@ -84,7 +84,7 @@ const HIDecisioningStpCriteriaPage: React.FC = () => {
   const deleteCriteria = async (hashId: string) => {
     if (!confirm('Delete this STP criteria set?')) return;
     try {
-      await api.delete(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/stp-criteria/${hashId}`);
+      await api.delete(`${base}/api/v1/O/${orgId}/hi_uw_decisioning/stp-criteria/${hashId}`);
       setCriteria((prev) => prev.filter((c) => c.hashId !== hashId));
     } catch {
       // ignore

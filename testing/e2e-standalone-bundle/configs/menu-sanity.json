@@ -304,7 +304,7 @@
         },
         {
           "action": "click",
-          "selector": "a:has-text('PII Vault'), a:has-text('PII'), [data-menu='pii-vault'], nav a[href*='pii']",
+          "selector": "a:has-text('PII Vault'), a:has-text('PII'), [data-menu='pii_vault'], nav a[href*='pii']",
           "force": true
         },
         {
@@ -459,7 +459,7 @@
         },
         {
           "action": "click",
-          "selector": "a:has-text('Form Builder'), a:has-text('Forms'), [data-menu='form-builder'], nav a[href*='form']",
+          "selector": "a:has-text('Form Builder'), a:has-text('Forms'), [data-menu='form_builder'], nav a[href*='form']",
           "force": true
         },
         {

@@ -4,14 +4,14 @@ import { Palette } from 'lucide-react';
 export default function WhiteLabelSetupPage() {
   return (
     <ModuleSetupPage
-      moduleId="white-label"
+      moduleId="white_label"
       moduleName="White Label"
       icon={Palette}
-      seedEndpoint="/api/white-label/api/v1/G/white-label/seed/system"
-      demoSeedEndpoint="/api/white-label/api/v1/G/white-label/seed/demo"
-      demoFlushEndpoint="/api/white-label/api/v1/G/white-label/seed/demo"
-      flushEndpoint="/api/white-label/api/v1/G/white-label/seed/all"
-      healthEndpoint="/api/white-label/api/v1/G/white-label/health"
+      seedEndpoint="/api/white_label/api/v1/G/white_label/seed/system"
+      demoSeedEndpoint="/api/white_label/api/v1/G/white_label/seed/demo"
+      demoFlushEndpoint="/api/white_label/api/v1/G/white_label/seed/demo"
+      flushEndpoint="/api/white_label/api/v1/G/white_label/seed/all"
+      healthEndpoint="/api/white_label/api/v1/G/white_label/health"
     />
   );
 }

@@ -1,5 +1,5 @@
 /**
- * Payment Gateway Sandbox (UAT-only) — /m/payment-gateway
+ * Payment Gateway Sandbox (UAT-only) — /m/payment_gateway
  *
  * Browses the zorbit-pfs-payment_gateway catalog, renders a familiar per-type
  * form (card / UPI / NACH / bank transfer) and submits a MOCK attempt.
@@ -8,7 +8,7 @@
  * user that this is sandbox-only. Nothing submitted here touches a real
  * payment network; there is no PCI-DSS compliance.
  *
- * Backend: POST /api/payment-gateway/api/v1/G/payment-attempts
+ * Backend: POST /api/payment_gateway/api/v1/G/payment-attempts
  */
 import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
@@ -54,7 +54,7 @@ const REGION_LABELS: Record<string, string> = {
 
 const API_BASE =
   (API_CONFIG as { paymentGateway?: string }).paymentGateway ||
-  '/api/payment-gateway';
+  '/api/payment_gateway';
 
 function authHeaders(): Record<string, string> {
   const token =

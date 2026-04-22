@@ -2,7 +2,7 @@ import { API_CONFIG } from '../config';
 import api from './api';
 
 /**
- * Edition as returned by GET /api/module-registry/api/v1/G/modules/editions.
+ * Edition as returned by GET /api/module_registry/api/v1/G/modules/editions.
  * Mirrors the EditionMeta shape consumed by BusinessLineSelector.
  */
 export interface Edition {

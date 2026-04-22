@@ -92,7 +92,7 @@
         },
         {
           "action": "click",
-          "selector": "a[href*='product-pricing'], button:has-text('Product Pricing'), [class*='menu'] :text('Product Pricing')",
+          "selector": "a[href*='product_pricing'], button:has-text('Product Pricing'), [class*='menu'] :text('Product Pricing')",
           "announce": { "after": "Clicked Product Pricing menu item" }
         },
         {

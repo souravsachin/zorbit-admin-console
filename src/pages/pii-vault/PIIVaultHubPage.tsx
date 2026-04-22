@@ -153,7 +153,7 @@ const PII_VAULT_SLIDES: Slide[] = [
 const PIIVaultHubPage: React.FC = () => {
   return (
     <ModuleHubPage
-      moduleId="pii-vault"
+      moduleId="pii_vault"
       moduleName="PII Vault"
       moduleDescription="Sensitive data tokenization and protection for the Zorbit platform"
       moduleIntro="The PII Vault is a dedicated service for protecting personally identifiable information (PII). It replaces raw sensitive data (emails, phone numbers, names, addresses) with opaque tokens that are stored in operational databases. The actual PII is encrypted and stored on a separate database host, accessible only through the de-tokenization API with explicit authorization and full audit logging."
@@ -206,7 +206,7 @@ const PIIVaultHubPage: React.FC = () => {
       ]}
       recordings={[]}
       videosBaseUrl="/demos/pii-vault/"
-      swaggerUrl="https://zorbit.scalatics.com/api/pii-vault/api-docs"
+      swaggerUrl="https://zorbit.scalatics.com/api/pii_vault/api-docs"
       faqs={[
         { question: 'What data types does the vault support?', answer: 'Email addresses, phone numbers, full names, postal addresses, SSN/national IDs, bank account numbers, and custom PII types defined per organization.' },
         { question: 'Is PII ever exposed in logs or events?', answer: 'No. All logging, event publishing, and API responses use PII tokens. Raw PII values are never logged, cached, or included in Kafka events.' },
@@ -214,7 +214,7 @@ const PIIVaultHubPage: React.FC = () => {
         { question: 'What happens if the vault database is breached?', answer: 'Each value is individually encrypted with AES-256. The encryption keys are stored in a separate secrets manager. Without both the vault DB and the key store, raw PII cannot be recovered.' },
       ]}
       resources={[
-        { label: 'PII Vault API (Swagger)', url: 'https://zorbit.scalatics.com/api/pii-vault/api-docs', icon: FileText },
+        { label: 'PII Vault API (Swagger)', url: 'https://zorbit.scalatics.com/api/pii_vault/api-docs', icon: FileText },
         { label: 'Token Registry', url: '/pii-vault/tokens', icon: KeyRound },
         { label: 'PII Showcase', url: '/pii-showcase', icon: Shield },
         { label: 'Platform Documentation', url: '/api-docs', icon: Code },

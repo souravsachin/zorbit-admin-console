@@ -49,7 +49,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/pii-vault/api/v1/G/health",
+          "endpoint": "/api/pii_vault/api/v1/G/health",
           "expectedStatus": [200],
           "announce": { "before": "PII Vault", "after": "PII Vault: healthy" }
         },
@@ -67,43 +67,43 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/G/white-label/health",
+          "endpoint": "/api/white_label/api/v1/G/white_label/health",
           "expectedStatus": [200],
           "announce": { "before": "White Label", "after": "White Label: healthy" }
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/zmb-factory/api/v1/G/zmb-factory/health",
+          "endpoint": "/api/zmb_factory/api/v1/G/zmb_factory/health",
           "expectedStatus": [200],
           "announce": { "before": "ZMB Factory", "after": "ZMB Factory: healthy" }
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/hi-quotation/api/v1/G/health",
+          "endpoint": "/api/hi_quotation/api/v1/G/health",
           "expectedStatus": [200],
           "announce": { "before": "HI Quotation", "after": "HI Quotation: healthy" }
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/health",
+          "endpoint": "/api/hi_uw_decisioning/api/v1/G/hi_uw_decisioning/health",
           "expectedStatus": [200],
           "announce": { "before": "HI UW Decisioning", "after": "HI UW Decisioning: healthy" }
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/uw-workflow/api/v1/G/health",
+          "endpoint": "/api/uw_workflow/api/v1/G/health",
           "expectedStatus": [200],
           "announce": { "before": "UW Workflow", "after": "UW Workflow: healthy" }
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/product-pricing/api/v1/G/health",
+          "endpoint": "/api/product_pricing/api/v1/G/health",
           "expectedStatus": [200],
           "announce": { "before": "Product Pricing", "after": "Product Pricing: healthy" }
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/form-builder/api/v1/G/form-builder/health",
+          "endpoint": "/api/form_builder/api/v1/G/form_builder/health",
           "expectedStatus": [200],
           "announce": { "before": "Form Builder", "after": "Form Builder: healthy" }
         },
@@ -115,7 +115,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/doc-generator/api/v1/G/health",
+          "endpoint": "/api/doc_generator/api/v1/G/health",
           "expectedStatus": [200],
           "announce": { "before": "Doc Generator", "after": "Doc Generator: healthy" }
         },
@@ -476,7 +476,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/G/white-label/health",
+          "endpoint": "/api/white_label/api/v1/G/white_label/health",
           "expectedStatus": [200],
           "announce": {
             "before": "White Label API health check",
@@ -485,7 +485,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/O/O-OZPY/white-label/themes",
+          "endpoint": "/api/white_label/api/v1/O/O-OZPY/white_label/themes",
           "expectedStatus": [200],
           "announce": {
             "before": "Verifying O-OZPY theme list API",
@@ -663,7 +663,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/health",
+          "endpoint": "/api/hi_uw_decisioning/api/v1/G/hi_uw_decisioning/health",
           "expectedStatus": [200],
           "announce": {
             "before": "HI UW Decisioning API health (new path)",
@@ -854,7 +854,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/zmb-factory/api/v1/G/zmb-factory/modules",
+          "endpoint": "/api/zmb_factory/api/v1/G/zmb_factory/modules",
           "expectedStatus": [200],
           "announce": {
             "before": "Checking ZMB Factory module registry API",

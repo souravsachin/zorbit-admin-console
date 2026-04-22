@@ -73,7 +73,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/pii-vault/api/v1/G/health",
+          "endpoint": "/api/pii_vault/api/v1/G/health",
           "expectedStatus": [200],
           "announce": { "before": "IN-2027: PII Vault health (zu-core)", "after": "PII Vault: healthy" }
         },
@@ -85,7 +85,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/form-builder/api/v1/G/form-builder/health",
+          "endpoint": "/api/form_builder/api/v1/G/form_builder/health",
           "expectedStatus": [200],
           "announce": { "before": "IN-2028: Form Builder health (zu-pfs)", "after": "Form Builder: healthy" }
         },
@@ -97,25 +97,25 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/product-pricing/api/v1/G/health",
+          "endpoint": "/api/product_pricing/api/v1/G/health",
           "expectedStatus": [200],
           "announce": { "before": "IN-2028: Product Pricing health (zu-pfs)", "after": "Product Pricing: healthy" }
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/doc-generator/api/v1/G/health",
+          "endpoint": "/api/doc_generator/api/v1/G/health",
           "expectedStatus": [200],
           "announce": { "before": "IN-2028: Doc Generator health (zu-pfs)", "after": "Doc Generator: healthy" }
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/G/white-label/health",
+          "endpoint": "/api/white_label/api/v1/G/white_label/health",
           "expectedStatus": [200],
           "announce": { "before": "IN-2028: White Label health (zu-pfs)", "after": "White Label: healthy" }
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/zmb-factory/api/v1/G/zmb-factory/health",
+          "endpoint": "/api/zmb_factory/api/v1/G/zmb_factory/health",
           "expectedStatus": [200],
           "announce": { "before": "IN-2028: ZMB Factory health (zu-pfs)", "after": "ZMB Factory: healthy" }
         },
@@ -127,19 +127,19 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/hi-quotation/api/v1/G/health",
+          "endpoint": "/api/hi_quotation/api/v1/G/health",
           "expectedStatus": [200],
           "announce": { "before": "IN-2029: HI Quotation health (zu-apps)", "after": "HI Quotation: healthy" }
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/uw-workflow/api/v1/G/health",
+          "endpoint": "/api/uw_workflow/api/v1/G/health",
           "expectedStatus": [200],
           "announce": { "before": "IN-2029: UW Workflow health (zu-apps)", "after": "UW Workflow: healthy" }
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/hi-uw-decisioning/api/v1/G/hi-uw-decisioning/health",
+          "endpoint": "/api/hi_uw_decisioning/api/v1/G/hi_uw_decisioning/health",
           "expectedStatus": [200],
           "announce": { "before": "IN-2029: HI UW Decisioning health (zu-apps)", "after": "HI UW Decisioning: healthy" }
         },
@@ -248,13 +248,13 @@
         { "action": "wait", "timeout": 2000 },
         {
           "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/G/white-label/health",
+          "endpoint": "/api/white_label/api/v1/G/white_label/health",
           "expectedStatus": [200],
           "announce": { "before": "Checking White Label seed readiness", "after": "White Label ready for seed" }
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/form-builder/api/v1/G/form-builder/health",
+          "endpoint": "/api/form_builder/api/v1/G/form_builder/health",
           "expectedStatus": [200],
           "announce": { "before": "Checking Form Builder seed readiness", "after": "Form Builder ready for seed" }
         },
@@ -266,7 +266,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/zmb-factory/api/v1/G/zmb-factory/health",
+          "endpoint": "/api/zmb_factory/api/v1/G/zmb_factory/health",
           "expectedStatus": [200],
           "announce": { "before": "Checking ZMB Factory seed readiness", "after": "ZMB Factory ready for seed" }
         },
@@ -314,9 +314,9 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/pii-vault/api/v1/G/health",
+          "endpoint": "/api/pii_vault/api/v1/G/health",
           "expectedStatus": [200],
-          "announce": { "before": "Nginx route: /api/pii-vault/*", "after": "PII Vault route OK" }
+          "announce": { "before": "Nginx route: /api/pii_vault/*", "after": "PII Vault route OK" }
         },
         {
           "action": "apiCheck",

@@ -17,7 +17,7 @@ import { ModuleHubPage } from '../../components/shared/ModuleHubPage';
 const UWWorkflowHubPage: React.FC = () => {
   return (
     <ModuleHubPage
-      moduleId="uw-workflow"
+      moduleId="uw_workflow"
       moduleName="UW Workflow"
       moduleDescription="Underwriting Workflow Engine &mdash; 13 Queues, 20 Actions"
       moduleIntro="UW Workflow is the underwriting workflow engine that manages the end-to-end evaluation of insurance applications. It operates 13 specialized queues with 20 distinct actions, supporting both Straight-Through Processing (STP) for low-risk applications and Non-STP manual review for complex cases. Every action is tracked in a full audit trail."
@@ -86,7 +86,7 @@ const UWWorkflowHubPage: React.FC = () => {
         },
       ]}
       videosBaseUrl="/demos/uw-workflow/"
-      swaggerUrl="/api/uw-workflow/api-docs"
+      swaggerUrl="/api/uw_workflow/api-docs"
       faqs={[
         { question: 'What are the 13 queues?', answer: 'New Business, Renewal, Endorsement, Medical Review, Financial Review, Risk Assessment, Escalation, Refer to Specialist, Pending Info, Counter Offer, Declined Review, STP Auto-Approve, and Manager Override.' },
         { question: 'How does STP work?', answer: 'Applications that pass all automated decisioning rules (from HI UW Decisioning) are routed to the STP queue and auto-approved without manual intervention.' },

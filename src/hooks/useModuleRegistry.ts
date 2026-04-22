@@ -71,7 +71,7 @@ export function useModuleRegistry(moduleId: string): {
     setError(null);
 
     const token = localStorage.getItem('zorbit_access_token') || localStorage.getItem('zorbit_token');
-    fetch(`/api/module-registry/api/v1/G/modules/${moduleId}`, {
+    fetch(`/api/module_registry/api/v1/G/modules/${moduleId}`, {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
       .then((r) => {

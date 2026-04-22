@@ -9,7 +9,7 @@
  *                 onSubmitted={(data) => {...}} />
  *
  * Fetch path:
- *   - If formSlug: GET /api/form-builder/api/v1/O/{orgId}/form-builder/forms?...
+ *   - If formSlug: GET /api/form_builder/api/v1/O/{orgId}/form_builder/forms?...
  *     then match by slug (tolerates missing-by-slug).
  *   - If formId / hashId: the same listing endpoint + match on hashId.
  *
@@ -72,9 +72,9 @@ interface FormRendererProps {
 
 /** Try multiple URL shapes to find the form definition. The form-builder
  *  service exposes:
- *    - /api/form-builder/api/v1/O/:orgId/form-builder/forms    (list, authed)
- *    - /api/form-builder/api/v1/O/:orgId/form-builder/forms/:slug (by slug)
- *    - /api/form-builder/api/v1/G/form-builder/templates       (templates, public)
+ *    - /api/form_builder/api/v1/O/:orgId/form_builder/forms    (list, authed)
+ *    - /api/form_builder/api/v1/O/:orgId/form_builder/forms/:slug (by slug)
+ *    - /api/form_builder/api/v1/G/form_builder/templates       (templates, public)
  *  We try direct-by-slug first, then fall back to list-and-match.
  */
 async function fetchFormDefinition(
@@ -82,7 +82,7 @@ async function fetchFormDefinition(
   formId?: string,
   formSlug?: string,
 ): Promise<FormDefinition | null> {
-  const base = '/api/form-builder/api/v1';
+  const base = '/api/form_builder/api/v1';
 
   // 1) Try GET /O/{orgId}/form-builder/forms/{slug}
   if (formSlug) {

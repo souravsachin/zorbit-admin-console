@@ -137,7 +137,7 @@ const WORKFLOW_SLIDES: Slide[] = [
 const WorkflowEngineHubPage: React.FC = () => {
   return (
     <ModuleHubPage
-      moduleId="workflow-engine"
+      moduleId="workflow_engine"
       moduleName="Workflow Engine"
       moduleDescription="FQP &mdash; Filters, Queues, Pipelines for Generic Workflow Orchestration"
       moduleIntro="The Workflow Engine (FQP) is a generic, recursive filter-based routing system. Business modules export their object schemas, define recursive filter conditions (AND/OR/NOT with unlimited nesting), create queues that combine multiple filters, and build pipelines with human, moderated, and automated stages. Items submitted to the engine are automatically evaluated against all active queues and routed accordingly."
@@ -189,7 +189,7 @@ const WorkflowEngineHubPage: React.FC = () => {
       ]}
       recordings={[]}
       videosBaseUrl="/demos/workflow-engine/"
-      swaggerUrl="/api/workflow-engine/api-docs"
+      swaggerUrl="/api/workflow_engine/api-docs"
       faqs={[
         { question: 'What is a recursive filter condition?', answer: 'A filter condition can be a leaf (field + operator + value) or a compound (AND/OR/NOT containing child conditions). Children can themselves be compound, allowing unlimited nesting depth.' },
         { question: 'What pipeline stage modes are available?', answer: 'Four modes: "automated" (pure rule execution / STP), "top_moderated" (AI decides, human spot-checks samples), "moderated" (AI suggests, human approves every decision), and "human" (person must act on every item).' },

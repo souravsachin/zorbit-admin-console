@@ -43,8 +43,8 @@ interface ModuleRegistryEntry {
 
 // --- constants / helpers --------------------------------------------
 
-const API_BASE = '/api/deployment-registry/api/v1/G/environments';
-const MODULE_REGISTRY_API = '/api/module-registry/api/v1/G/modules';
+const API_BASE = '/api/deployment_registry/api/v1/G/environments';
+const MODULE_REGISTRY_API = '/api/module_registry/api/v1/G/modules';
 
 const HEALTH_STYLE: Record<
   Health,

@@ -14,7 +14,7 @@ import { ModuleHubPage } from '../../components/shared/ModuleHubPage';
 const APIIntegrationHubPage: React.FC = () => {
   return (
     <ModuleHubPage
-      moduleId="api-integration"
+      moduleId="api_integration"
       moduleName="API Integration"
       moduleDescription="External API Connectivity &mdash; Credentials, Endpoints, Orchestration, Monitoring"
       moduleIntro="API Integration manages outbound API connections to external partners, regulators, and data providers. Unlike RPA (which automates portal UIs), this module handles direct API-to-API integrations via REST, SOAP, and SFTP. It manages API credentials (API keys, OAuth tokens, certificates), defines integration segments (request/response mappings), composes multi-step orchestrations, and provides real-time monitoring."
@@ -80,7 +80,7 @@ const APIIntegrationHubPage: React.FC = () => {
         },
       ]}
       videosBaseUrl="/demos/api-integration/"
-      swaggerUrl="/api/api-integration/api-docs"
+      swaggerUrl="/api/api_integration/api-docs"
       faqs={[
         { question: 'What API protocols are supported?', answer: 'REST (JSON/XML), SOAP (WSDL), GraphQL, SFTP (file-based), and webhooks (inbound). Each endpoint is configured with its protocol and authentication method.' },
         { question: 'How are API credentials rotated?', answer: 'Configurable expiry reminders. OAuth tokens are auto-refreshed. API keys and certificates trigger alerts before expiry. Rotation history is tracked.' },

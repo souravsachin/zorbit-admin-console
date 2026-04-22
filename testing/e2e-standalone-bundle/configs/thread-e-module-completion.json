@@ -103,7 +103,7 @@
         { "action": "screenshot", "value": "mod-03-uw-new-business.png" },
         {
           "action": "apiCheck",
-          "endpoint": "/api/uw-workflow/api/v1/G/health",
+          "endpoint": "/api/uw_workflow/api/v1/G/health",
           "expectedStatus": [200],
           "announce": { "before": "UW-2050: UW Workflow API health", "after": "UW Workflow service healthy" }
         },
@@ -139,7 +139,7 @@
         { "action": "wait", "timeout": 5000 },
         {
           "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/O/O-OZPY/white-label/themes",
+          "endpoint": "/api/white_label/api/v1/O/O-OZPY/white_label/themes",
           "expectedStatus": [200],
           "announce": { "before": "WL-2051: Fetching O-OZPY themes via API", "after": "WL-2051: O-OZPY themes API returned 200" }
         },
@@ -373,14 +373,14 @@
 
   "bouquets": {
 
-    "uw-workflow": {
+    "uw_workflow": {
       "name": "UW Workflow",
       "description": "UW-2050: Queue-based routes verification",
       "mode": "sequential",
       "journeys": ["mod-uw-workflow"]
     },
 
-    "white-label": {
+    "white_label": {
       "name": "White Label Seed",
       "description": "WL-2051: Seed and verify 6 themes for O-OZPY",
       "mode": "sequential",

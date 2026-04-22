@@ -53,8 +53,8 @@ interface FormDefinition {
   };
 }
 
-const FORM_BUILDER_API = '/api/form-builder';
-const PRODUCT_PRICING_API = API_CONFIG.PRODUCT_PRICING_URL || '/api/product-pricing';
+const FORM_BUILDER_API = '/api/form_builder';
+const PRODUCT_PRICING_API = API_CONFIG.PRODUCT_PRICING_URL || '/api/product_pricing';
 
 /* ------------------------------------------------------------------ */
 /*  Field Renderer                                                     */
@@ -343,7 +343,7 @@ const RateCardImportPage: React.FC = () => {
     const loadForm = async () => {
       try {
         const res = await api.get(
-          `${FORM_BUILDER_API}/api/v1/O/O-OZPY/form-builder/forms/rate-card-import`,
+          `${FORM_BUILDER_API}/api/v1/O/O-OZPY/form_builder/forms/rate-card-import`,
         );
         setForm(res.data);
       } catch (err) {
@@ -414,7 +414,7 @@ const RateCardImportPage: React.FC = () => {
       };
 
       const res = await api.post(
-        `${PRODUCT_PRICING_API}/api/v1/O/O-OZPY/product-pricing/rate-tables`,
+        `${PRODUCT_PRICING_API}/api/v1/O/O-OZPY/product_pricing/rate-tables`,
         rateTablePayload,
       );
 

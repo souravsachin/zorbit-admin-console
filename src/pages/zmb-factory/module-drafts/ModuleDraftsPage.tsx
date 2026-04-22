@@ -1,5 +1,5 @@
 /**
- * ZMB Module Drafts — authoring UI at /m/zmb-factory/module-drafts.
+ * ZMB Module Drafts — authoring UI at /m/zmb_factory/module-drafts.
  *
  * Left rail  = tree of manifest sections.
  * Center     = contextual editor for the selected section.

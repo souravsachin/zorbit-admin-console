@@ -14,7 +14,7 @@ import { ModuleHubPage } from '../../components/shared/ModuleHubPage';
 const RPAIntegrationHubPage: React.FC = () => {
   return (
     <ModuleHubPage
-      moduleId="rpa-integration"
+      moduleId="rpa_integration"
       moduleName="RPA Integration"
       moduleDescription="Robotic Process Automation &mdash; Credentials, Segments, Playlists, Scheduling"
       moduleIntro="RPA Integration manages robotic process automation workflows that interact with external partner portals (insurance authorities, regulators, reinsurers, brokers). It securely stores portal credentials, defines automation segments (login, navigate, extract, submit), composes segments into playlists, and schedules automated runs. This eliminates manual data entry and extraction from partner systems."
@@ -81,7 +81,7 @@ const RPAIntegrationHubPage: React.FC = () => {
         },
       ]}
       videosBaseUrl="/demos/rpa-integration/"
-      swaggerUrl="/api/rpa-integration/api-docs"
+      swaggerUrl="/api/rpa_integration/api-docs"
       faqs={[
         { question: 'What types of partner portals can be automated?', answer: 'Insurance authority portals (DHA, MOH, DOH), reinsurer extranets, broker platforms, bank payment portals, and any web-based system with login access.' },
         { question: 'How are credentials secured?', answer: 'Credentials are encrypted at rest using AES-256. Access is role-restricted. Credential usage is logged in the audit trail. Rotation reminders are configurable.' },

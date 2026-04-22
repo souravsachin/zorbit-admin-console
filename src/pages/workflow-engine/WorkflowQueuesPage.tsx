@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Layers, ChevronRight, Inbox, Clock, CheckCircle } from 'lucide-react';
 
-const API_BASE = '/api/workflow-engine';
+const API_BASE = '/api/workflow_engine';
 
 interface QueueDef {
   hashId: string;

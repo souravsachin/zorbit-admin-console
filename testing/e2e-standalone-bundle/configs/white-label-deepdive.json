@@ -25,7 +25,7 @@
         { "action": "wait", "timeout": 1000 },
         {
           "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/G/white-label/health",
+          "endpoint": "/api/white_label/api/v1/G/white_label/health",
           "expectedStatus": [200],
           "announce": {
             "before": "Checking White Label service health",
@@ -96,7 +96,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/G/white-label/seed/demo",
+          "endpoint": "/api/white_label/api/v1/G/white_label/seed/demo",
           "method": "POST",
           "expectedStatus": [200, 201],
           "announce": {
@@ -136,7 +136,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/O/O-OZPY/white-label/themes",
+          "endpoint": "/api/white_label/api/v1/O/O-OZPY/white_label/themes",
           "expectedStatus": [200],
           "announce": {
             "before": "Verifying themes API returns 6 themes for O-OZPY",
@@ -304,7 +304,7 @@
         { "action": "wait", "timeout": 1000 },
         {
           "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/G/white-label/health",
+          "endpoint": "/api/white_label/api/v1/G/white_label/health",
           "expectedStatus": [200],
           "announce": {
             "before": "Health check",
@@ -313,7 +313,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/O/O-OZPY/white-label/themes",
+          "endpoint": "/api/white_label/api/v1/O/O-OZPY/white_label/themes",
           "expectedStatus": [200],
           "announce": {
             "before": "Checking O-OZPY themes list via API",
@@ -322,7 +322,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/O/O-OZPY/white-label/resolve",
+          "endpoint": "/api/white_label/api/v1/O/O-OZPY/white_label/resolve",
           "expectedStatus": [200, 404],
           "announce": {
             "before": "Checking resolve endpoint",

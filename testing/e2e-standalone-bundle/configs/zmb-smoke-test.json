@@ -227,7 +227,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/form-builder/api/v1/G/form-builder/health",
+          "endpoint": "/api/form_builder/api/v1/G/form_builder/health",
           "expectedStatus": [200, 204],
           "announce": { "before": "Checking Form Builder service health", "after": "Form Builder healthy" }
         },
@@ -245,7 +245,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/white-label/api/v1/G/white-label/health",
+          "endpoint": "/api/white_label/api/v1/G/white_label/health",
           "expectedStatus": [200, 204],
           "announce": { "before": "Checking White Label service health", "after": "White Label healthy" }
         }

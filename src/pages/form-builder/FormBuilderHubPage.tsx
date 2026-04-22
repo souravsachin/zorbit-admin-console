@@ -191,7 +191,7 @@ const FORM_BUILDER_SLIDES: Slide[] = [
 const FormBuilderHubPage: React.FC = () => {
   return (
     <ModuleHubPage
-      moduleId="form-builder"
+      moduleId="form_builder"
       moduleName="Form Builder"
       moduleDescription="Dynamic Form Engine &mdash; formio.js, Conditional Logic, Multi-Step Wizard"
       moduleIntro="Form Builder is a dynamic form creation and rendering engine powered by formio.js. It supports drag-and-drop form design, conditional logic (show/hide fields based on other field values), multi-step wizard forms, auto-save with draft recovery, and seamless integration with Zorbit platform services for data submission and validation."
@@ -272,7 +272,7 @@ const FormBuilderHubPage: React.FC = () => {
         },
       ]}
       videosBaseUrl="/demos/form-builder/"
-      swaggerUrl="/api/form-builder/api-docs"
+      swaggerUrl="/api/form_builder/api-docs"
       faqs={[
         { question: 'What form components are available?', answer: 'Text fields, text areas, number, select/dropdown, radio, checkbox, date/time, file upload, signature, HTML content, panels, columns, tabs, and custom components.' },
         { question: 'How do I create a multi-step wizard?', answer: 'In the form builder, choose "Wizard" as the form type. Each panel becomes a wizard step. Navigation buttons are added automatically.' },

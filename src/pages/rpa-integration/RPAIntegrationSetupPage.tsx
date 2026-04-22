@@ -4,14 +4,14 @@ import { Cpu } from 'lucide-react';
 export default function RPAIntegrationSetupPage() {
   return (
     <ModuleSetupPage
-      moduleId="rpa-integration"
+      moduleId="rpa_integration"
       moduleName="RPA Integration"
       icon={Cpu}
-      seedEndpoint="/api/rpa-integration/api/v1/G/rpa-integration/seed"
-      demoSeedEndpoint="/api/rpa-integration/api/v1/G/rpa-integration/seed/demo"
-      demoFlushEndpoint="/api/rpa-integration/api/v1/G/rpa-integration/seed/demo"
-      flushEndpoint="/api/rpa-integration/api/v1/G/rpa-integration/seed/all"
-      healthEndpoint="/api/rpa-integration/api/v1/G/rpa-integration/health"
+      seedEndpoint="/api/rpa_integration/api/v1/G/rpa_integration/seed"
+      demoSeedEndpoint="/api/rpa_integration/api/v1/G/rpa_integration/seed/demo"
+      demoFlushEndpoint="/api/rpa_integration/api/v1/G/rpa_integration/seed/demo"
+      flushEndpoint="/api/rpa_integration/api/v1/G/rpa_integration/seed/all"
+      healthEndpoint="/api/rpa_integration/api/v1/G/rpa_integration/health"
     />
   );
 }

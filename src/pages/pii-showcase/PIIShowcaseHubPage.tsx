@@ -46,14 +46,14 @@ const PIIShowcaseHubPage: React.FC = () => (
       { label: 'Access', description: 'Authorized users request token resolution with role-based visibility', color: '#8b5cf6' },
       { label: 'Audit', description: 'Every access logged — who, when, what token, resolution result', color: '#10b981' },
     ]}
-    swaggerUrl="/api/pii-vault/api-docs"
+    swaggerUrl="/api/pii_vault/api-docs"
     faqs={[
       { question: 'Where is real PII stored?', answer: 'Only in the PII Vault service, which runs on a separate database host. Operational databases only store tokens.' },
       { question: 'Can I see masked data without vault access?', answer: 'Yes — partial masking is applied at the API layer based on your role. No vault call needed for masked views.' },
       { question: 'How is PII access audited?', answer: 'Every token resolution is logged in the Audit service with the requesting user, timestamp, token, and result.' },
     ]}
     resources={[
-      { label: 'PII Vault API (Swagger)', url: '/api/pii-vault/api-docs' },
+      { label: 'PII Vault API (Swagger)', url: '/api/pii_vault/api-docs' },
       { label: 'PII Dashboard', url: '/pii-showcase/dashboard' },
     ]}
   />

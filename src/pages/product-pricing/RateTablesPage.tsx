@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Calculator, RefreshCw, Table2 } from 'lucide-react';
 
-const API_BASE = '/api/product-pricing/api/v1/O/O-OZPY/product-pricing';
+const API_BASE = '/api/product_pricing/api/v1/O/O-OZPY/product_pricing';
 
 /* ─── helpers ─── */
 const fmtAED = (v: number | undefined) =>

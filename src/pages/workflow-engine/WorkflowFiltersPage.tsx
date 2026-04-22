@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Filter, Plus, ChevronRight, Trash2, Play, Tag } from 'lucide-react';
 
-const API_BASE = '/api/workflow-engine';
+const API_BASE = '/api/workflow_engine';
 
 interface FilterCondition {
   field?: string;

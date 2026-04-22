@@ -17,7 +17,7 @@ import StatusBadge from '../shared/StatusBadge';
  * TopicDetailView — platform-supplied drill-down for a single Kafka topic.
  *
  * Registered as `@platform:TopicDetailView`. Rendered at
- * `/m/event-bus/topics/:name` either via sidebar deep-link or via the
+ * `/m/event_bus/topics/:name` either via sidebar deep-link or via the
  * "Inspect" row action on the Topics DataTable.
  *
  * Four sub-panels:
@@ -86,7 +86,7 @@ interface LiveTailMessage {
 
 const EVENT_BUS_BASE =
   (import.meta as unknown as { env?: { VITE_EVENT_BUS_BASE?: string } })?.env
-    ?.VITE_EVENT_BUS_BASE || '/api/event-bus/api/v1/G/messaging/broker';
+    ?.VITE_EVENT_BUS_BASE || '/api/event_bus/api/v1/G/messaging/broker';
 
 const TopicDetailView: React.FC = () => {
   const params = useParams<{ name: string }>();
@@ -132,7 +132,7 @@ const TopicDetailView: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <Link
-            to="/m/event-bus/topics"
+            to="/m/event_bus/topics"
             className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
           >
             <ArrowLeft size={14} className="mr-1" /> All topics

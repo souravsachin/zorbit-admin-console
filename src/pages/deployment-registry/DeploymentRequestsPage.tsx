@@ -41,7 +41,7 @@ interface DRDetail extends DR {
 
 // --- helpers -------------------------------------------------------
 
-const DR_API = '/api/deployment-registry/api/v1/G';
+const DR_API = '/api/deployment_registry/api/v1/G';
 
 const STATUSES = [
   'DRAFT',
@@ -81,7 +81,7 @@ function whenAgo(iso?: string | null): string {
 
 /**
  * Central deployment-requests page (mounted at
- * `/m/deployment-registry/requests`). Phase-3 scope:
+ * `/m/deployment_registry/requests`). Phase-3 scope:
  *   - List + filters (status, source, target, module, maker, checker)
  *   - Status stat chips
  *   - View diff modal (JsonViewer)
@@ -145,7 +145,7 @@ const DeploymentRequestsPage: React.FC = () => {
     }
     try {
       const res = await api.get<{ moduleId: string }[]>(
-        `/api/module-registry/api/v1/G/modules`,
+        `/api/module_registry/api/v1/G/modules`,
       );
       const list = Array.isArray(res.data) ? res.data : [];
       setModuleOptions([

@@ -2,14 +2,14 @@
  * zorbit-unified-console — ZMB Module-Drafts service client
  *
  * Wraps the HTTP surface of zorbit-pfs-zmb_factory's noun-based
- * /api/v1/G/module-drafts/* and /api/v1/G/modules endpoints.
+ * /api/v1/G/module_drafts/* and /api/v1/G/modules endpoints.
  *
  * Renamed 2026-04-23 from zmbCompose.ts (verb -> noun). The old file has
  * been hard-deleted — no re-export shim, no back-compat. Pre-launch.
  */
 import api from './api';
 
-const BASE = (import.meta.env.VITE_ZMB_FACTORY_URL as string | undefined) || '/api/zmb-factory';
+const BASE = (import.meta.env.VITE_ZMB_FACTORY_URL as string | undefined) || '/api/zmb_factory';
 
 export interface ModuleDraftValidationIssue {
   level: 'error' | 'warning';
@@ -54,22 +54,22 @@ export interface SynthNarrationResult {
     fallback?: 'browser-speech-synthesis';
     error?: string;
   }>;
-  synthesiser: 'voice-engine' | 'browser-fallback';
+  synthesiser: 'voice_engine' | 'browser-fallback';
 }
 
 export const zmbModuleDraftsService = {
   validate: async (manifest: any): Promise<ModuleDraftValidationResult> => {
-    const { data } = await api.post(`${BASE}/api/v1/G/module-drafts/validations`, { manifest });
+    const { data } = await api.post(`${BASE}/api/v1/G/module_drafts/validations`, { manifest });
     return data;
   },
 
   preview: async (manifest: any): Promise<ModuleDraftPreviewResult> => {
-    const { data } = await api.post(`${BASE}/api/v1/G/module-drafts/previews`, { manifest });
+    const { data } = await api.post(`${BASE}/api/v1/G/module_drafts/previews`, { manifest });
     return data;
   },
 
   deriveConfig: async (manifest: any): Promise<any> => {
-    const { data } = await api.post(`${BASE}/api/v1/G/module-drafts/configs`, { manifest });
+    const { data } = await api.post(`${BASE}/api/v1/G/module_drafts/configs`, { manifest });
     return data;
   },
 
@@ -98,7 +98,7 @@ export const zmbModuleDraftsService = {
     config?: any,
   ): Promise<{ blob: Blob; fileName: string }> => {
     const rsp = await api.post(
-      `${BASE}/api/v1/G/module-drafts/exports`,
+      `${BASE}/api/v1/G/module_drafts/exports`,
       { manifest, config },
       { responseType: 'blob' },
     );
@@ -116,7 +116,7 @@ export const zmbModuleDraftsService = {
     manifest: any,
     rowsPerEntity?: number,
   ): Promise<{ sql: string; rowCount: number; entityCount: number }> => {
-    const { data } = await api.post(`${BASE}/api/v1/G/module-drafts/seeds`, {
+    const { data } = await api.post(`${BASE}/api/v1/G/module_drafts/seeds`, {
       manifest,
       rowsPerEntity,
     });
@@ -127,7 +127,7 @@ export const zmbModuleDraftsService = {
     narrations: SynthNarrationItem[],
     opts?: { voiceEngineUrl?: string; orgId?: string },
   ): Promise<SynthNarrationResult> => {
-    const { data } = await api.post(`${BASE}/api/v1/G/module-drafts/narrations`, {
+    const { data } = await api.post(`${BASE}/api/v1/G/module_drafts/narrations`, {
       narrations,
       ...opts,
     });
@@ -156,7 +156,7 @@ export const zmbModuleDraftsService = {
 export async function playNarration(
   text: string,
   opts?: { voice?: string; onFinish?: () => void },
-): Promise<'voice-engine' | 'browser-fallback'> {
+): Promise<'voice_engine' | 'browser-fallback'> {
   const result = await zmbModuleDraftsService.synthNarrations(
     [{ id: 'inline', text, voice: opts?.voice }],
   );
@@ -170,7 +170,7 @@ export async function playNarration(
       audio.play().catch(() => resolve());
     });
     opts?.onFinish?.();
-    return 'voice-engine';
+    return 'voice_engine';
   }
 
   return new Promise<'browser-fallback'>((resolve) => {

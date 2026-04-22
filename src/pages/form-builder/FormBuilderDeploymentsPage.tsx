@@ -4,7 +4,7 @@ import { FileInput } from 'lucide-react';
 export default function FormBuilderDeploymentsPage() {
   return (
     <ModuleDeploymentsPage
-      moduleId="form-builder"
+      moduleId="form_builder"
       moduleName="Form Builder"
       icon={FileInput}
     />

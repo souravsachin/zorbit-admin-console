@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FileText, Plus, Eye, Copy, Clock, CheckCircle, Archive, Pencil, Play } from 'lucide-react';
 
-const API_BASE = '/api/form-builder';
+const API_BASE = '/api/form_builder';
 
 interface FormTemplate {
   hashId: string;
@@ -43,8 +43,8 @@ const FormTemplatesPage: React.FC = () => {
     const headers = { Authorization: `Bearer ${token}` };
 
     Promise.all([
-      fetch(`${API_BASE}/api/v1/G/form-builder/templates`, { headers }).then(r => r.ok ? r.json() : []),
-      fetch(`${API_BASE}/api/v1/O/O-OZPY/form-builder/forms`, { headers }).then(r => r.ok ? r.json() : { forms: [] }),
+      fetch(`${API_BASE}/api/v1/G/form_builder/templates`, { headers }).then(r => r.ok ? r.json() : []),
+      fetch(`${API_BASE}/api/v1/O/O-OZPY/form_builder/forms`, { headers }).then(r => r.ok ? r.json() : { forms: [] }),
     ])
       .then(([tpls, frms]) => {
         // Templates API returns a plain array

@@ -89,7 +89,7 @@ zorbit zmb create`,
       'The 90:10 philosophy: 90% of customization happens in config, 10% in code. Edit module.config.ts to change queue behavior, PII fields, routing rules, and display columns.',
     code: `// module.config.ts — generated file
 export const config = {
-  module: 'claims-intake',
+  module: 'claims_intake',
   piiFields: ['name', 'email', 'phone'],
   fqpQueue: 'claims.new',
   tableColumns: ['id', 'status', 'createdAt'],

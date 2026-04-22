@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Inbox, FileText, Clock, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
 
-const API_BASE = '/api/form-builder';
+const API_BASE = '/api/form_builder';
 
 interface Submission {
   hashId: string;
@@ -38,7 +38,7 @@ const FormSubmissionsPage: React.FC = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('zorbit_token');
-    fetch(`${API_BASE}/api/v1/O/O-OZPY/form-builder/submissions`, {
+    fetch(`${API_BASE}/api/v1/O/O-OZPY/form_builder/submissions`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(r => r.ok ? r.json() : [])

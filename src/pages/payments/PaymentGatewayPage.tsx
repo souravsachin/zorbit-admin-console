@@ -96,7 +96,7 @@ const PaymentGatewayPage: React.FC = () => {
     const fetchPayment = async () => {
       try {
         const res = await axios.get(
-          `${base}/api/v1/G/uw-workflow/payments/${paymentId}`,
+          `${base}/api/v1/G/uw_workflow/payments/${paymentId}`,
         );
         setPayment(res.data);
         if (res.data.status === 'completed') {
@@ -127,7 +127,7 @@ const PaymentGatewayPage: React.FC = () => {
 
     try {
       const res = await axios.post(
-        `${base}/api/v1/G/uw-workflow/payments/${paymentId}/complete`,
+        `${base}/api/v1/G/uw_workflow/payments/${paymentId}/complete`,
         { paymentMethod: method },
       );
       setResult(res.data);

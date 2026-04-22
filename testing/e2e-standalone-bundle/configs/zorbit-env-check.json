@@ -33,7 +33,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/pii-vault/api/v1/G/health",
+          "endpoint": "/api/pii_vault/api/v1/G/health",
           "expectedStatus": [200],
           "announce": { "before": "Checking PII vault service", "after": "PII Vault: 200 OK" }
         },
@@ -58,7 +58,7 @@
         },
         {
           "action": "apiCheck",
-          "endpoint": "/api/form-builder/api/v1/G/form-builder/health",
+          "endpoint": "/api/form_builder/api/v1/G/form_builder/health",
           "expectedStatus": [200],
           "announce": { "before": "Checking form-builder service", "after": "Form Builder: 200 OK" }
         }

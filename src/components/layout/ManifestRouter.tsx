@@ -58,7 +58,7 @@ function findMatchingItem(sections: NavSection[], path: string): { section: NavS
       } else if (path.startsWith(item.feRoute.endsWith('/') ? item.feRoute : item.feRoute + '/')) {
         // Guard against greedy prefix matches across sibling modules.
         // Require the first slug segment of the path to equal the first
-        // slug segment of item.feRoute; otherwise /m/hi-decisioning/*
+        // slug segment of item.feRoute; otherwise /m/hi_decisioning/*
         // would accept a prefix match against /m/sample-rates/*.
         const itemSlug = firstModuleSlug(item.feRoute);
         if (pathSlug && itemSlug && pathSlug !== itemSlug) continue;
@@ -117,7 +117,7 @@ const StubNoMatch: React.FC<{ path: string; slug: string }> = ({ path, slug }) =
               Every sidebar link is driven by <code>placement.navigation.items[*].feRoute</code> in a module manifest. This path is not declared by any currently-registered manifest.
             </p>
             <div className="flex flex-wrap gap-2 text-xs">
-              <Link to="/m/module-registry/modules" className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-white dark:bg-gray-800 border border-amber-300 dark:border-amber-700 hover:bg-amber-100 dark:hover:bg-amber-900/40 text-amber-800 dark:text-amber-200">
+              <Link to="/m/module_registry/modules" className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-white dark:bg-gray-800 border border-amber-300 dark:border-amber-700 hover:bg-amber-100 dark:hover:bg-amber-900/40 text-amber-800 dark:text-amber-200">
                 <ExternalLink size={11} /> Module Registry
               </Link>
               <Link to="/" className="px-2.5 py-1 rounded bg-white dark:bg-gray-800 border border-amber-300 dark:border-amber-700 hover:bg-amber-100 dark:hover:bg-amber-900/40 text-amber-800 dark:text-amber-200">
@@ -163,7 +163,7 @@ const StubNoComponent: React.FC<{ item: NavItem; section: NavSection }> = ({ ite
               </div>
             </div>
             <div className="flex flex-wrap gap-2 text-xs mt-4">
-              <Link to="/m/module-registry/modules" className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-white dark:bg-gray-800 border border-blue-300 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/40 text-blue-800 dark:text-blue-200">
+              <Link to="/m/module_registry/modules" className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-white dark:bg-gray-800 border border-blue-300 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/40 text-blue-800 dark:text-blue-200">
                 <ExternalLink size={11} /> Inspect manifest
               </Link>
             </div>

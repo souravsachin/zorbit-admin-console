@@ -541,7 +541,7 @@ const NewApplicationPage: React.FC = () => {
     setPremiumLoading(true);
     try {
       const base = API_CONFIG.HI_QUOTATION_URL;
-      const res = await api.post(`${base}/api/v1/O/${orgId}/hi-quotation/quotations/calculate-premium`, {
+      const res = await api.post(`${base}/api/v1/O/${orgId}/hi_quotation/quotations/calculate-premium`, {
         region: form.region,
         planType: form.planType,
         sumInsured: form.sumInsured,
@@ -715,7 +715,7 @@ const NewApplicationPage: React.FC = () => {
       const hiBase = API_CONFIG.HI_QUOTATION_URL;
       let quotationNumber = `HI-Q-${generateId().toUpperCase().slice(0, 6)}`;
       try {
-        const res = await api.post(`${hiBase}/api/v1/O/${orgId}/hi-quotation/quotations`, quotationPayload);
+        const res = await api.post(`${hiBase}/api/v1/O/${orgId}/hi_quotation/quotations`, quotationPayload);
         quotationNumber = res.data?.quotationNumber || res.data?.hashId || quotationNumber;
       } catch {
         // Backend may not be available; still show success with local number

@@ -77,7 +77,7 @@ interface RegionalFormPageProps {
   accentColor: string;
 }
 
-const FORM_BUILDER_API = '/api/form-builder';
+const FORM_BUILDER_API = '/api/form_builder';
 const HI_QUOTATION_API = API_CONFIG.HI_QUOTATION_URL;
 
 /* ------------------------------------------------------------------ */
@@ -445,7 +445,7 @@ const RegionalFormPage: React.FC<RegionalFormPageProps> = ({
       try {
         setLoading(true);
         const res = await api.get(
-          `${FORM_BUILDER_API}/api/v1/O/${orgId}/form-builder/forms/${formSlug}`,
+          `${FORM_BUILDER_API}/api/v1/O/${orgId}/form_builder/forms/${formSlug}`,
         );
         setFormDef(res.data);
       } catch (err: unknown) {
@@ -471,7 +471,7 @@ const RegionalFormPage: React.FC<RegionalFormPageProps> = ({
     try {
       // 1. Persist form data in form_builder (data persistence)
       await api.post(
-        `${FORM_BUILDER_API}/api/v1/O/${orgId}/form-builder/forms/${formSlug}/submissions`,
+        `${FORM_BUILDER_API}/api/v1/O/${orgId}/form_builder/forms/${formSlug}/submissions`,
         { data: formData },
       );
 
@@ -497,7 +497,7 @@ const RegionalFormPage: React.FC<RegionalFormPageProps> = ({
       };
 
       const createRes = await api.post(
-        `${HI_QUOTATION_API}/api/v1/O/${orgId}/hi-quotation/quotations`,
+        `${HI_QUOTATION_API}/api/v1/O/${orgId}/hi_quotation/quotations`,
         quotationBody,
       );
       const qtHashId = createRes.data?.hashId;
@@ -529,7 +529,7 @@ const RegionalFormPage: React.FC<RegionalFormPageProps> = ({
           };
           try {
             await api.post(
-              `${HI_QUOTATION_API}/api/v1/O/${orgId}/hi-quotation/quotations/${qtHashId}/members`,
+              `${HI_QUOTATION_API}/api/v1/O/${orgId}/hi_quotation/quotations/${qtHashId}/members`,
               memberBody,
             );
           } catch (memberErr) {
@@ -542,7 +542,7 @@ const RegionalFormPage: React.FC<RegionalFormPageProps> = ({
       if (qtHashId) {
         try {
           await api.post(
-            `${HI_QUOTATION_API}/api/v1/O/${orgId}/hi-quotation/quotations/${qtHashId}/submit`,
+            `${HI_QUOTATION_API}/api/v1/O/${orgId}/hi_quotation/quotations/${qtHashId}/submit`,
           );
         } catch (submitErr) {
           console.warn('Quotation created but submit-for-UW failed (non-blocking)', submitErr);

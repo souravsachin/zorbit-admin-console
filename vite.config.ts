@@ -48,10 +48,10 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/messaging/, ''),
       },
-      '/api/pii-vault': {
+      '/api/pii_vault': {
         target: 'http://localhost:3095',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/pii-vault/, ''),
+        rewrite: (path) => path.replace(/^\/api\/pii_vault/, ''),
       },
       '/api/audit': {
         target: 'http://localhost:3094',
@@ -82,50 +82,50 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/rtc/, ''),
       },
-      '/api/uw-workflow': {
+      '/api/uw_workflow': {
         target: 'http://localhost:3115',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/uw-workflow/, ''),
+        rewrite: (path) => path.replace(/^\/api\/uw_workflow/, ''),
       },
-      '/api/hi-uw-decisioning': {
+      '/api/hi_uw_decisioning': {
         target: 'http://localhost:3116',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/hi-uw-decisioning/, ''),
+        rewrite: (path) => path.replace(/^\/api\/hi_uw_decisioning/, ''),
       },
-      '/api/hi-quotation': {
+      '/api/hi_quotation': {
         target: 'http://localhost:3117',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/hi-quotation/, ''),
+        rewrite: (path) => path.replace(/^\/api\/hi_quotation/, ''),
       },
-      '/api/mi-quotation': {
+      '/api/mi_quotation': {
         target: 'http://localhost:3123',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/mi-quotation/, ''),
+        rewrite: (path) => path.replace(/^\/api\/mi_quotation/, ''),
       },
-      '/api/product-pricing': {
+      '/api/product_pricing': {
         target: 'http://localhost:3125',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/product-pricing/, ''),
+        rewrite: (path) => path.replace(/^\/api\/product_pricing/, ''),
       },
-      '/api/form-builder': {
+      '/api/form_builder': {
         target: 'http://localhost:3114',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/form-builder/, ''),
+        rewrite: (path) => path.replace(/^\/api\/form_builder/, ''),
       },
-      '/api/white-label': {
+      '/api/white_label': {
         target: 'http://localhost:3034',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/white-label/, ''),
+        rewrite: (path) => path.replace(/^\/api\/white_label/, ''),
       },
-      '/api/doc-generator': {
+      '/api/doc_generator': {
         target: 'http://localhost:3032',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/doc-generator/, ''),
+        rewrite: (path) => path.replace(/^\/api\/doc_generator/, ''),
       },
-      '/api/file-viewer': {
+      '/api/file_viewer': {
         target: 'http://localhost:3030',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/file-viewer/, ''),
+        rewrite: (path) => path.replace(/^\/api\/file_viewer/, ''),
       },
       '/api/notification': {
         target: 'http://localhost:3026',
@@ -147,15 +147,15 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/integration/, ''),
       },
-      '/api/workflow-engine': {
+      '/api/workflow_engine': {
         target: 'http://localhost:3031',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/workflow-engine/, ''),
+        rewrite: (path) => path.replace(/^\/api\/workflow_engine/, ''),
       },
-      '/api/module-registry': {
+      '/api/module_registry': {
         target: 'http://localhost:3032',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/module-registry/, ''),
+        rewrite: (path) => path.replace(/^\/api\/module_registry/, ''),
         ws: true,
       },
       '/socket.io/realtime': {

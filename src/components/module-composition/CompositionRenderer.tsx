@@ -198,7 +198,7 @@ const DatatableShell: React.FC<DatatableShellProps> = ({
           <p>Generated ${new Date().toISOString()}</p>
         </body></html>`;
         const res = await api.post(
-          `/api/doc-generator/api/v1/O/${orgId}/doc-generator/render-html`,
+          `/api/doc_generator/api/v1/O/${orgId}/doc_generator/render-html`,
           { html, pageSize: 'A4' },
           { responseType: 'blob' },
         );
@@ -355,7 +355,7 @@ const FormBuilderShell: React.FC<FormBuilderShellProps> = ({
     setFetchError(null);
     api
       .get<Record<string, unknown>>(
-        `/api/form-builder/api/v1/O/${orgId}/form-builder/templates/${templateId}`,
+        `/api/form_builder/api/v1/O/${orgId}/form_builder/templates/${templateId}`,
       )
       .then((res) => {
         if (!cancelled) setTemplate(res.data || null);
@@ -514,7 +514,7 @@ const CompositionRenderer: React.FC = () => {
     let cancelled = false;
     api
       .get<WhiteLabelTheme>(
-        `/api/white-label/api/v1/O/${orgId}/white-label/themes/${themeId}`,
+        `/api/white_label/api/v1/O/${orgId}/white_label/themes/${themeId}`,
       )
       .then((res) => {
         if (cancelled) return;

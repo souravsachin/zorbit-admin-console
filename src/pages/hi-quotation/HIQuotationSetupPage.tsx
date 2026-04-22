@@ -26,20 +26,20 @@ const HI_COHORTS: CohortOption[] = [
 export default function HIQuotationSetupPage() {
   return (
     <ModuleSetupPage
-      moduleId="hi-quotation"
+      moduleId="hi_quotation"
       moduleName="HI Quotation"
       icon={FileText}
-      seedEndpoint="/api/hi-quotation/api/v1/G/hi-quotation/seed"
-      demoSeedEndpoint="/api/hi-quotation/api/v1/G/hi-quotation/seed/demo"
-      demoFlushEndpoint="/api/hi-quotation/api/v1/G/hi-quotation/seed/demo"
-      flushEndpoint="/api/hi-quotation/api/v1/G/hi-quotation/seed/all"
-      healthEndpoint="/api/hi-quotation/api/v1/G/hi-quotation/health"
+      seedEndpoint="/api/hi_quotation/api/v1/G/hi_quotation/seed"
+      demoSeedEndpoint="/api/hi_quotation/api/v1/G/hi_quotation/seed/demo"
+      demoFlushEndpoint="/api/hi_quotation/api/v1/G/hi_quotation/seed/demo"
+      flushEndpoint="/api/hi_quotation/api/v1/G/hi_quotation/seed/all"
+      healthEndpoint="/api/hi_quotation/api/v1/G/hi_quotation/health"
       demoGenerator={
         <DemoDataGenerator
-          moduleId="hi-quotation"
+          moduleId="hi_quotation"
           moduleName="HI Quotation"
-          seedEndpoint="/api/hi-quotation/api/v1/G/hi-quotation/seed/demo"
-          flushEndpoint="/api/hi-quotation/api/v1/G/hi-quotation/seed/demo"
+          seedEndpoint="/api/hi_quotation/api/v1/G/hi_quotation/seed/demo"
+          flushEndpoint="/api/hi_quotation/api/v1/G/hi_quotation/seed/demo"
           columns={HI_COLUMNS}
           cohortOptions={HI_COHORTS}
           generatePreview={generateHIQuotationPreview}

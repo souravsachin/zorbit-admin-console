@@ -4,14 +4,14 @@ import { Lock } from 'lucide-react';
 export default function PiiVaultSetupPage() {
   return (
     <ModuleSetupPage
-      moduleId="pii-vault"
+      moduleId="pii_vault"
       moduleName="PII Vault"
       icon={Lock}
-      seedEndpoint="/api/pii-vault/api/v1/G/pii-vault/seed"
-      demoSeedEndpoint="/api/pii-vault/api/v1/G/pii-vault/seed/demo"
-      demoFlushEndpoint="/api/pii-vault/api/v1/G/pii-vault/seed/demo"
-      flushEndpoint="/api/pii-vault/api/v1/G/pii-vault/seed/all"
-      healthEndpoint="/api/pii-vault/api/v1/G/pii-vault/health"
+      seedEndpoint="/api/pii_vault/api/v1/G/pii_vault/seed"
+      demoSeedEndpoint="/api/pii_vault/api/v1/G/pii_vault/seed/demo"
+      demoFlushEndpoint="/api/pii_vault/api/v1/G/pii_vault/seed/demo"
+      flushEndpoint="/api/pii_vault/api/v1/G/pii_vault/seed/all"
+      healthEndpoint="/api/pii_vault/api/v1/G/pii_vault/health"
     />
   );
 }

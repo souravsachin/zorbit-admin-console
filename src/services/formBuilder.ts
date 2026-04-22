@@ -41,34 +41,34 @@ const ORG_ID = 'O-OZPY';
 export const formBuilderService = {
   getFormDefinitions: (orgId = ORG_ID) =>
     api.get<{ forms: FormDefinition[]; total: number }>(
-      `${BASE}/api/v1/O/${orgId}/form-builder/forms`,
+      `${BASE}/api/v1/O/${orgId}/form_builder/forms`,
     ),
 
   getFormDefinition: (slug: string, orgId = ORG_ID) =>
     api.get<FormDefinition>(
-      `${BASE}/api/v1/O/${orgId}/form-builder/forms/${slug}`,
+      `${BASE}/api/v1/O/${orgId}/form_builder/forms/${slug}`,
     ),
 
   publishForm: (slug: string, orgId = ORG_ID) =>
     api.post<FormDefinition>(
-      `${BASE}/api/v1/O/${orgId}/form-builder/forms/${slug}/publish`,
+      `${BASE}/api/v1/O/${orgId}/form_builder/forms/${slug}/publish`,
       {},
     ),
 
   getTokens: (orgId = ORG_ID) =>
     api.get<FormToken[]>(
-      `${BASE}/api/v1/O/${orgId}/form-builder/tokens/`,
+      `${BASE}/api/v1/O/${orgId}/form_builder/tokens/`,
     ),
 
   createToken: (data: CreateTokenDto, orgId = ORG_ID) =>
     api.post<{ token: FormToken; secret: string }>(
-      `${BASE}/api/v1/O/${orgId}/form-builder/tokens/`,
+      `${BASE}/api/v1/O/${orgId}/form_builder/tokens/`,
       data,
     ),
 
   revokeToken: (tokenId: string, orgId = ORG_ID) =>
     api.post(
-      `${BASE}/api/v1/O/${orgId}/form-builder/tokens/${tokenId}/revoke`,
+      `${BASE}/api/v1/O/${orgId}/form_builder/tokens/${tokenId}/revoke`,
       {},
     ),
 };

@@ -118,7 +118,7 @@ const HIDecisioningRulesPage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await api.get(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/rules`);
+      const res = await api.get(`${base}/api/v1/O/${orgId}/hi_uw_decisioning/rules`);
       const d = res.data;
       setRules(d?.rules || (Array.isArray(d) ? d : d?.data || []));
     } catch (err: unknown) {
@@ -133,7 +133,7 @@ const HIDecisioningRulesPage: React.FC = () => {
   const toggleRule = async (hashId: string, currentActive: boolean) => {
     setToggling(hashId);
     try {
-      await api.patch(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/rules/${hashId}/toggle`, {
+      await api.patch(`${base}/api/v1/O/${orgId}/hi_uw_decisioning/rules/${hashId}/toggle`, {
         isActive: !currentActive,
       });
       setRules((prev) => prev.map((r) => r.hashId === hashId ? { ...r, isActive: !currentActive } : r));
@@ -147,7 +147,7 @@ const HIDecisioningRulesPage: React.FC = () => {
   const deleteRule = async (hashId: string) => {
     if (!confirm('Delete this rule? This cannot be undone.')) return;
     try {
-      await api.delete(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/rules/${hashId}`);
+      await api.delete(`${base}/api/v1/O/${orgId}/hi_uw_decisioning/rules/${hashId}`);
       setRules((prev) => prev.filter((r) => r.hashId !== hashId));
     } catch {
       // ignore
@@ -157,7 +157,7 @@ const HIDecisioningRulesPage: React.FC = () => {
   const loadPreset = async () => {
     setLoadingPreset(true);
     try {
-      await api.post(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/rules/load-preset`, {});
+      await api.post(`${base}/api/v1/O/${orgId}/hi_uw_decisioning/rules/load-preset`, {});
       await fetchRules();
     } catch {
       // ignore
@@ -168,7 +168,7 @@ const HIDecisioningRulesPage: React.FC = () => {
 
   const exportRules = async () => {
     try {
-      const res = await api.get(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/rules/export`);
+      const res = await api.get(`${base}/api/v1/O/${orgId}/hi_uw_decisioning/rules/export`);
       const blob = new Blob([JSON.stringify(res.data.rules, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');

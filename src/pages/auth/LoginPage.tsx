@@ -402,11 +402,11 @@ const LoginPage: React.FC = () => {
   // Derive context from returnTo URL for user-friendly messaging
   const returnToParam = new URLSearchParams(window.location.search).get('returnTo') || '';
   const contextMap: Record<string, { title: string; subtitle: string }> = {
-    'hi-quotation': { title: 'Health Insurance', subtitle: 'Sign in to access the quotation system' },
-    'mi-quotation': { title: 'Marine Insurance', subtitle: 'Sign in to access marine quotations' },
-    'uw-workflow': { title: 'Underwriting Workflow', subtitle: 'Sign in to access underwriting queues' },
-    'hi-decisioning': { title: 'UW Decisioning', subtitle: 'Sign in to access underwriting rules' },
-    'form-builder': { title: 'Form Builder', subtitle: 'Sign in to manage forms' },
+    'hi_quotation': { title: 'Health Insurance', subtitle: 'Sign in to access the quotation system' },
+    'mi_quotation': { title: 'Marine Insurance', subtitle: 'Sign in to access marine quotations' },
+    'uw_workflow': { title: 'Underwriting Workflow', subtitle: 'Sign in to access underwriting queues' },
+    'hi_decisioning': { title: 'UW Decisioning', subtitle: 'Sign in to access underwriting rules' },
+    'form_builder': { title: 'Form Builder', subtitle: 'Sign in to manage forms' },
     'directory': { title: 'Team Directory', subtitle: 'Sign in to connect with your team' },
     'support-center': { title: 'Support Center', subtitle: 'Sign in to access help & tutorials' },
     'pii-showcase': { title: 'PII Showcase', subtitle: 'Sign in to explore PII protection' },

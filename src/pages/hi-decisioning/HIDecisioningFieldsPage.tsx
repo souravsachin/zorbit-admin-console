@@ -95,7 +95,7 @@ const HIDecisioningFieldsPage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await api.get(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/available-fields`);
+      const res = await api.get(`${base}/api/v1/O/${orgId}/hi_uw_decisioning/available-fields`);
       setData(res.data);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to load fields');

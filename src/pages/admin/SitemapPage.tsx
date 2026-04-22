@@ -30,7 +30,7 @@ const ROUTE_MODULE_MAP: { prefix: string; module: ModuleAttribution }[] = [
   { prefix: '/app/pcg4', module: { label: 'zorbit-app-pcg4', color: 'text-green-700 dark:text-green-400', bg: 'bg-green-100 dark:bg-green-900/30' } },
   { prefix: '/form-builder', module: { label: 'zorbit-pfs-form_builder', color: 'text-indigo-700 dark:text-indigo-400', bg: 'bg-indigo-100 dark:bg-indigo-900/30' } },
   { prefix: '/directory', module: { label: 'zorbit-pfs-chat + zorbit-pfs-rtc', color: 'text-teal-700 dark:text-teal-400', bg: 'bg-teal-100 dark:bg-teal-900/30' } },
-  { prefix: '/support-center', module: { label: 'zorbit-tpm-rocket_chat + unified-console', color: 'text-pink-700 dark:text-pink-400', bg: 'bg-pink-100 dark:bg-pink-900/30' } },
+  { prefix: '/m/help_support', module: { label: 'zorbit-adm-help_support', color: 'text-pink-700 dark:text-pink-400', bg: 'bg-pink-100 dark:bg-pink-900/30' } },
   { prefix: '/uw-workflow', module: { label: 'zorbit-app-uw_workflow', color: 'text-amber-700 dark:text-amber-400', bg: 'bg-amber-100 dark:bg-amber-900/30' } },
   { prefix: '/hi-uw-decisioning', module: { label: 'zorbit-app-hi_uw_decisioning', color: 'text-rose-700 dark:text-rose-400', bg: 'bg-rose-100 dark:bg-rose-900/30' } },
   { prefix: '/hi-decisioning', module: { label: 'zorbit-app-hi_uw_decisioning (legacy path)', color: 'text-rose-700 dark:text-rose-400', bg: 'bg-rose-100 dark:bg-rose-900/30' } },

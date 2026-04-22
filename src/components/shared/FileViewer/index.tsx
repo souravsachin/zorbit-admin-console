@@ -369,7 +369,7 @@ async function recordViewEvent(body: {
       }
     }
     const scope = orgId ? `O/${orgId}` : 'G';
-    await api.post(`/api/file-viewer/api/v1/${scope}/view-events`, {
+    await api.post(`/api/file_viewer/api/v1/${scope}/view-events`, {
       pageId: body.pageId,
       sourceRoute: body.sourceRoute,
       format: body.format,

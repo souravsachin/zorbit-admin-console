@@ -13,7 +13,7 @@ const services: ServiceDoc[] = [
   { name: 'Authorization Service', description: 'Roles, privileges, access control policies', proxyPath: '/api/authorization', swaggerPath: '/api-docs' },
   { name: 'Navigation Service', description: 'Dynamic menu management, route registration', proxyPath: '/api/navigation', swaggerPath: '/api-docs' },
   { name: 'Event Bus', description: 'Kafka topics, dead letter queue, event routing', proxyPath: '/api/messaging', swaggerPath: '/api-docs' },
-  { name: 'PII Vault', description: 'Tokenization of sensitive PII data', proxyPath: '/api/pii-vault', swaggerPath: '/api-docs' },
+  { name: 'PII Vault', description: 'Tokenization of sensitive PII data', proxyPath: '/api/pii_vault', swaggerPath: '/api-docs' },
   { name: 'Audit Service', description: 'Event audit logging and compliance', proxyPath: '/api/audit', swaggerPath: '/api-docs' },
   { name: 'Customer Service', description: 'Sample business service for customer management', proxyPath: '/api/customer', swaggerPath: '/api-docs' },
   { name: 'PCG4 - Product Configurator', description: 'Product definition, variants, encounter types', proxyPath: '/api/pcg4', swaggerPath: '/api-docs' },

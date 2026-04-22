@@ -528,7 +528,7 @@
     "quotation-api-calculate": {
       "name": "API: Calculate Premium",
       "steps": [
-        { "action": "apiPost", "endpoint": "/api/hi-quotation/quotations/latest/calculate-premium", "value": "{}", "description": "Calculate premium for latest quotation", "optional": true },
+        { "action": "apiPost", "endpoint": "/api/hi_quotation/quotations/latest/calculate-premium", "value": "{}", "description": "Calculate premium for latest quotation", "optional": true },
         { "action": "wait", "timeout": 2000 },
         { "action": "screenshot", "value": "quote-08-premium-calculated.png" }
       ]
@@ -537,7 +537,7 @@
     "quotation-api-submit-uw": {
       "name": "API: Submit for Underwriting",
       "steps": [
-        { "action": "apiPost", "endpoint": "/api/hi-quotation/quotations/latest/submit", "value": "{}", "description": "Submit quotation for UW review", "optional": true },
+        { "action": "apiPost", "endpoint": "/api/hi_quotation/quotations/latest/submit", "value": "{}", "description": "Submit quotation for UW review", "optional": true },
         { "action": "wait", "timeout": 2000 },
         { "action": "screenshot", "value": "quote-09-submitted-uw.png" }
       ]
@@ -638,7 +638,7 @@
       "description": "Create distribution channels and brokers",
       "segments": ["login", "channel-broker-setup", "logout"]
     },
-    "uw-workflow": {
+    "uw_workflow": {
       "name": "UW Workflow (Full)",
       "description": "Navigate to UW queue, open quotation, approve, verify status change",
       "segments": ["login-underwriter", "uw-workflow-full", "logout"]
@@ -655,7 +655,7 @@
       "name": "AWNIC Complete Demo",
       "description": "Full end-to-end: Setup → PCG4 → Pricing → Quotation → UW Approve → Payment → Policy",
       "mode": "sequential",
-      "journeys": ["setup", "pcg4", "pricing", "quotation", "uw-workflow", "payment-policy"]
+      "journeys": ["setup", "pcg4", "pricing", "quotation", "uw_workflow", "payment-policy"]
     },
     "awnic-setup": {
       "name": "AWNIC Setup Only",
@@ -677,7 +677,7 @@
       "name": "AWNIC with Channels & Brokers",
       "description": "Full flow including channel/broker setup",
       "mode": "sequential",
-      "journeys": ["setup", "channels-brokers", "pcg4", "pricing", "quotation", "uw-workflow", "payment-policy"]
+      "journeys": ["setup", "channels-brokers", "pcg4", "pricing", "quotation", "uw_workflow", "payment-policy"]
     }
   }
 }

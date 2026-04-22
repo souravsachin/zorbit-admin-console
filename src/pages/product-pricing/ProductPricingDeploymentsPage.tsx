@@ -4,7 +4,7 @@ import { Calculator } from 'lucide-react';
 export default function ProductPricingDeploymentsPage() {
   return (
     <ModuleDeploymentsPage
-      moduleId="product-pricing"
+      moduleId="product_pricing"
       moduleName="Product Pricing"
       icon={Calculator}
     />

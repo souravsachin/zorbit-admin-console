@@ -79,24 +79,24 @@ const TABS = [
 /* ------------------------------------------------------------------ */
 
 const API_ENDPOINTS = [
-  { method: 'GET', path: '/api/v1/G/hi-uw-decisioning/health', description: 'Service health check' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/rules', description: 'List all rules' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/rules', description: 'Create a rule' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/rules/export', description: 'Export rules as JSON' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/rules/:hashId', description: 'Get rule by ID' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/rules/import', description: 'Import rules from JSON' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/rules/load-preset', description: 'Load preset STP/NSTP rules (15 rules)' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/evaluate/:quotationHashId', description: 'Evaluate quotation against rules' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/evaluations', description: 'List evaluation history' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/evaluations/:hashId', description: 'Get evaluation details' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/available-fields', description: 'Available fields for rule conditions' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/loading-tables', description: 'List loading tables' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/loading-tables', description: 'Create loading table' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/loading-tables/seed-defaults', description: 'Seed BMI + age defaults' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-uw-decisioning/stp-criteria', description: 'List STP criteria' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/stp-criteria', description: 'Create STP criteria' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/stp-criteria/seed-defaults', description: 'Seed default STP criteria' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-uw-decisioning/stp-criteria/check', description: 'Check STP eligibility' },
+  { method: 'GET', path: '/api/v1/G/hi_uw_decisioning/health', description: 'Service health check' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi_uw_decisioning/rules', description: 'List all rules' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_uw_decisioning/rules', description: 'Create a rule' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi_uw_decisioning/rules/export', description: 'Export rules as JSON' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi_uw_decisioning/rules/:hashId', description: 'Get rule by ID' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_uw_decisioning/rules/import', description: 'Import rules from JSON' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_uw_decisioning/rules/load-preset', description: 'Load preset STP/NSTP rules (15 rules)' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_uw_decisioning/evaluate/:quotationHashId', description: 'Evaluate quotation against rules' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi_uw_decisioning/evaluations', description: 'List evaluation history' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi_uw_decisioning/evaluations/:hashId', description: 'Get evaluation details' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi_uw_decisioning/available-fields', description: 'Available fields for rule conditions' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi_uw_decisioning/loading-tables', description: 'List loading tables' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_uw_decisioning/loading-tables', description: 'Create loading table' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_uw_decisioning/loading-tables/seed-defaults', description: 'Seed BMI + age defaults' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi_uw_decisioning/stp-criteria', description: 'List STP criteria' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_uw_decisioning/stp-criteria', description: 'Create STP criteria' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_uw_decisioning/stp-criteria/seed-defaults', description: 'Seed default STP criteria' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_uw_decisioning/stp-criteria/check', description: 'Check STP eligibility' },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -152,9 +152,9 @@ const OverviewTab: React.FC = () => {
     try {
       const base = API_CONFIG.HI_DECISIONING_URL;
       const [healthRes, rulesRes, evalsRes] = await Promise.allSettled([
-        api.get(`${base}/api/v1/G/hi-uw-decisioning/health`),
-        api.get(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/rules`),
-        api.get(`${base}/api/v1/O/${orgId}/hi-uw-decisioning/evaluations`),
+        api.get(`${base}/api/v1/G/hi_uw_decisioning/health`),
+        api.get(`${base}/api/v1/O/${orgId}/hi_uw_decisioning/rules`),
+        api.get(`${base}/api/v1/O/${orgId}/hi_uw_decisioning/evaluations`),
       ]);
 
       if (healthRes.status === 'fulfilled') setHealth(healthRes.value.data);
@@ -421,7 +421,7 @@ const HIDecisioningPage: React.FC = () => {
         </div>
         <div className="flex items-center gap-3">
           <a
-            href="https://zorbit.scalatics.com/api/hi-uw-decisioning/api-docs"
+            href="https://zorbit.scalatics.com/api/hi_uw_decisioning/api-docs"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg border border-indigo-200 dark:border-indigo-700 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors"

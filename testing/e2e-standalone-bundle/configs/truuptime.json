@@ -146,7 +146,7 @@
         },
         {
           "action": "navigate",
-          "url": "/api/pii-vault/api/v1/G/health",
+          "url": "/api/pii_vault/api/v1/G/health",
           "description": "TU-AH04: PII Vault health"
         },
         {
@@ -164,7 +164,7 @@
         },
         {
           "action": "navigate",
-          "url": "/api/form-builder/api/v1/G/form-builder/health",
+          "url": "/api/form_builder/api/v1/G/form_builder/health",
           "description": "TU-AH06: Form Builder health"
         },
         {
@@ -182,7 +182,7 @@
         },
         {
           "action": "navigate",
-          "url": "/api/white-label/api/v1/G/white-label/health",
+          "url": "/api/white_label/api/v1/G/white_label/health",
           "description": "TU-AH08: White Label health"
         },
         {
@@ -191,7 +191,7 @@
         },
         {
           "action": "navigate",
-          "url": "/api/zmb-factory/api/v1/G/zmb-factory/health",
+          "url": "/api/zmb_factory/api/v1/G/zmb_factory/health",
           "description": "TU-AH09: ZMB Factory health"
         },
         {
@@ -200,7 +200,7 @@
         },
         {
           "action": "navigate",
-          "url": "/api/product-pricing/api/v1/G/product-pricing/health",
+          "url": "/api/product_pricing/api/v1/G/product_pricing/health",
           "description": "TU-AH10: Product Pricing health"
         },
         {
@@ -209,7 +209,7 @@
         },
         {
           "action": "navigate",
-          "url": "/api/hi-quotation/api/v1/G/hi-quotation/health",
+          "url": "/api/hi_quotation/api/v1/G/hi_quotation/health",
           "description": "TU-AH11: HI Quotation health"
         },
         {
@@ -218,7 +218,7 @@
         },
         {
           "action": "navigate",
-          "url": "/api/uw-workflow/api/v1/G/uw-workflow/health",
+          "url": "/api/uw_workflow/api/v1/G/uw_workflow/health",
           "description": "TU-AH12: UW Workflow health"
         },
         {
@@ -227,7 +227,7 @@
         },
         {
           "action": "navigate",
-          "url": "/api/hi-decisioning/api/v1/G/hi-uw-decisioning/health",
+          "url": "/api/hi_decisioning/api/v1/G/hi_uw_decisioning/health",
           "description": "TU-AH13: HI Decisioning health"
         },
         {

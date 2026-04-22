@@ -14,7 +14,7 @@
  *             Do NOT auto-reload.
  *
  * The WebSocket endpoint is read from VITE_PLATFORM_WS_URL (falls back to
- * /api/module-registry/events for same-origin deployments).
+ * /api/module_registry/events for same-origin deployments).
  *
  * This module is a singleton: call initPlatformEvents() once at app startup
  * (e.g. in main.tsx or App.tsx). Subsequent calls are no-ops.
@@ -85,7 +85,7 @@ function getWsUrl(): string {
 
   // Same-origin: use relative path proxied by nginx
   const proto = window.location.protocol === 'https:' ? 'wss' : 'ws';
-  return `${proto}://${window.location.host}/api/module-registry/events`;
+  return `${proto}://${window.location.host}/api/module_registry/events`;
 }
 
 function handleEvent(event: PlatformEvent): void {

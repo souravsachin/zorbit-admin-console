@@ -50,16 +50,16 @@ interface HealthStatus {
 /* ------------------------------------------------------------------ */
 
 const API_ENDPOINTS = [
-  { method: 'GET', path: '/api/v1/G/hi-quotation/health', description: 'Service health check' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-quotation/quotations', description: 'Create quotation' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-quotation/quotations', description: 'List quotations' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-quotation/quotations/:hashId', description: 'Get quotation details' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-quotation/quotations/:hashId/members', description: 'Add member to quotation' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-quotation/quotations/:hashId/queries', description: 'Add query to quotation' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-quotation/maf-questions', description: 'Create MAF question' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-quotation/maf-questions', description: 'List MAF questions' },
-  { method: 'POST', path: '/api/v1/O/:orgId/hi-quotation/maf-question-sets', description: 'Create MAF question set' },
-  { method: 'GET', path: '/api/v1/O/:orgId/hi-quotation/maf-question-sets', description: 'List MAF question sets' },
+  { method: 'GET', path: '/api/v1/G/hi_quotation/health', description: 'Service health check' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_quotation/quotations', description: 'Create quotation' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi_quotation/quotations', description: 'List quotations' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi_quotation/quotations/:hashId', description: 'Get quotation details' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_quotation/quotations/:hashId/members', description: 'Add member to quotation' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_quotation/quotations/:hashId/queries', description: 'Add query to quotation' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_quotation/maf-questions', description: 'Create MAF question' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi_quotation/maf-questions', description: 'List MAF questions' },
+  { method: 'POST', path: '/api/v1/O/:orgId/hi_quotation/maf-question-sets', description: 'Create MAF question set' },
+  { method: 'GET', path: '/api/v1/O/:orgId/hi_quotation/maf-question-sets', description: 'List MAF question sets' },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -114,10 +114,10 @@ const HIQuotationPage: React.FC = () => {
     try {
       const base = API_CONFIG.HI_QUOTATION_URL;
       const [healthRes, quotRes, mafRes, setsRes] = await Promise.allSettled([
-        api.get(`${base}/api/v1/G/hi-quotation/health`),
-        api.get(`${base}/api/v1/O/${orgId}/hi-quotation/quotations`),
-        api.get(`${base}/api/v1/O/${orgId}/hi-quotation/maf-questions`),
-        api.get(`${base}/api/v1/O/${orgId}/hi-quotation/maf-question-sets`),
+        api.get(`${base}/api/v1/G/hi_quotation/health`),
+        api.get(`${base}/api/v1/O/${orgId}/hi_quotation/quotations`),
+        api.get(`${base}/api/v1/O/${orgId}/hi_quotation/maf-questions`),
+        api.get(`${base}/api/v1/O/${orgId}/hi_quotation/maf-question-sets`),
       ]);
 
       if (healthRes.status === 'fulfilled') setHealth(healthRes.value.data);
@@ -186,7 +186,7 @@ const HIQuotationPage: React.FC = () => {
             <RefreshCw className={`h-4 w-4 text-gray-500 ${loading ? 'animate-spin' : ''}`} />
           </button>
           <a
-            href="https://zorbit.scalatics.com/api/hi-quotation/api-docs"
+            href="https://zorbit.scalatics.com/api/hi_quotation/api-docs"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg border border-indigo-200 dark:border-indigo-700 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors"

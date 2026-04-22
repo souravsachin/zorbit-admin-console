@@ -17,7 +17,7 @@ import { ModuleHubPage } from '../../components/shared/ModuleHubPage';
 const HIDecisioningHubPage: React.FC = () => {
   return (
     <ModuleHubPage
-      moduleId="hi-uw-decisioning"
+      moduleId="hi_uw_decisioning"
       moduleName="HI UW Decisioning"
       moduleDescription="Underwriting Rules Engine &mdash; 15 Rules, 11 Action Types"
       moduleIntro="HI UW Decisioning is the automated underwriting rules engine for health insurance. It evaluates applications against 15 configurable rules with 11 action types including approve, decline, load premium, exclude condition, and refer to specialist. Rules support per-member evaluation for family policies, condition builders with AND/OR logic, and priority-based execution order."
@@ -84,7 +84,7 @@ const HIDecisioningHubPage: React.FC = () => {
         },
       ]}
       videosBaseUrl="/demos/hi-uw-decisioning/"
-      swaggerUrl="/api/hi-uw-decisioning/api-docs"
+      swaggerUrl="/api/hi_uw_decisioning/api-docs"
       faqs={[
         { question: 'What are the 15 rules?', answer: 'Age limit, BMI threshold, pre-existing condition exclusion, occupation hazard loading, geographic restriction, sum insured cap, family size loading, smoker loading, pregnancy waiting period, chronic condition sub-limit, adventure sports exclusion, senior citizen loading, NRI surcharge, group size discount, and loyalty discount.' },
         { question: 'How does per-member evaluation work?', answer: 'For family policies, each insured member is evaluated independently. A family of 4 generates 4 separate evaluation passes, each with their own loadings and exclusions.' },

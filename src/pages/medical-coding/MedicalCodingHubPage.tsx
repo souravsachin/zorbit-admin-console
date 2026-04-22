@@ -12,7 +12,7 @@ import { ModuleHubPage } from '../../components/shared/ModuleHubPage';
 const MedicalCodingHubPage: React.FC = () => {
   return (
     <ModuleHubPage
-      moduleId="medical-coding"
+      moduleId="medical_coding"
       moduleName="Medical Coding"
       moduleDescription="ICD-10, CPT, HCPCS &mdash; Code Lookup, Standards Management, Provider Mapping"
       moduleIntro="Medical Coding provides a centralized master for international medical classification standards used across the insurance platform. It includes ICD-10 diagnosis codes (68,000+ codes), CPT procedure codes, DRG groupings, and regional authority code sets (DHA, MOH, DOH). The module powers auto-complete lookups, code validation in claims processing, and mapping between different coding standards."
@@ -77,7 +77,7 @@ const MedicalCodingHubPage: React.FC = () => {
         },
       ]}
       videosBaseUrl="/demos/medical-coding/"
-      swaggerUrl="/api/medical-coding/api-docs"
+      swaggerUrl="/api/medical_coding/api-docs"
       faqs={[
         { question: 'How many ICD-10 codes are supported?', answer: 'The full WHO ICD-10 classification with 68,000+ codes across 22 chapters. Updated annually when WHO releases new versions.' },
         { question: 'Can we define custom exclusion lists?', answer: 'Yes. Each product can have its own exclusion list referencing ICD-10 and CPT codes. Exclusions are checked automatically during claims adjudication.' },
