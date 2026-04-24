@@ -96,9 +96,9 @@ const JaynaHubPage: React.FC = () => {
       ]}
       resources={[
         { label: 'Jayna API (Swagger)', url: 'https://zorbit.scalatics.com/api/jayna/api-docs', icon: FileText },
-        { label: 'Voice Engine Service', url: '/support-center', icon: Mic },
-        { label: 'AI Gateway Service', url: '/support-center', icon: Brain },
-        { label: 'RTC Service (WebRTC)', url: '/support-center', icon: Headphones },
+        { label: 'Voice Engine Service', url: '/voice-engine', icon: Mic },
+        { label: 'AI Gateway Service', url: '/ai-gateway', icon: Brain },
+        { label: 'RTC Service (WebRTC)', url: '/rtc', icon: Headphones },
       ]}
     />
   );

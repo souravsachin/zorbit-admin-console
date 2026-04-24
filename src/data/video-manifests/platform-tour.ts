@@ -1,28 +1,27 @@
-import React from 'react';
-import {
-  Headset,
-  MessageSquare,
-  Phone,
-  Video,
-  BookOpen,
-  LifeBuoy,
-  Sparkles,
-  Shield,
-  Zap,
-  Globe,
-  FileText,
-  Users,
-  Settings,
-  Lock,
-} from 'lucide-react';
-import { ModuleHubPage } from '../../components/shared/ModuleHubPage';
+/**
+ * Platform tour video manifests
+ *
+ * Scavenged from the retired `pages/support-center/SupportCenterPage.tsx`
+ * (deleted 2026-04-23 by Soldier AX per owner directive J62, decision #7).
+ * The canonical Support Center UI now lives in the `zorbit-adm-help_support`
+ * registered module's feComponent. Any module (including that one once
+ * scaffolded) can import these manifests via:
+ *
+ *   import { ALL_RECORDINGS } from '../../data/video-manifests/platform-tour';
+ *
+ * or cross-module via the unified console's shared data layer.
+ *
+ * Preserving these entries avoids re-capturing the narration/chapter metadata
+ * that was accumulated across multiple recording sessions (see timestamps).
+ */
+
 import type { ManifestEntry } from '../../components/shared/DemoTourPlayer';
 
 /* ------------------------------------------------------------------ */
 /*  Full Platform Tour (v3 — 2026-04-03, comprehensive narrated tour) */
 /* ------------------------------------------------------------------ */
 
-const FULL_TOUR: ManifestEntry[] = [
+export const FULL_TOUR: ManifestEntry[] = [
   {
     file: 'full-tour/zorbit-full-tour-narrated.mp4',
     title: 'Complete Platform Tour — All Features (Narrated)',
@@ -48,7 +47,7 @@ const FULL_TOUR: ManifestEntry[] = [
 /*  Narrated Journey Playlist (v2 — 2026-04-03, with voice narration)*/
 /* ------------------------------------------------------------------ */
 
-const NARRATED_JOURNEY: ManifestEntry[] = [
+export const NARRATED_JOURNEY: ManifestEntry[] = [
   { file: 'segments-v2/desktop/01-login-mfa.mp4', title: 'Login with MFA (Narrated)', thumbnail: '', timestamp: '2026-04-03T02:30:00Z', duration: 40, chapters: [{ title: 'Login + TOTP', startMs: 0 }] },
   { file: 'segments-v2/desktop/02-product-config.mp4', title: 'Product Configuration (Narrated)', thumbnail: '', timestamp: '2026-04-03T02:31:00Z', duration: 45, chapters: [{ title: 'PCG4 Wizard', startMs: 0 }] },
   { file: 'segments-v2/desktop/03-rate-tables.mp4', title: 'Rate Tables & Calculator (Narrated)', thumbnail: '', timestamp: '2026-04-03T02:32:00Z', duration: 35, chapters: [{ title: 'Rate Lookup', startMs: 0 }] },
@@ -63,7 +62,7 @@ const NARRATED_JOURNEY: ManifestEntry[] = [
 /*  Desktop Journey Playlist (v1 — 2026-04-02, silent screencasts)   */
 /* ------------------------------------------------------------------ */
 
-const DESKTOP_JOURNEY: ManifestEntry[] = [
+export const DESKTOP_JOURNEY: ManifestEntry[] = [
   { file: 'segments/desktop/01-login-mfa.mp4', title: 'Login with MFA', thumbnail: '', timestamp: '2026-04-02T12:01:00Z', duration: 66, chapters: [{ title: 'Login + TOTP', startMs: 0 }] },
   { file: 'segments/desktop/02-create-org.mp4', title: 'Create Organization', thumbnail: '', timestamp: '2026-04-02T12:02:00Z', duration: 63, chapters: [{ title: 'Organizations', startMs: 0 }] },
   { file: 'segments/desktop/03-users-roles.mp4', title: 'Users & Roles Management', thumbnail: '', timestamp: '2026-04-02T12:03:00Z', duration: 64, chapters: [{ title: 'Roles', startMs: 0 }, { title: 'Users', startMs: 30000 }] },
@@ -86,18 +85,18 @@ const DESKTOP_JOURNEY: ManifestEntry[] = [
 /*  Mobile Journey Playlist (v1 — 2026-04-02)                        */
 /* ------------------------------------------------------------------ */
 
-const MOBILE_JOURNEY: ManifestEntry[] = DESKTOP_JOURNEY.map((entry) => ({
+export const MOBILE_JOURNEY: ManifestEntry[] = DESKTOP_JOURNEY.map((entry) => ({
   ...entry,
   file: entry.file.replace('desktop/', 'mobile/'),
   title: `${entry.title} (Mobile)`,
-  timestamp: entry.timestamp.replace('T12:', 'T13:'), // slightly later timestamp
+  timestamp: entry.timestamp.replace('T12:', 'T13:'),
 }));
 
 /* ------------------------------------------------------------------ */
-/*  Previous recordings (preserved — never delete)                    */
+/*  Full Workflow Demo (v1 — 2026-04-02)                             */
 /* ------------------------------------------------------------------ */
 
-const FULL_WORKFLOW_DEMO: ManifestEntry[] = [
+export const FULL_WORKFLOW_DEMO: ManifestEntry[] = [
   {
     file: 'workflow-demo/zorbit-workflow-demo-narrated.mp4',
     title: 'Complete Insurance Workflow — End-to-End Demo (v1)',
@@ -116,111 +115,25 @@ const FULL_WORKFLOW_DEMO: ManifestEntry[] = [
   },
 ];
 
-/** Auto-generate thumbnail path from video file path: foo/bar.mp4 → foo/bar-thumb.jpg */
-function withThumbnails(entries: ManifestEntry[]): ManifestEntry[] {
+/**
+ * Auto-generate thumbnail path from video file path:
+ *   foo/bar.mp4 -> foo/bar-thumb.jpg
+ */
+export function withThumbnails(entries: ManifestEntry[]): ManifestEntry[] {
   return entries.map((e) => ({
     ...e,
     thumbnail: e.thumbnail || e.file.replace('.mp4', '-thumb.jpg'),
   }));
 }
 
-/* Combine all recordings — latest first by default (DemoTourPlayer sorts by timestamp desc) */
-const ALL_RECORDINGS: ManifestEntry[] = withThumbnails([
+/**
+ * All recordings combined (latest first — DemoTourPlayer sorts by timestamp desc).
+ * Use this for the Support Center / Help hub pages.
+ */
+export const ALL_RECORDINGS: ManifestEntry[] = withThumbnails([
   ...FULL_TOUR,
   ...NARRATED_JOURNEY,
   ...DESKTOP_JOURNEY,
   ...MOBILE_JOURNEY,
   ...FULL_WORKFLOW_DEMO,
 ]);
-
-/* ------------------------------------------------------------------ */
-/*  Component                                                         */
-/* ------------------------------------------------------------------ */
-
-const SupportCenterPage: React.FC = () => (
-  <ModuleHubPage
-    moduleId="support-center"
-    moduleName="Support Center"
-    moduleDescription="Platform tutorials, knowledge base, and support — spanning all Zorbit modules"
-    moduleIntro="The Support Center is your central hub for learning the Zorbit platform. Browse step-by-step tutorials, watch narrated video walkthroughs, access the knowledge base, and get help from Jayna AI or human specialists. Each module also has its own Guide section with module-specific content — this page covers cross-module workflows and platform-wide resources."
-    icon={Headset}
-    capabilities={[
-      {
-        icon: Video,
-        title: 'Video Tutorial Library',
-        description: 'Step-by-step screencasts for every workflow — login, product config, quotation, underwriting, payments, and more. Desktop and mobile versions.',
-      },
-      {
-        icon: Sparkles,
-        title: 'Jayna AI Assistant',
-        description: 'Get instant answers to platform questions. Jayna understands the Zorbit architecture and can guide you through any workflow.',
-      },
-      {
-        icon: BookOpen,
-        title: 'Knowledge Base',
-        description: 'In-depth articles covering platform setup, API integration, security configuration, PII protection, and role-based access control.',
-      },
-      {
-        icon: Shield,
-        title: 'Security Guides',
-        description: 'MFA setup, PII tokenization, role-based visibility, namespace isolation — everything you need to secure your organization.',
-      },
-      {
-        icon: Phone,
-        title: 'Human Support',
-        description: 'Voice calls, chat, and video support with platform specialists. Average response time under 5 minutes during business hours.',
-      },
-      {
-        icon: Globe,
-        title: 'Cross-Module Workflows',
-        description: 'End-to-end tutorials that span multiple modules — from product configuration through policy issuance.',
-      },
-    ]}
-    lifecycleStages={[
-      { label: 'Onboard', description: 'New user creates account, enables MFA, joins organization', color: '#3b82f6' },
-      { label: 'Configure', description: 'Admin sets up roles, products, pricing, and automation rules', color: '#f59e0b' },
-      { label: 'Operate', description: 'Users process quotations, underwriting, payments, and policies', color: '#10b981' },
-      { label: 'Monitor', description: 'Review audit trails, notifications, PII access logs, and SLA metrics', color: '#8b5cf6' },
-      { label: 'Optimize', description: 'Refine STP rules, adjust loading tables, and improve automation rates', color: '#ef4444' },
-    ]}
-    recordings={ALL_RECORDINGS}
-    videosBaseUrl="/demos/"
-    swaggerUrl="/api/identity/api-docs"
-    faqs={[
-      {
-        question: 'How do I add users to my organization?',
-        answer: 'Navigate to the Users page from the sidebar. Click "Add User" to create a new account. Assign roles during creation. Each user receives a unique short-hash identifier (e.g. U-81F3).',
-      },
-      {
-        question: 'What authentication methods are supported?',
-        answer: 'Zorbit supports 8 protocols: Email/Password, Google OAuth, GitHub OAuth, LinkedIn OAuth, Generic OIDC/SSO, SAML 2.0, RADIUS (RFC 2865), and Diameter (RFC 6733). Plus TOTP-based MFA.',
-      },
-      {
-        question: 'How does PII protection work?',
-        answer: 'All PII is stored in a separate PII Vault database. Operational databases only store tokens (e.g. PII-92AF). Role-based visibility controls who sees real data, nicknames, or restricted access.',
-      },
-      {
-        question: 'How do I set up role-based access control?',
-        answer: 'OrgAdmin creates roles on the Roles page, then assigns them to users. Six pre-built roles cover Product Designer, Actuary, Quotation Officer, Medical Underwriter, UW Rules Admin, and Broker.',
-      },
-      {
-        question: 'Where can I view audit logs?',
-        answer: 'The Audit page shows every significant event with actor, action, target, namespace, and timestamp. Filter by date range, event type, or module.',
-      },
-      {
-        question: 'How does the underwriting workflow work?',
-        answer: '13 specialized queues manage applications from submission to policy issuance. STP auto-approves clean cases. NSTP routes complex cases to manual review. Every action is audited.',
-      },
-    ]}
-    resources={[
-      { label: 'Platform API Documentation', url: '/api-docs', icon: FileText },
-      { label: 'Identity Service API', url: '/api/identity/api-docs', icon: Lock },
-      { label: 'User Management', url: '/users', icon: Users },
-      { label: 'Security Settings (MFA)', url: '/settings/security', icon: Shield },
-      { label: 'Audit Logs', url: '/audit', icon: BookOpen },
-      { label: 'Module Registry', url: '/admin/modules', icon: Settings },
-    ]}
-  />
-);
-
-export default SupportCenterPage;
