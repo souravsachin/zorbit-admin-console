@@ -23,6 +23,7 @@ import { L1Node, MenuNodeData, MenuNodePlacement, ForceExpandContext, ForceExpan
 import { navigationService, MenuItem } from '../../services/navigation';
 import { moduleRegistryService } from '../../services/moduleRegistry';
 import type { MenuStyle } from '../../hooks/useMenuPreference';
+import staticMenuData from '../../data/menu-6level.json';
 import type { UserPreferences } from '../../services/preferences';
 
 /**
@@ -482,8 +483,18 @@ const Sidebar6Level: React.FC<Sidebar6LevelProps> = ({
   //   'loading' — initial mount, first fetch in flight
   //   'live'    — resolver returned modules (happy path)
   //   'error'   — resolver threw or returned 0 modules (visible banner)
+  //   'static'  — user explicitly chose the static fallback (debug; never auto-switch)
+  // Owner directive 2026-04-25 (MSG-013): user can EXPLICITLY toggle to static
+  // for debugging/comparison. We never auto-fall-back — that previously caused
+  // weeks of confusion (Path B / 2026-04-23). The footer must clearly indicate
+  // STATIC mode so it's never mistaken for live.
   const [apiSections, setApiSections] = useState<ApiSection[]>([]);
-  const [sourceState, setSourceState] = useState<'loading' | 'live' | 'error'>('loading');
+  const [sourceState, setSourceState] = useState<'loading' | 'live' | 'error' | 'static'>(() => {
+    if (typeof window !== 'undefined' && window.localStorage?.getItem('zorbit:menuSource') === 'static') {
+      return 'static';
+    }
+    return 'loading';
+  });
   const [errorMessage, setErrorMessage] = useState<string>('');
   const fetchedRef = useRef(false);
 
@@ -500,6 +511,10 @@ const Sidebar6Level: React.FC<Sidebar6LevelProps> = ({
     async (refresh = false) => {
       const userId = user?.id;
       if (!userId) return;
+      // If the user has explicitly chosen STATIC mode (persisted in
+      // localStorage and reflected in current sourceState), do not run the
+      // live fetch — that would silently overwrite their choice.
+      if (sourceState === 'static') return;
       if (refresh) setIsRefreshing(true);
       try {
         const res = await navigationService.getMenu(userId, { refresh });
@@ -647,7 +662,12 @@ const Sidebar6Level: React.FC<Sidebar6LevelProps> = ({
     () => buildDbScaffold(apiSections, businessLine),
     [apiSections, businessLine],
   );
-  const menuData: MenuNodeData[] = sourceState === 'live' ? navServiceData : [];
+  const menuData: MenuNodeData[] =
+    sourceState === 'live'
+      ? navServiceData
+      : sourceState === 'static'
+        ? (staticMenuData as MenuNodeData[])
+        : [];
 
   // Height resize state — null = fill full screen height
   const [sidebarHeight, setSidebarHeight] = useState<number | null>(null);
@@ -999,7 +1019,7 @@ const Sidebar6Level: React.FC<Sidebar6LevelProps> = ({
               </div>
             )}
 
-            {sourceState === 'live' && (
+            {(sourceState === 'live' || sourceState === 'static') && (
               <>
                 <ForceExpandContext.Provider value={forceExpand}>
                 {filteredData.map((node, idx) => {
@@ -1052,38 +1072,65 @@ const Sidebar6Level: React.FC<Sidebar6LevelProps> = ({
                 <LogOut size={14} strokeWidth={1.75} />
               </button>
               <div className="min-w-0 flex-1">
-                {/* Read-only source chip — LIVE when cascade served real
-                    modules, OFFLINE when the resolver failed or was empty.
-                    Clicking opens a tooltip detail only; there is NO way to
-                    flip this back into a static mode. Owner directive
-                    2026-04-23. */}
-                <div
+                {/* Source chip — LIVE / LOADING / OFFLINE / STATIC.
+                    Owner directive 2026-04-25 (MSG-013): user can EXPLICITLY
+                    toggle to STATIC for debug/comparison. We never auto-fall-back
+                    to static (that previously caused weeks of confusion).
+                    Clicking the chip cycles through live → static → live.
+                    The localStorage key `zorbit:menuSource` persists the choice. */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const next = sourceState === 'static' ? 'live' : 'static';
+                    if (next === 'static') {
+                      window.localStorage?.setItem('zorbit:menuSource', 'static');
+                      setSourceState('static');
+                    } else {
+                      window.localStorage?.removeItem('zorbit:menuSource');
+                      // re-trigger the live fetch by setting loading; the existing
+                      // effect will run and flip to live or error.
+                      fetchedRef.current = false;
+                      setSourceState('loading');
+                    }
+                  }}
                   title={
                     sourceState === 'live'
-                      ? `Live navigation — ${navServiceData.length} scaffold group(s) from cascade resolver`
+                      ? `Live navigation — ${navServiceData.length} scaffold group(s) from cascade resolver. Click to switch to STATIC fallback.`
                       : sourceState === 'loading'
                       ? 'Loading live navigation from cascade resolver…'
-                      : `Offline — ${errorMessage || 'nav service unreachable'}`
+                      : sourceState === 'static'
+                      ? `STATIC fallback (frozen snapshot from src/data/menu-6level.json). Click to switch back to LIVE.`
+                      : `Offline — ${errorMessage || 'nav service unreachable'}. Click to switch to STATIC fallback.`
                   }
-                  className={`inline-flex items-center gap-1 text-[10px] rounded px-0.5 -ml-0.5
+                  className={`inline-flex items-center gap-1 text-[10px] rounded px-0.5 -ml-0.5 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800
                     ${sourceState === 'live'
                       ? 'text-emerald-600 dark:text-emerald-400'
                       : sourceState === 'loading'
                       ? 'text-gray-400 dark:text-gray-500'
+                      : sourceState === 'static'
+                      ? 'text-amber-600 dark:text-amber-400'
                       : 'text-red-500 dark:text-red-400'}
                   `}
                 >
                   <span className="leading-none">
-                    {sourceState === 'live' ? '🟢' : sourceState === 'loading' ? '⚪' : '🔴'}
+                    {sourceState === 'live'
+                      ? '🟢'
+                      : sourceState === 'loading'
+                      ? '⚪'
+                      : sourceState === 'static'
+                      ? '🟡'
+                      : '🔴'}
                   </span>
                   <span className="font-semibold tracking-wide whitespace-nowrap">
                     {sourceState === 'live'
                       ? 'LIVE'
                       : sourceState === 'loading'
                       ? 'LOADING'
+                      : sourceState === 'static'
+                      ? 'STATIC'
                       : 'OFFLINE'}
                   </span>
-                </div>
+                </button>
                 <div className="text-[10px] font-mono text-gray-300 dark:text-gray-600 tracking-tight mt-0.5 whitespace-nowrap">
                   {__APP_VERSION__} &middot; {__BUILD_DATE__} &middot; {__GIT_SHA__}
                 </div>
