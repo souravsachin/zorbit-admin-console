@@ -33,20 +33,27 @@ const DashboardPage: React.FC = () => {
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
 
   useEffect(() => {
-    // Fetch metrics from REST APIs (no WebSocket dependency)
+    // Fetch metrics from REST APIs (no WebSocket dependency).
+    //
+    // Cycle-105 E-OVERFETCH (MSG-082): use the lightweight `_count`
+    // endpoints for the count badges instead of fetching the full
+    // user/org list just to read `data.length`. The SPA only needs
+    // a number here; ~30 bytes via `_count` vs ~25 KB for a paginated
+    // list response. The list endpoints are still used elsewhere when
+    // we actually render rows.
     const fetchMetrics = async () => {
       try {
         const [usersRes, orgsRes, healthRes] = await Promise.allSettled([
-          api.get(`/api/identity/api/v1/O/${orgId}/users`),
-          api.get('/api/identity/api/v1/G/organizations'),
+          api.get(`/api/identity/api/v1/O/${orgId}/users/_count?tree=true`),
+          api.get('/api/identity/api/v1/G/organizations/_count'),
           api.get('/api/identity/api/v1/G/health'),
         ]);
 
         const usersCount = usersRes.status === 'fulfilled'
-          ? (Array.isArray(usersRes.value.data) ? usersRes.value.data.length : usersRes.value.data?.total ?? 0)
+          ? (usersRes.value.data?.count ?? 0)
           : 0;
         const orgsCount = orgsRes.status === 'fulfilled'
-          ? (Array.isArray(orgsRes.value.data) ? orgsRes.value.data.length : orgsRes.value.data?.total ?? 0)
+          ? (orgsRes.value.data?.count ?? 0)
           : 0;
         const healthStatus = healthRes.status === 'fulfilled' ? 'Healthy' : 'Unknown';
 
