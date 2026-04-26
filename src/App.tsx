@@ -40,7 +40,7 @@ const ForgotPasswordPage = lazyWithRetry(() => import('./pages/auth/ForgotPasswo
 const ResetPasswordPage = lazyWithRetry(() => import('./pages/auth/ResetPasswordPage'));
 const ForceChangePasswordPage = lazyWithRetry(() => import('./pages/auth/ForceChangePasswordPage'));
 import DashboardPage from './pages/dashboard/DashboardPage';
-import UsersPage from './pages/users/UsersPage';
+// UsersPage import removed Cycle 105 — legacy /users now redirects to /m/identity/users.
 import OrganizationsPage from './pages/organizations/OrganizationsPage';
 const DepartmentsPage = lazyWithRetry(() => import('./pages/organizations/DepartmentsPage'));
 const OrgChartPage = lazyWithRetry(() => import('./pages/organizations/OrgChartPage'));
@@ -483,7 +483,11 @@ function PageRoutes() {
       <Route index element={<DashboardPage />} />
       <Route path="dashboard" element={<DashboardPage />} />
       <Route path="dashboard/designer" element={<DashboardDesignerPage />} />
-      <Route path="users" element={<UsersPage />} />
+      {/* Legacy /users route — redirected to canonical /m/identity/users (Cycle 105 MSG-065).
+          The legacy UsersPage called /api/v1/O/<orgId>/users?tree=true which 404s after
+          the identity backend canonicalised users/tree as a separate endpoint. The
+          manifest-driven datatable at /m/identity/users is the supported path. */}
+      <Route path="users" element={<Navigate to="/m/identity/users" replace />} />
       <Route path="user-directory" element={<SafeLazy><UserDirectoryPage /></SafeLazy>} />
       <Route path="organizations" element={<OrganizationsPage />} />
       <Route path="organizations/:orgId/departments" element={<SafeLazy><DepartmentsPage /></SafeLazy>} />
