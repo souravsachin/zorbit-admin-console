@@ -269,6 +269,28 @@ function buildDbScaffold(sections: ApiSection[], _selectedEdition: BusinessLine)
   const tr = (kind: 'scaffold' | 'businessLine' | 'capabilityArea', slug: string): string =>
     slugLabels[kind]?.[slug] || slug.replace(/_/g, ' ');
 
+  // Owner directive 2026-04-26 (MSG-065 / Section M): icons come from
+  // window.__MENU_ICONS (loaded from /menu-icons.json by index.html).
+  // Lookup is by slug; missing slug -> uses catalogue default; missing
+  // catalogue -> 'Box'. Never throws — getIcon() in MenuNode handles
+  // unknown names by falling back to LayoutDashboard.
+  const menuIcons = (window as any).__MENU_ICONS || {};
+  const iconDefault: string = menuIcons.default || 'Box';
+  const ic = (kind: 'scaffold' | 'businessLine' | 'capabilityArea' | 'module', slug: string): string => {
+    const map = menuIcons[kind];
+    if (!map) return iconDefault;
+    return map[slug] || iconDefault;
+  };
+  // Module lookup: try full slug (e.g. zorbit-cor-identity), then the bare
+  // suffix (e.g. identity), then the default.
+  const icModule = (moduleId: string): string => {
+    const m = menuIcons.module || {};
+    if (m[moduleId]) return m[moduleId];
+    const bare = moduleId.replace(/^zorbit-(?:cor|pfs|app|ai)-/, '');
+    if (m[bare]) return m[bare];
+    return iconDefault;
+  };
+
   const scaffolds = new Map<string, ScaffoldGroup>();
 
   for (const sec of visible) {
@@ -345,7 +367,7 @@ function buildDbScaffold(sections: ApiSection[], _selectedEdition: BusinessLine)
   return sortedScaffolds.map((sc): MenuNodeData => ({
     id: sc.id,
     label: sc.label,
-    icon: '',
+    icon: ic('scaffold', sc.id),
     route: null,
     privilegeCode: null,
     level: 1,
@@ -356,46 +378,54 @@ function buildDbScaffold(sections: ApiSection[], _selectedEdition: BusinessLine)
         if (sc.id === 'business') {
           // Business: emit L2 (Distribution/Servicing/Finance) with L3
           // capability buckets containing the modules below them.
+          // L2 slug for business is the businessLine slug — the bucket's
+          // id is `${scaffold}-${businessLineSlug}` so we strip the prefix.
+          const blSlug = l2.id.startsWith(`${sc.id}-`) ? l2.id.slice(sc.id.length + 1) : l2.id;
           return {
             id: l2.id,
             label: l2.label,
-            icon: '',
+            icon: ic('businessLine', blSlug),
             route: null,
             privilegeCode: null,
             level: 2,
             children: Array.from(l2.l3Buckets.values())
               .sort((a, b) => a.sortOrder - b.sortOrder || a.label.localeCompare(b.label))
-              .map((l3): MenuNodeData => ({
-                id: l3.id,
-                label: l3.label,
-                icon: '',
-                route: null,
-                privilegeCode: null,
-                level: 3,
-                children: l3.sections
-                  .sort((a, b) => (a.placement?.sortOrder ?? 999) - (b.placement?.sortOrder ?? 999))
-                  .map((sec): MenuNodeData => {
-                    const flat: MenuNodeData[] = (sec.items || []).map((item, idx) => ({
-                      id: `${sec.moduleId}-${idx}`,
-                      label: item.label,
-                      icon: item.icon || 'circle',
-                      route: item.feRoute || null,
-                      privilegeCode: item.privilege || null,
-                      level: 5,
-                      children: [],
-                      feComponent: item.feComponent ?? null,
-                    }));
-                    return {
-                      id: sec.moduleId,
-                      label: sec.moduleName || prettyModuleName(sec.moduleId),
-                      icon: '',
-                      route: null,
-                      privilegeCode: null,
-                      level: 4,
-                      children: groupGuideItems(flat, 5, sec.moduleId),
-                    };
-                  }),
-              })),
+              .map((l3): MenuNodeData => {
+                // L3 inside Business: capabilityArea slug. Bucket id is
+                // `${l2.id}-${capabilityAreaSlug}`.
+                const caSlug = l3.id.startsWith(`${l2.id}-`) ? l3.id.slice(l2.id.length + 1) : l3.id;
+                return {
+                  id: l3.id,
+                  label: l3.label,
+                  icon: ic('capabilityArea', caSlug),
+                  route: null,
+                  privilegeCode: null,
+                  level: 3,
+                  children: l3.sections
+                    .sort((a, b) => (a.placement?.sortOrder ?? 999) - (b.placement?.sortOrder ?? 999))
+                    .map((sec): MenuNodeData => {
+                      const flat: MenuNodeData[] = (sec.items || []).map((item, idx) => ({
+                        id: `${sec.moduleId}-${idx}`,
+                        label: item.label,
+                        icon: item.icon || 'circle',
+                        route: item.feRoute || null,
+                        privilegeCode: item.privilege || null,
+                        level: 5,
+                        children: [],
+                        feComponent: item.feComponent ?? null,
+                      }));
+                      return {
+                        id: sec.moduleId,
+                        label: sec.moduleName || prettyModuleName(sec.moduleId),
+                        icon: icModule(sec.moduleId),
+                        route: null,
+                        privilegeCode: null,
+                        level: 4,
+                        children: groupGuideItems(flat, 5, sec.moduleId),
+                      };
+                    }),
+                };
+              }),
           };
         }
         // Non-Business: skip the synthetic L3 wrapper — sections become L2's
@@ -415,10 +445,15 @@ function buildDbScaffold(sections: ApiSection[], _selectedEdition: BusinessLine)
             feComponent: item.feComponent ?? null,
           })),
         );
+        // Non-Business L2 carries the module's own icon (one section per L2).
+        // When multiple sections share an L2 (rare), use the first section's
+        // module slug for icon lookup.
+        const firstSec = sectionsFlat[0];
+        const l2Icon = firstSec ? icModule(firstSec.moduleId) : iconDefault;
         return {
           id: l2.id,
           label: l2.label,
-          icon: '',
+          icon: l2Icon,
           route: null,
           privilegeCode: null,
           level: 2,

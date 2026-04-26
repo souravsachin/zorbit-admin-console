@@ -22,6 +22,24 @@
           };
         })
         .catch(() => {});
+
+      // Owner directive 2026-04-26 (MSG-065 / Section M of test-plan-v3):
+      // Sidebar icons come from /menu-icons.json (single source of truth).
+      // Manifests do NOT carry icons. Sidebar6Level looks up icon by slug
+      // and falls back to `default` when missing — never throws on miss.
+      fetch('/menu-icons.json')
+        .then((r) => (r.ok ? r.json() : null))
+        .then((t) => {
+          if (!t) return;
+          window.__MENU_ICONS = {
+            default: t.default || 'Box',
+            scaffold: t.scaffold || {},
+            businessLine: t.businessLine || {},
+            capabilityArea: t.capabilityArea || {},
+            module: t.module || {},
+          };
+        })
+        .catch(() => {});
     </script>
   </head>
   <body class="bg-gray-50 dark:bg-gray-900">
