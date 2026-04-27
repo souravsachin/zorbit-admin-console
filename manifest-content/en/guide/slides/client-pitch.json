@@ -1,0 +1,13 @@
+{
+  "deck": [
+    {
+      "title": "zorbit-unified-console overview",
+      "body": "Overview of zorbit-unified-console.",
+      "narration": {
+        "audioSrc": "./audio/client-pitch/0.mp3",
+        "text": "Overview of zorbit-unified-console.",
+        "duration": 10
+      }
+    }
+  ]
+}

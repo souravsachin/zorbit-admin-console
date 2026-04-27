@@ -1,0 +1,11 @@
+{
+  "entries": [
+    {
+      "title": "zorbit-unified-console demo",
+      "src": "/static/videos/zorbit-unified-console/demo.mp4",
+      "playerType": "tour",
+      "captions": "/static/videos/zorbit-unified-console/demo.vtt",
+      "duration": 60
+    }
+  ]
+}

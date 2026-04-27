@@ -1,0 +1,16 @@
+{
+  "phases": [
+    {
+      "name": "Setup",
+      "description": "Module is installed and configured."
+    },
+    {
+      "name": "Active",
+      "description": "Module is processing requests."
+    },
+    {
+      "name": "Retire",
+      "description": "Module is decommissioned."
+    }
+  ]
+}

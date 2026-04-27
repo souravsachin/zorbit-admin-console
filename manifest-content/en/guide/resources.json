@@ -1,0 +1,9 @@
+{
+  "links": [
+    {
+      "label": "zorbit-unified-console OpenAPI",
+      "href": "/api/zorbit-unified-console/api/v1/G/openapi.json",
+      "kind": "api"
+    }
+  ]
+}
