@@ -1,13 +1,73 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useModuleContext } from '../../contexts/ModuleContext';
 import { Info, BookOpen } from 'lucide-react';
 
+/** Resolve a `$src` ref against the module-content static mount. The manifest
+ * declares paths like `./manifest-content/guide/intro.md`; on-disk content
+ * actually lives under `manifest-content/en/guide/intro.md` after the i18n
+ * refactor. We strip the leading `./` and inject `/en/` if the path doesn't
+ * already include a language segment. Final URL:
+ *   /m-content/<moduleId>/manifest-content/en/...
+ */
+function resolveSrcUrl(moduleId: string, srcPath: string): string {
+  let p = srcPath.replace(/^\.\//, '').replace(/^\/+/, '');
+  if (!p.includes('/en/') && !p.includes('/<lang>/')) {
+    p = p.replace(/^manifest-content\//, 'manifest-content/en/');
+  }
+  return `/m-content/${moduleId}/${p}`;
+}
+
+/** Parse the first H1 (headline) and the first non-empty paragraph (summary)
+ * out of a markdown blob so we can render the existing hero card without
+ * pulling in a full markdown lib. The full body is also returned for callers
+ * that want to render everything below the hero. */
+function extractHeadlineSummary(md: string): { headline: string; summary: string; rest: string } {
+  const lines = md.split(/\r?\n/);
+  let headline = '';
+  const buf: string[] = [];
+  let i = 0;
+  for (; i < lines.length; i++) {
+    const m = lines[i].match(/^#\s+(.+)$/);
+    if (m) { headline = m[1].trim(); i++; break; }
+  }
+  // skip blanks
+  while (i < lines.length && !lines[i].trim()) i++;
+  // first paragraph = consecutive non-blank lines that are NOT headings or list bullets
+  while (i < lines.length && lines[i].trim() && !/^#{1,6}\s/.test(lines[i]) && !/^[-*]\s/.test(lines[i])) {
+    buf.push(lines[i]); i++;
+  }
+  const summary = buf.join(' ').trim();
+  const rest = lines.slice(i).join('\n').trim();
+  return { headline, summary, rest };
+}
+
 /**
  * Renders the `guide.intro` block from a module manifest as a hero card.
+ * Supports two manifest shapes:
+ *   - Inline: { headline, summary } — rendered directly
+ *   - $src ref: { $src: "./manifest-content/guide/intro.md" } — fetched and
+ *     parsed into headline + summary (first H1 + first paragraph)
  * Wired via `componentByName("GuideIntroView")` from `ManifestRouter`.
  */
 const IntroView: React.FC = () => {
   const { manifest, moduleId, loading, error } = useModuleContext();
+  const [resolved, setResolved] = useState<{ headline: string; summary: string; rest: string } | null>(null);
+  const [fetchError, setFetchError] = useState<string | null>(null);
+
+  const intro = manifest?.guide?.intro;
+  const srcPath: string | undefined = intro && typeof intro === 'object' && '$src' in intro ? (intro as { $src: string }).$src : undefined;
+
+  useEffect(() => {
+    if (!srcPath || !moduleId) return;
+    let cancelled = false;
+    setFetchError(null);
+    setResolved(null);
+    fetch(resolveSrcUrl(moduleId, srcPath))
+      .then((r) => (r.ok ? r.text() : Promise.reject(new Error(`HTTP ${r.status}`))))
+      .then((text) => { if (!cancelled) setResolved(extractHeadlineSummary(text)); })
+      .catch((err) => { if (!cancelled) setFetchError(String(err.message || err)); });
+    return () => { cancelled = true; };
+  }, [moduleId, srcPath]);
 
   if (loading) return <div className="p-6 text-gray-500 text-sm">Loading guide…</div>;
   if (error) {
@@ -18,8 +78,13 @@ const IntroView: React.FC = () => {
     );
   }
 
-  const intro = manifest?.guide?.intro;
-  if (!intro || (!intro.headline && !intro.summary)) {
+  const inlineHasContent = intro && typeof intro === 'object' && (('headline' in intro && intro.headline) || ('summary' in intro && intro.summary));
+  const view = inlineHasContent
+    ? { headline: (intro as Record<string, string>).headline || '', summary: (intro as Record<string, string>).summary || '', rest: '' }
+    : resolved;
+
+  if (!view) {
+    if (srcPath && !fetchError) return <div className="p-6 text-gray-500 text-sm">Loading guide intro…</div>;
     return (
       <div className="max-w-3xl mx-auto p-8">
         <div className="rounded-lg border border-amber-300 bg-amber-50 dark:bg-amber-900/20 dark:border-amber-700 p-5 flex gap-3 items-start">
@@ -27,7 +92,7 @@ const IntroView: React.FC = () => {
           <div>
             <h2 className="font-semibold text-amber-900 dark:text-amber-200">Guide intro not supplied</h2>
             <p className="text-sm text-amber-800 dark:text-amber-300 mt-1">
-              Module <code className="font-mono">{moduleId || '?'}</code> did not declare <code>guide.intro</code> in its manifest.
+              Module <code className="font-mono">{moduleId || '?'}</code> did not declare <code>guide.intro</code> in its manifest{fetchError ? ` (fetch error: ${fetchError})` : ''}.
             </p>
           </div>
         </div>
@@ -47,16 +112,21 @@ const IntroView: React.FC = () => {
               {manifest?.moduleName || moduleId}
             </div>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 leading-tight">
-              {intro.headline}
+              {view.headline}
             </h1>
-            {intro.summary && (
+            {view.summary && (
               <p className="mt-4 text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                {intro.summary}
+                {view.summary}
               </p>
             )}
           </div>
         </div>
       </div>
+      {view.rest && (
+        <div className="rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-6 shadow-sm prose prose-sm max-w-none dark:prose-invert">
+          <pre className="whitespace-pre-wrap font-sans text-sm text-gray-800 dark:text-gray-200">{view.rest}</pre>
+        </div>
+      )}
 
       {manifest?.placement && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
