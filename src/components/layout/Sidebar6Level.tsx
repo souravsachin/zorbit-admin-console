@@ -27,6 +27,25 @@ import staticMenuData from '../../data/menu-6level.json';
 import type { UserPreferences } from '../../services/preferences';
 
 /**
+ * Humanize a slug or the last segment of a feRoute path so the sidebar never
+ * renders an empty leaf. e.g. "/m/pcg4/guide/intro" -> "Intro";
+ * "video_tutorials" -> "Video Tutorials". Used as fallback when the manifest
+ * (or slug-translations) does not provide a display label for an item.
+ */
+function humanizeLeaf(feRoute: string | null | undefined, slug?: string | null): string {
+  const raw =
+    (slug && String(slug)) ||
+    (feRoute ? String(feRoute).replace(/\/+$/, '').split('/').filter(Boolean).pop() || '' : '');
+  if (!raw) return '(unnamed)';
+  return raw
+    .replace(/[_-]+/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+}
+
+/**
  * Transform a flat/nested MenuItem[] from the navigation service into
  * the MenuNodeData[] shape the sidebar tree expects.
  */
@@ -34,7 +53,7 @@ function transformNavItems(items: MenuItem[], level = 1): MenuNodeData[] {
   function transform(item: MenuItem, lvl: number): MenuNodeData {
     return {
       id: item.hashId || item.id,
-      label: item.label,
+      label: item.label || humanizeLeaf(item.route, item.id),
       icon: item.icon || '',
       route: item.route || null,
       privilegeCode: item.privilegeCode || null,
@@ -580,7 +599,7 @@ function buildDbScaffold(sections: ApiSection[], _selectedEdition: BusinessLine)
                         null;
                       const flat: MenuNodeData[] = (sec.items || []).map((item, idx) => ({
                         id: `${sec.moduleId}-${idx}`,
-                        label: item.label,
+                        label: item.label || humanizeLeaf(item.feRoute),
                         icon: item.icon || 'circle',
                         route: item.feRoute || null,
                         privilegeCode: item.privilege || null,
@@ -636,7 +655,7 @@ function buildDbScaffold(sections: ApiSection[], _selectedEdition: BusinessLine)
             );
             flatChildren.push({
               id: `${sec.moduleId}-${childIdxCounter}`,
-              label: item.label,
+              label: item.label || humanizeLeaf(item.feRoute),
               icon: item.icon || 'circle',
               route: item.feRoute || null,
               privilegeCode: item.privilege || null,
